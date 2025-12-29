@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this dataset or code, please cite it as below."
+title: "BoundaryBench: Evaluating Geographic Boundary Resolution with Calibrated Uncertainty"
+authors:
+  - family-names: "Pandya"
+    given-names: "Nidhi"
+    affiliation: "Pace University"
+type: dataset
+date-released: 2025-01-01
+url: "https://github.com/nidhipandya/boundarybench"
+repository-code: "https://github.com/nidhipandya/boundarybench"
+license: CC-BY-4.0
+keywords:
+  - geographic-information-systems
+  - benchmark
+  - boundary-resolution
+  - llm-evaluation
+  - uncertainty-quantification
