@@ -11,6 +11,7 @@ Copyright (c) 2025 Nidhi Pandya
 Scope:
 This license applies to the BoundaryBench dataset files distributed in the /data
 directory of this repository (and any dataset mirrors/releases of those files).
+This includes boundarybench_v1.parquet and boundarybench_v1_eval_subset.parquet.
 It does not apply to the software/code in this repository, which is licensed
 separately under the MIT License (see LICENSE).
 
@@ -32,7 +33,7 @@ Under the following terms:
                                others from doing anything the license permits.
 
 Attribution suggestion:
-"BoundaryBench v1.0.0 (Pandya, 2025)" with a link to the dataset URL.
+"BoundaryBench v1.0.0 (Nidhi Pandya, 2025)" with a link to the dataset URL.
 
 ---
 
