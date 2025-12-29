@@ -1,18 +1,33 @@
 cff-version: 1.2.0
-message: "If you use this dataset or code, please cite it as below."
+message: "If you use this code or dataset, please cite it as below."
 title: "BoundaryBench: Evaluating Geographic Boundary Resolution with Calibrated Uncertainty"
+type: software
 authors:
   - family-names: "Pandya"
     given-names: "Nidhi"
     affiliation: "Pace University"
-type: dataset
-date-released: 2025-01-01
+version: 1.0.0
+date-released: 2025-12-29
 url: "https://github.com/nidhip1611/boundarybench"
 repository-code: "https://github.com/nidhip1611/boundarybench"
-license: CC-BY-4.0
+license: "MIT"
 keywords:
   - geographic-information-systems
   - benchmark
   - boundary-resolution
   - llm-evaluation
   - uncertainty-quantification
+  - gps-noise
+  - spatial-analysis
+
+preferred-citation:
+  type: dataset
+  title: "BoundaryBench: Evaluating Geographic Boundary Resolution with Calibrated Uncertainty"
+  authors:
+    - family-names: "Pandya"
+      given-names: "Nidhi"
+      affiliation: "Pace University"
+  version: 1.0.0
+  date-released: 2025-12-29
+  url: "https://huggingface.co/datasets/nidhip1611/boundarybench"
+  license: "CC-BY-4.0"
