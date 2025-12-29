@@ -5,7 +5,7 @@
 ![Code License: MIT](https://img.shields.io/badge/Code%20License-MIT-green.svg)
 ![Data License: CC BY 4.0](https://img.shields.io/badge/Data%20License-CC%20BY%204.0-lightgrey.svg)
 [![🤗 Dataset](https://img.shields.io/badge/🤗%20Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/nidhipandya/boundarybench)
-[![DOI](https://zenodo.org/badge/DOI/<YOUR_CONCEPT_DOI>.svg)](https://doi.org/<YOUR_CONCEPT_DOI>)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18090588.svg)](https://doi.org/10.5281/zenodo.18090588)
 
 
 ## Overview
