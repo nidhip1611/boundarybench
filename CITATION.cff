@@ -9,8 +9,8 @@ authors:
     email: "np59350n@pace.edu"
 version: 1.0.0
 date-released: 2025-12-29
-url: "https://github.com/nidhip1611/boundarybench"
-repository-code: "https://github.com/nidhip1611/boundarybench"
+url: "https://github.com/nidhipandya/boundarybench"
+repository-code: "https://github.com/nidhipandya/boundarybench"
 license: "MIT"
 keywords:
   - geographic-information-systems
@@ -31,5 +31,5 @@ preferred-citation:
       email: "nidhipandya1606@gmail.com"
   version: 1.0.0
   date-released: 2025-12-29
-  url: "https://huggingface.co/datasets/nidhip1611/boundarybench"
+  url: "https://huggingface.co/datasets/nidhipandya/boundarybench"
   license: "CC-BY-4.0"

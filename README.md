@@ -4,7 +4,7 @@
 
 ![Code License: MIT](https://img.shields.io/badge/Code%20License-MIT-green.svg)
 ![Data License: CC BY 4.0](https://img.shields.io/badge/Data%20License-CC%20BY%204.0-lightgrey.svg)
-[![🤗 Dataset](https://img.shields.io/badge/🤗%20Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/nidhip1611/boundarybench)
+[![🤗 Dataset](https://img.shields.io/badge/🤗%20Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/nidhipandya/boundarybench)
 
 ## Overview
 
@@ -21,7 +21,7 @@ BoundaryBench is a benchmark dataset of 13,000 synthetic coordinate queries acro
 
 ## Installation
 ```bash
-git clone https://github.com/nidhip1611/boundarybench.git
+git clone https://github.com/nidhipandya/boundarybench.git
 cd boundarybench
 pip install -r requirements.txt
 ```
@@ -42,7 +42,7 @@ boundary_points = df[df["difficulty"] == "boundary"]
 county_points = df[df["layer"] == "county"]
 ```
 
-> **Note:** If parquet files are not in `data/`, download from [HuggingFace](https://huggingface.co/datasets/nidhip1611/boundarybench).
+> **Note:** If parquet files are not in `data/`, download from [HuggingFace](https://huggingface.co/datasets/nidhipandya/boundarybench).
 
 ---
 
@@ -174,7 +174,7 @@ boundarybench/
   author={Pandya, Nidhi},
   year={2025},
   howpublished={GitHub},
-  url={https://github.com/nidhip1611/boundarybench}
+  url={https://github.com/nidhipandya/boundarybench}
 }
 ```
 
