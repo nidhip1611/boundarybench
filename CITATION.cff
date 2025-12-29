@@ -11,6 +11,7 @@ version: 1.0.0
 date-released: 2025-12-29
 url: "https://github.com/nidhip1611/boundarybench"
 repository-code: "https://github.com/nidhip1611/boundarybench"
+doi: "10.5281/zenodo.18090588"
 license: "MIT"
 keywords:
   - geographic-information-systems
@@ -28,8 +29,12 @@ preferred-citation:
     - family-names: "Pandya"
       given-names: "Nidhi"
       affiliation: "Pace University"
-      email: "np59350n@pace.edu"
+      email: "nidhipandya1606@gmail.com"
   version: 1.0.0
   date-released: 2025-12-29
-  url: "https://huggingface.co/datasets/nidhipandya/boundarybench"
+  doi: "10.5281/zenodo.18090589"
+  url: "https://doi.org/10.5281/zenodo.18090589"
   license: "CC-BY-4.0"
+  identifiers:
+    - type: url
+      value: "https://huggingface.co/datasets/nidhipandya/boundarybench"
