@@ -2,79 +2,93 @@
 
 **A National Benchmark for Geographic Boundary Resolution with Calibrated Uncertainty**
 
-[![License: MIT](https://img.shields.io/badge/Code-MIT-blue.svg)](LICENSE)
-[![License: CC BY 4.0](https://img.shields.io/badge/Data-CC%20BY%204.0-lightgrey.svg)](LICENSE-DATA)
-[![Dataset on HuggingFace](https://img.shields.io/badge/🤗-Dataset-yellow)](https://huggingface.co/datasets/nidhip1611/boundarybench)
+![Code License: MIT](https://img.shields.io/badge/Code%20License-MIT-green.svg)
+![Data License: CC BY 4.0](https://img.shields.io/badge/Data%20License-CC%20BY%204.0-lightgrey.svg)
+[![🤗 Dataset](https://img.shields.io/badge/🤗%20Dataset-HuggingFace-yellow)](https://huggingface.co/datasets/nidhip1611/boundarybench)
 
 ## Overview
 
 BoundaryBench is a benchmark dataset of 13,000 synthetic coordinate queries across 50 U.S. states plus D.C., designed to evaluate geographic boundary resolution systems. Points are stratified by distance-to-boundary difficulty tiers and complex polygon geometries.
 
-**Key Findings:**
+**Key findings:**
 - LLM-only baselines are unreliable for boundary resolution (either abstain ~100% or wrong ~96%)
 - GPS noise (±20m) causes 39.6% label flips within 10m of boundaries
 - BoundarySafe achieves 100% accuracy on answered queries with 89.4% coverage
 
-*This work is independent research and not affiliated with or endorsed by any agency.*
+*Independent research; not endorsed by any organization.*
+
+---
 
 ## Installation
 ```bash
-# Clone repository
 git clone https://github.com/nidhip1611/boundarybench.git
 cd boundarybench
-
-# Install dependencies
 pip install -r requirements.txt
 ```
 
-## Quick Start
+## Quick Start (Dataset)
 ```python
 import pandas as pd
 
-# Load dataset
+# Load dataset (download from HuggingFace if not present)
 df = pd.read_parquet("data/boundarybench_v1.parquet")
 
-print(f"Total points: {len(df)}")
-print(f"Layers: {df['layer'].unique()}")
-print(f"Difficulties: {df['difficulty'].unique()}")
+print("Total points:", len(df))
+print("Layers:", df["layer"].unique())
+print("Difficulties:", df["difficulty"].unique())
 
-# Filter by difficulty
+# Filter examples
 boundary_points = df[df["difficulty"] == "boundary"]
-
-# Filter by layer
 county_points = df[df["layer"] == "county"]
 ```
 
-## Using BoundarySafe
+> **Note:** If parquet files are not in `data/`, download from [HuggingFace](https://huggingface.co/datasets/nidhip1611/boundarybench).
+
+---
+
+## BoundarySafe Method
+
+> **Note:** You must supply boundary polygons yourself; we do not distribute 
+> shapefiles in this repo. Download TIGER/Line 2025 from the Census Bureau 
+> and project to EPSG:2163 before use.
+
+BoundarySafe estimates label stability under GPS uncertainty by sampling perturbed locations and re-running exact containment.
+
+### Example (lat/lon)
 ```python
 import geopandas as gpd
 from src.boundarysafe import boundarysafe_lookup_latlon
 
-# Load boundary shapefiles (you need to download TIGER/Line 2025)
+# Load boundaries and project to EPSG:2163 (meters)
 counties = gpd.read_file("path/to/counties.shp").to_crs(2163)
 gdf_dict = {"county": counties}
 
-# Query with lat/lon
 result = boundarysafe_lookup_latlon(
-    lat=40.7128, 
-    lon=-74.0060, 
+    lat=40.7128,
+    lon=-74.0060,
     layer="county",
     gdf_dict=gdf_dict,
     gps_radius_m=20,
-    p_thresh=0.90
+    p_thresh=0.90,
 )
 
 print(result)
-# {
-#   "status": "answer",
-#   "label_id": "36061",
-#   "confidence": 0.95,
-#   "dist_to_boundary_m": 234.5,
-#   "candidates": [("36061", 0.95), ("36047", 0.05)]
-# }
 ```
 
-## Dataset
+### Output
+```json
+{
+  "status": "answer",
+  "label_id": "36061",
+  "confidence": 0.95,
+  "dist_to_boundary_m": 234.5,
+  "candidates": [["36061", 0.95], ["36047", 0.05]]
+}
+```
+
+---
+
+## Dataset Summary
 
 | Layer | Points | Description |
 |-------|--------|-------------|
@@ -92,16 +106,7 @@ print(result)
 | boundary | 0-10m | 1,300 | Very close to boundary |
 | edge | 10-100m | 650 | Complex polygons only |
 
-## Reproduce Results
-
-### 1. Verify Dataset
-```bash
-python src/verify_boundarybench.py
-```
-
-### 2. Run BoundarySafe Evaluation
-
-See the evaluation notebook in the repository for full reproduction steps.
+---
 
 ## Results
 
@@ -127,25 +132,40 @@ See the evaluation notebook in the repository for full reproduction steps.
 | 10-25m | 12.0% |
 | >50m | 0.0% |
 
+---
+
+## Reproduce Results
+
+1. **Verify dataset:**
+```bash
+python src/verify_boundarybench.py
+```
+
+2. **View evaluation results:**
+```bash
+# Results are in outputs/
+ls outputs/
+```
+
+---
+
 ## Repository Structure
 ```
 boundarybench/
-├── data/
-│   ├── boundarybench_v1.parquet          # Full dataset (13,000 points)
-│   ├── boundarybench_v1_eval_subset.parquet  # Evaluation subset
-│   ├── dataset_card.md                   # Dataset documentation
-│   └── README.md                         # Data README
-├── src/
-│   ├── boundarysafe.py                   # BoundarySafe implementation
-│   └── verify_boundarybench.py           # Verification script
-├── figures/                              # Publication figures
-├── outputs/                              # Evaluation results (CSVs)
-├── requirements.txt                      # Python dependencies
-├── LICENSE                               # MIT (code)
-├── LICENSE-DATA                          # CC-BY-4.0 (data)
-├── CITATION.cff                          # Citation metadata
-└── README.md                             # This file
+├── data/                    # Dataset files
+├── src/                     # Source code
+│   ├── boundarysafe.py      # BoundarySafe implementation
+│   └── verify_boundarybench.py
+├── figures/                 # Publication figures
+├── outputs/                 # Evaluation results (CSVs)
+├── requirements.txt
+├── LICENSE                  # MIT (code)
+├── LICENSE-DATA             # CC BY 4.0 (data)
+├── CITATION.cff
+└── README.md
 ```
+
+---
 
 ## Citation
 ```bibtex
@@ -158,11 +178,13 @@ boundarybench/
 }
 ```
 
+---
+
 ## License
 
-- **Code**: [MIT License](LICENSE)
-- **Dataset** (`/data`): [CC-BY-4.0](LICENSE-DATA)
+- **Code**: MIT ([LICENSE](LICENSE))
+- **Dataset**: CC BY 4.0 ([LICENSE-DATA](LICENSE-DATA))
 
 ## Acknowledgments
 
-This work uses publicly available TIGER/Line 2025 boundary shapefiles.
+This work uses publicly available boundary shapefiles (TIGER/Line 2025).
