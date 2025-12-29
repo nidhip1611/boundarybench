@@ -7,8 +7,8 @@ authors:
     affiliation: "Pace University"
 type: dataset
 date-released: 2025-01-01
-url: "https://github.com/nidhipandya/boundarybench"
-repository-code: "https://github.com/nidhipandya/boundarybench"
+url: "https://github.com/nidhip1611/boundarybench"
+repository-code: "https://github.com/nidhip1611/boundarybench"
 license: CC-BY-4.0
 keywords:
   - geographic-information-systems

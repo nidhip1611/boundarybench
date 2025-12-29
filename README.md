@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/Code-MIT-blue.svg)](LICENSE)
 [![License: CC BY 4.0](https://img.shields.io/badge/Data-CC%20BY%204.0-lightgrey.svg)](LICENSE-DATA)
-[![Dataset on HuggingFace](https://img.shields.io/badge/🤗-Dataset-yellow)](https://huggingface.co/datasets/nidhipandya/boundarybench)
+[![Dataset on HuggingFace](https://img.shields.io/badge/🤗-Dataset-yellow)](https://huggingface.co/datasets/nidhip1611/boundarybench)
 
 ## Overview
 
@@ -20,7 +20,7 @@ BoundaryBench is a benchmark dataset of 13,000 synthetic coordinate queries acro
 ## Installation
 ```bash
 # Clone repository
-git clone https://github.com/nidhipandya/boundarybench.git
+git clone https://github.com/nidhip1611/boundarybench.git
 cd boundarybench
 
 # Install dependencies
@@ -154,7 +154,7 @@ boundarybench/
   author={Pandya, Nidhi},
   year={2025},
   howpublished={GitHub},
-  url={https://github.com/nidhipandya/boundarybench}
+  url={https://github.com/nidhip1611/boundarybench}
 }
 ```
 
