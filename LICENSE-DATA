@@ -1,6 +1,6 @@
 Creative Commons Attribution 4.0 International (CC BY 4.0)
 
-This file is a human-readable summary for convenience and is not a substitute 
+This file is a human-readable summary for convenience and is not a substitute
 for the CC BY 4.0 legal code.
 See: https://creativecommons.org/licenses/by/4.0/legalcode
 
@@ -8,24 +8,31 @@ See: https://creativecommons.org/licenses/by/4.0/legalcode
 
 Copyright (c) 2025 Nidhi Pandya
 
-This license applies to all dataset files in the /data directory.
+Scope:
+This license applies to the BoundaryBench dataset files distributed in the /data
+directory of this repository (and any dataset mirrors/releases of those files).
+It does not apply to the software/code in this repository, which is licensed
+separately under the MIT License (see LICENSE).
 
 You are free to:
 
   Share — copy and redistribute the material in any medium or format
-  Adapt — remix, transform, and build upon the material for any purpose, 
+  Adapt — remix, transform, and build upon the material for any purpose,
           even commercially
 
 Under the following terms:
 
-  Attribution — You must give appropriate credit, provide a link to the 
-                license, and indicate if changes were made. You may do so 
-                in any reasonable manner, but not in any way that suggests 
+  Attribution — You must give appropriate credit, provide a link to the
+                license, and indicate if changes were made. You may do so
+                in any reasonable manner, but not in any way that suggests
                 the licensor endorses you or your use.
 
-  No additional restrictions — You may not apply legal terms or 
-                               technological measures that legally restrict 
+  No additional restrictions — You may not apply legal terms or
+                               technological measures that legally restrict
                                others from doing anything the license permits.
+
+Attribution suggestion:
+"BoundaryBench v1.0.0 (Pandya, 2025)" with a link to the dataset URL.
 
 ---
 
