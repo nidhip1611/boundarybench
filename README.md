@@ -172,19 +172,33 @@ boundarybench/
 ## Citation
 
 **DOIs:**
-- Dataset DOI (v1.0.0): [`10.5281/zenodo.18090589`](https://doi.org/10.5281/zenodo.18090589)
-- Software DOI (all versions): [`10.5281/zenodo.18090588`](https://doi.org/10.5281/zenodo.18090588)
+- Software/Dataset (v1.0.0): [`10.5281/zenodo.18090589`](https://doi.org/10.5281/zenodo.18090589)
+- All versions: [`10.5281/zenodo.18090588`](https://doi.org/10.5281/zenodo.18090588)
+
+**BibTeX (Software):**
 ```bibtex
-@misc{pandya2025boundarybench,
-  title={BoundaryBench: Evaluating Geographic Boundary Resolution with Calibrated Uncertainty},
-  author={Pandya, Nidhi},
-  year={2025},
-  howpublished={GitHub},
-  url={https://github.com/nidhipandya/boundarybench}
+@software{pandya2025boundarybench,
+  title  = {BoundaryBench: Evaluating Geographic Boundary Resolution with Calibrated Uncertainty},
+  author = {Pandya, Nidhi},
+  year   = {2025},
+  doi    = {10.5281/zenodo.18090589},
+  url    = {https://doi.org/10.5281/zenodo.18090589}
 }
 ```
 
----
+**BibTeX (Dataset):**
+```bibtex
+@dataset{pandya2025boundarybench_data,
+  title  = {BoundaryBench Dataset (v1.0.0)},
+  author = {Pandya, Nidhi},
+  year   = {2025},
+  url    = {https://huggingface.co/datasets/nidhipandya/boundarybench},
+  note   = {License: CC-BY-4.0}
+}
+```
+
+**Plain text:**
+> Pandya, N. (2025). BoundaryBench: Evaluating Geographic Boundary Resolution with Calibrated Uncertainty. https://doi.org/10.5281/zenodo.18090589
 
 ## License
 
