@@ -170,6 +170,10 @@ boundarybench/
 ---
 
 ## Citation
+
+**DOIs:**
+- Dataset DOI (v1.0.0): [`10.5281/zenodo.18090589`](https://doi.org/10.5281/zenodo.18090589)
+- Software DOI (all versions): [`10.5281/zenodo.18090588`](https://doi.org/10.5281/zenodo.18090588)
 ```bibtex
 @misc{pandya2025boundarybench,
   title={BoundaryBench: Evaluating Geographic Boundary Resolution with Calibrated Uncertainty},
