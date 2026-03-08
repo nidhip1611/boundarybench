@@ -106,8 +106,7 @@ print(result)
 | medium | 100-500m | 3,250 | Moderate proximity |
 | hard | 10-100m | 3,250 | Near boundary |
 | boundary | 0-10m | 1,300 | Very close to boundary |
-| edge | 10-100m | 650 | Complex polygons only |
-
+| complex-geom | 10-100m | 650 | Complex polygons (multipart, corridors, holes) |
 ---
 
 ## Results
