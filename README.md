@@ -90,6 +90,29 @@ print(result)
 
 ---
 
+## V2 evaluation (in progress, branch `v2`)
+
+V2 re-evaluates boundary assignment **under positional error**: each benchmark point is the true location, the
+methods only see a simulated noisy report of it, and answers are scored against the true region.
+(V1 results in this README scored methods on the clean point; see `docs/EXPERIMENTS.md`.)
+
+```bash
+git clone -b v2 https://github.com/nidhip1611/boundarybench.git && cd boundarybench
+pip install -r requirements.txt
+export BB_WORK=/path/to/work          # must contain tiger2025/{COUNTY,ZCTA520,TRACT} (TIGER/Line 2025)
+python experiments/exp01_v2_main.py --quick   # smoke test
+python experiments/run_all.py                 # EXP01–EXP04; results/<exp>/summary.txt
+```
+
+| Experiment | Script | Results |
+|---|---|---|
+| EXP01 main evaluation (RQ1–3) | `experiments/exp01_v2_main.py` | `results/v2/` |
+| EXP02 straight-boundary theory + local geometry | `experiments/exp02_geometry.py` | `results/v2_geometry/` |
+| EXP03 Gaussian-weighted overlay | `experiments/exp03_gaussian_overlay.py` | `results/v2_gaussian/` |
+| EXP04 real geocoding error, NYC (RQ4) | `experiments/exp04_nyc_real.py` | `results/v2_nyc/` |
+
+Colab: `notebooks/BoundaryBench_V2_colab.ipynb`. Experiment log and design decisions: `docs/EXPERIMENTS.md`.
+
 ## Dataset Summary
 
 | Layer | Points | Description |

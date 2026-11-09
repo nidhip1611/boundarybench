@@ -30,3 +30,7 @@ Thumbs.db
 *.dbf
 *.prj
 *.zip
+
+# V2: large working files (TIGER shapefiles, per-observation parquet) live in $BB_WORK
+work/
+results/**/*.parquet
