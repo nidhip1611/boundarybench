@@ -1,0 +1,229 @@
+# EXP01 V2 main experiment | run 2026-11-09 17:46 | commit b7bf0d8
+points: 13,000 | K = 5 | settings = 8
+SANITY: disk overlay vs 5,000-sample MC on 300 obs, MAE = 0.0041 -> PASS
+observations: 520,000
+
+[T1] Crisp PIP wrong-region rate (%) by true distance band
+dist_bin            0-10m  10-25m  25-50m  50-100m  100-500m  >500m
+model    R  layer                                                  
+gaussian 5  county   7.55    0.00    0.00     0.00       0.0    0.0
+            tract    8.76    0.00    0.00     0.00       0.0    0.0
+            zcta     7.95    0.00    0.00     0.00       0.0    0.0
+         10 county  14.90    0.12    0.00     0.00       0.0    0.0
+            tract   16.40    0.07    0.00     0.00       0.0    0.0
+            zcta    15.20    0.21    0.00     0.00       0.0    0.0
+         20 county  27.70    3.44    0.00     0.00       0.0    0.0
+            tract   27.56    2.87    0.05     0.00       0.0    0.0
+            zcta    29.90    3.47    0.00     0.00       0.0    0.0
+         50 county  37.20   19.14    3.77     0.11       0.0    0.0
+            tract   42.28   19.49    3.67     0.15       0.0    0.0
+            zcta    39.50   21.37    4.06     0.09       0.0    0.0
+uniform  5  county   8.95    0.00    0.00     0.00       0.0    0.0
+            tract   10.32    0.00    0.00     0.00       0.0    0.0
+            zcta    11.35    0.00    0.00     0.00       0.0    0.0
+         10 county  18.40    0.00    0.00     0.00       0.0    0.0
+            tract   22.16    0.00    0.00     0.00       0.0    0.0
+            zcta    20.65    0.00    0.00     0.00       0.0    0.0
+         20 county  33.35    5.03    0.00     0.00       0.0    0.0
+            tract   34.28    4.49    0.00     0.00       0.0    0.0
+            zcta    35.20    5.47    0.00     0.00       0.0    0.0
+         50 county  43.15   26.87    7.34     0.00       0.0    0.0
+            tract   43.04   26.62    7.76     0.00       0.0    0.0
+            zcta    44.35   29.16    8.00     0.00       0.0    0.0
+
+[T1b] Crisp PIP wrong-region rate (%) by difficulty tier
+difficulty          boundary  easy  edge  hard  medium
+model    R  layer                                     
+gaussian 5  county      7.55   0.0  0.00  0.00     0.0
+            tract       8.76   0.0  0.00  0.00     0.0
+            zcta        7.95   0.0  0.00  0.00     0.0
+         10 county     14.90   0.0  0.00  0.02     0.0
+            tract      16.40   0.0  0.00  0.02     0.0
+            zcta       15.20   0.0  0.10  0.02     0.0
+         20 county     27.70   0.0  0.20  0.52     0.0
+            tract      27.56   0.0  0.56  0.53     0.0
+            zcta       29.90   0.0  0.80  0.50     0.0
+         50 county     37.20   0.0  2.40  3.88     0.0
+            tract      42.28   0.0  4.32  4.72     0.0
+            zcta       39.50   0.0  4.60  4.60     0.0
+uniform  5  county      8.95   0.0  0.00  0.00     0.0
+            tract      10.32   0.0  0.00  0.00     0.0
+            zcta       11.35   0.0  0.00  0.00     0.0
+         10 county     18.40   0.0  0.00  0.00     0.0
+            tract      22.16   0.0  0.00  0.00     0.0
+            zcta       20.65   0.0  0.00  0.00     0.0
+         20 county     33.35   0.0  0.40  0.74     0.0
+            tract      34.28   0.0  0.72  0.83     0.0
+            zcta       35.20   0.0  1.00  0.84     0.0
+         50 county     43.15   0.0  2.60  6.12     0.0
+            tract      43.04   0.0  6.56  7.12     0.0
+            zcta       44.35   0.0  6.70  6.96     0.0
+
+[T2] Error-model sensitivity & disk-overlay calibration
+   model  R  layer  crisp_error_%  share_near_boundary_%  disk_ECE_near_%  disk_Brier_true_near  obs_err_beyond_R_%
+gaussian  5 county          0.755                  4.515            5.386                 0.118               4.990
+gaussian  5  tract          0.876                  5.096            4.049                 0.125               5.184
+gaussian  5   zcta          0.795                  5.160            6.367                 0.117               5.035
+gaussian 10 county          1.495                  8.545            5.122                 0.125               4.905
+gaussian 10  tract          1.644                  9.004            4.849                 0.135               4.932
+gaussian 10   zcta          1.530                  8.970            6.403                 0.127               5.005
+gaussian 20 county          2.910                 12.455            2.708                 0.154               5.055
+gaussian 20  tract          2.916                 13.228            3.374                 0.156               5.040
+gaussian 20   zcta          3.155                 12.910            2.721                 0.163               4.930
+gaussian 50 county          4.810                 22.540            3.330                 0.144               4.820
+gaussian 50  tract          5.624                 23.796            1.621                 0.157               5.004
+gaussian 50   zcta          5.330                 23.290            2.954                 0.156               5.195
+ uniform  5 county          0.895                  4.600            1.656                 0.135               0.000
+ uniform  5  tract          1.032                  5.152            2.675                 0.143               0.000
+ uniform  5   zcta          1.135                  5.080            1.880                 0.151               0.000
+ uniform 10 county          1.840                  8.305            2.322                 0.154               0.000
+ uniform 10  tract          2.216                  8.604            2.620                 0.166               0.000
+ uniform 10   zcta          2.065                  8.730            2.768                 0.162               0.000
+ uniform 20 county          3.540                 12.015            5.910                 0.189               0.000
+ uniform 20  tract          3.672                 13.052            5.142                 0.187               0.000
+ uniform 20   zcta          3.780                 12.925            6.109                 0.187               0.000
+ uniform 50 county          5.975                 22.555            4.512                 0.179               0.000
+ uniform 50  tract          6.412                 23.476            4.769                 0.185               0.000
+ uniform 50   zcta          6.510                 23.505            4.637                 0.184               0.000
+
+[T3] Strategy comparison, pooled over layers (Distance rule tau = R; MC / overlay theta = 0.90)
+   model  R        method  err_full_cov_%  AURC_%  cov@risk<=1%  cov@risk<=0.5%  cov@risk<=0.1%  op_coverage_%  op_risk_%
+gaussian  5     Crisp PIP           0.814   0.814       100.000           0.000           0.000            NaN        NaN
+gaussian  5 Distance rule           0.814   0.011       100.000          99.218          97.349         95.063      0.008
+gaussian  5   Monte Carlo           0.811   0.022       100.000          99.078          97.349         96.706      0.048
+gaussian  5  Disk overlay           0.803   0.019       100.000          99.206          97.352         96.657      0.048
+gaussian 10     Crisp PIP           1.563   1.563         0.000           0.000           0.000            NaN        NaN
+gaussian 10 Distance rule           1.563   0.041        98.554          96.745          93.620         91.148      0.015
+gaussian 10   Monte Carlo           1.603   0.059        98.520          96.566          93.492         93.705      0.110
+gaussian 10  Disk overlay           1.534   0.054        98.569          96.746          93.634         93.534      0.082
+gaussian 20     Crisp PIP           2.988   2.988         0.000           0.000           0.000            NaN        NaN
+gaussian 20 Distance rule           2.988   0.127        94.815          92.448          88.706         87.108      0.021
+gaussian 20   Monte Carlo           2.992   0.164        94.658          92.323          88.772         90.257      0.218
+gaussian 20  Disk overlay           2.918   0.146        94.809          92.406          88.688         90.046      0.191
+gaussian 50     Crisp PIP           5.283   5.283         0.000           0.000           0.000            NaN        NaN
+gaussian 50 Distance rule           5.283   0.403        87.257          83.748          78.374         76.746      0.062
+gaussian 50   Monte Carlo           5.205   0.489        86.838          83.169           0.000         83.169      0.457
+gaussian 50  Disk overlay           5.140   0.447        87.337          83.774          78.320         82.851      0.390
+ uniform  5     Crisp PIP           1.022   1.022         0.000           0.000           0.000            NaN        NaN
+ uniform  5 Distance rule           1.022   0.015        99.974          98.691          96.852         95.040      0.000
+ uniform  5   Monte Carlo           1.011   0.017        99.938          98.608          96.871         96.645      0.067
+ uniform  5  Disk overlay           1.002   0.015        99.980          98.698          96.857         96.571      0.056
+ uniform 10     Crisp PIP           2.054   2.054         0.000           0.000           0.000            NaN        NaN
+ uniform 10 Distance rule           2.054   0.057        97.469          95.862          93.571         91.449      0.000
+ uniform 10   Monte Carlo           2.062   0.058        97.308          95.603          93.306         93.897      0.156
+ uniform 10  Disk overlay           2.018   0.057        97.457          95.845          93.586         93.752      0.121
+ uniform 20     Crisp PIP           3.665   3.665         0.000           0.000           0.000            NaN        NaN
+ uniform 20 Distance rule           3.665   0.167        93.358          91.683          89.488         87.306      0.000
+ uniform 20   Monte Carlo           3.603   0.180        93.366          91.577          89.286         90.838      0.329
+ uniform 20  Disk overlay           3.574   0.167        93.389          91.692          89.517         90.603      0.261
+ uniform 50     Crisp PIP           6.308   6.308         0.000           0.000           0.000            NaN        NaN
+ uniform 50 Distance rule           6.308   0.544        84.686          82.226          79.595         76.798      0.000
+ uniform 50   Monte Carlo           6.217   0.567        84.191          81.694          78.748         83.688      0.809
+ uniform 50  Disk overlay           6.140   0.540        84.751          82.275          79.631         83.271      0.695
+
+[T3-by-layer]
+   model  R  layer        method  err_full_cov_%  AURC_%  cov@risk<=1%  cov@risk<=0.5%  cov@risk<=0.1%  op_coverage_%  op_risk_%
+gaussian  5 county     Crisp PIP           0.755   0.755       100.000           0.000           0.000            NaN        NaN
+gaussian  5 county Distance rule           0.755   0.009       100.000          99.450          97.670         95.485      0.016
+gaussian  5 county   Monte Carlo           0.735   0.024       100.000          99.385          97.510         97.030      0.052
+gaussian  5 county  Disk overlay           0.735   0.024       100.000          99.445          97.675         96.990      0.052
+gaussian  5  tract     Crisp PIP           0.876   0.876       100.000           0.000           0.000            NaN        NaN
+gaussian  5  tract Distance rule           0.876   0.013       100.000          99.004          97.004         94.904      0.004
+gaussian  5  tract   Monte Carlo           0.876   0.025       100.000          99.016          97.060         96.552      0.046
+gaussian  5  tract  Disk overlay           0.876   0.017       100.000          98.988          97.008         96.508      0.046
+gaussian  5   zcta     Crisp PIP           0.795   0.795       100.000           0.000           0.000            NaN        NaN
+gaussian  5   zcta Distance rule           0.795   0.011       100.000          99.175          97.515         94.840      0.005
+gaussian  5   zcta   Monte Carlo           0.805   0.016       100.000          98.995          97.395         96.575      0.047
+gaussian  5   zcta  Disk overlay           0.780   0.016       100.000          99.120          97.510         96.510      0.047
+gaussian 10 county     Crisp PIP           1.495   1.495         0.000           0.000           0.000            NaN        NaN
+gaussian 10 county Distance rule           1.495   0.037        98.820          97.155          93.740         91.455      0.033
+gaussian 10 county   Monte Carlo           1.565   0.072        98.855          97.140          93.400         94.140      0.122
+gaussian 10 county  Disk overlay           1.460   0.066        98.815          97.100          93.740         93.965      0.106
+gaussian 10  tract     Crisp PIP           1.644   1.644         0.000           0.000           0.000            NaN        NaN
+gaussian 10  tract Distance rule           1.644   0.045        98.260          96.448          93.424         90.996      0.004
+gaussian 10  tract   Monte Carlo           1.704   0.055        98.020          96.256          93.244         93.448      0.111
+gaussian 10  tract  Disk overlay           1.644   0.049        98.252          96.464          93.428         93.272      0.077
+gaussian 10   zcta     Crisp PIP           1.530   1.530         0.000           0.000           0.000            NaN        NaN
+gaussian 10   zcta Distance rule           1.530   0.039        98.640          96.790          93.705         91.030      0.011
+gaussian 10   zcta   Monte Carlo           1.515   0.051        98.505          96.620          93.590         93.590      0.096
+gaussian 10   zcta  Disk overlay           1.470   0.049        98.675          96.795          93.680         93.430      0.064
+gaussian 20 county     Crisp PIP           2.910   2.910         0.000           0.000           0.000            NaN        NaN
+gaussian 20 county Distance rule           2.910   0.117        95.190          92.850          89.160         87.545      0.046
+gaussian 20 county   Monte Carlo           2.855   0.168        95.060          92.785          89.010         90.560      0.188
+gaussian 20 county  Disk overlay           2.815   0.156        95.200          93.010          89.185         90.395      0.171
+gaussian 20  tract     Crisp PIP           2.916   2.916         0.000           0.000           0.000            NaN        NaN
+gaussian 20  tract Distance rule           2.916   0.130        94.744          91.972          88.360         86.772      0.014
+gaussian 20  tract   Monte Carlo           2.968   0.165        94.400          91.800          88.628         90.072      0.258
+gaussian 20  tract  Disk overlay           2.912   0.142        94.744          91.912          88.328         89.820      0.218
+gaussian 20   zcta     Crisp PIP           3.155   3.155         0.000           0.000           0.000            NaN        NaN
+gaussian 20   zcta Distance rule           3.155   0.135        94.620          92.510          88.670         87.090      0.006
+gaussian 20   zcta   Monte Carlo           3.160   0.158        94.260          92.360          88.715         90.185      0.200
+gaussian 20   zcta  Disk overlay           3.030   0.140        94.595          92.495          88.680         89.980      0.178
+gaussian 50 county     Crisp PIP           4.810   4.810         0.000           0.000           0.000            NaN        NaN
+gaussian 50 county Distance rule           4.810   0.347        88.715          85.015          78.495         77.460      0.077
+gaussian 50 county   Monte Carlo           4.780   0.443        88.570          84.600           0.000         83.780      0.376
+gaussian 50 county  Disk overlay           4.630   0.401        88.835          85.125          78.500         83.550      0.329
+gaussian 50  tract     Crisp PIP           5.624   5.624         0.000           0.000           0.000            NaN        NaN
+gaussian 50  tract Distance rule           5.624   0.442        86.332          83.192          77.824         76.204      0.068
+gaussian 50  tract   Monte Carlo           5.564   0.520        86.432          82.756          77.352         82.756      0.483
+gaussian 50  tract  Disk overlay           5.596   0.490        86.568          83.320          77.940         82.392      0.398
+gaussian 50   zcta     Crisp PIP           5.330   5.330         0.000           0.000           0.000            NaN        NaN
+gaussian 50   zcta Distance rule           5.330   0.412        87.040          83.290          78.515         76.710      0.039
+gaussian 50   zcta   Monte Carlo           5.180   0.497        86.420          82.565          77.845         83.075      0.506
+gaussian 50   zcta  Disk overlay           5.080   0.441        86.905          83.380          78.360         82.725      0.441
+ uniform  5 county     Crisp PIP           0.895   0.895       100.000           0.000           0.000            NaN        NaN
+ uniform  5 county Distance rule           0.895   0.012       100.000          99.130          97.105         95.400      0.000
+ uniform  5 county   Monte Carlo           0.860   0.017       100.000          99.040          97.145         97.025      0.077
+ uniform  5 county  Disk overlay           0.870   0.012       100.000          99.135          97.110         96.950      0.067
+ uniform  5  tract     Crisp PIP           1.032   1.032         0.000           0.000           0.000            NaN        NaN
+ uniform  5  tract Distance rule           1.032   0.017        99.940          98.536          96.800         94.848      0.000
+ uniform  5  tract   Monte Carlo           1.044   0.016        99.856          98.468          96.732         96.488      0.062
+ uniform  5  tract  Disk overlay           1.024   0.016        99.960          98.536          96.808         96.420      0.054
+ uniform  5   zcta     Crisp PIP           1.135   1.135         0.000           0.000           0.000            NaN        NaN
+ uniform  5   zcta Distance rule           1.135   0.018        99.720          98.505          96.680         94.920      0.000
+ uniform  5   zcta   Monte Carlo           1.120   0.018        99.650          98.320          96.750         96.460      0.062
+ uniform  5   zcta  Disk overlay           1.105   0.018        99.740          98.480          96.690         96.380      0.047
+ uniform 10 county     Crisp PIP           1.840   1.840         0.000           0.000           0.000            NaN        NaN
+ uniform 10 county Distance rule           1.840   0.049        97.830          96.165          94.105         91.695      0.000
+ uniform 10 county   Monte Carlo           1.815   0.050        97.640          96.185          93.750         94.060      0.117
+ uniform 10 county  Disk overlay           1.790   0.049        97.845          96.175          94.110         93.955      0.090
+ uniform 10  tract     Crisp PIP           2.216   2.216         0.000           0.000           0.000            NaN        NaN
+ uniform 10  tract Distance rule           2.216   0.062        97.268          95.644          93.516         91.396      0.000
+ uniform 10  tract   Monte Carlo           2.284   0.063        97.216          95.596          93.300         93.872      0.175
+ uniform 10  tract  Disk overlay           2.212   0.062        97.276          95.664          93.504         93.684      0.120
+ uniform 10   zcta     Crisp PIP           2.065   2.065         0.000           0.000           0.000            NaN        NaN
+ uniform 10   zcta Distance rule           2.065   0.059        97.320          95.745          93.155         91.270      0.000
+ uniform 10   zcta   Monte Carlo           2.030   0.061        97.260          95.500          93.075         93.765      0.171
+ uniform 10   zcta  Disk overlay           2.005   0.060        97.315          95.720          93.180         93.635      0.155
+ uniform 20 county     Crisp PIP           3.540   3.540         0.000           0.000           0.000            NaN        NaN
+ uniform 20 county Distance rule           3.540   0.153        93.840          92.195          90.380         87.985      0.000
+ uniform 20 county   Monte Carlo           3.440   0.158        93.840          92.310          90.060         91.190      0.241
+ uniform 20 county  Disk overlay           3.445   0.152        93.865          92.215          90.380         90.990      0.181
+ uniform 20  tract     Crisp PIP           3.672   3.672         0.000           0.000           0.000            NaN        NaN
+ uniform 20  tract Distance rule           3.672   0.177        93.064          91.380          89.008         86.948      0.000
+ uniform 20  tract   Monte Carlo           3.680   0.190        92.976          91.176          88.964         90.644      0.375
+ uniform 20  tract  Disk overlay           3.624   0.176        93.068          91.412          89.040         90.432      0.305
+ uniform 20   zcta     Crisp PIP           3.780   3.780         0.000           0.000           0.000            NaN        NaN
+ uniform 20   zcta Distance rule           3.780   0.171        93.250          91.555          88.965         87.075      0.000
+ uniform 20   zcta   Monte Carlo           3.670   0.189        93.315          91.470          88.830         90.730      0.358
+ uniform 20   zcta  Disk overlay           3.640   0.171        93.255          91.575          88.925         90.430      0.288
+ uniform 50 county     Crisp PIP           5.975   5.975         0.000           0.000           0.000            NaN        NaN
+ uniform 50 county Distance rule           5.975   0.500        85.395          82.945          80.295         77.445      0.000
+ uniform 50 county   Monte Carlo           5.920   0.517        84.795          82.810          79.380         84.310      0.801
+ uniform 50 county  Disk overlay           5.810   0.497        85.425          83.050          80.345         83.900      0.656
+ uniform 50  tract     Crisp PIP           6.412   6.412         0.000           0.000           0.000            NaN        NaN
+ uniform 50  tract Distance rule           6.412   0.568        84.348          81.920          79.372         76.524      0.000
+ uniform 50  tract   Monte Carlo           6.412   0.595        83.920          81.520          79.100         83.416      0.820
+ uniform 50  tract  Disk overlay           6.396   0.565        84.464          82.052          79.416         83.092      0.732
+ uniform 50   zcta     Crisp PIP           6.510   6.510         0.000           0.000           0.000            NaN        NaN
+ uniform 50   zcta Distance rule           6.510   0.559        84.445          81.855          79.000         76.495      0.000
+ uniform 50   zcta   Monte Carlo           6.270   0.584        83.925          81.345          78.525         83.405      0.803
+ uniform 50   zcta  Disk overlay           6.150   0.555        84.540          81.880          79.120         82.865      0.688
+
+[T4] Runtime (ms per 1,000 queries; distance pre-filter applied to MC and overlay)
+     n_obs  t_crisp_s  t_dist_s  t_mc_s  t_overlay_s  t_crisp_ms_per_1k  t_dist_ms_per_1k  t_mc_ms_per_1k  t_overlay_ms_per_1k
+R                                                                                                                             
+5   130000       0.83      0.72    3.29         0.66               6.42              5.55           25.27                 5.11
+10  130000       0.70      0.61    5.93         1.21               5.36              4.72           45.63                 9.27
+20  130000       0.71      0.64    8.74         1.71               5.45              4.93           67.26                13.19
+50  130000       0.73      0.64   15.85         3.11               5.60              4.94          121.94                23.92

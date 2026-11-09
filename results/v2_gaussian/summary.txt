@@ -1,0 +1,47 @@
+# EXP03 Gaussian-weighted overlay | run 2026-11-09 17:53 | commit 5b614c6
+[GA0] Gaussian overlay vs 5,000-sample Gaussian MC (300 obs): MAE = 0.0037 -> PASS
+[GA1] regenerated observations match EXP01 exactly
+
+[GA1] Strategies incl. Gaussian overlay (pooled). Distance rule tau = R; others theta = 0.90.
+      Correctly specified model: Disk overlay for 'uniform' data, Gaussian overlay for 'gaussian' data.
+   model  R             method  err_full_cov_%  AURC_%  cov@risk<=1%  cov@risk<=0.5%  cov@risk<=0.1%  op_coverage_%  op_risk_%  ECE_near_%  Brier_true_near
+gaussian  5      Distance rule           0.814   0.011       100.000          99.218          97.349         95.063      0.008         NaN              NaN
+gaussian  5 Monte Carlo (disk)           0.811   0.022       100.000          99.078          97.349         96.706      0.048       4.825            0.122
+gaussian  5       Disk overlay           0.803   0.019       100.000          99.206          97.352         96.657      0.048       5.142            0.121
+gaussian  5   Gaussian overlay           0.802   0.011       100.000          99.209          97.351         97.391      0.104       1.235            0.118
+gaussian 10      Distance rule           1.563   0.041        98.554          96.745          93.620         91.148      0.015         NaN              NaN
+gaussian 10 Monte Carlo (disk)           1.603   0.059        98.520          96.566          93.492         93.705      0.110       4.461            0.132
+gaussian 10       Disk overlay           1.534   0.054        98.569          96.746          93.634         93.534      0.082       5.387            0.129
+gaussian 10   Gaussian overlay           1.537   0.040        98.558          96.748          93.628         95.031      0.232       1.390            0.126
+gaussian 20      Distance rule           2.988   0.127        94.815          92.448          88.706         87.108      0.021         NaN              NaN
+gaussian 20 Monte Carlo (disk)           2.992   0.164        94.658          92.323          88.772         90.257      0.218       2.253            0.159
+gaussian 20       Disk overlay           2.918   0.146        94.809          92.406          88.688         90.046      0.191       2.714            0.158
+gaussian 20   Gaussian overlay           2.906   0.127        94.814          92.405          88.694         91.895      0.412       4.036            0.158
+gaussian 50      Distance rule           5.283   0.403        87.257          83.748          78.374         76.746      0.062         NaN              NaN
+gaussian 50 Monte Carlo (disk)           5.205   0.489        86.838          83.169           0.000         83.169      0.457       1.939            0.154
+gaussian 50       Disk overlay           5.140   0.447        87.337          83.774          78.320         82.851      0.390       2.012            0.153
+gaussian 50   Gaussian overlay           5.146   0.400        87.303          83.794          78.388         86.137      0.818       3.821            0.154
+ uniform  5      Distance rule           1.022   0.015        99.974          98.691          96.852         95.040      0.000         NaN              NaN
+ uniform  5 Monte Carlo (disk)           1.011   0.017        99.938          98.608          96.871         96.645      0.067       1.402            0.144
+ uniform  5       Disk overlay           1.002   0.015        99.980          98.698          96.857         96.571      0.056       1.416            0.143
+ uniform  5   Gaussian overlay           1.002   0.015        99.978          98.695          96.855         97.354      0.171       4.503            0.146
+ uniform 10      Distance rule           2.054   0.057        97.469          95.862          93.571         91.449      0.000         NaN              NaN
+ uniform 10 Monte Carlo (disk)           2.062   0.058        97.308          95.603          93.306         93.897      0.156       1.685            0.163
+ uniform 10       Disk overlay           2.018   0.057        97.457          95.845          93.586         93.752      0.121       1.809            0.161
+ uniform 10   Gaussian overlay           2.018   0.057        97.466          95.852          93.585         95.042      0.327       6.140            0.166
+ uniform 20      Distance rule           3.665   0.167        93.358          91.683          89.488         87.306      0.000         NaN              NaN
+ uniform 20 Monte Carlo (disk)           3.603   0.180        93.366          91.577          89.286         90.838      0.329       6.199            0.189
+ uniform 20       Disk overlay           3.574   0.167        93.389          91.692          89.517         90.603      0.261       5.396            0.188
+ uniform 20   Gaussian overlay           3.572   0.167        93.357          91.694          89.502         92.502      0.710      10.478            0.198
+ uniform 50      Distance rule           6.308   0.544        84.686          82.226          79.595         76.798      0.000         NaN              NaN
+ uniform 50 Monte Carlo (disk)           6.217   0.567        84.191          81.694          78.748         83.688      0.809       5.200            0.185
+ uniform 50       Disk overlay           6.140   0.540        84.751          82.275          79.631         83.271      0.695       4.610            0.183
+ uniform 50   Gaussian overlay           6.154   0.541        84.785          82.280          79.546         86.906      1.558       9.601            0.192
+
+[GA2] Gaussian overlay runtime (ms per 1,000 queries; compare results/v2/T4_runtime.csv)
+     n_obs  t_gauss_s  gauss_ms_per_1k
+R                                     
+5   130000      15.69           120.67
+10  130000      24.50           188.43
+20  130000      34.71           266.98
+50  130000      66.05           508.11

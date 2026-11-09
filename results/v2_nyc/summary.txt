@@ -1,0 +1,37 @@
+# EXP04 NYC real-world check (PLUTO vs Census Geocoder) | run 2026-11-09 17:56 | commit 5b614c6
+[N1] PLUTO rows: 856,581 | eligible small residential lots with house numbers: 744,647
+[N2] Census match status: {'Match': 4966, 'No_Match': 29, 'Tie': 5} | type: {'Exact': 3010, 'Non_Exact': 1956}
+[N2] matched 4,966 | gross errors (>500 m, likely wrong address match) excluded: 3
+[N2] displacement (m): p50 25.2 | p75 37.3 | p90 53.8 | p95 64.2 | p99 104.7
+[N3] R from calibration half (p95 displacement): 64.1 m
+[N4] Census-returned tract equals our TIGER lookup of the Census point: 100.00%
+
+[N5] Test half: real wrong-region rate, straight-line prediction (real displacements, random direction),
+     distance rule (tau = R) and disk overlay (theta = 0.90) at R_hat. 'random' = population-like sample.
+ layer  stratum    n  wrong_%  ci_low_%  ci_high_%  straight_line_pred_%  dist_op_coverage_%  dist_op_risk_%  disk_op_coverage_%  disk_op_risk_%  dist_AURC_%  disk_AURC_%
+ tract   random 1257    0.239     0.081      0.699                 4.185              61.177            0.26              69.690           0.228        0.120        0.334
+ tract near_50m 1261    0.000     0.000      0.304                12.357               8.485            0.00              15.385           0.000        0.000        0.791
+  zcta   random 1257    0.080     0.014      0.449                 1.347              90.056            0.00              93.397           0.000        0.000        0.006
+  zcta near_50m 1261    0.079     0.014      0.448                 1.640              87.867            0.00              91.435           0.000        0.004        0.013
+county   random 1257    0.000     0.000      0.305                 0.006              99.841            0.00             100.000           0.000        0.000        0.000
+county near_50m 1261    0.000     0.000      0.304                 0.135              99.286            0.00              99.445           0.000        0.000        0.000
+
+[N6] Test half: wrong-region rate by true distance to boundary
+           bin  layer    n  observed_pct  straight_line_pct
+   [0.0, 10.0)  tract    4         0.000             39.020
+  [10.0, 25.0)  tract  742         0.000             17.070
+  [25.0, 50.0)  tract  903         0.000              8.370
+ [50.0, 100.0)  tract  415         0.482              1.013
+[100.0, 250.0)  tract  400         0.250              0.105
+  [250.0, inf)  tract   54         0.000              0.000
+   [0.0, 10.0)   zcta   12        16.667             43.160
+  [10.0, 25.0)   zcta   97         0.000             22.583
+  [25.0, 50.0)   zcta  115         0.000              7.201
+ [50.0, 100.0)   zcta  234         0.000              0.798
+[100.0, 250.0)   zcta  644         0.000              0.060
+  [250.0, inf)   zcta 1416         0.000              0.000
+  [10.0, 25.0) county    5         0.000             20.958
+  [25.0, 50.0) county   10         0.000              6.728
+ [50.0, 100.0) county    7         0.000              0.551
+[100.0, 250.0) county   27         0.000              0.064
+  [250.0, inf) county 2469         0.000              0.000
