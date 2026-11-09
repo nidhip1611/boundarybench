@@ -75,11 +75,7 @@ def disk_pairs(L, x, y, r, quad_segs=64):
     if len(inp) == 0:
         return inp, tr, np.zeros(0), disk_area
     d = disks[inp]
-    b = shapely.bounds(d)
-    try:  # clip large polygons to the disk's bounding box first (same result, faster)
-        poly = shapely.clip_by_rect(L.geoms[tr], b[:, 0], b[:, 1], b[:, 2], b[:, 3])
-    except Exception:
-        poly = L.geoms[tr]
+    poly = L.geoms[tr]
     try:
         inter = shapely.intersection(poly, d)
     except Exception:

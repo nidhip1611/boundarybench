@@ -56,6 +56,11 @@ Key results (uniform error):
 - Runtime per 1,000 queries at R = 20: crisp 5.5 ms, overlay 13.4 ms, MC 68 ms.
 - Pooled error rates (0.8–6.3%) reflect the benchmark's stratified mix, not real-world rates — report per-band rates.
 
+### 2026-11-09 — EXP01 re-run from repo (branch v2, commit b7bf0d8)
+Reproduced the first run exactly: all 32 pooled and 96 by-layer [T3] rows identical
+(e.g. uniform R = 20 crisp error 3.665%, disk overlay AURC 0.167%).
+EXP02 failed: `shapely.clip_by_rect` accepts only scalar bounds. The same call in `disk_pairs` had always fallen back
+to plain intersection via try/except, so EXP01 numbers are unaffected. Fix: removed `clip_by_rect` in both places.
+
 ### Next
-- Re-run EXP01 from this repo and confirm the numbers above reproduce exactly (same seeds).
 - Run EXP02–EXP04. Go / no-go for ICICT 2027 (deadline Nov 25) on Nov 16.

@@ -91,8 +91,7 @@ for R in C.RADII:
         disks = shapely.buffer(shapely.points(x, y), R, quad_segs=32)
         inp, _ = L.tree.query(disks, predicate="intersects")
         n_reg = np.bincount(inp, minlength=len(s))
-        b = shapely.bounds(disks)
-        seg = shapely.intersection(shapely.clip_by_rect(L.bounds[own], b[:, 0], b[:, 1], b[:, 2], b[:, 3]), disks)
+        seg = shapely.intersection(L.bounds[own], disks)   # own boundary inside the disk
         d = s["dist_to_boundary_m"].to_numpy()
         bend = shapely.length(seg) / (2 * np.sqrt(np.maximum(R * R - d * d, 1e-9)))
         pieces = n_pieces(seg)
