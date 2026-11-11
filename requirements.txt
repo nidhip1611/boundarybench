@@ -10,3 +10,4 @@ matplotlib>=3.7
 requests>=2.31
 tqdm>=4.62
 rtree>=1.0              # V1 code (src/boundarysafe.py)
+pytest>=7.0              # tests/

@@ -1,6 +1,6 @@
 """Run the V2 experiments in order. Each step skips work whose raw outputs already exist.
 
-    python experiments/run_all.py                 # EXP01 -> EXP04
+    python experiments/run_all.py                 # EXP01 -> EXP08
     python experiments/run_all.py 2 3             # only EXP02 and EXP03
     python experiments/run_all.py --skip-nyc      # everything except the internet-dependent EXP04
 """
@@ -10,12 +10,14 @@ import sys
 import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-STEPS = {"1": "exp01_v2_main.py", "2": "exp02_geometry.py", "3": "exp03_gaussian_overlay.py", "4": "exp04_nyc_real.py"}
+STEPS = {"1": "exp01_v2_main.py", "2": "exp02_geometry.py", "3": "exp03_gaussian_overlay.py", "4": "exp04_nyc_real.py",
+         "4b": "exp04b_nyc_mechanism.py", "5": "exp05_mc_convergence.py", "6": "exp06_geometry_stress.py",
+         "7": "exp07_heavy_tails.py", "8": "exp08_stats.py"}
 
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
 todo = args or list(STEPS)
-if "--skip-nyc" in sys.argv and "4" in todo:
-    todo.remove("4")
+if "--skip-nyc" in sys.argv:
+    todo = [k for k in todo if k not in ("4", "4b")]
 for k in todo:
     t = time.time()
     print(f"\n{'=' * 80}\nRUNNING {STEPS[k]}\n{'=' * 80}", flush=True)

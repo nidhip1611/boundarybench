@@ -23,6 +23,7 @@ import shapely
 
 from src import config as C
 from src.geo import load_layers, load_points
+from src.localgeom import classify
 from src.metrics import wilson
 from src.report import Report
 from src.uncertainty import p_straight
@@ -60,26 +61,7 @@ for model in C.MODELS:
     rep.say(f"  {model}: observed {100*d['crisp_wrong'].mean():.2f}% vs predicted {100*d['p_line'].mean():.2f}% "
             f"(ratio {d['crisp_wrong'].mean()/max(d['p_line'].mean(), 1e-12):.3f}, n={len(d):,})")
 
-# ----------------------------------------------------------------------------- 2. local geometry
-def n_pieces(geoms):
-    out = np.zeros(len(geoms), dtype=int)
-    for i, gm in enumerate(geoms):
-        try:
-            if gm is None or gm.is_empty:
-                continue
-            if gm.geom_type == "GeometryCollection":
-                lines = [p for p in gm.geoms if p.geom_type in ("LineString", "MultiLineString")]
-                if not lines:
-                    continue
-                gm = shapely.union_all(lines)
-            if gm.geom_type == "MultiLineString":
-                gm = shapely.line_merge(gm)
-            out[i] = shapely.get_num_geometries(gm)
-        except Exception:
-            out[i] = -1
-    return out
-
-
+# ----------------------------------------------------------------------------- 2. local geometry (src/localgeom.py)
 geo_rows = []
 for R in C.RADII:
     for lname, sub in pts.groupby("layer"):
@@ -88,17 +70,8 @@ for R in C.RADII:
             continue
         L = LAYERS[lname]
         x, y, own = s["x"].to_numpy(), s["y"].to_numpy(), s["true_idx"].to_numpy()
-        disks = shapely.buffer(shapely.points(x, y), R, quad_segs=32)
-        inp, _ = L.tree.query(disks, predicate="intersects")
-        n_reg = np.bincount(inp, minlength=len(s))
-        seg = shapely.intersection(L.bounds[own], disks)   # own boundary inside the disk
         d = s["dist_to_boundary_m"].to_numpy()
-        bend = shapely.length(seg) / (2 * np.sqrt(np.maximum(R * R - d * d, 1e-9)))
-        pieces = n_pieces(seg)
-        cls = np.where(n_reg <= 1, "open edge (water/gap)",
-              np.where(n_reg >= 3, "junction (3+ regions)",
-              np.where(pieces >= 2, "multi-edge / sliver",
-              np.where(bend > 1.10, "bent / corner", "straight"))))
+        cls, n_reg, pieces, bend = classify(L, x, y, own, d, R)
         geo_rows.append(pd.DataFrame({"point_id": s["point_id"].to_numpy(), "layer": lname, "R": R, "geom_class": cls,
                                       "n_regions": n_reg, "n_pieces": pieces, "bend_ratio": bend}))
 geo = pd.concat(geo_rows, ignore_index=True)
