@@ -7,6 +7,8 @@ Strategies (each sees only the reported point and an error scale R):
   disk overlay       area of polygon ∩ disk(R) / disk area — exact under a uniform-disk error model
   Gaussian overlay   Gaussian-weighted area fractions (radial Gauss-Legendre quadrature) — matched to Gaussian error
 """
+import math
+
 import numpy as np
 import pandas as pd
 import shapely
