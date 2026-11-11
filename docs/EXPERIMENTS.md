@@ -28,6 +28,13 @@ or a design decision changes. Numbers here must come from `results/*/summary.txt
 | EXP02 | `exp02_geometry.py` | Does error collapse onto d/R and match straight-boundary theory? Where does local geometry deviate? | `results/v2_geometry/` |
 | EXP03 | `exp03_gaussian_overlay.py` | Gaussian-weighted overlay (correctly specified under Gaussian error) vs other strategies | `results/v2_gaussian/` |
 | EXP04 | `exp04_nyc_real.py` | RQ4: real geocoding error (NYC PLUTO lot centroids vs Census Geocoder) | `results/v2_nyc/` |
+| EXP04b | `exp04b_nyc_mechanism.py` | Why NYC geocoding errors rarely cross tract lines: across- vs along-boundary displacement | `results/v2_nyc_mechanism/` |
+| EXP05 | `exp05_mc_convergence.py` | Is MC-100's weakness finite-sample noise? N = 25…5,000 vs disk overlay | `results/v2_mc_convergence/` |
+| EXP06 | `exp06_geometry_stress.py` | Targeted junction / corner / sliver / water-edge points: deviation from theory, strategy ranking | `results/v2_geometry_stress/` |
+| EXP07 | `exp07_heavy_tails.py` | Robustness to heavy-tailed error (t3, contaminated, Strickland-scale lognormal) — simulation | `results/v2_heavy_tails/` |
+| EXP08 | `exp08_stats.py` | Data-flow table, bootstrap CIs over points, calibration (equal-mass bins, reliability diagrams) | `results/v2_stats/` |
+
+Tests: `python -m pytest tests -q` (half-plane and junction checks against closed-form answers and high-sample MC).
 
 ## Design decisions (locked)
 
@@ -62,5 +69,25 @@ Reproduced the first run exactly: all 32 pooled and 96 by-layer [T3] rows identi
 EXP02 failed: `shapely.clip_by_rect` accepts only scalar bounds. The same call in `disk_pairs` had always fallen back
 to plain intersection via try/except, so EXP01 numbers are unaffected. Fix: removed `clip_by_rect` in both places.
 
+### 2026-11-09 — EXP02–EXP04 (commit 5b614c6, results commit fd9fd3c)
+- EXP02: wrong-region rate collapses onto d/R and matches straight-boundary theory: observed/predicted 0.988 (uniform,
+  n = 33,390) and 0.994 (Gaussian, n = 43,760). 92–97% of near-boundary points have straight local boundaries.
+  Junctions exceed theory (uniform R = 50: 45.1% [39.8, 50.4] vs 37.1%); bends/slivers smaller, n small.
+- EXP03: Gaussian overlay validated (MAE 0.0037 vs 5,000-sample MC). Under Gaussian error its AURC equals the distance
+  rule (R = 20: 0.127 vs 0.127), better than disk overlay (0.146) and MC (0.164). ECE not better at R = 20/50
+  (3.8–4.0% vs 2.0–2.7%). 20× slower than disk overlay.
+- EXP04 (NYC, 4,966 matched addresses): displacement p50 25 m, p95 64 m, but wrong tract only 0.24% [0.08, 0.70]
+  (random sample) vs 4.2% predicted by an isotropic model; 0 / 1,261 near-boundary addresses. ZCTA 0.08%, county 0%.
+  Hypothesis: Census Geocoder places addresses along TIGER street edges that tract boundaries also follow → EXP04b.
+
+### Plan (locked 2026-11-11)
+Paper = benchmark + controlled evaluation. Three findings: (1) d/R theory explains isotropic misassignment, junctions
+deviate; (2) therefore distance ranking ≈ probability methods, probabilities only needed for graded output, MC adds
+noise/cost; (3) real geocoding error is structured — the error model must match the error source.
+Avoid: "first probabilistic PIP", "exact" for anything but uniform-disk overlay, "level/geometry don't matter",
+"MC is unreliable", national real-world error rates.
+Schedule: EXP04b–08 Nov 11–12 → freeze Nov 13–15 → go/no-go Nov 16 → write Nov 16–22 → submit ICICT Nov 25.
+Outreach (Berg group, Geocodio, public-health GIS) only after submission.
+
 ### Next
-- Run EXP02–EXP04. Go / no-go for ICICT 2027 (deadline Nov 25) on Nov 16.
+- Run EXP04b–EXP08 and the tests; record results here.
