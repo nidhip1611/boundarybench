@@ -5,10 +5,8 @@ Strategies (each sees only the reported point and an error scale R):
   distance rule      abstain if the reported point is closer than tau to its polygon boundary
   Monte Carlo        share of N random samples (uniform disk of radius R) falling in each polygon
   disk overlay       area of polygon ∩ disk(R) / disk area — exact under a uniform-disk error model
-  Gaussian overlay   Gaussian-weighted area fractions via equal-probability rings — matched to Gaussian error
+  Gaussian overlay   Gaussian-weighted area fractions (radial Gauss-Legendre quadrature) — matched to Gaussian error
 """
-import math
-
 import numpy as np
 import pandas as pd
 import shapely
@@ -88,29 +86,31 @@ def disk_overlay(L, x, y, R, true_idx):
     return top_from_pairs(len(x), inp, tr, a / A, true_idx)
 
 
-def ring_coefficients(sigma, n_rings=C.N_RINGS, q_max=C.Q_MAX, quad_segs=64):
-    """Radii r_k with equal Gaussian mass per ring, and weights c_k such that
-    P(polygon) ≈ sum_k c_k * Area(polygon ∩ disk(r_k)) / q_max  (density taken as uniform within each ring)."""
-    q = np.linspace(0, q_max, n_rings + 1)[1:]
-    r = sigma * np.sqrt(-2 * np.log(1 - q))
+def radial_quadrature(sigma, n=C.GAUSS_NODES, rmax_sig=C.GAUSS_RMAX_SIG, quad_segs=64):
+    """Radii r_k and weights w_k so that, for an isotropic Gaussian with std sigma,
+    P(polygon) ≈ sum_k w_k * Area(polygon ∩ disk(r_k)).
+    Derivation: P = ∫ phi(r) dA(r) = ∫ A(r) * (r / sigma^2) * phi(r) dr (integration by parts, phi = 2-D density),
+    evaluated with Gauss-Legendre on [0, rmax]; weights are normalised so a polygon covering everything gets P = 1."""
+    x, w = np.polynomial.legendre.leggauss(n)
+    b = rmax_sig * sigma
+    r = b / 2 * (x + 1)
+    w = w * b / 2 * (r / sigma ** 2) * np.exp(-r * r / (2 * sigma * sigma)) / (2 * np.pi * sigma * sigma)
     A = np.array([float(shapely.area(shapely.buffer(shapely.Point(0, 0), rk, quad_segs=quad_segs))) for rk in r])
-    dens = (q_max / n_rings) / np.diff(np.concatenate([[0.0], A]))
-    c = dens - np.concatenate([dens[1:], [0.0]])
-    return r, c
+    return r, w / float((w * A).sum())
 
 
 def gaussian_overlay(L, x, y, sigma, true_idx):
-    r, c = ring_coefficients(sigma)
+    r, wk = radial_quadrature(sigma)
     rows, polys, ws = [], [], []
-    for rk, ck in zip(r, c):
+    for rk, ck in zip(r, wk):
         inp, tr, a, _ = disk_pairs(L, x, y, rk)
         rows.append(inp); polys.append(tr); ws.append(ck * a)
-    top, p_top, p_true = top_from_pairs(len(x), np.concatenate(rows), np.concatenate(polys), np.concatenate(ws), true_idx)
-    return top, p_top / C.Q_MAX, p_true / C.Q_MAX
+    return top_from_pairs(len(x), np.concatenate(rows), np.concatenate(polys), np.concatenate(ws), true_idx)
 
 
 def gaussian_rmax(sigma):
-    return sigma * math.sqrt(-2 * math.log(1 - C.Q_MAX))
+    """Beyond this distance from every boundary the Gaussian overlay returns P = 1 (missing mass ~4e-6)."""
+    return C.GAUSS_RMAX_SIG * sigma
 
 
 # ----------------------------------------------------------------------------- theory

@@ -89,5 +89,12 @@ Avoid: "first probabilistic PIP", "exact" for anything but uniform-disk overlay,
 Schedule: EXP04b–08 Nov 11–12 → freeze Nov 13–15 → go/no-go Nov 16 → write Nov 16–22 → submit ICICT Nov 25.
 Outreach (Berg group, Geocodio, public-health GIS) only after submission.
 
+### 2026-11-11 — Gaussian overlay corrected (tail bias)
+The new unit test caught a tail error in the EXP03 method (16 equal-probability rings with uniform density inside each
+ring): at d = 1.25 R it gave P(cross) = 0.45% vs the exact 0.11%; max absolute error 0.0046.
+Replaced by radial Gauss-Legendre quadrature, P = ∫ A(r) (r/σ²) φ(r) dr on [0, 5σ], 24 nodes:
+max absolute error 0.0002 on the half-plane test. EXP03 results from commit 5b614c6 are SUPERSEDED — rerun EXP03,
+then EXP06 and EXP08 (they use it). Expect ECE of the Gaussian overlay at R = 20/50 to change.
+
 ### Next
-- Run EXP04b–EXP08 and the tests; record results here.
+- Rerun EXP03 (delete its raw outputs first), then EXP04b–EXP08; record results here.
