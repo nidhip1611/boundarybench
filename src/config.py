@@ -24,8 +24,8 @@ GAUSS_K95 = 2.4477            # Gaussian: sigma = R / 2.4477, so 95% of errors f
 K_OBS = 5                     # noisy observations per benchmark point
 N_MC = 100                    # Monte Carlo samples
 THETA = 0.90                  # default answer threshold for probabilistic methods
-N_RINGS = 16                  # Gaussian overlay: equal-probability rings
-Q_MAX = 0.999                 # Gaussian overlay covers 99.9% of the error mass
+GAUSS_NODES = 24              # Gaussian overlay: Gauss-Legendre nodes in radius
+GAUSS_RMAX_SIG = 5.0          # Gaussian overlay integrates radius 0..5 sigma (mass beyond: ~4e-6)
 
 LAYER_ID = {"county": "GEOID", "zcta": "ZCTA5CE20", "tract": "GEOID"}
 LABEL_WIDTH = {"county": 5, "zcta": 5, "tract": 11}

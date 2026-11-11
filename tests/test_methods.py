@@ -39,10 +39,19 @@ def test_disk_overlay_matches_straight_line_formula(d):
     assert abs((1 - pt[0]) - p_straight(d, R, "uniform")) < 2e-3
 
 
-@pytest.mark.parametrize("d", [0.5, 5, 10, 15, 25])
+@pytest.mark.parametrize("d", [0.5, 5, 10, 15, 20, 25, 30])
 def test_gaussian_overlay_matches_phi(d):
     _, _, pt = gaussian_overlay(halfplane(), np.array([-d]), np.array([0.0]), SIG, np.array([0]))
-    assert abs((1 - pt[0]) - p_straight(d, R, "gaussian")) < 3e-3
+    assert abs((1 - pt[0]) - p_straight(d, R, "gaussian")) < 1e-3
+
+
+@pytest.mark.parametrize("a,b", [(3, 4), (10, 10), (20, 5)])
+def test_gaussian_overlay_matches_gaussian_mc_at_a_junction(a, b):
+    from src.uncertainty import monte_carlo_gaussian
+    L = quadrants(); x, y, t = np.array([-a]), np.array([-b]), np.array([0])
+    _, _, mc = monte_carlo_gaussian(L, x, y, SIG, 400000, np.random.default_rng(3), t)
+    _, _, g = gaussian_overlay(L, x, y, SIG, t)
+    assert abs(mc[0] - g[0]) < 4e-3
 
 
 @pytest.mark.parametrize("a,b", [(3, 4), (8, 2), (12, 12)])

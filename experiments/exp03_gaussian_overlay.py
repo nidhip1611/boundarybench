@@ -1,4 +1,5 @@
 """EXP03 — Gaussian-weighted overlay as a 5th strategy (needs EXP01 outputs).
+Method: radial Gauss-Legendre quadrature (src/uncertainty.py: radial_quadrature).
 
 Regenerates the exact EXP01 reported points (same seeds), verifies them against the saved files,
 then adds the Gaussian overlay and compares all probabilistic strategies.
