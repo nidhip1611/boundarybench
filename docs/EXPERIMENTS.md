@@ -39,6 +39,7 @@ or a design decision changes. Numbers here must come from `results/*/summary.txt
 | EXP13 | `exp13_nyc_sensitivity.py` | Street tolerance 1–5 m, Exact vs Non_Exact matches, Fisher test, failure taxonomy | `results/v2_nyc_sensitivity/` |
 | EXP14 | `exp14_cartographic_boundaries.py` | Cartographic (simplified) boundary files with exact locations | `results/v2_cartographic/` |
 | EXP15 | `exp15_utah_transfer.py` | Second region: Utah urban (Salt Lake Co.) vs 6 rural counties, UGRC address points, same measurements as EXP09/EXP11 | `results/v2_utah/` |
+| EXP16 | `exp16_national_transfer.py` | National transfer: urban + rural county in each of the 9 Census divisions, USDOT National Address Database truth, Census geocoder | `results/v2_national/` |
 | EXP08 | `exp08_stats.py` | Data-flow table, bootstrap CIs over points, calibration (equal-mass bins, reliability diagrams) | `results/v2_stats/` |
 
 Tests: `python -m pytest tests -q` (half-plane and junction checks against closed-form answers and high-sample MC).
@@ -139,5 +140,17 @@ Utah chosen because one state gives an urban street grid (Salt Lake County) and 
 often follow non-street features. Prediction from the NYC mechanism: more Census tract crossings on non-street
 boundaries. Truth = UGRC statewide address points (county Master Address List authorities).
 
+### 2026-11-12 — EXP11–EXP14 results (results commit 8260110)
+- EXP11: same displacement lengths in random directions raise wrong-tract 0.33% → 8.7% (×26, CI ×19–41).
+- EXP12: Wilson-certified thresholds keep pooled held-out risk within target in 24/24 settings for every method;
+  empirical thresholds 6–7/24 (MC 21/24). Individual folds sometimes exceed slightly.
+- EXP13: street tolerance 1–5 m irrelevant; NYC has too few non-street boundaries to test (41/66); taxonomy of 26
+  failures: 12 along same street, 10 different street, 4 opposite side; 23/26 Non_Exact.
+- EXP14: cartographic tract 500k misassigns 1.64% of exact points (14.2% within 10 m); county 20m 15.0%.
+
+### 2026-11-12 — EXP16 added (national coverage)
+Instead of hand-picked regions: one urban (most NAD points) and one random rural county (2k–30k points) in each of the
+9 Census divisions, from the USDOT National Address Database. Utah (EXP15) stays as the deep urban/rural case study.
+
 ### Next
-- Run EXP09 (rerun), EXP11–EXP15. Write paper Nov 13–21; Springer LNNS format Nov 22–24; submit Nov 25.
+- Run EXP15, EXP16. Then experiments are frozen; write. Write paper Nov 13–21; Springer LNNS format Nov 22–24; submit Nov 25.
