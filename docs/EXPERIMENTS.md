@@ -38,6 +38,7 @@ or a design decision changes. Numbers here must come from `results/*/summary.txt
 | EXP12 | `exp12_heldout_geography.py` | Thresholds chosen on 4/5 of states, risk checked on held-out states (empirical vs Wilson-certified) | `results/v2_heldout_geography/` |
 | EXP13 | `exp13_nyc_sensitivity.py` | Street tolerance 1–5 m, Exact vs Non_Exact matches, Fisher test, failure taxonomy | `results/v2_nyc_sensitivity/` |
 | EXP14 | `exp14_cartographic_boundaries.py` | Cartographic (simplified) boundary files with exact locations | `results/v2_cartographic/` |
+| EXP15 | `exp15_utah_transfer.py` | Second region: Utah urban (Salt Lake Co.) vs 6 rural counties, UGRC address points, same measurements as EXP09/EXP11 | `results/v2_utah/` |
 | EXP08 | `exp08_stats.py` | Data-flow table, bootstrap CIs over points, calibration (equal-mass bins, reliability diagrams) | `results/v2_stats/` |
 
 Tests: `python -m pytest tests -q` (half-plane and junction checks against closed-form answers and high-sample MC).
@@ -133,5 +134,10 @@ EXP11–EXP14 added; EXP09 now also saves match type and street names (rerun nee
 Paper framing: assignment risk = f(distance, error distribution, error direction, boundary geometry, coverage gaps);
 each experiment answers one factor. After this batch: experiments frozen.
 
+### 2026-11-12 — EXP15 added (second region, not only NYC)
+Utah chosen because one state gives an urban street grid (Salt Lake County) and rural counties where tract lines more
+often follow non-street features. Prediction from the NYC mechanism: more Census tract crossings on non-street
+boundaries. Truth = UGRC statewide address points (county Master Address List authorities).
+
 ### Next
-- Run EXP09 (rerun) and EXP11–EXP14. Write paper Nov 13–21; Springer LNNS format Nov 22–24; submit Nov 25.
+- Run EXP09 (rerun), EXP11–EXP15. Write paper Nov 13–21; Springer LNNS format Nov 22–24; submit Nov 25.
