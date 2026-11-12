@@ -96,5 +96,19 @@ Replaced by radial Gauss-Legendre quadrature, P = ∫ A(r) (r/σ²) φ(r) dr on 
 max absolute error 0.0002 on the half-plane test. EXP03 results from commit 5b614c6 are SUPERSEDED — rerun EXP03,
 then EXP06 and EXP08 (they use it). Expect ECE of the Gaussian overlay at R = 20/50 to change.
 
+### 2026-11-12 — EXP01–EXP08 full run (commit 5d09585); results frozen
+EXP01 reproduced (all T3 values identical after removing clip_by_rect). Fixed Gaussian overlay validated
+(MAE 0.0032 vs 5,000-sample Gaussian MC). Full numbers: results/*/summary.txt. Key results:
+- d/R theory holds for every isotropic error model tried (uniform, Gaussian, t3, contaminated, lognormal).
+- Geometry stress set: straight ≈ theory; junctions ×1.14–1.19, corners ×1.13–1.20, slivers ×1.06–1.21 (tight CIs).
+- Distance score ranks as well as or better than overlays (better at corners/slivers and under heavy tails);
+  overlays clearly better only at water edges / coverage gaps.
+- MC error ∝ 1/sqrt(N): needs ~5,000 samples to match the overlay.
+- Overlay calibration ECE 1.6–5.6% even when correctly specified.
+- NYC mechanism: errors are not parallel to boundaries (across share 0.475 vs 0.5 isotropic); 67% move toward the line
+  (80% near-boundary) but Census points stop at a fixed ~6.3 m offset (none < 5 m; near-boundary median 6.4 m vs true
+  25.6 m). The geocoder snaps toward the street centreline that forms the tract boundary and stays on the correct side.
+  The earlier "slides along the street" hypothesis was wrong. Check added to EXP04b as [M4].
+
 ### Next
-- Rerun EXP03 (delete its raw outputs first), then EXP04b–EXP08; record results here.
+- Go / no-go Nov 16 (recommendation: go). Write paper Nov 13–22; Springer LNNS format Nov 23–24; submit Nov 25.
