@@ -104,6 +104,16 @@ for name, tau in [("tau = p95 displacement", float(np.quantile(rho, .95))),
 t3 = pd.DataFrame(rows).round(3); t3.to_csv(f"{RES}/M3_distance_rule_calibration.csv", index=False)
 rep.table("[M3] Distance rule on the test half with tau from the calibration half", t3, index=False)
 
+# Where do the reported points end up? (expect a pile-up at a fixed side-of-street offset from the line)
+rows = []
+for st, d in [("random", m[m["stratum"] == "random"]), ("near_50m", m[m["stratum"] == "near_50m"])]:
+    q = d["d_obs"].quantile([.05, .1, .25, .5, .75]).round(1).tolist()
+    qt = d["d_true"].quantile([.05, .25, .5, .75]).round(1).tolist()
+    rows.append({"sample": st, "n": len(d), "d_obs_p5/p10/p25/p50/p75": q, "d_true_p5/p25/p50/p75": qt,
+                 **{f"d_obs<{x}m_%": round(100 * (d["d_obs"] < x).mean(), 1) for x in (2, 5, 10, 15)}})
+t4 = pd.DataFrame(rows); t4.to_csv(f"{RES}/M4_reported_distance_to_line.csv", index=False)
+rep.table("[M4] Distance from the Census-reported point to the tract line vs the true lot's distance", t4, index=False)
+
 fig, axes = plt.subplots(1, 2, figsize=(8, 3))
 axes[0].hist(m["angle"], bins=18, range=(0, 90)); axes[0].axhline(len(m) / 18, color="k", ls=":", label="isotropic")
 axes[0].set_xlabel("displacement angle to nearest tract boundary (°)\n0 = parallel, 90 = perpendicular"); axes[0].legend()

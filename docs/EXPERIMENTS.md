@@ -32,6 +32,8 @@ or a design decision changes. Numbers here must come from `results/*/summary.txt
 | EXP05 | `exp05_mc_convergence.py` | Is MC-100's weakness finite-sample noise? N = 25…5,000 vs disk overlay | `results/v2_mc_convergence/` |
 | EXP06 | `exp06_geometry_stress.py` | Targeted junction / corner / sliver / water-edge points: deviation from theory, strategy ranking | `results/v2_geometry_stress/` |
 | EXP07 | `exp07_heavy_tails.py` | Robustness to heavy-tailed error (t3, contaminated, Strickland-scale lognormal) — simulation | `results/v2_heavy_tails/` |
+| EXP09 | `exp09_nyc_streets.py` | NYC mechanism: Census point vs street centerlines, street vs non-street tract boundaries, same-side test, map panels; independent truth = NYC Address Points | `results/v2_nyc_streets/` |
+| EXP10 | `exp10_output_categories.py` | Formal outputs: ANSWER / ABSTAIN (competing region) / ABSTAIN (unassigned mass: water, ZCTA gaps) | `results/v2_output_categories/` |
 | EXP08 | `exp08_stats.py` | Data-flow table, bootstrap CIs over points, calibration (equal-mass bins, reliability diagrams) | `results/v2_stats/` |
 
 Tests: `python -m pytest tests -q` (half-plane and junction checks against closed-form answers and high-sample MC).
@@ -96,5 +98,25 @@ Replaced by radial Gauss-Legendre quadrature, P = ∫ A(r) (r/σ²) φ(r) dr on 
 max absolute error 0.0002 on the half-plane test. EXP03 results from commit 5b614c6 are SUPERSEDED — rerun EXP03,
 then EXP06 and EXP08 (they use it). Expect ECE of the Gaussian overlay at R = 20/50 to change.
 
+### 2026-11-12 — EXP01–EXP08 full run (commit 5d09585); results frozen
+EXP01 reproduced (all T3 values identical after removing clip_by_rect). Fixed Gaussian overlay validated
+(MAE 0.0032 vs 5,000-sample Gaussian MC). Full numbers: results/*/summary.txt. Key results:
+- d/R theory holds for every isotropic error model tried (uniform, Gaussian, t3, contaminated, lognormal).
+- Geometry stress set: straight ≈ theory; junctions ×1.14–1.19, corners ×1.13–1.20, slivers ×1.06–1.21 (tight CIs).
+- Distance score ranks as well as or better than overlays (better at corners/slivers and under heavy tails);
+  overlays clearly better only at water edges / coverage gaps.
+- MC error ∝ 1/sqrt(N): needs ~5,000 samples to match the overlay.
+- Overlay calibration ECE 1.6–5.6% even when correctly specified.
+- NYC mechanism: errors are not parallel to boundaries (across share 0.475 vs 0.5 isotropic); 67% move toward the line
+  (80% near-boundary) but Census points stop at a fixed ~6.3 m offset (none < 5 m; near-boundary median 6.4 m vs true
+  25.6 m). The geocoder snaps toward the street centreline that forms the tract boundary and stays on the correct side.
+  The earlier "slides along the street" hypothesis was wrong. Check added to EXP04b as [M4].
+
+### 2026-11-12 — Strengthening plan (merged with second-opinion review)
+Added EXP09 (street mechanism + independent NYC Address Points truth + map panels) and EXP10 (formal output
+categories). NYC wording stays conservative until EXP09: "Census geocodes concentrate ~6.3 m from tract lines,
+consistent with street-side placement". LLM evaluation dropped from the paper (future work). Paper adds a
+practitioner decision table and a Zenodo DOI for code + data.
+
 ### Next
-- Rerun EXP03 (delete its raw outputs first), then EXP04b–EXP08; record results here.
+- Run EXP09, EXP10. Write paper Nov 13–21; Springer LNNS format Nov 22–24; submit Nov 25.
