@@ -57,18 +57,34 @@ for div, states in {
 # ----------------------------------------------------------------------------- 1. stream the NAD once
 @contextlib.contextmanager
 def open_member(zip_path, member):
-    """Binary stream of one zip member. The official NAD zip uses Deflate64, which Python's zipfile cannot read,
-    so fall back to the system `unzip -p` (Info-ZIP 6.0, shipped with macOS/Linux, supports Deflate64), then to the
-    optional zipfile-deflate64 package. Nothing is written to disk."""
-    zf = zipfile.ZipFile(zip_path)
+    """Binary stream of one zip member, nothing written to disk. The official NAD zip is Zip64 + Deflate64:
+    stdlib zipfile can't decompress Deflate64 and macOS `unzip` 6.00 can't read the >4 GB Zip64 directory.
+    Order: (1) zipfile-deflate64 (pip; patches stdlib zipfile), (2) 7-Zip CLI (brew install sevenzip -> 7zz),
+    (3) stdlib zipfile, (4) unzip."""
     try:
-        fh = zf.open(member)
-    except NotImplementedError:
-        fh = None
-    if fh is not None:
-        with fh:
+        import zipfile_deflate64 as zd  # noqa: F401  (import patches zipfile with Deflate64 support)
+        with zd.ZipFile(zip_path).open(member) as fh:
             yield fh
         return
+    except ImportError:
+        pass
+    for exe in ["7zz", "7z", "7za"]:
+        if shutil.which(exe):
+            proc = subprocess.Popen([exe, "e", "-so", "-bd", zip_path, member], stdout=subprocess.PIPE,
+                                    stderr=subprocess.DEVNULL, bufsize=1 << 24)
+            try:
+                yield proc.stdout
+            finally:
+                proc.stdout.close()
+                proc.kill()
+                proc.wait()
+            return
+    try:
+        with zipfile.ZipFile(zip_path).open(member) as fh:
+            yield fh
+        return
+    except NotImplementedError:
+        pass
     if shutil.which("unzip"):
         proc = subprocess.Popen(["unzip", "-p", zip_path, member], stdout=subprocess.PIPE, bufsize=1 << 24)
         try:
@@ -78,12 +94,7 @@ def open_member(zip_path, member):
             proc.kill()
             proc.wait()
         return
-    try:
-        import zipfile_deflate64 as zd  # pip install zipfile-deflate64
-    except ImportError as e:
-        raise RuntimeError("NAD zip is Deflate64: install `unzip` or `pip install zipfile-deflate64`") from e
-    with zd.ZipFile(zip_path).open(member) as fh:
-        yield fh
+    raise RuntimeError("NAD zip is Zip64+Deflate64: `pip install zipfile-deflate64` or `brew install sevenzip`")
 
 
 cand_path = f"{RAW}/candidates.parquet"
