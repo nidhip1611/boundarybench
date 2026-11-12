@@ -15,8 +15,11 @@ and saved as $BB_WORK/outputs/nad/NAD_TXT.zip (or set NAD_ZIP=/path/to/zip).
     python experiments/exp16_national_transfer.py
 Raw -> $BB_WORK/outputs/nad/   Tables, summary -> results/v2_national/
 """
+import contextlib
 import io
 import os
+import shutil
+import subprocess
 import sys
 import zipfile
 
@@ -52,13 +55,44 @@ for div, states in {
         DIVISION[s] = div
 
 # ----------------------------------------------------------------------------- 1. stream the NAD once
+@contextlib.contextmanager
+def open_member(zip_path, member):
+    """Binary stream of one zip member. The official NAD zip uses Deflate64, which Python's zipfile cannot read,
+    so fall back to the system `unzip -p` (Info-ZIP 6.0, shipped with macOS/Linux, supports Deflate64), then to the
+    optional zipfile-deflate64 package. Nothing is written to disk."""
+    zf = zipfile.ZipFile(zip_path)
+    try:
+        fh = zf.open(member)
+    except NotImplementedError:
+        fh = None
+    if fh is not None:
+        with fh:
+            yield fh
+        return
+    if shutil.which("unzip"):
+        proc = subprocess.Popen(["unzip", "-p", zip_path, member], stdout=subprocess.PIPE, bufsize=1 << 24)
+        try:
+            yield proc.stdout
+        finally:
+            proc.stdout.close()
+            proc.kill()
+            proc.wait()
+        return
+    try:
+        import zipfile_deflate64 as zd  # pip install zipfile-deflate64
+    except ImportError as e:
+        raise RuntimeError("NAD zip is Deflate64: install `unzip` or `pip install zipfile-deflate64`") from e
+    with zd.ZipFile(zip_path).open(member) as fh:
+        yield fh
+
+
 cand_path = f"{RAW}/candidates.parquet"
 if not os.path.exists(cand_path):
     assert os.path.exists(NAD_ZIP), f"Download the NAD text file to {NAD_ZIP} first (see docstring)"
     zf = zipfile.ZipFile(NAD_ZIP)
     member = max(zf.namelist(), key=lambda n: zf.getinfo(n).file_size)
     print("reading", member, f"{zf.getinfo(member).file_size / 1e9:.1f} GB")
-    with zf.open(member) as fh:
+    with open_member(NAD_ZIP, member) as fh:
         first = io.TextIOWrapper(fh, encoding="utf-8", errors="replace").readline()
     SEP = max([",", "|", "\t"], key=first.count)
     header = [h.strip().strip('"') for h in first.rstrip("\n").split(SEP)]
@@ -72,7 +106,7 @@ if not os.path.exists(cand_path):
         raise KeyError(f"NAD columns not found: {missing}. Header: {header}")
     usecols = [v for v in need.values() if v]
     kept, counts = None, {}
-    with zf.open(member) as fh:
+    with open_member(NAD_ZIP, member) as fh:
         reader = pd.read_csv(io.TextIOWrapper(fh, encoding="utf-8", errors="replace"), sep=SEP, usecols=usecols,
                              dtype=str, chunksize=2_000_000)
         for i, ch in enumerate(reader):
