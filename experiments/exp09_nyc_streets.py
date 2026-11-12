@@ -43,6 +43,7 @@ OFFSET_BAND = (5.0, 8.0)
 LT = load_layers(["tract"])["tract"]
 roads = tiger_roads(os.path.join(RAW, "roads"))
 RG = np.array([shapely.get_geometry(g, 0) for g in roads.geometry.to_numpy()])   # single LineStrings
+RNAME = roads["FULLNAME"].fillna("").astype(str).to_numpy() if "FULLNAME" in roads.columns else np.full(len(RG), "")
 RT = shapely.STRtree(RG)
 rep.say(f"TIGER road segments (5 NYC counties): {len(RG):,}")
 
@@ -70,7 +71,7 @@ def side(road_i, qx, qy, px, py):
 # ----------------------------------------------------------------------------- samples
 samples = {}
 pl = pd.read_csv(f"{RAW}/nyc_analysis_points.csv")
-samples["PLUTO"] = pl[["tx", "ty", "ox", "oy", "stratum", "disp_m"]].copy()
+samples["PLUTO"] = pl[["uid", "tx", "ty", "ox", "oy", "stratum", "disp_m", "match_type"]].copy()
 
 ap_path = f"{RAW}/ap_sample_geocoded.parquet"
 if not os.path.exists(ap_path):
@@ -89,12 +90,12 @@ if not os.path.exists(ap_path):
             for u, h, s, b, z in zip(smp["uid"], smp["hn"], smp["street"], smp["boro"], smp["zip"])]
     cg = census_batch(rows, f"{RAW}/census_geocoded_ap.csv")
     rep.say(f"[A0] AddressPoints rows: {len(ap):,} | Census match status on sample: {cg['match'].value_counts().to_dict()}")
-    smp = smp.merge(cg.loc[cg["match"] == "Match", ["uid", "lon_c", "lat_c"]], on="uid")
+    smp = smp.merge(cg.loc[cg["match"] == "Match", ["uid", "lon_c", "lat_c", "match_type"]], on="uid")
     gc = gpd.GeoSeries(gpd.points_from_xy(smp["lon_c"], smp["lat_c"]), crs=4269).to_crs(C.CRS_M)
     smp["ox"], smp["oy"] = gc.x.to_numpy(), gc.y.to_numpy()
     smp["disp_m"] = np.hypot(smp["ox"] - smp["tx"], smp["oy"] - smp["ty"])
     smp = smp[smp["disp_m"] <= 500]
-    smp[["tx", "ty", "ox", "oy", "stratum", "disp_m"]].to_parquet(ap_path, index=False)
+    smp[["uid", "tx", "ty", "ox", "oy", "stratum", "disp_m", "match_type"]].to_parquet(ap_path, index=False)
 samples["AddressPoints"] = pd.read_parquet(ap_path)
 
 # ----------------------------------------------------------------------------- measurements
@@ -109,11 +110,13 @@ for name, s in samples.items():
     P = shapely.get_coordinates(shapely.shortest_line(shapely.points(tx, ty), LT.bounds[t_idx]))[1::2]
     _, dP_road = nearest_road(P[:, 0], P[:, 1])
     rc, dc_road = nearest_road(ox, oy)
-    _, dt_road = nearest_road(tx, ty)
+    rt, dt_road = nearest_road(tx, ty)
     Q = shapely.get_coordinates(shapely.shortest_line(shapely.points(ox, oy), RG[rc]))[1::2]
     sO = side(rc, Q[:, 0], Q[:, 1], ox, oy)
     sT = side(rc, Q[:, 0], Q[:, 1], tx, ty)
-    allrows.append(pd.DataFrame({"sample": name, "stratum": s["stratum"].to_numpy(), "disp_m": s["disp_m"].to_numpy(),
+    allrows.append(pd.DataFrame({"sample": name, "uid": s["uid"].to_numpy(), "match_type": s["match_type"].to_numpy(),
+                                 "census_road": RNAME[rc], "true_road": RNAME[rt],
+                                 "stratum": s["stratum"].to_numpy(), "disp_m": s["disp_m"].to_numpy(),
                                  "tx": tx, "ty": ty, "ox": ox, "oy": oy, "t_idx": t_idx, "c_idx": c_idx,
                                  "wrong": c_idx != t_idx, "d_true": d_true, "d_obs": d_obs,
                                  "street_boundary": dP_road <= STREET_TOL, "dP_road": dP_road,
