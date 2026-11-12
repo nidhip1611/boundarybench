@@ -1,0 +1,9 @@
+method,rule,settings,pooled_risk_holds,total_folds_over_target,mean_coverage_pct
+Disk overlay,certified,24,24,25,91.95
+Disk overlay,empirical,24,7,60,92.29
+Distance rule,certified,24,24,25,91.93
+Distance rule,empirical,24,6,58,92.28
+Gaussian overlay,certified,24,24,26,91.94
+Gaussian overlay,empirical,24,7,60,92.29
+Monte Carlo,certified,24,24,16,88.54
+Monte Carlo,empirical,24,21,50,89.82

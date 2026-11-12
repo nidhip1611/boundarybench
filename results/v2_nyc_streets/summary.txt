@@ -1,4 +1,4 @@
-# EXP09 NYC street mechanism + independent address-point truth | run 2026-11-12 14:18 | commit 6ad347e
+# EXP09 NYC street mechanism + independent address-point truth | run 2026-11-12 14:34 | commit 84b528c
 TIGER road segments (5 NYC counties): 22,014
 [A0] AddressPoints rows: 946,979 | Census match status on sample: {'Match': 2960, 'Tie': 25, 'No_Match': 15}
 

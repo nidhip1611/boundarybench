@@ -1,0 +1,24 @@
+# EXP11 direction counterfactual (real lengths, random directions) | run 2026-11-12 14:34 | commit 84b528c
+
+[D1] Wrong-tract rate: real Census displacement vs the SAME lengths in random directions (200 draws/address;
+     95% CIs: bootstrap over addresses, B = 1000)
+       sample  stratum    n  median_disp_m  actual_wrong_%      actual_ci  random_direction_wrong_%        random_ci  random/actual          ratio_ci
+AddressPoints near_50m 1443           19.5           0.970 [0.553, 1.525]                    15.012 [14.035, 16.008]         15.473     [10.0, 28.31]
+AddressPoints   random 1451           21.6           0.482 [0.138, 0.896]                     5.637    [4.961, 6.31]         11.685    [6.55, 37.346]
+        PLUTO near_50m 2478           24.8           0.040   [0.0, 0.161]                    11.484 [10.887, 12.078]        284.570 [71.055, 297.012]
+        PLUTO   random 2485           25.9           0.161  [0.04, 0.322]                     4.065   [3.634, 4.505]         25.256 [12.855, 100.613]
+          all      all 7857           24.2           0.331 [0.216, 0.458]                     8.706   [8.375, 9.023]         26.308  [18.973, 41.179]
+
+[D2] Same comparison by the true address's distance to the tract line
+                                n  actual_wrong_pct  random_dir_wrong_pct
+sample        band                                                       
+AddressPoints [0.0, 10.0)      45             2.222                21.000
+              [10.0, 25.0)   1324             0.831                18.514
+              [25.0, 50.0)    564             1.596                 6.913
+              [50.0, 100.0)   482             0.000                 0.794
+              [100.0, inf)    479             0.000                 0.214
+PLUTO         [0.0, 10.0)       5             0.000                35.700
+              [10.0, 25.0)   1515             0.000                15.038
+              [25.0, 50.0)   1742             0.057                 8.294
+              [50.0, 100.0)   814             0.369                 1.344
+              [100.0, inf)    887             0.113                 0.064

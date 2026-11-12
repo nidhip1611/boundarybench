@@ -1,0 +1,11 @@
+sample,band,n,actual_wrong_pct,random_dir_wrong_pct
+AddressPoints,"[0.0, 10.0)",45,2.222,21.0
+AddressPoints,"[10.0, 25.0)",1324,0.831,18.514
+AddressPoints,"[25.0, 50.0)",564,1.596,6.913
+AddressPoints,"[50.0, 100.0)",482,0.0,0.794
+AddressPoints,"[100.0, inf)",479,0.0,0.214
+PLUTO,"[0.0, 10.0)",5,0.0,35.7
+PLUTO,"[10.0, 25.0)",1515,0.0,15.038
+PLUTO,"[25.0, 50.0)",1742,0.057,8.294
+PLUTO,"[50.0, 100.0)",814,0.369,1.344
+PLUTO,"[100.0, inf)",887,0.113,0.064

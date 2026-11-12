@@ -1,0 +1,41 @@
+# EXP14 cartographic boundary files with exact locations | run 2026-11-12 14:34 | commit 84b528c
+tract 500k: 85,184 polygons
+county 500k: 3,235 polygons
+county 5m: 3,235 polygons
+county 20m: 3,222 polygons
+
+[K1] Benchmark TRUE points (no positional error) assigned with cartographic files vs their TIGER label
+       file     band    n  wrong_region_%             ci  outside_all_polygons_%
+ tract 500k    0-10m  500          14.200 [11.41, 17.53]                   1.600
+ tract 500k   10-25m  272           2.941   [1.50, 5.70]                   3.676
+ tract 500k   25-50m  425           0.706   [0.24, 2.05]                   5.176
+ tract 500k  50-100m  803           0.000   [0.00, 0.48]                   5.479
+ tract 500k 100-500m 1250           0.000   [0.00, 0.31]                   1.200
+ tract 500k    >500m 1750           0.000   [0.00, 0.22]                   1.029
+ tract 500k      all 5000           1.640   [1.32, 2.03]                   2.340
+county 500k    0-10m  400          17.250 [13.86, 21.26]                   5.750
+county 500k   10-25m  163           4.908   [2.51, 9.38]                   6.135
+county 500k   25-50m  308           1.623   [0.70, 3.74]                   4.545
+county 500k  50-100m  729           0.137   [0.02, 0.77]                   9.053
+county 500k 100-500m 1000           0.000   [0.00, 0.38]                   3.300
+county 500k    >500m 1400           0.000   [0.00, 0.27]                   3.000
+county 500k      all 4000           2.075   [1.68, 2.56]                   4.700
+  county 5m    0-10m  400          34.750 [30.25, 39.54]                   5.500
+  county 5m   10-25m  163          21.472 [15.86, 28.39]                   6.135
+  county 5m   25-50m  308          13.636 [10.25, 17.92]                   3.896
+  county 5m  50-100m  729          11.248  [9.15, 13.75]                   8.916
+  county 5m 100-500m 1000           2.200   [1.46, 3.31]                   3.300
+  county 5m    >500m 1400           0.071   [0.01, 0.40]                   2.929
+  county 5m      all 4000           8.025   [7.22, 8.91]                   4.575
+ county 20m    0-10m  400          44.000 [39.22, 48.90]                   4.500
+ county 20m   10-25m  163          31.288 [24.67, 38.77]                   4.908
+ county 20m   25-50m  308          25.974 [21.39, 31.15]                   2.922
+ county 20m  50-100m  729          22.497 [19.61, 25.67]                   8.368
+ county 20m 100-500m 1000          12.100 [10.22, 14.27]                   3.000
+ county 20m    >500m 1400           0.429   [0.20, 0.93]                   2.571
+ county 20m      all 4000          14.950 [13.88, 16.09]                   4.050
+
+[K2] NYC addresses: tract errors with TIGER vs cartographic (500k) tract polygons
+       sample    n  TIGER: Census point wrong_%  cartographic: TRUE point wrong_%  cartographic: Census point wrong_%  cartographic: Census point outside_%
+AddressPoints 2894                        0.726                             0.968                               2.281                                   0.0
+        PLUTO 4963                        0.101                             0.685                               1.471                                   0.0

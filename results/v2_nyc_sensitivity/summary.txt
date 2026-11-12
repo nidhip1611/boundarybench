@@ -1,0 +1,63 @@
+# EXP13 NYC sensitivity + failure taxonomy | run 2026-11-12 14:34 | commit 84b528c
+
+[N1] Street-boundary tolerance sensitivity (true points within 50 m of a tract line)
+       sample  tol_m  n_street  n_nonstreet  wrong_street_%  wrong_nonstreet_%  odds_ratio_nonstreet_vs_street  fisher_p  pileup_5-8m_street_%  pileup_5-8m_nonstreet_%
+AddressPoints    1.0      1892           41          1.0571              2.439                          3.3830     0.364               66.4376                   4.8780
+AddressPoints    1.5      1892           41          1.0571              2.439                          3.3830     0.364               66.4376                   4.8780
+AddressPoints    2.0      1892           41          1.0571              2.439                          3.3830     0.364               66.4376                   4.8780
+AddressPoints    3.0      1892           41          1.0571              2.439                          3.3830     0.364               66.4376                   4.8780
+AddressPoints    5.0      1892           41          1.0571              2.439                          3.3830     0.364               66.4376                   4.8780
+        PLUTO    1.0      3196           66          0.0313              0.000                         16.0175     1.000               67.6783                   6.0606
+        PLUTO    1.5      3196           66          0.0313              0.000                         16.0175     1.000               67.6783                   6.0606
+        PLUTO    2.0      3197           65          0.0313              0.000                         16.2672     1.000               67.6885                   4.6154
+        PLUTO    3.0      3197           65          0.0313              0.000                         16.2672     1.000               67.6885                   4.6154
+        PLUTO    5.0      3199           63          0.0313              0.000                         16.7900     1.000               67.6774                   3.1746
+
+[N2] Census Exact vs Non_Exact matches
+       sample match_type    n  wrong_%           ci  median_disp_m  census_to_street_5-8m_%
+AddressPoints      Exact  203    0.493 [0.09, 2.74]         23.366                   99.015
+AddressPoints  Non_Exact 2691    0.743 [0.48, 1.15]         20.375                   99.517
+        PLUTO      Exact 3009    0.066 [0.02, 0.24]         23.465                   99.767
+        PLUTO  Non_Exact 1954    0.154 [0.05, 0.45]         29.792                   99.795
+
+[N3] Failure taxonomy: counts by cause
+cause          different street  moved along same street  opposite side of street
+sample                                                                           
+AddressPoints                 8                        9                        4
+PLUTO                         2                        3                        0
+
+[N3b] Failure taxonomy: cause × match quality
+match_type               Exact  Non_Exact
+cause                                    
+different street             0         10
+moved along same street      2         10
+opposite side of street      1          3
+
+[N3c] All failure cases
+       sample  stratum                   cause   boundary match_type  disp_m  d_true  d_obs  census_to_road_m       true_road             census_road
+        PLUTO near_50m moved along same street     street      Exact   126.3    36.9   20.5               6.3       E 35th St               E 35th St
+        PLUTO   random moved along same street     street      Exact   215.9    94.2   27.0               6.4    Riverside Dr            Riverside Dr
+        PLUTO   random moved along same street     street  Non_Exact   194.2    62.9   67.5               6.3         54th St                 54th St
+        PLUTO   random        different street     street  Non_Exact   187.4   108.4   77.3               6.4        113th Dr               113th Ave
+        PLUTO   random        different street     street  Non_Exact    98.5    69.7   24.0               6.4        207th St   Clearview Exwy Svc Rd
+AddressPoints near_50m        different street     street  Non_Exact    69.0    35.7    6.5               6.5    Virginia Ave        Hugh J Grant Cir
+AddressPoints near_50m moved along same street     street  Non_Exact   144.0    13.8    6.4               6.4         99th St                 99th St
+AddressPoints near_50m opposite side of street     street  Non_Exact   261.0    25.7    6.3               6.3       Ascan Ave               Ascan Ave
+AddressPoints near_50m opposite side of street     street  Non_Exact   311.3    15.4    6.1               6.1      Sumpter St               Ralph Ave
+AddressPoints near_50m        different street     street  Non_Exact   121.5    25.5   21.6               6.5         68th St            Ovington Ave
+AddressPoints near_50m        different street     street  Non_Exact    26.0    17.1    6.4               6.3           Ave T               Ocean Ave
+AddressPoints near_50m opposite side of street     street  Non_Exact    27.8    20.2    5.3               5.3        210th St               Colfax St
+AddressPoints near_50m moved along same street     street  Non_Exact    74.9    36.4   21.7               6.3   Fresh Pond Rd           Fresh Pond Rd
+AddressPoints near_50m moved along same street     street  Non_Exact    71.1    10.2    6.4               6.4        196th St                196th St
+AddressPoints near_50m moved along same street     street  Non_Exact   109.8    33.4   16.6               6.3       E 35th St               E 35th St
+AddressPoints near_50m        different street     street  Non_Exact   128.8    25.6   19.9               6.5         68th St            Ovington Ave
+AddressPoints near_50m        different street     street  Non_Exact    39.4    15.2    6.5               6.5        43rd Ave        State Hwy 25 Alt
+AddressPoints near_50m moved along same street     street  Non_Exact    41.6    13.6    6.3               6.3   Flatlands Ave           Flatlands Ave
+AddressPoints near_50m moved along same street     street  Non_Exact    89.7    15.1    6.4               6.4    Flatbush Ave            Flatbush Ave
+AddressPoints   random moved along same street     street  Non_Exact    88.9    17.0    6.3               6.3  Vanderbilt Ave          Vanderbilt Ave
+AddressPoints   random opposite side of street     street      Exact    40.1    33.9    5.9               5.9       Spring St                Broadway
+AddressPoints   random        different street     street  Non_Exact    87.3    12.2    6.3               6.3      E 165th St         Westchester Ave
+AddressPoints   random        different street     street  Non_Exact    58.2    46.5   11.2               6.3  N Railroad Ave Anthony J Crecca Jr Plz
+AddressPoints   random moved along same street     street  Non_Exact    63.0    11.3   35.3               6.5          7th St                  7th St
+AddressPoints   random        different street     street  Non_Exact   114.7    41.6   72.6               6.3 Brighton 1st Pl           Brighton 1 Pl
+AddressPoints   random moved along same street non-street  Non_Exact    94.0     4.3   49.7               6.3        264th St                264th St

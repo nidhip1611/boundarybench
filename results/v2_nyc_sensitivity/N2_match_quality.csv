@@ -1,0 +1,5 @@
+sample,match_type,n,wrong_%,ci,median_disp_m,census_to_street_5-8m_%
+AddressPoints,Exact,203,0.493,"[0.09, 2.74]",23.366,99.015
+AddressPoints,Non_Exact,2691,0.743,"[0.48, 1.15]",20.375,99.517
+PLUTO,Exact,3009,0.066,"[0.02, 0.24]",23.465,99.767
+PLUTO,Non_Exact,1954,0.154,"[0.05, 0.45]",29.792,99.795
