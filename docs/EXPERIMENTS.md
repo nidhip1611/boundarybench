@@ -34,6 +34,10 @@ or a design decision changes. Numbers here must come from `results/*/summary.txt
 | EXP07 | `exp07_heavy_tails.py` | Robustness to heavy-tailed error (t3, contaminated, Strickland-scale lognormal) — simulation | `results/v2_heavy_tails/` |
 | EXP09 | `exp09_nyc_streets.py` | NYC mechanism: Census point vs street centerlines, street vs non-street tract boundaries, same-side test, map panels; independent truth = NYC Address Points | `results/v2_nyc_streets/` |
 | EXP10 | `exp10_output_categories.py` | Formal outputs: ANSWER / ABSTAIN (competing region) / ABSTAIN (unassigned mass: water, ZCTA gaps) | `results/v2_output_categories/` |
+| EXP11 | `exp11_direction_counterfactual.py` | Real NYC displacement lengths with random directions vs actual directions | `results/v2_direction_counterfactual/` |
+| EXP12 | `exp12_heldout_geography.py` | Thresholds chosen on 4/5 of states, risk checked on held-out states (empirical vs Wilson-certified) | `results/v2_heldout_geography/` |
+| EXP13 | `exp13_nyc_sensitivity.py` | Street tolerance 1–5 m, Exact vs Non_Exact matches, Fisher test, failure taxonomy | `results/v2_nyc_sensitivity/` |
+| EXP14 | `exp14_cartographic_boundaries.py` | Cartographic (simplified) boundary files with exact locations | `results/v2_cartographic/` |
 | EXP08 | `exp08_stats.py` | Data-flow table, bootstrap CIs over points, calibration (equal-mass bins, reliability diagrams) | `results/v2_stats/` |
 
 Tests: `python -m pytest tests -q` (half-plane and junction checks against closed-form answers and high-sample MC).
@@ -118,5 +122,16 @@ categories). NYC wording stays conservative until EXP09: "Census geocodes concen
 consistent with street-side placement". LLM evaluation dropped from the paper (future work). Paper adds a
 practitioner decision table and a Zenodo DOI for code + data.
 
+### 2026-11-12 — EXP09–EXP10 results (results commit 82d1156)
+Census points sit 6.3–6.5 m from the nearest TIGER street centerline (99.4–99.8%), on the same side as the true address
+(99.4–99.7% of correct cases). Independent NYC Address Points truth: wrong tract 0.48% random, 0.97% near-boundary
+(isotropic prediction 12–16%). 95–98% of near-boundary tract lines follow streets. Unassigned mass is largest for
+ZCTA (gaps) and county (coast). Full numbers in results/v2_nyc_streets and results/v2_output_categories.
+
+### 2026-11-12 — Final batch (combined plan)
+EXP11–EXP14 added; EXP09 now also saves match type and street names (rerun needed; results unchanged otherwise).
+Paper framing: assignment risk = f(distance, error distribution, error direction, boundary geometry, coverage gaps);
+each experiment answers one factor. After this batch: experiments frozen.
+
 ### Next
-- Run EXP09, EXP10. Write paper Nov 13–21; Springer LNNS format Nov 22–24; submit Nov 25.
+- Run EXP09 (rerun) and EXP11–EXP14. Write paper Nov 13–21; Springer LNNS format Nov 22–24; submit Nov 25.
