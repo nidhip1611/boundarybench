@@ -1,0 +1,69 @@
+# EXP16 national transfer across 9 Census divisions (NAD + Census geocoder) | run 2026-11-12 16:26 | commit 5409333
+
+[G0] Counties chosen (urban = most NAD points in division; rural = random county with 2k–30k points)
+          division  type         county  nad_points
+East North Central urban        IL|Lake      180823
+East North Central rural  IL|Jo Daviess       14510
+East South Central urban     AL|Baldwin      119596
+East South Central rural     KY|Garrard        9077
+   Middle Atlantic urban     NY|Suffolk      547028
+   Middle Atlantic rural       NY|Yates       14619
+          Mountain urban MT|Yellowstone       66679
+          Mountain rural  MT|Deer Lodge        5604
+       New England urban   MA|Middlesex      485415
+       New England rural    ME|Kennebec        6629
+           Pacific urban     CA|Ventura      221842
+           Pacific rural   WA|Snohomish       17162
+    South Atlantic urban     VA|Fairfax      315340
+    South Atlantic rural     VA|Halifax       20068
+West North Central urban    MN|Hennepin      388065
+West North Central rural      ND|Ransom        2580
+West South Central urban       OK|Tulsa      112066
+West South Central rural      OK|Murray        8281
+[G1] Census match status: {'Match': 2358, 'No_Match': 299, 'Tie': 22}
+
+[G2] Per chosen county (division × urban/rural): real wrong-tract rate vs same lengths in random directions,
+     street offset, same side of street, share of nearby tract lines that follow a street
+          division  type   n  median_disp_m  wrong_tract_%            ci  random_direction_%  census_to_street_5-8m_%  census_to_street_p50  same_side_%  near_line_follows_street_%  non_exact_%
+East North Central rural  88           53.8          0.000  [0.00, 4.18]               4.119                  100.000                   6.4       92.405                      92.857        6.818
+East North Central urban 149           42.6          0.000  [0.00, 2.51]               6.379                  100.000                   6.4       97.887                      88.462       10.067
+East South Central rural 129           73.3          2.326  [0.79, 6.61]              11.981                   99.225                   6.4       84.167                     100.000       19.380
+East South Central urban  99           46.5          0.000  [0.00, 3.74]               4.207                   98.990                   6.4       90.909                      73.333        3.030
+   Middle Atlantic rural 108           85.6          0.926  [0.16, 5.06]               7.532                   98.148                   6.3       94.792                      90.476        3.704
+   Middle Atlantic urban 154           35.2          1.299  [0.36, 4.61]               6.968                   98.701                   6.4       95.395                      80.645        0.649
+          Mountain rural 113           42.7          0.000  [0.00, 3.29]               5.584                  100.000                   6.4       95.413                     100.000        8.850
+          Mountain urban 157           44.3          0.000  [0.00, 2.39]               7.863                  100.000                   6.4       97.315                      93.103        1.911
+       New England rural 103           59.0          0.971  [0.17, 5.30]               5.063                   98.058                   6.3       92.553                      60.000        8.738
+       New England urban 187           34.9          1.070  [0.29, 3.82]               9.142                   98.396                   6.4       95.652                      73.196      100.000
+           Pacific rural  65           45.2          3.077 [0.85, 10.54]              11.477                  100.000                   6.3       86.207                      91.667        1.538
+           Pacific urban 163           30.5          0.000  [0.00, 2.30]               5.755                  100.000                   6.4       97.516                      94.030        4.908
+    South Atlantic rural 115           55.5          1.739  [0.48, 6.12]               7.526                   96.522                   6.4       98.095                      92.683        6.957
+    South Atlantic urban 154           52.6          0.000  [0.00, 2.43]               9.539                   97.403                   6.4       89.362                      76.271        2.597
+West North Central rural  97           57.3          0.000  [0.00, 3.81]               4.258                  100.000                   6.4       96.703                      90.909        4.124
+West North Central urban 177           42.3          0.565  [0.10, 3.13]               9.220                   99.435                   6.4       97.076                      89.024      100.000
+West South Central rural 101           57.5          0.000 [-0.00, 3.66]               7.094                  100.000                   6.4       98.936                     100.000       12.871
+West South Central urban 127           48.2          0.787  [0.14, 4.33]               7.740                   98.425                   6.4       95.902                      95.122       17.323
+
+[G3] Pooled urban vs rural
+ type    n  median_disp_m  wrong_tract_%           ci  random_direction_%  census_to_street_5-8m_%  census_to_street_p50  same_side_%  near_line_follows_street_%  non_exact_%
+rural  919           56.8          0.979 [0.52, 1.85]               7.198                   99.021                   6.4       93.381                      92.797        8.705
+urban 1367           41.1          0.439 [0.20, 0.95]               7.612                   99.049                   6.4       95.496                      84.803       30.724
+
+[G4] Pooled by stratum (all counties)
+ stratum    n  median_disp_m  wrong_tract_%           ci  random_direction_%  census_to_street_5-8m_%  census_to_street_p50  same_side_%  near_line_follows_street_%  non_exact_%
+near_50m  765           39.8          1.569 [0.90, 2.72]              20.202                   98.562                   6.4       93.939                       87.32       29.935
+  random 1521           49.8          0.197 [0.07, 0.58]               1.030                   99.277                   6.4       95.061                       75.00       17.817
+
+[G5] Within 50 m of a tract line: street vs non-street boundaries (the key test of the mechanism)
+ type         boundary   n  wrong_tract_%            ci  random_direction_%
+rural     not a street  17          5.882 [1.05, 26.98]              34.941
+rural follows a street 219          2.740  [1.26, 5.85]              25.176
+urban     not a street  81          3.704 [1.27, 10.33]              24.315
+urban follows a street 452          0.664  [0.23, 1.93]              16.408
+
+[G6] By NAD placement type (groups n >= 30)
+                        n  wrong_pct  median_disp
+placement                                        
+Parcel - Other        281      0.000       36.190
+Site                   48      0.000       34.518
+Structure - Rooftop  1931      0.725       48.232

@@ -1,5 +1,5 @@
 region,boundary,n,wrong_tract_%,ci,random_direction_%,census_to_tract_line_5-8m_%
-rural (6 counties),not a street,23,4.348,"[0.77, 20.99]",28.848,0.0
-rural (6 counties),follows a street,636,2.358,"[1.43, 3.85]",9.773,83.648
-urban (Salt Lake Co.),not a street,66,3.03,"[0.83, 10.39]",17.947,3.03
-urban (Salt Lake Co.),follows a street,698,0.716,"[0.31, 1.67]",10.922,59.169
+rural (6 counties),not a street,23,4.348,"[0.77, 20.99]",26.63,0.0
+rural (6 counties),follows a street,636,2.358,"[1.43, 3.85]",9.85,83.648
+urban (Salt Lake Co.),not a street,66,3.03,"[0.83, 10.39]",17.939,3.03
+urban (Salt Lake Co.),follows a street,698,0.716,"[0.31, 1.67]",10.878,59.169

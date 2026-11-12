@@ -1,0 +1,3 @@
+type,n,median_disp_m,wrong_tract_%,ci,random_direction_%,census_to_street_5-8m_%,census_to_street_p50,same_side_%,near_line_follows_street_%,non_exact_%
+rural,919,56.8,0.979,"[0.52, 1.85]",7.198,99.021,6.4,93.381,92.797,8.705
+urban,1367,41.1,0.439,"[0.20, 0.95]",7.612,99.049,6.4,95.496,84.803,30.724

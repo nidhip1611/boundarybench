@@ -1,4 +1,4 @@
-# EXP15 Utah urban vs rural real-world transfer | run 2026-11-12 14:41 | commit 6d0bf6c
+# EXP15 Utah urban vs rural real-world transfer | run 2026-11-12 15:53 | commit 12f3842
 [U0] UGRC address points downloaded: 601,616 | usable (no units, numeric house number): 417,105
 
 [U0b] Point placement types (PtLocation) by region
@@ -13,21 +13,20 @@ Primary Structure Entrance                   3                      0
 Rooftop                                   9180                      0
 Unknown                                  29493                 356463
 unknown                                    327                   7563
-[U1] Census match status: {'Match': 2663, 'No_Match': 330, 'Tie': 7}
 
 [U1] Utah: wrong-tract rate (real), same lengths in random directions, isotropic prediction, street offset
                region  stratum   n  median_disp_m  wrong_tract_%           ci  random_direction_%  isotropic_pred_% census_to_street_p10/p50/p90  census_to_street_5-8m_%  true_to_street_p50  non_exact_match_%
-   rural (6 counties) near_50m 647         26.874          2.473 [1.53, 3.98]              10.434            15.801              [6.4, 6.4, 6.4]                   99.536                24.5             29.985
-   rural (6 counties)   random 592         30.530          0.169 [0.03, 0.95]               0.488             0.649              [6.4, 6.4, 6.4]                   99.324                25.8             35.980
-urban (Salt Lake Co.) near_50m 694         27.865          0.720 [0.31, 1.68]              11.736            14.064              [6.4, 6.4, 6.4]                   99.712                24.2             48.991
-urban (Salt Lake Co.)   random 682         27.688          0.587 [0.23, 1.50]               1.599             2.231              [6.4, 6.4, 6.4]                  100.000                22.7             61.584
+   rural (6 counties) near_50m 647         26.874          2.473 [1.53, 3.98]              10.426            15.801              [6.4, 6.4, 6.4]                   99.536                24.5             29.985
+   rural (6 counties)   random 592         30.530          0.169 [0.03, 0.95]               0.489             0.649              [6.4, 6.4, 6.4]                   99.324                25.8             35.980
+urban (Salt Lake Co.) near_50m 694         27.865          0.720 [0.31, 1.68]              11.717            14.064              [6.4, 6.4, 6.4]                   99.712                24.2             48.991
+urban (Salt Lake Co.)   random 682         27.688          0.587 [0.23, 1.50]               1.603             2.231              [6.4, 6.4, 6.4]                  100.000                22.7             61.584
 
 [U2] Within 50 m of a tract line: boundary follows a street (TIGER road within 1.5 m) or not
                region         boundary   n  wrong_tract_%            ci  random_direction_%  census_to_tract_line_5-8m_%
-   rural (6 counties)     not a street  23          4.348 [0.77, 20.99]              28.848                        0.000
-   rural (6 counties) follows a street 636          2.358  [1.43, 3.85]               9.773                       83.648
-urban (Salt Lake Co.)     not a street  66          3.030 [0.83, 10.39]              17.947                        3.030
-urban (Salt Lake Co.) follows a street 698          0.716  [0.31, 1.67]              10.922                       59.169
+   rural (6 counties)     not a street  23          4.348 [0.77, 20.99]              26.630                        0.000
+   rural (6 counties) follows a street 636          2.358  [1.43, 3.85]               9.850                       83.648
+urban (Salt Lake Co.)     not a street  66          3.030 [0.83, 10.39]              17.939                        3.030
+urban (Salt Lake Co.) follows a street 698          0.716  [0.31, 1.67]              10.878                       59.169
 
 [U3] Census point on the same side of its nearest street as the true address
                                 n  same_side_share
@@ -45,3 +44,14 @@ rural (6 counties)                 341      0.587         24.259
                       Rooftop      122      0.820         28.717
                       Unknown      656      1.524         31.120
 urban (Salt Lake Co.) Unknown     1351      0.666         27.570
+
+[U5] Sensitivity: excluding 100 truth points whose PtLocation is 'Geocoded'
+               region               stratum   n  wrong_tract_%            ci  random_direction_%
+   rural (6 counties)              near_50m 591          2.030  [1.17, 3.52]              10.801
+   rural (6 counties)                random 548          0.182  [0.03, 1.03]               0.528
+urban (Salt Lake Co.)              near_50m 694          0.720  [0.31, 1.68]              11.717
+urban (Salt Lake Co.)                random 682          0.587  [0.23, 1.50]               1.603
+   rural (6 counties) near: non-street line  23          4.348 [0.77, 20.99]              26.630
+   rural (6 counties)     near: street line 576          1.910  [1.07, 3.39]              10.247
+urban (Salt Lake Co.) near: non-street line  66          3.030 [0.83, 10.39]              17.939
+urban (Salt Lake Co.)     near: street line 698          0.716  [0.31, 1.67]              10.878
