@@ -1,0 +1,5 @@
+region,wrong,n,same_side_share
+rural (6 counties),False,1187,0.9747
+rural (6 counties),True,16,0.4375
+urban (Salt Lake Co.),False,1346,0.9666
+urban (Salt Lake Co.),True,9,0.7778

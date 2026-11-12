@@ -1,0 +1,6 @@
+region,PtLocation,n,wrong_pct,median_disp_m
+rural (6 counties),,341,0.587,24.259
+rural (6 counties),Geocoded,100,4.0,9.598
+rural (6 counties),Rooftop,122,0.82,28.717
+rural (6 counties),Unknown,656,1.524,31.12
+urban (Salt Lake Co.),Unknown,1351,0.666,27.57
