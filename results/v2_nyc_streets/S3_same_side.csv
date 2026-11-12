@@ -1,0 +1,5 @@
+sample,assignment,n,same_side_of_street_%
+AddressPoints,correct tract,2865,99.442
+AddressPoints,wrong tract,21,80.952
+PLUTO,correct tract,4958,99.718
+PLUTO,wrong tract,5,100.0

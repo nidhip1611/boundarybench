@@ -1,0 +1,7 @@
+rule,tau_m,stratum,op_coverage_%,op_risk_%
+tau = p95 displacement,64.1,random,61.177,0.26
+tau = p95 displacement,64.1,near_50m,8.485,0.0
+tau = p95 across-component,26.9,random,75.497,0.211
+tau = p95 across-component,26.9,near_50m,23.077,0.0
+tau = p99 across-component,39.6,random,71.122,0.224
+tau = p99 across-component,39.6,near_50m,17.367,0.0

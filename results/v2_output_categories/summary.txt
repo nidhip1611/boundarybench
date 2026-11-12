@@ -1,0 +1,14 @@
+# EXP10 output categories: answer / abstain (competing) / abstain (unassigned) | run 2026-11-12 14:22 | commit 6ad347e
+
+[O1] Near-boundary observations by output category (theta = 0.90). UNASSIGNED = probability mass outside
+     every region (water, coastline, ZCTA gaps), reported separately instead of being renormalised.
+   model  R  layer  n_near  mean_unassigned_%  obs_with_unassigned>1%_%  ANSWER_%  ABSTAIN-competing_%  ABSTAIN-unassigned_%  answer_risk_%
+ uniform 20 county    2403              0.861                     2.497    25.010               73.034                 1.956          5.491
+ uniform 20  tract    3263              0.126                     0.490    26.693               72.908                 0.398          7.922
+ uniform 20   zcta    2585              1.330                     3.714    25.957               71.064                 2.979          7.750
+ uniform 50 county    4511              0.955                     3.613    28.619               68.943                 2.438          8.521
+ uniform 50  tract    5869              0.228                     0.886    27.978               71.341                 0.682          9.257
+ uniform 50   zcta    4701              1.331                     3.595    27.101               70.006                 2.893          8.948
+gaussian 20 county    3771              0.526                     1.724    58.844               40.069                 1.087          3.200
+gaussian 20  tract    5159              0.124                     0.349    60.012               39.678                 0.310          3.521
+gaussian 20   zcta    4043              0.757                     2.424    59.659               38.709                 1.632          2.985

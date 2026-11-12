@@ -1,0 +1,4 @@
+sample,n,median_disp_m,median_|across|_m,median_along_m,share_sq_disp_across,share_angle<15deg_%,share_angle>75deg_%,p95_toward_m,share_moved_toward_%
+all,4963,25.22,18.012,17.429,0.475,9.369,15.495,26.246,67.338
+random,2485,25.869,17.902,17.629,0.497,11.59,13.763,31.545,54.527
+near_50m,2478,24.793,18.128,17.134,0.45,7.143,17.232,24.202,80.186

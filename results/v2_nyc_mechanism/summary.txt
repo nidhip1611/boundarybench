@@ -1,0 +1,33 @@
+# EXP04b NYC mechanism: across- vs along-boundary geocoding error | run 2026-11-12 14:16 | commit db26392
+
+[M1] Displacement across vs along the nearest tract boundary (isotropic expectation: share_sq_disp_across = 0.50,
+     angle <15° and >75° each ≈ 16.7%)
+  sample    n  median_disp_m  median_|across|_m  median_along_m  share_sq_disp_across  share_angle<15deg_%  share_angle>75deg_%  p95_toward_m  share_moved_toward_%
+     all 4963         25.220             18.012          17.429                 0.475                9.369               15.495        26.246                67.338
+  random 2485         25.869             17.902          17.629                 0.497               11.590               13.763        31.545                54.527
+near_50m 2478         24.793             18.128          17.134                 0.450                7.143               17.232        24.202                80.186
+
+[M2] Test half: observed wrong-tract rate vs prediction from (a) isotropic random-direction displacement,
+     (b) the real across-boundary component (both estimated on the calibration half)
+                 n  observed_pct  isotropic_pred_pct  across_component_pred_pct
+bin                                                                            
+[0.0, 10.0)      4         0.000              39.020                     59.642
+[10.0, 25.0)   742         0.000              17.070                     15.885
+[25.0, 50.0)   903         0.000               8.370                      3.269
+[50.0, 100.0)  415         0.482               1.013                      0.221
+[100.0, inf)   454         0.220               0.093                      0.012
+     overall: observed 0.12% [0.04, 0.35] | isotropic 8.28% | across-component 5.99%
+
+[M3] Distance rule on the test half with tau from the calibration half
+                      rule  tau_m  stratum  op_coverage_%  op_risk_%
+    tau = p95 displacement   64.1   random         61.177      0.260
+    tau = p95 displacement   64.1 near_50m          8.485      0.000
+tau = p95 across-component   26.9   random         75.497      0.211
+tau = p95 across-component   26.9 near_50m         23.077      0.000
+tau = p99 across-component   39.6   random         71.122      0.224
+tau = p99 across-component   39.6 near_50m         17.367      0.000
+
+[M4] Distance from the Census-reported point to the tract line vs the true lot's distance
+  sample    n      d_obs_p5/p10/p25/p50/p75     d_true_p5/p25/p50/p75  d_obs<2m_%  d_obs<5m_%  d_obs<10m_%  d_obs<15m_%
+  random 2485 [6.3, 6.3, 23.6, 75.7, 122.2] [22.0, 31.7, 67.9, 119.0]         0.0         0.0         21.7         23.1
+near_50m 2478    [6.3, 6.3, 6.3, 6.4, 23.1]  [16.2, 23.6, 25.6, 30.6]         0.0         0.0         67.1         70.7
