@@ -1,6 +1,6 @@
 """Run the V2 experiments in order. Each step skips work whose raw outputs already exist.
 
-    python experiments/run_all.py                 # EXP01 -> EXP15
+    python experiments/run_all.py                 # EXP01 -> EXP16
     python experiments/run_all.py 2 3             # only EXP02 and EXP03
     python experiments/run_all.py --skip-nyc      # everything except the internet-dependent EXP04
 """
@@ -15,12 +15,12 @@ STEPS = {"1": "exp01_v2_main.py", "2": "exp02_geometry.py", "3": "exp03_gaussian
          "7": "exp07_heavy_tails.py", "8": "exp08_stats.py", "9": "exp09_nyc_streets.py",
          "10": "exp10_output_categories.py", "11": "exp11_direction_counterfactual.py",
          "12": "exp12_heldout_geography.py", "13": "exp13_nyc_sensitivity.py", "14": "exp14_cartographic_boundaries.py",
-         "15": "exp15_utah_transfer.py"}
+         "15": "exp15_utah_transfer.py", "16": "exp16_national_transfer.py"}
 
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
 todo = args or list(STEPS)
 if "--skip-nyc" in sys.argv:
-    todo = [k for k in todo if k not in ("4", "4b", "9", "11", "13", "15")]
+    todo = [k for k in todo if k not in ("4", "4b", "9", "11", "13", "15", "16")]
 for k in todo:
     t = time.time()
     print(f"\n{'=' * 80}\nRUNNING {STEPS[k]}\n{'=' * 80}", flush=True)

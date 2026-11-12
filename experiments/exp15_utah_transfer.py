@@ -198,4 +198,20 @@ u4 = S.groupby(["region", "PtLocation"], dropna=False).agg(n=("wrong", "size"), 
 u4["wrong_pct"] *= 100
 u4 = u4[u4["n"] >= 30].round(3); u4.to_csv(f"{RES}/U4_by_point_location.csv")
 rep.table("[U4] By how the true address point was placed (PtLocation; groups with n >= 30)", u4)
+
+# Sensitivity: drop truth points that are themselves geocoded (not authoritative locations)
+G = S[~S["PtLocation"].fillna("").str.contains("Geocod", case=False)]
+rows = []
+for (region, st), d in G.groupby(["region", "stratum"]):
+    k, n = int(d["wrong"].sum()), len(d); lo, hi = wilson(k, n)
+    rows.append({"region": region, "stratum": st, "n": n, "wrong_tract_%": 100 * k / n,
+                 "ci": f"[{100*lo:.2f}, {100*hi:.2f}]", "random_direction_%": 100 * d["p_random_dir"].mean()})
+for (region, sb), d in G[G["d_true"] < 50].groupby(["region", "street_boundary"]):
+    k, n = int(d["wrong"].sum()), len(d); lo, hi = wilson(k, n)
+    rows.append({"region": region, "stratum": "near: " + ("street line" if sb else "non-street line"), "n": n,
+                 "wrong_tract_%": 100 * k / n, "ci": f"[{100*lo:.2f}, {100*hi:.2f}]",
+                 "random_direction_%": 100 * d["p_random_dir"].mean()})
+u5 = pd.DataFrame(rows).round(3); u5.to_csv(f"{RES}/U5_without_geocoded_truth.csv", index=False)
+rep.table(f"[U5] Sensitivity: excluding {int((S['PtLocation'].fillna('').str.contains('Geocod', case=False)).sum())} "
+          "truth points whose PtLocation is 'Geocoded'", u5, index=False)
 rep.save()
