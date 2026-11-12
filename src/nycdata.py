@@ -76,7 +76,9 @@ def nyc_address_points(path):
     """NYC Address Points (CSCL; placed ~5 ft inside the building footprint along the addressed street front).
     Returns DataFrame [hn, street, zip, boro, lon, lat]."""
     if not os.path.exists(path):
-        urls = ["https://data.cityofnewyork.us/resource/g6pj-hd8k.csv?$limit=2000000",
+        urls = ["https://data.cityofnewyork.us/api/views/uf93-f8nk/rows.csv?accessType=DOWNLOAD",       # current (2025+)
+                "https://data.cityofnewyork.us/api/v3/views/uf93-f8nk/export.csv?accessType=DOWNLOAD",
+                "https://data.cityofnewyork.us/resource/g6pj-hd8k.csv?$limit=2000000",                      # legacy ids
                 "https://data.cityofnewyork.us/api/views/g6pj-hd8k/rows.csv?accessType=DOWNLOAD",
                 "https://data.cityofnewyork.us/api/views/emzr-v3pi/rows.csv?accessType=DOWNLOAD"]
         for u in urls:
