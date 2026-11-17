@@ -31,8 +31,8 @@ fig.tight_layout(); fig.savefig(f"{OUT}/fig1_theory.pdf"); plt.close(fig)
 # ---------------------------------------------------------------- Fig. 2: real vs random-direction error
 # addresses within 50 m of a tract line; real Census geocodes vs the same displacement lengths in random directions
 rows = [  # label, real %, random-direction %, source
-    ("NYC\n(PLUTO)", 0.33, 8.7),            # EXP11
-    ("NYC\n(Addr. Pts.)", 0.97, 15.0),      # EXP11
+    ("NYC\n(PLUTO)", 0.04, 11.5),           # EXP09 Wilson n=2,478 / EXP11 near-line
+    ("NYC\n(Addr. Pts.)", 0.97, 15.0),      # EXP09 n=1,443 / EXP11 near-line
     ("Utah\nSalt Lake", 0.72, 11.7),        # EXP15 U1/U5
     ("Utah\n6 rural", 2.03, 10.8),          # EXP15 U5 (geocoded truth removed)
     ("National\n18 counties", 1.57, 20.2),  # EXP16 G4
@@ -42,7 +42,7 @@ fig, ax = plt.subplots(figsize=(3.4, 2.0))
 ax.bar(x - w / 2, [r[1] for r in rows], w, color=BLUE, label="real Census geocode")
 ax.bar(x + w / 2, [r[2] for r in rows], w, color=GREY, label="same error, random direction")
 for i, r in enumerate(rows):
-    ax.text(i - w / 2, r[1] + 0.4, f"{r[1]:.2g}", ha="center", fontsize=6)
+    ax.text(i - w / 2, r[1] + 0.4, f"{r[1]:g}", ha="center", fontsize=6)
     ax.text(i + w / 2, r[2] + 0.4, f"{r[2]:.3g}", ha="center", fontsize=6)
 ax.set_xticks(x); ax.set_xticklabels([r[0] for r in rows], fontsize=6.5)
 ax.set_ylabel("wrong tract (%)")

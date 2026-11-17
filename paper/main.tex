@@ -24,8 +24,8 @@
 \maketitle
 
 \begin{abstract}
-Government statistics, eligibility rules and public-health surveillance routinely assign geocoded addresses to administrative areas such as census tracts, ZIP code areas and counties. Geocoded coordinates are displaced from the true location, and a point near a boundary can be silently assigned to the wrong area. We study when this happens and how to detect it. We build a national benchmark of 13{,}000 locations across U.S.\ counties, ZIP Code Tabulation Areas and tracts, stratified by distance to the nearest boundary, and evaluate 520{,}000 simulated noisy observations under uniform, Gaussian and heavy-tailed error. Misassignment closely follows a closed-form straight-boundary prediction in the ratio of boundary distance to error radius (observed/predicted 0.99), with 6--20\% excess at corners, junctions and slivers. A simple distance-based abstention rule ranks risky queries as well as probabilistic overlay and Monte Carlo methods, is more robust to heavy tails, and its certified thresholds transfer to held-out states. We then measure real errors of the U.S.\ Census Bureau geocoder against authoritative address points in New York City, urban and rural Utah, and 18 counties covering all nine Census divisions. Real displacements are large (median 20--86\,m by region) yet rarely change the tract, because geocodes sit about 6.4\,m from the street centerline on the correct side and tract boundaries mostly follow streets; the same displacements in random directions cause 5--26 times more errors. Protection is weaker in smaller counties and where boundaries do not follow streets. Finally, simplified (cartographic) boundary files alone misassign 1.6--15\% of exact locations. We release code and data to support reliable geographic assignment.
-\keywords{Geocoding \and Positional uncertainty \and Point-in-polygon \and Census tracts \and Selective prediction \and E-government data quality}
+Government statistics, eligibility rules and public-health surveillance routinely assign geocoded addresses to administrative areas such as census tracts, ZIP code areas and counties. Geocoded coordinates are displaced from the true location, and a point near a boundary can be silently assigned to the wrong area. We study when this happens and how to detect it. We build a national benchmark of 13{,}000 locations across U.S.\ counties, ZIP Code Tabulation Areas and tracts, stratified by distance to the nearest boundary, and evaluate 520{,}000 simulated noisy observations under uniform, Gaussian and heavy-tailed error. Misassignment closely follows a closed-form straight-boundary prediction in the ratio of boundary distance to error radius (observed/predicted 0.99), with 6--20\% excess at corners, junctions and slivers. A simple distance-based abstention rule ranks risky queries as well as probabilistic overlay and Monte Carlo methods, is more robust to heavy tails, and its certified thresholds transfer to held-out states. We then measure real errors of the U.S.\ Census Bureau geocoder against authoritative address points in New York City, urban and rural Utah, and 18 counties covering all nine Census divisions. Real displacements are large (median 20--86\,m by region) yet rarely change the tract, because geocodes sit about 6.4\,m from the street centerline on the correct side and tract boundaries mostly follow streets; near tract lines, 0.04--2.0\% of real geocodes are misassigned, whereas the same displacements in random directions misassign 10.8--20.2\%. Protection is weaker in smaller counties and where boundaries do not follow streets. Finally, simplified (cartographic) boundary files alone misassign 1.6--15\% of exact locations. We release code and data to support reliable geographic assignment.
+\keywords{Geocoding \and Positional uncertainty \and Point-in-polygon \and Census tracts \and Selective prediction \and Data quality}
 \end{abstract}
 
 %=====================================================================
@@ -154,19 +154,19 @@ Simulated isotropic error predicts substantial misassignment for addresses near 
 \label{fig:direction}
 \end{figure}
 
-\textbf{Real errors are large but rarely change the tract.} Median displacement is 20--26\,m in NYC, about 27\,m in Utah and 30--86\,m across the national counties. Isotropic theory would predict many tract errors near boundaries (e.g., 14--16\% in Utah). Observed rates are far lower (Fig.~\ref{fig:direction}, Table~\ref{tab:real}): 0.33\% and 0.97\% in NYC, 0.72\% in Salt Lake County, 2.03\% in rural Utah and 1.57\% [0.90, 2.72] nationally for near-line addresses, against 8.7--20.2\% under random directions. Every one of the 18 national counties shows the same pattern (real 0--3.1\%, random 4.1--12.0\%).
+\textbf{Real errors are large but rarely change the tract.} Median displacement is 20--26\,m in NYC, about 27\,m in Utah and 30--86\,m across the national counties. Isotropic theory would predict many tract errors near boundaries (e.g., 14--16\% in Utah). Observed rates are far lower (Fig.~\ref{fig:direction}, Table~\ref{tab:real}): 0.04\% and 0.97\% in NYC (PLUTO and Address Points truth), 0.72\% in Salt Lake County, 2.03\% in rural Utah and 1.57\% [0.90, 2.72] nationally for near-line addresses, against 10.8--20.2\% under random directions, i.e.\ 5--16 times fewer errors outside the PLUTO sample (which has a single error). The pattern holds in each of the 18 national counties: on each county's full sample (near-line and random addresses), real rates are 0--3.1\% and random-direction rates 4.1--12.0\%.
 
 \begin{table}[t]
 \centering
-\caption{Wrong-tract rate (\%) of Census geocodes for addresses within 50\,m of a tract line, with 95\% Wilson intervals, and the same displacement lengths in random directions.}
+\caption{Wrong-tract rate (\%) of Census geocodes for addresses within 50\,m of a tract line, with 95\% Wilson intervals, and the same displacement lengths in random directions. PLUTO and Address Points are two independent NYC ground truths.}
 \label{tab:real}
 \small\setlength{\tabcolsep}{5pt}
 \begin{tabular}{lrrrr}
 \toprule
 Region & $n$ & Real & 95\% CI & Random dir. \\
 \midrule
-NYC, PLUTO truth & \todo{n} & 0.33 & \todo{CI} & 8.7 \\
-NYC, Address Points truth & \todo{n} & 0.97 & \todo{CI} & 15.0 \\
+NYC, PLUTO truth & 2{,}478 & 0.04 & [0.01, 0.23] & 11.5 \\
+NYC, Address Points truth & 1{,}443 & 0.97 & [0.58, 1.62] & 15.0 \\
 Utah, Salt Lake County & 694 & 0.72 & [0.31, 1.68] & 11.7 \\
 Utah, six rural counties & 591 & 2.03 & [1.17, 3.52] & 10.8 \\
 National, 18 counties & 765 & 1.57 & [0.90, 2.72] & 20.2 \\
@@ -176,9 +176,9 @@ National, 18 counties & 765 & 1.57 & [0.90, 2.72] & 20.2 \\
 
 \textbf{Mechanism: a street-side offset.} Census geocodes are interpolated along TIGER street centerlines and offset from them. In every region, the median distance from the geocode to the nearest TIGER street centerline is 6.3--6.4\,m, with 96--100\% of geocodes between 5 and 8\,m, and 84--99\% lie on the same side of the street as the true address. Tract boundaries mostly follow street centerlines (87\% of near-line boundaries nationally; 60--100\% by county). A geocode that stays on the correct side of the street therefore stays in the correct tract even when it is tens of metres away along the street. This is a measured regularity of the geocoder output, not a documented design guarantee. In NYC, of the remaining misassigned cases, 12 of 26 were displaced along the same street, 10 matched a different street and 4 were placed on the opposite side.
 
-\textbf{Where protection weakens.} The protection depends on two conditions. First, in smaller counties the error is larger and side-of-street swaps occur: pooled national rates are 0.44\% [0.20, 0.95] in the largest-coverage counties and 0.98\% [0.52, 1.85] in the smaller ones, and only 44\% of rural Utah errors stayed on the correct side (78\% urban). Second, some tract boundaries follow rivers, rail lines or municipal limits. Near such non-street boundaries the error rate was higher in every region examined (national: 3.7\% vs.\ 0.66\% in larger and 5.9\% vs.\ 2.7\% in smaller counties; Utah: 3.0\% vs.\ 0.72\% urban, 4.3\% vs.\ 1.9\% rural). Groups are small; pooling Utah and national data in an exploratory analysis gives 3.7\% (7/187) versus 1.45\% (29/2{,}005), odds ratio 2.6, Fisher $p$=0.03.
+\textbf{Where protection weakens.} The protection depends on two conditions. First, in smaller counties the error is larger and side-of-street swaps occur: pooled national rates are 0.44\% [0.20, 0.95] in the largest-coverage counties and 0.98\% [0.52, 1.85] in the smaller ones, and only 44\% of rural Utah errors stayed on the correct side (78\% urban). Second, some tract boundaries follow rivers, rail lines or municipal limits. Near such non-street boundaries the error rate was higher in every region examined (national: 3.7\% vs.\ 0.66\% in larger and 5.9\% vs.\ 2.7\% in smaller counties; Utah: 3.0\% vs.\ 0.72\% urban, 4.3\% vs.\ 1.9\% rural). Groups are small; pooling Utah (geocoded truth points removed) and national data in an exploratory analysis gives 3.7\% (7/187) versus 1.29\% (25/1{,}945), odds ratio 3.0, Fisher $p$=0.02.
 
-\textbf{Pitfall: simplified boundary files.} Census also distributes generalised cartographic boundary files for mapping. Applied to \emph{exact} benchmark locations, the 1:500k tract file assigns 1.64\% [1.32, 2.03] of locations to the wrong tract (14.2\% within 10\,m of a boundary) and leaves 2.3\% outside every polygon along shorelines; county files misassign 2.1\% (1:500k), 8.0\% (1:5m) and 15.0\% (1:20m). In NYC, true address points with the cartographic tract file are wrong 0.69\% of the time, seven times the 0.10\% of Census geocodes with TIGER/Line. The boundary file can matter more than the geocoder.
+\textbf{Pitfall: simplified boundary files.} Census also distributes generalised cartographic boundary files for mapping. Applied to \emph{exact} benchmark locations, the 1:500k tract file assigns 1.64\% [1.32, 2.03] of locations to the wrong tract (14.2\% within 10\,m of a boundary) and leaves 2.3\% outside every polygon along shorelines; county files misassign 2.1\% (1:500k), 8.0\% (1:5m) and 15.0\% (1:20m). In NYC, true PLUTO locations with the cartographic tract file are wrong 0.69\% of the time, seven times the 0.10\% of the corresponding Census geocodes with TIGER/Line. The boundary file can matter more than the geocoder.
 
 %=====================================================================
 \section{Implications, Limitations and Conclusion}
@@ -189,7 +189,7 @@ National, 18 counties & 765 & 1.57 & [0.90, 2.72] & 20.2 \\
 \caption{Practitioner decision table.}
 \label{tab:guide}
 \small\setlength{\tabcolsep}{3pt}
-\begin{tabular}{p{4.0cm}p{7.9cm}}
+\begin{tabular}{p{3.9cm}p{7.7cm}}
 \toprule
 Situation & Recommendation \\
 \midrule
@@ -197,8 +197,9 @@ Any area assignment & Use full-resolution TIGER/Line boundaries, never cartograp
 Need a cheap risk flag & Flag records with $d<R$; review or report them separately. \\
 Need graded probabilities & Use a deterministic overlay matched to the error model; check calibration; avoid MC with few samples. \\
 Choosing a threshold & Certify it on held-out geography (Wilson bound), not on the same data. \\
-Census geocodes, street-following boundaries & Risk far below isotropic models; a smaller effective $R$ is reasonable. \\
-Rural areas, non-street boundaries, coasts, ZCTAs & Expect higher risk and unassigned mass; flag and review. \\
+Census geocodes near street-following boundaries & Do not set $R$ from the along-street displacement (20--86\,m): it would flag most urban addresses. Residual risk within 50\,m of a line was 0.04--2.0\%. \\
+Rural counties, non-street boundaries (rivers, rail, municipal limits) & Real-data risk 2--6\% near the line: flag with $d<R$ and review. \\
+Coasts, ZCTAs (simulated) & Expect unassigned mass (0.5--1.3\%); report it, do not renormalise. \\
 \bottomrule
 \end{tabular}
 \end{table}
