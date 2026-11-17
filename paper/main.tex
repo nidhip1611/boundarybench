@@ -46,11 +46,11 @@ We do not claim a new PIP algorithm; the strategies we evaluate are established.
 
 %=====================================================================
 \section{Related Work}
-\textbf{Geocoding error.} Address geocoding places points by street-segment interpolation, parcel or address-point matching; positional errors range from metres to hundreds of metres and are larger in rural areas~\cite{cayo2003,zandbergen2008,zandbergen2009,goldberg2007}. Error distributions have been modelled empirically~\cite{zimmerman2007,strickland2007}, and their consequences for health studies reviewed~\cite{rushton2006,jacquez2012}. Krieger et al.~\cite{krieger2001} measured tract misassignment by commercial geocoders; we extend this line with a controlled theory, strategy comparison and multi-region measurement of a free public geocoder.
+\textbf{Geocoding error.} Address geocoding places points by street-segment interpolation, parcel or address-point matching; positional errors range from metres to hundreds of metres and are larger in rural areas~\cite{cayo2003,zandbergen2008,zandbergen2009,goldberg2007}. Error distributions have been modelled empirically: automated geocoding errors in rural Iowa formed a cross-shaped (street-aligned) distribution that a single bivariate normal or $t$ distribution could not fit~\cite{zimmerman2007}, whereas error angles in Atlanta appeared uniform~\cite{strickland2007}. Consequences for health studies have been reviewed~\cite{rushton2006,jacquez2012}. Whether error direction matters for \emph{area assignment} has not been measured directly; we do so in Sect.~\ref{sec:real}. Krieger et al.~\cite{krieger2001} measured tract misassignment by commercial geocoders; we extend this line with a controlled theory, strategy comparison and multi-region measurement of a free public geocoder.
 
 \textbf{Spatial uncertainty and point-in-polygon.} Uncertainty in GIS has a long tradition~\cite{heuvelink1998,zhang2002,shi2010}. The epsilon band~\cite{perkal1956} and its use to classify points as definitely or possibly inside a polygon~\cite{blakemore1984} are the origin of the distance rule we evaluate. Probability-based PIP models integrate a positional error distribution over the polygon~\cite{cheung2004}, and probabilistic spatial queries over imprecise data were studied in databases~\cite{cheng2003}. These works define the methods; we evaluate their risk--coverage behaviour at national scale and test their assumptions against real geocoding error.
 
-\textbf{Selective prediction and calibration.} A system that may abstain is evaluated by its risk--coverage trade-off~\cite{chow1970,geifman2017}; the quality of probabilities is measured by calibration~\cite{guo2017}. We adopt these tools for geographic assignment.
+\textbf{Selective prediction.} We evaluate abstention by the risk--coverage trade-off~\cite{chow1970,geifman2017} and probabilities by calibration~\cite{guo2017}.
 
 %=====================================================================
 \section{Problem and Risk Model}\label{sec:model}
@@ -136,7 +136,7 @@ Monte Carlo ($N$=100) & AURC 0.164 (Gaussian, $R$=20); $\sim$5\% of decisions fl
 \end{tabular}
 \end{table}
 
-\textbf{Probabilities need care.} The Gaussian overlay matches 5{,}000-sample MC to a mean absolute difference of 0.0032, yet its ECE is 1.6\% at $R$=5--10\,m and 3.8--4.6\% at $R$=20--50\,m; the disk overlay has ECE 2.0--5.6\%. A correctly specified error model therefore does not guarantee calibrated probabilities, likely because benchmark locations are concentrated near boundaries, so the implicit flat prior of an overlay centred on the observation does not hold. MC error decreases as $1/\sqrt{N}$ (RMSE 0.079, 0.039, 0.012, 0.006 for $N$=25, 100, 1{,}000, 5{,}000): about 5\% of threshold decisions flip between runs at $N$=100 and 0.7\% at $N$=5{,}000, so MC needs thousands of samples to match a deterministic overlay.
+\textbf{Probabilities need care.} The Gaussian overlay matches 5{,}000-sample MC to a mean absolute difference of 0.0032, yet its ECE is 1.6\% at $R$=5--10\,m and 3.8--4.6\% at $R$=20--50\,m; the disk overlay has ECE 2.0--5.6\%. A correctly specified error model therefore does not guarantee calibrated probabilities, likely because benchmark locations are concentrated near boundaries (a non-flat prior). MC error decreases as $1/\sqrt{N}$ (RMSE 0.079, 0.039, 0.012, 0.006 for $N$=25, 100, 1{,}000, 5{,}000): about 5\% of threshold decisions flip between runs at $N$=100 and 0.7\% at $N$=5{,}000, so MC needs thousands of samples to match a deterministic overlay.
 
 \textbf{Heavy tails.} When $R$ is only a percentile of a heavy-tailed error, no rule has a hard guarantee. The distance rule degrades gracefully (Student-$t_3$, $R$=50\,m: 67.9\% coverage at risk $\le$0.1\%), whereas the disk overlay cannot reach that risk at any coverage.
 
@@ -144,8 +144,6 @@ Monte Carlo ($N$=100) & AURC 0.164 (Gaussian, $R$=20); $\sim$5\% of decisions fl
 
 %=====================================================================
 \section{Real Geocoding Error: NYC, Utah and Nationwide}\label{sec:real}
-Simulated isotropic error predicts substantial misassignment for addresses near tract lines. We test whether this holds for a widely used free geocoder.
-
 \textbf{Data.} We geocode addresses with the U.S.\ Census Bureau batch geocoder~\cite{censusgeocoder} (benchmark \texttt{Public\_AR\_Current}) and assign tracts with the same TIGER/Line 2025 polygons~\cite{tiger2025}. Ground truth comes from authoritative address points: (a) New York City, two independent sources (PLUTO tax-lot points, $n$=4{,}963; NYC Address Points, $n$=2{,}894); (b) Utah, Salt Lake County versus six rural counties (state address points, about 2{,}660 geocoded); (c) the USDOT National Address Database (release 24)~\cite{nad}, using in each of the nine Census divisions the county with the most address points and one randomly chosen smaller county (2{,}000--30{,}000 address points), 18 counties and 2{,}286 scored addresses. Addresses with unit numbers or non-numeric house numbers, and truth points that are themselves geocoded, are excluded. In each region we sample addresses within 50\,m of a tract line and random addresses. As a counterfactual we keep each address's displacement length but rotate it to a random direction (\emph{random direction}).
 
 \begin{figure}[t]
