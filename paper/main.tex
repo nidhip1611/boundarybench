@@ -114,7 +114,7 @@ easy & $\ge$500\,m & 4{,}550 & interior control \\
 \section{Results on the Benchmark}\label{sec:sim}
 \textbf{Risk is governed by $d/R$.} Crisp PIP is wrong often near boundaries: under uniform error with $R=20$\,m, 34.3\% [33.2, 35.5] of observations within 10\,m of a boundary fall in the wrong region, 4.9\% [4.2, 5.8] at 10--25\,m, and none beyond 25\,m; at $R=50$\,m the rates are 43.5\%, 27.5\% and 7.7\% for 0--10, 10--25 and 25--50\,m. County, ZCTA and tract rates differ by at most about 5 points, with no level consistently worst. Across all radii, the observed misassignment collapses onto Eq.~(\ref{eq:uni}) and its Gaussian analogue: the ratio of observed to predicted errors is 0.988 for uniform ($n$=33{,}390 near-boundary observations) and 0.994 for Gaussian error ($n$=43{,}760). The empirical form holds for each heavy-tailed model when evaluated with that model's displacement lengths.
 
-\textbf{Geometry adds a measurable excess.} On the stress set, straight local boundaries match the theory (ratio 0.97--1.00), while junctions (ratio 1.14--1.19), corners (1.13--1.20) and slivers (1.06--1.21) exceed it, with tight confidence intervals.
+\textbf{Geometry adds a measurable excess.} On the stress set, straight local boundaries match the theory (ratio 0.97--1.00), while junctions (ratio 1.14--1.19), corners (1.13--1.20) and slivers (1.06--1.21) exceed it, with confidence intervals excluding 1 in 11 of 12 cases.
 
 \textbf{A distance rule is as good as probabilistic methods for ranking.} Table~\ref{tab:strategies} summarises the strategies. Under uniform error, the distance rule ($\tau=R$) has zero observed risk at 95.0/91.4/87.3/76.8\% coverage for $R$=5/10/20/50\,m, which follows from the bounded-error guarantee. The disk overlay ($\theta=0.9$) answers more queries (96.6/93.8/90.6/83.3\%) at a small risk (0.06--0.70\%): a trade-off, not a dominance. AURC of the distance rule and the overlays is indistinguishable under uniform error; under Gaussian error the distance rule equals the correctly specified Gaussian overlay (AURC 0.127\% at $R=20$) and beats the disk overlay (0.146\%) and MC-100 (0.164\%). At corners and slivers the distance rule ranks better than the overlays; the overlays are clearly better only at water edges and coverage gaps, where they can report unassigned mass. Unassigned mass is small for tracts (0.1--0.2\%) but reaches 0.5--1.0\% for coastal counties and 0.8--1.3\% for ZCTAs.
 
@@ -130,13 +130,13 @@ Strategy & Key behaviour & ms/1k \\
 Crisp PIP & no abstention; 34\% wrong within 10\,m ($R$=20) & 5 \\
 Distance rule & 0\% risk at 87.3\% coverage ($R$=20); best under heavy tails & 5 \\
 Disk overlay & 90.6\% coverage at 0.26\% risk ($R$=20); exact for uniform only & 13 \\
-Gaussian overlay & AURC 0.127 = distance rule (Gaussian, $R$=20); ECE 1.4--4.1\% & 500 \\
+Gaussian overlay & AURC 0.127 = distance rule (Gaussian, $R$=20); ECE 1.6--4.6\% & 500 \\
 Monte Carlo ($N$=100) & AURC 0.164 (Gaussian, $R$=20); 5\% of decisions differ from overlay & 67 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Probabilities need care.} The Gaussian overlay matches 5{,}000-sample MC to a mean absolute difference of 0.0032, yet its ECE is 1.4--1.6\% at $R$=5--10\,m and 4.0--4.1\% at $R$=20--50\,m; the disk overlay under uniform error has ECE 1.4--5.4\%. A correctly specified error model therefore does not guarantee calibrated probabilities, likely because benchmark locations are concentrated near boundaries (a non-flat prior). MC error decreases as $1/\sqrt{N}$ (RMSE 0.079, 0.039, 0.012, 0.006 for $N$=25, 100, 1{,}000, 5{,}000): about 5\% of threshold decisions differ from the exact overlay at $N$=100 and 0.7\% at $N$=5{,}000, so MC needs thousands of samples to match a deterministic overlay.
+\textbf{Probabilities need care.} The Gaussian overlay matches 5{,}000-sample MC to a mean absolute difference of 0.0032, yet its ECE is 1.6--1.7\% at $R$=5--10\,m and 3.8--4.6\% at $R$=20--50\,m; the disk overlay under uniform error has ECE 2.0--5.6\%. A correctly specified error model therefore does not guarantee calibrated probabilities, likely because benchmark locations are concentrated near boundaries (a non-flat prior). MC error decreases as $1/\sqrt{N}$ (RMSE 0.079, 0.039, 0.012, 0.006 for $N$=25, 100, 1{,}000, 5{,}000): about 5\% of threshold decisions differ from the exact overlay at $N$=100 and 0.7\% at $N$=5{,}000, so MC needs thousands of samples to match a deterministic overlay.
 
 \textbf{Heavy tails.} When $R$ is only a percentile of a heavy-tailed error, no rule has a hard guarantee. The distance rule degrades gracefully (Student-$t_3$, $R$=50\,m: 67.9\% coverage at risk $\le$0.1\%), whereas the disk overlay cannot reach that risk at any coverage.
 
