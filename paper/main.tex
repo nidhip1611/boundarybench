@@ -6,6 +6,8 @@
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb}
 \usepackage{booktabs}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \usepackage{multirow}
 \usepackage{xcolor}
 \usepackage[hidelinks]{hyperref}
@@ -69,7 +71,7 @@ P(d)=\frac{1}{n}\sum_{i:\,\rho_i>d}\frac{\arccos(d/\rho_i)}{\pi}. \label{eq:emp}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.62\textwidth]{figures/fig1_theory.pdf}
+\includegraphics[width=0.75\textwidth]{figures/fig1_theory.pdf}
 \caption{Straight-boundary prediction of misassignment versus $d/R$ (lines) and observed benchmark rates (markers); observed/predicted 0.988 uniform, 0.994 Gaussian (Sect.~\ref{sec:sim}).}
 \label{fig:theory}
 \end{figure}
@@ -91,6 +93,7 @@ Probabilistic strategies answer if the top region probability is at least $\thet
 \caption{Benchmark composition by distance to the nearest boundary of the true region.}
 \label{tab:bench}
 \small
+\setlength{\tabcolsep}{6.5pt}
 \begin{tabular}{lrrl}
 \toprule
 Stratum & Distance & Points & Purpose \\
@@ -123,7 +126,7 @@ easy & $\ge$500\,m & 4{,}550 & interior control \\
 \caption{Assignment strategies on the benchmark (uniform error unless noted). Coverage = share of queries answered; AURC in \%; runtime per 1{,}000 queries at $R$=20\,m.}
 \label{tab:strategies}
 \small\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lp{7.0cm}r}
+\begin{tabular}{lL{7.0cm}r}
 \toprule
 Strategy & Key behaviour & ms/1k \\
 \midrule
@@ -148,7 +151,7 @@ Monte Carlo ($N$=100) & AURC 0.164 (Gaussian, $R$=20); 5\% of decisions differ f
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.66\textwidth]{figures/fig2_direction.pdf}
+\includegraphics[width=0.78\textwidth]{figures/fig2_direction.pdf}
 \caption{Addresses within 50\,m of a tract line: wrong-tract rate of real Census geocodes versus the same displacement lengths in random directions.}
 \label{fig:direction}
 \end{figure}
@@ -188,7 +191,7 @@ National, 18 counties & 765 & 1.57 & [0.90, 2.72] & 20.2 \\
 \caption{Practitioner decision table.}
 \label{tab:guide}
 \small\setlength{\tabcolsep}{3pt}
-\begin{tabular}{p{3.9cm}p{7.7cm}}
+\begin{tabular}{L{3.9cm}L{7.7cm}}
 \toprule
 Situation & Recommendation \\
 \midrule
