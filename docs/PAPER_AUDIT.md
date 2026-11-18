@@ -121,3 +121,7 @@ point-in-polygon idea is cited to Blakemore 1984 instead.
 | Kinnee et al. 2020 | IJERPH 17(16) 5845; NYC; street-segment errors mostly toward one direction; few differences in census-area assignment | PMC7459468 | ✓ |
 | Census geocoder documentation | "coordinates calculated along an address range" (offset not stated on current page) | census.gov Geocoding Services | ✓ |
 | Cartographic file documentation | designed for small-scale thematic mapping; not for geocoding / precise area relationships | census.gov Cartographic Boundary File Description | ✓ |
+
+## 10-page version (2026-11-18)
+Fig. 2 removed (its values are in Table 3, now with CIs); Table 1 folded into Sect. 4 text; references dropped:
+Krieger 2002, Jacquez 2012, Goldberg 2007, Cheng 2003 (claims that used them were reworded or removed). All numbers unchanged.
