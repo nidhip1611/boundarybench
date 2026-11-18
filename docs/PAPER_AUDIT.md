@@ -125,3 +125,7 @@ point-in-polygon idea is cited to Blakemore 1984 instead.
 ## 10-page version (2026-11-18)
 Fig. 2 removed (its values are in Table 3, now with CIs); Table 1 folded into Sect. 4 text; references dropped:
 Krieger 2002, Jacquez 2012, Goldberg 2007, Cheng 2003 (claims that used them were reworded or removed). All numbers unchanged.
+
+## Using the spare page (2026-11-18)
+The 10-page cut built to 9 pages, so Fig. 2, Eq. (2) as a display, the AURC sentence and the four dropped references
+(Krieger 2002, Jacquez 2012, Goldberg 2007, Cheng 2003) were restored. Numbers unchanged.
