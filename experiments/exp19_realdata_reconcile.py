@@ -10,10 +10,16 @@ Cohort used everywhere: the NEAR-LINE STRATUM of Table 2 (addresses sampled beca
   P4  Along-street / cross-street components of each displacement (relative to the TIGER segment nearest the
       reference point); rates excluding geocodes near an intersection (within 15 m of a segment end) or with an
       ambiguous nearest segment (second-nearest segment within 2 m).
-  P5  Flags available at assignment time (from the GEOCODE only): (a) distance d_obs < tau; (b) the tract line
-      nearest the geocode does not follow a street (no TIGER centerline within 1.5 m of its nearest boundary point)
-      and d_obs < 50 m; (c) a or b. Coverage, errors caught, risk among answered; distance flag at matched coverage.
+  P0b Cohort flow per region: scored, near-line, street / non-street, same / opposite side, wrong.
+  P1b Trace of the earlier street-side cohort (d_true < 50 m in ANY stratum) versus the Table 2 cohort (near stratum).
+  P5  Screening from the GEOCODE only (src/screening.py): A distance only, B nearest tract line is not a street,
+      C distance + boundary type. Same review workload and same risk targets; coverage, risk among answered,
+      recall, errors caught, correct addresses withheld; address-level bootstrap CI for C - A.
+  P5b Agreement of geocode-based and reference-based boundary type.
   P6  Wrong-tract rate by reference placement type (national NAD 'placement', Utah 'PtLocation').
+  P7  Length-preserving direction test: each real displacement re-applied along vs across the street segment
+      nearest the reference point (clear segment matches only), vs actual and random-direction rates.
+  P8  Held-out geography: rules fitted on five regions, evaluated on the sixth (leave-one-region-out).
 
     python experiments/exp19_realdata_reconcile.py
 Outputs -> results/v2_realdata_reconcile/
@@ -33,6 +39,7 @@ from src import config as C
 from src.geo import load_layers, locate
 from src.metrics import wilson
 from src.report import Report
+from src import screening as SC
 
 RES = C.out_dir(C.RESULTS, "v2_realdata_reconcile")
 rep = Report("EXP19 reconciled real-data cohort, street-side breakdown, along/cross components, assignment-time flags", RES)
@@ -63,7 +70,7 @@ na["region"] = "nad"
 ORDER = ["NYC, PLUTO", "NYC, Address Points", "Utah, Salt Lake County", "Utah, six rural counties",
          "National, largest-coverage counties", "National, smaller counties"]
 cols = ["group", "region", "stratum", "wrong", "tx", "ty", "ox", "oy", "d_true", "d_obs", "street_boundary",
-        "same_side", "true_to_road_m", "disp_m"]
+        "same_side", "true_to_road_m", "disp_m", "p_random_dir"]
 A = pd.concat([nyc[cols], ut[cols], na[cols]], ignore_index=True)
 for c in ["wrong", "street_boundary", "same_side"]:
     A[c] = as_bool(A[c])
@@ -99,6 +106,22 @@ p1.loc["TOTAL"] = [p1["n"].sum(), p1["wrong"].sum(), 100 * p1["wrong"].sum() / p
 p1.round(3).to_csv(f"{RES}/P1_cohort.csv")
 rep.table("[P1] Near-line cohort (= Table 2 rows; the 18-county row is the sum of the two national groups)", p1.round(3))
 
+# ----------------------------------------------------------------------------- P1b earlier cohort trace
+old = A[A["d_true"] < 50].copy()
+old["in_table2"] = old["stratum"].astype(str).str.startswith("near")
+p1b = old.groupby(["group", "in_table2"]).agg(n=("wrong", "size"), wrong=("wrong", "sum")).reset_index()
+p1b.to_csv(f"{RES}/P1b_old_cohort_trace.csv", index=False)
+rep.table("[P1b] Earlier street-side analyses used d_true < 50 m in ANY stratum (near-line sample + random sample points\n"
+          "      that happen to lie within 50 m). in_table2=False rows are the extra addresses not in Table 2.", p1b, index=False)
+o2 = old.copy(); o2["side"] = np.where(o2["true_to_road_m"] > 60, "no street <= 60 m",
+                                       np.where(o2["same_side"], "same side", "opposite side"))
+o2["boundary"] = np.where(o2["street_boundary"], "street", "non-street")
+rep.table("[P1c] Earlier cohort, pooled (should reproduce the old 27/6,949 same side, 19/84 opposite, 6/264 non-street figures"
+          " up to grouping)", o2.groupby(["boundary", "side"])["wrong"].agg(["size", "sum"]).reset_index(), index=False)
+rep.say(f"[P1d] earlier cohort total {len(old)} ({int(old['wrong'].sum())} wrong) = Table 2 cohort {int(old['in_table2'].sum())} "
+        f"+ {int((~old['in_table2']).sum())} random-stratum addresses; Table 2 near stratum with d_true >= 50 m: "
+        f"{int(((A['stratum'].astype(str).str.startswith('near')) & (A['d_true'] >= 50)).sum())}")
+
 # ----------------------------------------------------------------------------- P2 breakdown
 K["boundary"] = np.where(K["street_boundary"], "street", "non-street")
 K["side"] = np.where(K["true_to_road_m"] > 60, "no street <= 60 m", np.where(K["same_side"], "same side", "opposite side"))
@@ -115,6 +138,17 @@ p2 = tab(K, ["group", "boundary", "side"]); p2.to_csv(f"{RES}/P2_breakdown.csv",
 rep.table("[P2] Near-line cohort by region x boundary type (at the reference point) x street side of the geocode", p2, index=False)
 p2b = tab(K, ["boundary", "side"]); p2b.to_csv(f"{RES}/P2b_pooled.csv", index=False)
 rep.table("[P2b] Same, pooled (rows sum to the cohort total in P1)", p2b, index=False)
+
+flow = K.groupby("group").agg(near_line=("wrong", "size"), street=("street_boundary", "sum"),
+                              same_side=("side", lambda x: int((x == "same side").sum())),
+                              opposite_side=("side", lambda x: int((x == "opposite side").sum())),
+                              no_street_60m=("side", lambda x: int((x == "no street <= 60 m").sum())),
+                              wrong=("wrong", "sum")).reindex(ORDER)
+flow.insert(0, "scored_all_strata", A.groupby("group").size().reindex(ORDER))
+flow.insert(3, "non_street", flow["near_line"] - flow["street"])
+flow.loc["TOTAL"] = flow.sum()
+flow.to_csv(f"{RES}/P0b_cohort_flow.csv")
+rep.table("[P0b] Cohort flow (submitted/matched in P0): scored -> near-line -> boundary type -> street side -> wrong", flow)
 
 # ----------------------------------------------------------------------------- P3 street vs non-street
 p3 = tab(K, ["group", "boundary"]); p3.to_csv(f"{RES}/P3_street_vs_nonstreet.csv", index=False)
@@ -201,33 +235,103 @@ def obs_boundary_is_street(d):
 
 
 A["obs_street"] = obs_boundary_is_street(A)
-rows = []
-for scope, D in [("near-line cohort", A[A["stratum"].astype(str).str.startswith("near")]),
-                 ("all scored addresses", A)]:
-    w = D["wrong"].to_numpy(); d = D["d_obs"].to_numpy(); nst = ~D["obs_street"].to_numpy()
-    flags = {"d_obs < 7 m": d < 7, "non-street line within 50 m (geocode)": nst & (d < 50),
-             "either": (d < 7) | (nst & (d < 50))}
-    for name, f in flags.items():
-        rows.append({"scope": scope, "flag": name, "n": len(D), "flagged_%": 100 * f.mean(),
-                     "errors_caught": f"{int(w[f].sum())}/{int(w.sum())}",
-                     "risk_answered_%": 100 * (w[~f].mean() if (~f).any() else np.nan)})
-    cov = 1 - (nst & (d < 50)).mean()                       # distance flag at the coverage of the street flag
-    tau = np.quantile(d, 1 - cov) if cov < 1 else 0.0
-    f = d < tau
-    rows.append({"scope": scope, "flag": f"d_obs < {tau:.1f} m (matched coverage)", "n": len(D), "flagged_%": 100 * f.mean(),
-                 "errors_caught": f"{int(w[f].sum())}/{int(w.sum())}",
-                 "risk_answered_%": 100 * (w[~f].mean() if (~f).any() else np.nan)})
-    rows.append({"scope": scope, "flag": "none", "n": len(D), "flagged_%": 0.0, "errors_caught": f"0/{int(w.sum())}",
-                 "risk_answered_%": 100 * w.mean()})
-p5 = pd.DataFrame(rows).round(3); p5.to_csv(f"{RES}/P5_assignment_time_flags.csv", index=False)
-rep.table("[P5] Flags computed from the geocode only (information available at assignment time)", p5, index=False)
-agree = (A["obs_street"] == A["street_boundary"])[A["stratum"].astype(str).str.startswith("near")].mean()
-rep.say(f"[P5b] boundary type from the geocode agrees with boundary type from the reference point for {100*agree:.1f}% "
-        f"of near-line addresses")
+A["nonstreet"] = ~A["obs_street"]
+NEARM = A["stratum"].astype(str).str.startswith("near")
+agree = (A["obs_street"] == A["street_boundary"])[NEARM]
+rep.say(f"[P5b] boundary type from the geocode agrees with boundary type from the reference point for "
+        f"{int(agree.sum())}/{len(agree)} = {100*agree.mean():.1f}% of near-line addresses")
+xt = pd.crosstab(A.loc[NEARM, "street_boundary"], A.loc[NEARM, "obs_street"], rownames=["ref: street"], colnames=["geocode: street"])
+rep.table("[P5b] reference-based (rows) x geocode-based (cols) boundary type, near-line cohort", xt)
+
+p5rows, p5risk, p5ci = [], [], []
+for scope, D in [("near-line cohort", A[NEARM]), ("all scored addresses", A)]:
+    d, ns, w = D["d_obs"].to_numpy(), D["nonstreet"].to_numpy(), D["wrong"].to_numpy()
+    wl7 = (d < 7).mean(); wlB = ns.mean()
+    for wl_name, wl in [("= d_obs<7 m", wl7), ("= rule B", wlB), ("10%", .10), ("25%", .25), ("50%", .50)]:
+        wC = SC.best_w(d, ns, w, wl)
+        for rule, f in [("A distance only", SC.flag_lowest(d, wl)),
+                        (f"C distance + boundary type (w={wC:g}, in-sample)", SC.flag_lowest(SC.score_C(d, ns, wC), wl))]:
+            p5rows.append({"scope": scope, "workload": wl_name, "rule": rule, **SC.summarize(f, w)})
+        lo, med, hi = SC.bootstrap_diff(d, ns, w, wl, wC)
+        p5ci.append({"scope": scope, "workload": wl_name, "w": wC, "C_minus_A_caught_median": med,
+                     "ci95": f"[{lo:.0f}, {hi:.0f}]"})
+    p5rows.append({"scope": scope, "workload": "rule B", "rule": "B non-street boundary only", **SC.summarize(ns, w)})
+    p5rows.append({"scope": scope, "workload": "d_obs<7 m", "rule": "A d_obs < 7 m (paper)", **SC.summarize(d < 7, w)})
+    p5rows.append({"scope": scope, "workload": "0", "rule": "none (assign all)", **SC.summarize(np.zeros(len(d), bool), w)})
+    for tgt in (0.5, 0.25, 0.1):
+        wC = SC.best_w(d, ns, w, wl7)
+        for rule, sc in [("A distance only", d), (f"C (w={wC:g})", SC.score_C(d, ns, wC))]:
+            p5risk.append({"scope": scope, "risk_target_%": tgt, "rule": rule, **SC.coverage_at_risk(sc, w, tgt)})
+p5 = pd.DataFrame(p5rows).round(3); p5.to_csv(f"{RES}/P5_screening_matched_workload.csv", index=False)
+rep.table("[P5] Screening from the geocode only, same review workload (C's w is chosen in-sample here; P8 is held-out)",
+          p5, index=False)
+p5c = pd.DataFrame(p5ci).round(2); p5c.to_csv(f"{RES}/P5_bootstrap_C_minus_A.csv", index=False)
+rep.table("[P5c] Address-level bootstrap (2,000 reps): extra errors caught by C over A at the same workload", p5c, index=False)
+p5r = pd.DataFrame(p5risk).round(3); p5r.to_csv(f"{RES}/P5_matched_risk.csv", index=False)
+rep.table("[P5d] Coverage at matched risk targets (answer safest first)", p5r, index=False)
 
 # ----------------------------------------------------------------------------- P6 placement type
 K["placement"] = A.loc[K.index, "placement"].to_numpy()
 p6 = tab(K, ["group", "placement"]); p6 = p6[p6["n"] >= 20]
 p6.to_csv(f"{RES}/P6_placement.csv", index=False)
 rep.table("[P6] Near-line cohort by reference placement type (groups with n >= 20)", p6, index=False)
+# ----------------------------------------------------------------------------- P7 length-preserving along vs across
+tid = locate(LT, tx, ty)
+mag = np.hypot(ox - tx, oy - ty)
+nvec = np.c_[-tvec[:, 1], tvec[:, 0]]
+q = (~K["near_intersection"] & ~K["ambiguous_segment"] & (K["true_to_road_m"] <= 60)).to_numpy() & (tid >= 0)
+rates = {}
+for name, vec in [("along", tvec), ("across", nvec)]:
+    wr = np.zeros(len(K))
+    for sgn_ in (1, -1):
+        cx, cy = tx + sgn_ * mag * vec[:, 0], ty + sgn_ * mag * vec[:, 1]
+        wr += (locate(LT, cx, cy) != tid)
+    rates[name] = wr / 2
+K["cf_along"], K["cf_across"] = rates["along"], rates["across"]
+Q7 = K[q]
+rng = np.random.default_rng(7)
+
+
+def bci(x):
+    x = np.asarray(x, float); bs = [x[rng.integers(0, len(x), len(x))].mean() for _ in range(1000)]
+    return f"{100*x.mean():.2f} [{100*np.percentile(bs, 2.5):.2f}, {100*np.percentile(bs, 97.5):.2f}]"
+
+
+rows = []
+for g in ORDER + ["ALL"]:
+    d = Q7 if g == "ALL" else Q7[Q7["group"] == g]
+    n_all = len(K) if g == "ALL" else int((K["group"] == g).sum())
+    if len(d) == 0:
+        continue
+    rows.append({"group": g, "qualifying": len(d), "of_cohort_%": 100 * len(d) / n_all,
+                 "actual_wrong_%": bci(d["wrong"]), "along_street_%": bci(d["cf_along"]),
+                 "across_street_%": bci(d["cf_across"]), "random_direction_%": bci(d["p_random_dir"])})
+p7 = pd.DataFrame(rows).round(2); p7.to_csv(f"{RES}/P7_along_vs_across.csv", index=False)
+rep.table("[P7] Same displacement length, re-oriented along vs across the street segment nearest the reference point\n"
+          "     (clear segment matches: not within 15 m of a segment end, no second segment within 2 m, reference <= 60 m\n"
+          "     from a road). Mean over both signs; 95% address-level bootstrap CI.", p7, index=False)
+
+# ----------------------------------------------------------------------------- P8 held-out geography
+p8 = []
+for scope, D in [("near-line cohort", A[NEARM]), ("all scored addresses", A)]:
+    wl7 = (D["d_obs"] < 7).mean()
+    for wl in (wl7, .25, .10):
+        h = SC.heldout(D[["group", "d_obs", "nonstreet", "wrong"]], ORDER, wl)
+        h.insert(0, "scope", scope); p8.append(h)
+p8 = pd.concat(p8).round(3); p8.to_csv(f"{RES}/P8_heldout_regions.csv", index=False)
+rep.table("[P8] Held-out regions: thresholds (and w) fitted on the other five regions, applied unchanged", p8, index=False)
+pool = (p8.groupby(["scope", "workload_target_%", "rule"])
+        .agg(n=("n", "sum"), errors_total=("errors_total", "sum"), errors_caught=("errors_caught", "sum"),
+             correct_withheld=("correct_withheld", "sum"), errors_answered=("errors_answered", "sum")).reset_index())
+pool["reviewed_%"] = 100 * (pool["errors_caught"] + pool["correct_withheld"]) / pool["n"]
+pool["recall_%"] = 100 * pool["errors_caught"] / pool["errors_total"]
+pool["risk_answered_%"] = 100 * pool["errors_answered"] / (pool["n"] - pool["errors_caught"] - pool["correct_withheld"])
+pool = pool.round(3); pool.to_csv(f"{RES}/P8b_heldout_pooled.csv", index=False)
+rep.table("[P8b] Held-out results pooled over the six held-out regions", pool, index=False)
+wins = p8[p8["rule"].isin(["C distance + boundary type", "A, same held-out workload as C"])].pivot_table(
+    index=["scope", "workload_target_%", "held_out"], columns="rule", values="errors_caught").reset_index()
+wins["C_minus_A"] = wins["C distance + boundary type"] - wins["A, same held-out workload as C"]
+wins.to_csv(f"{RES}/P8c_heldout_C_vs_A.csv", index=False)
+rep.table("[P8c] Held-out errors caught: C vs A at C's held-out review share, per region", wins.round(0), index=False)
+
 rep.save()
