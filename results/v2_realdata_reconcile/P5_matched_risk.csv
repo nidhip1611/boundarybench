@@ -1,0 +1,13 @@
+scope,risk_target_%,rule,coverage_%,answered,errors_answered,risk_answered_%
+near-line cohort,0.5,A distance only,27.55,1645,8,0.486
+near-line cohort,0.5,C (w=3),25.054,1496,7,0.468
+near-line cohort,0.25,A distance only,0.033,2,0,0.0
+near-line cohort,0.25,C (w=3),0.033,2,0,0.0
+near-line cohort,0.1,A distance only,0.033,2,0,0.0
+near-line cohort,0.1,C (w=3),0.033,2,0,0.0
+all scored addresses,0.5,A distance only,100.0,12658,63,0.498
+all scored addresses,0.5,C (w=1e+06),100.0,12658,63,0.498
+all scored addresses,0.25,A distance only,55.38,7010,17,0.243
+all scored addresses,0.25,C (w=1e+06),48.207,6102,15,0.246
+all scored addresses,0.1,A distance only,36.293,4594,4,0.087
+all scored addresses,0.1,C (w=1e+06),29.144,3689,3,0.081

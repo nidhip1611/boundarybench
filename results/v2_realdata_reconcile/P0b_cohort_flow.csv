@@ -1,0 +1,8 @@
+group,scored_all_strata,near_line,street,non_street,same_side,opposite_side,no_street_60m,wrong
+"NYC, PLUTO",4963,2478,2426,52,2474,4,0,1
+"NYC, Address Points",2894,1443,1413,30,1434,8,1,14
+"Utah, Salt Lake County",1376,694,630,64,671,19,4,5
+"Utah, six rural counties",1139,591,568,23,575,13,3,12
+"National, largest-coverage counties",1367,529,449,80,501,25,3,5
+"National, smaller counties",919,236,219,17,212,21,3,7
+TOTAL,12658,5971,5705,266,5867,90,14,44

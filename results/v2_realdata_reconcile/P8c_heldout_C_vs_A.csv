@@ -1,0 +1,37 @@
+scope,workload_target_%,held_out,"A, same held-out workload as C",C distance + boundary type,C_minus_A
+all scored addresses,10.0,"NYC, Address Points",4.0,1.0,-3.0
+all scored addresses,10.0,"NYC, PLUTO",0.0,0.0,0.0
+all scored addresses,10.0,"National, largest-coverage counties",4.0,3.0,-1.0
+all scored addresses,10.0,"National, smaller counties",0.0,1.0,1.0
+all scored addresses,10.0,"Utah, Salt Lake County",0.0,1.0,1.0
+all scored addresses,10.0,"Utah, six rural counties",7.0,1.0,-6.0
+all scored addresses,25.0,"NYC, Address Points",9.0,10.0,1.0
+all scored addresses,25.0,"NYC, PLUTO",0.0,0.0,0.0
+all scored addresses,25.0,"National, largest-coverage counties",3.0,3.0,0.0
+all scored addresses,25.0,"National, smaller counties",2.0,2.0,0.0
+all scored addresses,25.0,"Utah, Salt Lake County",1.0,4.0,3.0
+all scored addresses,25.0,"Utah, six rural counties",10.0,9.0,-1.0
+all scored addresses,38.071,"NYC, Address Points",14.0,13.0,-1.0
+all scored addresses,38.071,"NYC, PLUTO",0.0,0.0,0.0
+all scored addresses,38.071,"National, largest-coverage counties",6.0,4.0,-2.0
+all scored addresses,38.071,"National, smaller counties",3.0,4.0,1.0
+all scored addresses,38.071,"Utah, Salt Lake County",5.0,4.0,-1.0
+all scored addresses,38.071,"Utah, six rural counties",10.0,11.0,1.0
+near-line cohort,10.0,"NYC, Address Points",3.0,3.0,0.0
+near-line cohort,10.0,"NYC, PLUTO",0.0,0.0,0.0
+near-line cohort,10.0,"National, largest-coverage counties",2.0,2.0,0.0
+near-line cohort,10.0,"National, smaller counties",0.0,1.0,1.0
+near-line cohort,10.0,"Utah, Salt Lake County",0.0,0.0,0.0
+near-line cohort,10.0,"Utah, six rural counties",1.0,1.0,0.0
+near-line cohort,25.0,"NYC, Address Points",6.0,6.0,0.0
+near-line cohort,25.0,"NYC, PLUTO",0.0,0.0,0.0
+near-line cohort,25.0,"National, largest-coverage counties",2.0,2.0,0.0
+near-line cohort,25.0,"National, smaller counties",0.0,1.0,1.0
+near-line cohort,25.0,"Utah, Salt Lake County",0.0,0.0,0.0
+near-line cohort,25.0,"Utah, six rural counties",1.0,1.0,0.0
+near-line cohort,64.897,"NYC, Address Points",8.0,8.0,0.0
+near-line cohort,64.897,"NYC, PLUTO",0.0,0.0,0.0
+near-line cohort,64.897,"National, largest-coverage counties",3.0,3.0,0.0
+near-line cohort,64.897,"National, smaller counties",3.0,4.0,1.0
+near-line cohort,64.897,"Utah, Salt Lake County",1.0,1.0,0.0
+near-line cohort,64.897,"Utah, six rural counties",9.0,9.0,0.0

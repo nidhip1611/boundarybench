@@ -1,0 +1,11 @@
+scope,workload,w,C_minus_A_caught_median,ci95
+near-line cohort,= d_obs<7 m,3.0,2.0,"[-1, 5]"
+near-line cohort,= rule B,3.0,2.0,"[0, 5]"
+near-line cohort,10%,10.0,3.0,"[0, 7]"
+near-line cohort,25%,3.0,2.0,"[-1, 5]"
+near-line cohort,50%,3.0,2.0,"[0, 5]"
+all scored addresses,= d_obs<7 m,1000000.0,5.0,"[-1, 11]"
+all scored addresses,= rule B,10.0,5.0,"[0, 11]"
+all scored addresses,10%,10.0,5.0,"[0, 11]"
+all scored addresses,25%,10.0,6.0,"[1, 12]"
+all scored addresses,50%,2.0,2.0,"[-1, 7]"

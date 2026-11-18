@@ -1,0 +1,12 @@
+group,in_table2,n,wrong
+"NYC, Address Points",False,490,7
+"NYC, Address Points",True,1443,14
+"NYC, PLUTO",False,784,0
+"NYC, PLUTO",True,2478,1
+"National, largest-coverage counties",False,4,1
+"National, largest-coverage counties",True,529,5
+"National, smaller counties",True,236,7
+"Utah, Salt Lake County",False,70,2
+"Utah, Salt Lake County",True,694,5
+"Utah, six rural counties",False,8,0
+"Utah, six rural counties",True,591,12

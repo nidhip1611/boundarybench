@@ -1,4 +1,4 @@
-# EXP19 reconciled real-data cohort, street-side breakdown, along/cross components, assignment-time flags | run 2026-11-18 18:12 | commit 032908d
+# EXP19 reconciled real-data cohort, street-side breakdown, along/cross components, assignment-time flags | run 2026-11-18 18:18 | commit 00a7f73
 
 [P0] Pipeline: addresses submitted, Census match status, scored. Only 'Match' is scored; 'Tie' and 'No_Match'
      are excluded; matched_not_scored = displacement > 500 m (treated as a wrong address match) or reference point
@@ -19,6 +19,30 @@ Utah, six rural counties              591.0   12.0    2.030
 National, largest-coverage counties   529.0    5.0    0.945
 National, smaller counties            236.0    7.0    2.966
 TOTAL                                5971.0   44.0    0.737
+
+[P1b] Earlier street-side analyses used d_true < 50 m in ANY stratum (near-line sample + random sample points
+      that happen to lie within 50 m). in_table2=False rows are the extra addresses not in Table 2.
+                              group  in_table2    n  wrong
+                NYC, Address Points      False  490      7
+                NYC, Address Points       True 1443     14
+                         NYC, PLUTO      False  784      0
+                         NYC, PLUTO       True 2478      1
+National, largest-coverage counties      False    4      1
+National, largest-coverage counties       True  529      5
+         National, smaller counties       True  236      7
+             Utah, Salt Lake County      False   70      2
+             Utah, Salt Lake County       True  694      5
+           Utah, six rural counties      False    8      0
+           Utah, six rural counties       True  591     12
+
+[P1c] Earlier cohort, pooled (should reproduce the old 27/6,949 same side, 19/84 opposite, 6/264 non-street figures up to grouping)
+  boundary              side  size  sum
+non-street no street <= 60 m    14    1
+non-street     opposite side    16    1
+non-street         same side   264    6
+    street     opposite side    84   19
+    street         same side  6949   27
+[P1d] earlier cohort total 7327 (54 wrong) = Table 2 cohort 5971 + 1356 random-stratum addresses; Table 2 near stratum with d_true >= 50 m: 0
 
 [P2] Near-line cohort by region x boundary type (at the reference point) x street side of the geocode
                               group   boundary              side    n  wrong  wrong_%             ci
@@ -57,6 +81,17 @@ non-street     opposite side   15      0    0.000  [0.00, 20.39]
 non-street         same side  237      4    1.688   [0.66, 4.26]
     street     opposite side   75     18   24.000 [15.75, 34.78]
     street         same side 5630     21    0.373   [0.24, 0.57]
+
+[P0b] Cohort flow (submitted/matched in P0): scored -> near-line -> boundary type -> street side -> wrong
+                                     scored_all_strata  near_line  street  non_street  same_side  opposite_side  no_street_60m  wrong
+group                                                                                                                                
+NYC, PLUTO                                        4963       2478    2426          52       2474              4              0      1
+NYC, Address Points                               2894       1443    1413          30       1434              8              1     14
+Utah, Salt Lake County                            1376        694     630          64        671             19              4      5
+Utah, six rural counties                          1139        591     568          23        575             13              3     12
+National, largest-coverage counties               1367        529     449          80        501             25              3      5
+National, smaller counties                         919        236     219          17        212             21              3      7
+TOTAL                                            12658       5971    5705         266       5867             90             14     44
 
 [P3] Near-line cohort: street vs non-street boundary per region
                               group   boundary    n  wrong  wrong_%            ci
@@ -108,20 +143,70 @@ non-street     opposite side   12      0    0.000 [0.00, 24.25]
 non-street         same side  167      2    1.198  [0.33, 4.26]
     street     opposite side   35      3    8.571 [2.96, 22.38]
     street         same side 4164     11    0.264  [0.15, 0.47]
+[P5b] boundary type from the geocode agrees with boundary type from the reference point for 5933/5971 = 99.4% of near-line addresses
 
-[P5] Flags computed from the geocode only (information available at assignment time)
-               scope                                  flag     n  flagged_% errors_caught  risk_answered_%
-    near-line cohort                           d_obs < 7 m  5971     64.897         26/44            0.859
-    near-line cohort non-street line within 50 m (geocode)  5971      2.529          4/44            0.687
-    near-line cohort                                either  5971     67.292         28/44            0.819
-    near-line cohort      d_obs < 6.3 m (matched coverage)  5971      2.529          5/44            0.670
-    near-line cohort                                  none  5971      0.000          0/44            0.737
-all scored addresses                           d_obs < 7 m 12658     38.071         31/63            0.408
-all scored addresses non-street line within 50 m (geocode) 12658      1.454          8/63            0.441
-all scored addresses                                either 12658     39.445         36/63            0.352
-all scored addresses      d_obs < 6.3 m (matched coverage) 12658      1.454          7/63            0.449
-all scored addresses                                  none 12658      0.000          0/63            0.498
-[P5b] boundary type from the geocode agrees with boundary type from the reference point for 99.4% of near-line addresses
+[P5b] reference-based (rows) x geocode-based (cols) boundary type, near-line cohort
+geocode: street  False  True 
+ref: street                  
+False              239     27
+True                11   5694
+
+[P5] Screening from the geocode only, same review workload (C's w is chosen in-sample here; P8 is held-out)
+               scope    workload                                            rule     n  reviewed_%  coverage_%  errors_caught  errors_total  recall_%  correct_withheld  errors_answered  risk_answered_%
+    near-line cohort = d_obs<7 m                                 A distance only  5971      64.897      35.103             26            44    59.091              3849               18            0.859
+    near-line cohort = d_obs<7 m     C distance + boundary type (w=3, in-sample)  5971      64.897      35.103             28            44    63.636              3847               16            0.763
+    near-line cohort    = rule B                                 A distance only  5971       4.187      95.813              5            44    11.364               245               39            0.682
+    near-line cohort    = rule B     C distance + boundary type (w=3, in-sample)  5971       4.187      95.813              7            44    15.909               243               37            0.647
+    near-line cohort         10%                                 A distance only  5971       9.998      90.002              5            44    11.364               592               39            0.726
+    near-line cohort         10%    C distance + boundary type (w=10, in-sample)  5971       9.998      90.002              8            44    18.182               589               36            0.670
+    near-line cohort         25%                                 A distance only  5971      25.004      74.996              8            44    18.182              1485               36            0.804
+    near-line cohort         25%     C distance + boundary type (w=3, in-sample)  5971      25.004      74.996              9            44    20.455              1484               35            0.782
+    near-line cohort         50%                                 A distance only  5971      50.008      49.992             23            44    52.273              2963               21            0.704
+    near-line cohort         50%     C distance + boundary type (w=3, in-sample)  5971      50.008      49.992             25            44    56.818              2961               19            0.637
+    near-line cohort      rule B                      B non-street boundary only  5971       4.187      95.813              5            44    11.364               245               39            0.682
+    near-line cohort   d_obs<7 m                           A d_obs < 7 m (paper)  5971      64.897      35.103             26            44    59.091              3849               18            0.859
+    near-line cohort           0                               none (assign all)  5971       0.000     100.000              0            44     0.000                 0               44            0.737
+all scored addresses = d_obs<7 m                                 A distance only 12658      38.071      61.929             31            63    49.206              4788               32            0.408
+all scored addresses = d_obs<7 m C distance + boundary type (w=1e+06, in-sample) 12658      38.071      61.929             36            63    57.143              4783               27            0.344
+all scored addresses    = rule B                                 A distance only 12658       9.425      90.575              9            63    14.286              1184               54            0.471
+all scored addresses    = rule B    C distance + boundary type (w=10, in-sample) 12658       9.425      90.575             14            63    22.222              1179               49            0.427
+all scored addresses         10%                                 A distance only 12658      10.002      89.998              9            63    14.286              1257               54            0.474
+all scored addresses         10%    C distance + boundary type (w=10, in-sample) 12658      10.002      89.998             14            63    22.222              1252               49            0.430
+all scored addresses         25%                                 A distance only 12658      24.996      75.004             23            63    36.508              3141               40            0.421
+all scored addresses         25%    C distance + boundary type (w=10, in-sample) 12658      24.996      75.004             29            63    46.032              3135               34            0.358
+all scored addresses         50%                                 A distance only 12658      50.000      50.000             51            63    80.952              6278               12            0.190
+all scored addresses         50%     C distance + boundary type (w=2, in-sample) 12658      50.000      50.000             54            63    85.714              6275                9            0.142
+all scored addresses      rule B                      B non-street boundary only 12658       9.425      90.575             11            63    17.460              1182               52            0.454
+all scored addresses   d_obs<7 m                           A d_obs < 7 m (paper) 12658      38.071      61.929             31            63    49.206              4788               32            0.408
+all scored addresses           0                               none (assign all) 12658       0.000     100.000              0            63     0.000                 0               63            0.498
+
+[P5c] Address-level bootstrap (2,000 reps): extra errors caught by C over A at the same workload
+               scope    workload         w  C_minus_A_caught_median     ci95
+    near-line cohort = d_obs<7 m       3.0                      2.0  [-1, 5]
+    near-line cohort    = rule B       3.0                      2.0   [0, 5]
+    near-line cohort         10%      10.0                      3.0   [0, 7]
+    near-line cohort         25%       3.0                      2.0  [-1, 5]
+    near-line cohort         50%       3.0                      2.0   [0, 5]
+all scored addresses = d_obs<7 m 1000000.0                      5.0 [-1, 11]
+all scored addresses    = rule B      10.0                      5.0  [0, 11]
+all scored addresses         10%      10.0                      5.0  [0, 11]
+all scored addresses         25%      10.0                      6.0  [1, 12]
+all scored addresses         50%       2.0                      2.0  [-1, 7]
+
+[P5d] Coverage at matched risk targets (answer safest first)
+               scope  risk_target_%            rule  coverage_%  answered  errors_answered  risk_answered_%
+    near-line cohort           0.50 A distance only      27.550      1645                8            0.486
+    near-line cohort           0.50         C (w=3)      25.054      1496                7            0.468
+    near-line cohort           0.25 A distance only       0.033         2                0            0.000
+    near-line cohort           0.25         C (w=3)       0.033         2                0            0.000
+    near-line cohort           0.10 A distance only       0.033         2                0            0.000
+    near-line cohort           0.10         C (w=3)       0.033         2                0            0.000
+all scored addresses           0.50 A distance only     100.000     12658               63            0.498
+all scored addresses           0.50     C (w=1e+06)     100.000     12658               63            0.498
+all scored addresses           0.25 A distance only      55.380      7010               17            0.243
+all scored addresses           0.25     C (w=1e+06)      48.207      6102               15            0.246
+all scored addresses           0.10 A distance only      36.293      4594                4            0.087
+all scored addresses           0.10     C (w=1e+06)      29.144      3689                3            0.081
 
 [P6] Near-line cohort by reference placement type (groups with n >= 20)
                               group           placement    n  wrong  wrong_%            ci
@@ -134,3 +219,270 @@ National, largest-coverage counties Structure - Rooftop  388      5    1.289  [0
            Utah, six rural counties             Rooftop   21      1    4.762 [0.85, 22.67]
            Utah, six rural counties             Unknown  323     10    3.096  [1.69, 5.60]
            Utah, six rural counties             missing  246      1    0.407  [0.07, 2.27]
+
+[P7] Same displacement length, re-oriented along vs across the street segment nearest the reference point
+     (clear segment matches: not within 15 m of a segment end, no second segment within 2 m, reference <= 60 m
+     from a road). Mean over both signs; 95% address-level bootstrap CI.
+                              group  qualifying  of_cohort_%    actual_wrong_%      along_street_%      across_street_%   random_direction_%
+                         NYC, PLUTO        2231        90.03 0.04 [0.00, 0.13]   6.39 [5.76, 7.06] 16.85 [15.87, 17.82] 11.52 [10.85, 12.17]
+                NYC, Address Points        1256        87.04 0.56 [0.16, 0.96]   7.05 [6.09, 8.08] 19.86 [18.39, 21.22] 15.53 [14.55, 16.47]
+             Utah, Salt Lake County         276        39.77 0.36 [0.00, 1.09]   5.98 [4.17, 7.79] 19.20 [16.30, 22.10] 12.71 [10.79, 14.95]
+           Utah, six rural counties         143        24.20 2.10 [0.00, 4.20]   2.80 [1.05, 4.55] 22.03 [17.83, 26.22] 14.05 [11.37, 16.48]
+National, largest-coverage counties         367        69.38 0.54 [0.00, 1.36]   7.49 [5.59, 9.40] 24.11 [21.53, 26.84] 17.74 [15.92, 19.64]
+         National, smaller counties         105        44.49 1.90 [0.00, 4.76] 11.90 [7.61, 16.67] 32.86 [28.57, 37.14] 28.00 [24.47, 31.38]
+                                ALL        4378        73.32 0.37 [0.21, 0.57]   6.66 [6.17, 7.20] 19.03 [18.28, 19.76] 13.74 [13.25, 14.22]
+
+[P8] Held-out regions: thresholds (and w) fitted on the other five regions, applied unchanged
+               scope                            held_out  workload_target_%                           rule      param    n  reviewed_%  coverage_%  errors_caught  errors_total  recall_%  correct_withheld  errors_answered  risk_answered_%
+    near-line cohort                          NYC, PLUTO             64.897                A distance only  tau=8.9 m 2478      66.263      33.737              0             1     0.000              1642                1            0.120
+    near-line cohort                          NYC, PLUTO             64.897     C distance + boundary type        w=3 2478      66.182      33.818              0             1     0.000              1640                1            0.119
+    near-line cohort                          NYC, PLUTO             64.897 A, same held-out workload as C            2478      66.182      33.818              0             1     0.000              1640                1            0.119
+    near-line cohort                          NYC, PLUTO             64.897     B non-street boundary only            2478       1.937      98.063              0             1     0.000                48                1            0.041
+    near-line cohort                          NYC, PLUTO             64.897              none (assign all)            2478       0.000     100.000              0             1     0.000                 0                1            0.040
+    near-line cohort                 NYC, Address Points             64.897                A distance only  tau=6.5 m 1443      63.964      36.036             10            14    71.429               913                4            0.769
+    near-line cohort                 NYC, Address Points             64.897     C distance + boundary type       w=10 1443      58.351      41.649              8            14    57.143               834                6            0.998
+    near-line cohort                 NYC, Address Points             64.897 A, same held-out workload as C            1443      58.351      41.649              8            14    57.143               834                6            0.998
+    near-line cohort                 NYC, Address Points             64.897     B non-street boundary only            1443       2.079      97.921              0            14     0.000                30               14            0.991
+    near-line cohort                 NYC, Address Points             64.897              none (assign all)            1443       0.000     100.000              0            14     0.000                 0               14            0.970
+    near-line cohort              Utah, Salt Lake County             64.897                A distance only  tau=6.5 m  694      55.476      44.524              1             5    20.000               384                4            1.294
+    near-line cohort              Utah, Salt Lake County             64.897     C distance + boundary type        w=3  694      56.196      43.804              1             5    20.000               389                4            1.316
+    near-line cohort              Utah, Salt Lake County             64.897 A, same held-out workload as C             694      56.196      43.804              1             5    20.000               389                4            1.316
+    near-line cohort              Utah, Salt Lake County             64.897     B non-street boundary only             694       8.069      91.931              1             5    20.000                55                4            0.627
+    near-line cohort              Utah, Salt Lake County             64.897              none (assign all)             694       0.000     100.000              0             5     0.000                 0                5            0.720
+    near-line cohort            Utah, six rural counties             64.897                A distance only tau=11.0 m  591      82.403      17.597              9            12    75.000               478                3            2.885
+    near-line cohort            Utah, six rural counties             64.897     C distance + boundary type        w=1  591      82.403      17.597              9            12    75.000               478                3            2.885
+    near-line cohort            Utah, six rural counties             64.897 A, same held-out workload as C             591      82.403      17.597              9            12    75.000               478                3            2.885
+    near-line cohort            Utah, six rural counties             64.897     B non-street boundary only             591       3.723      96.277              1            12     8.333                21               11            1.933
+    near-line cohort            Utah, six rural counties             64.897              none (assign all)             591       0.000     100.000              0            12     0.000                 0               12            2.030
+    near-line cohort National, largest-coverage counties             64.897                A distance only  tau=6.5 m  529      50.095      49.905              3             5    60.000               262                2            0.758
+    near-line cohort National, largest-coverage counties             64.897     C distance + boundary type        w=3  529      51.418      48.582              3             5    60.000               269                2            0.778
+    near-line cohort National, largest-coverage counties             64.897 A, same held-out workload as C             529      51.418      48.582              3             5    60.000               269                2            0.778
+    near-line cohort National, largest-coverage counties             64.897     B non-street boundary only             529      14.367      85.633              2             5    40.000                74                3            0.662
+    near-line cohort National, largest-coverage counties             64.897              none (assign all)             529       0.000     100.000              0             5     0.000                 0                5            0.945
+    near-line cohort          National, smaller counties             64.897                A distance only  tau=7.9 m  236      69.492      30.508              3             7    42.857               161                4            5.556
+    near-line cohort          National, smaller counties             64.897     C distance + boundary type        w=3  236      68.644      31.356              4             7    57.143               158                3            4.054
+    near-line cohort          National, smaller counties             64.897 A, same held-out workload as C             236      68.644      31.356              3             7    42.857               159                4            5.405
+    near-line cohort          National, smaller counties             64.897     B non-street boundary only             236       7.627      92.373              1             7    14.286                17                6            2.752
+    near-line cohort          National, smaller counties             64.897              none (assign all)             236       0.000     100.000              0             7     0.000                 0                7            2.966
+    near-line cohort                          NYC, PLUTO             25.000                A distance only  tau=6.4 m 2478      33.858      66.142              0             1     0.000               839                1            0.061
+    near-line cohort                          NYC, PLUTO             25.000     C distance + boundary type        w=3 2478      33.939      66.061              0             1     0.000               841                1            0.061
+    near-line cohort                          NYC, PLUTO             25.000 A, same held-out workload as C            2478      33.939      66.061              0             1     0.000               841                1            0.061
+    near-line cohort                          NYC, PLUTO             25.000     B non-street boundary only            2478       1.937      98.063              0             1     0.000                48                1            0.041
+    near-line cohort                          NYC, PLUTO             25.000              none (assign all)            2478       0.000     100.000              0             1     0.000                 0                1            0.040
+    near-line cohort                 NYC, Address Points             25.000                A distance only  tau=6.4 m 1443      32.086      67.914              6            14    42.857               457                8            0.816
+    near-line cohort                 NYC, Address Points             25.000     C distance + boundary type        w=3 1443      32.155      67.845              6            14    42.857               458                8            0.817
+    near-line cohort                 NYC, Address Points             25.000 A, same held-out workload as C            1443      32.155      67.845              6            14    42.857               458                8            0.817
+    near-line cohort                 NYC, Address Points             25.000     B non-street boundary only            1443       2.079      97.921              0            14     0.000                30               14            0.991
+    near-line cohort                 NYC, Address Points             25.000              none (assign all)            1443       0.000     100.000              0            14     0.000                 0               14            0.970
+    near-line cohort              Utah, Salt Lake County             25.000                A distance only  tau=6.4 m  694       3.602      96.398              0             5     0.000                25                5            0.747
+    near-line cohort              Utah, Salt Lake County             25.000     C distance + boundary type        w=3  694       3.602      96.398              0             5     0.000                25                5            0.747
+    near-line cohort              Utah, Salt Lake County             25.000 A, same held-out workload as C             694       3.602      96.398              0             5     0.000                25                5            0.747
+    near-line cohort              Utah, Salt Lake County             25.000     B non-street boundary only             694       8.069      91.931              1             5    20.000                55                4            0.627
+    near-line cohort              Utah, Salt Lake County             25.000              none (assign all)             694       0.000     100.000              0             5     0.000                 0                5            0.720
+    near-line cohort            Utah, six rural counties             25.000                A distance only  tau=6.4 m  591       1.015      98.985              0            12     0.000                 6               12            2.051
+    near-line cohort            Utah, six rural counties             25.000     C distance + boundary type       w=10  591       2.707      97.293              1            12     8.333                15               11            1.913
+    near-line cohort            Utah, six rural counties             25.000 A, same held-out workload as C             591       2.707      97.293              1            12     8.333                15               11            1.913
+    near-line cohort            Utah, six rural counties             25.000     B non-street boundary only             591       3.723      96.277              1            12     8.333                21               11            1.933
+    near-line cohort            Utah, six rural counties             25.000              none (assign all)             591       0.000     100.000              0            12     0.000                 0               12            2.030
+    near-line cohort National, largest-coverage counties             25.000                A distance only  tau=6.4 m  529      17.391      82.609              2             5    40.000                90                3            0.686
+    near-line cohort National, largest-coverage counties             25.000     C distance + boundary type        w=3  529      18.526      81.474              2             5    40.000                96                3            0.696
+    near-line cohort National, largest-coverage counties             25.000 A, same held-out workload as C             529      18.526      81.474              2             5    40.000                96                3            0.696
+    near-line cohort National, largest-coverage counties             25.000     B non-street boundary only             529      14.367      85.633              2             5    40.000                74                3            0.662
+    near-line cohort National, largest-coverage counties             25.000              none (assign all)             529       0.000     100.000              0             5     0.000                 0                5            0.945
+    near-line cohort          National, smaller counties             25.000                A distance only  tau=6.4 m  236      26.695      73.305              0             7     0.000                63                7            4.046
+    near-line cohort          National, smaller counties             25.000     C distance + boundary type        w=3  236      28.814      71.186              1             7    14.286                67                6            3.571
+    near-line cohort          National, smaller counties             25.000 A, same held-out workload as C             236      28.814      71.186              0             7     0.000                68                7            4.167
+    near-line cohort          National, smaller counties             25.000     B non-street boundary only             236       7.627      92.373              1             7    14.286                17                6            2.752
+    near-line cohort          National, smaller counties             25.000              none (assign all)             236       0.000     100.000              0             7     0.000                 0                7            2.966
+    near-line cohort                          NYC, PLUTO             10.000                A distance only  tau=6.3 m 2478      17.312      82.688              0             1     0.000               429                1            0.049
+    near-line cohort                          NYC, PLUTO             10.000     C distance + boundary type       w=10 2478      11.299      88.701              0             1     0.000               280                1            0.045
+    near-line cohort                          NYC, PLUTO             10.000 A, same held-out workload as C            2478      11.299      88.701              0             1     0.000               280                1            0.045
+    near-line cohort                          NYC, PLUTO             10.000     B non-street boundary only            2478       1.937      98.063              0             1     0.000                48                1            0.041
+    near-line cohort                          NYC, PLUTO             10.000              none (assign all)            2478       0.000     100.000              0             1     0.000                 0                1            0.040
+    near-line cohort                 NYC, Address Points             10.000                A distance only  tau=6.3 m 1443      17.672      82.328              3            14    21.429               252               11            0.926
+    near-line cohort                 NYC, Address Points             10.000     C distance + boundary type       w=10 1443      14.068      85.932              3            14    21.429               200               11            0.887
+    near-line cohort                 NYC, Address Points             10.000 A, same held-out workload as C            1443      14.068      85.932              3            14    21.429               200               11            0.887
+    near-line cohort                 NYC, Address Points             10.000     B non-street boundary only            1443       2.079      97.921              0            14     0.000                30               14            0.991
+    near-line cohort                 NYC, Address Points             10.000              none (assign all)            1443       0.000     100.000              0            14     0.000                 0               14            0.970
+    near-line cohort              Utah, Salt Lake County             10.000                A distance only  tau=6.3 m  694       0.432      99.568              0             5     0.000                 3                5            0.724
+    near-line cohort              Utah, Salt Lake County             10.000     C distance + boundary type        w=3  694       1.153      98.847              0             5     0.000                 8                5            0.729
+    near-line cohort              Utah, Salt Lake County             10.000 A, same held-out workload as C             694       1.153      98.847              0             5     0.000                 8                5            0.729
+    near-line cohort              Utah, Salt Lake County             10.000     B non-street boundary only             694       8.069      91.931              1             5    20.000                55                4            0.627
+    near-line cohort              Utah, Salt Lake County             10.000              none (assign all)             694       0.000     100.000              0             5     0.000                 0                5            0.720
+    near-line cohort            Utah, six rural counties             10.000                A distance only  tau=6.3 m  591       0.169      99.831              0            12     0.000                 1               12            2.034
+    near-line cohort            Utah, six rural counties             10.000     C distance + boundary type       w=10  591       2.707      97.293              1            12     8.333                15               11            1.913
+    near-line cohort            Utah, six rural counties             10.000 A, same held-out workload as C             591       2.707      97.293              1            12     8.333                15               11            1.913
+    near-line cohort            Utah, six rural counties             10.000     B non-street boundary only             591       3.723      96.277              1            12     8.333                21               11            1.933
+    near-line cohort            Utah, six rural counties             10.000              none (assign all)             591       0.000     100.000              0            12     0.000                 0               12            2.030
+    near-line cohort National, largest-coverage counties             10.000                A distance only  tau=6.3 m  529       6.805      93.195              2             5    40.000                34                3            0.609
+    near-line cohort National, largest-coverage counties             10.000     C distance + boundary type       w=10  529      13.611      86.389              2             5    40.000                70                3            0.656
+    near-line cohort National, largest-coverage counties             10.000 A, same held-out workload as C             529      13.611      86.389              2             5    40.000                70                3            0.656
+    near-line cohort National, largest-coverage counties             10.000     B non-street boundary only             529      14.367      85.633              2             5    40.000                74                3            0.662
+    near-line cohort National, largest-coverage counties             10.000              none (assign all)             529       0.000     100.000              0             5     0.000                 0                5            0.945
+    near-line cohort          National, smaller counties             10.000                A distance only  tau=6.3 m  236       4.237      95.763              0             7     0.000                10                7            3.097
+    near-line cohort          National, smaller counties             10.000     C distance + boundary type       w=10  236       6.780      93.220              1             7    14.286                15                6            2.727
+    near-line cohort          National, smaller counties             10.000 A, same held-out workload as C             236       6.780      93.220              0             7     0.000                16                7            3.182
+    near-line cohort          National, smaller counties             10.000     B non-street boundary only             236       7.627      92.373              1             7    14.286                17                6            2.752
+    near-line cohort          National, smaller counties             10.000              none (assign all)             236       0.000     100.000              0             7     0.000                 0                7            2.966
+all scored addresses                          NYC, PLUTO             38.071                A distance only tau=20.2 m 4963      48.680      51.320              0             5     0.000              2416                5            0.196
+all scored addresses                          NYC, PLUTO             38.071     C distance + boundary type        w=1 4963      48.680      51.320              0             5     0.000              2416                5            0.196
+all scored addresses                          NYC, PLUTO             38.071 A, same held-out workload as C            4963      48.680      51.320              0             5     0.000              2416                5            0.196
+all scored addresses                          NYC, PLUTO             38.071     B non-street boundary only            4963       3.002      96.998              0             5     0.000               149                5            0.104
+all scored addresses                          NYC, PLUTO             38.071              none (assign all)            4963       0.000     100.000              0             5     0.000                 0                5            0.101
+all scored addresses                 NYC, Address Points             38.071                A distance only tau=12.9 m 2894      45.992      54.008             14            21    66.667              1317                7            0.448
+all scored addresses                 NYC, Address Points             38.071     C distance + boundary type        w=3 2894      45.266      54.734             13            21    61.905              1297                8            0.505
+all scored addresses                 NYC, Address Points             38.071 A, same held-out workload as C            2894      45.266      54.734             14            21    66.667              1296                7            0.442
+all scored addresses                 NYC, Address Points             38.071     B non-street boundary only            2894       2.903      97.097              1            21     4.762                83               20            0.712
+all scored addresses                 NYC, Address Points             38.071              none (assign all)            2894       0.000     100.000              0            21     0.000                 0               21            0.726
+all scored addresses              Utah, Salt Lake County             38.071                A distance only  tau=6.5 m 1376      30.741      69.259              1             9    11.111               422                8            0.839
+all scored addresses              Utah, Salt Lake County             38.071     C distance + boundary type    w=1e+06 1376      41.352      58.648              4             9    44.444               565                5            0.620
+all scored addresses              Utah, Salt Lake County             38.071 A, same held-out workload as C            1376      41.352      58.648              5             9    55.556               564                4            0.496
+all scored addresses              Utah, Salt Lake County             38.071     B non-street boundary only            1376      10.610      89.390              3             9    33.333               143                6            0.488
+all scored addresses              Utah, Salt Lake County             38.071              none (assign all)            1376       0.000     100.000              0             9     0.000                 0                9            0.654
+all scored addresses            Utah, six rural counties             38.071                A distance only  tau=9.1 m 1139      43.986      56.014             10            13    76.923               491                3            0.470
+all scored addresses            Utah, six rural counties             38.071     C distance + boundary type       w=10 1139      45.303      54.697             11            13    84.615               505                2            0.321
+all scored addresses            Utah, six rural counties             38.071 A, same held-out workload as C            1139      45.303      54.697             10            13    76.923               506                3            0.482
+all scored addresses            Utah, six rural counties             38.071     B non-street boundary only            1139      20.808      79.192              1            13     7.692               236               12            1.330
+all scored addresses            Utah, six rural counties             38.071              none (assign all)            1139       0.000     100.000              0            13     0.000                 0               13            1.141
+all scored addresses National, largest-coverage counties             38.071                A distance only  tau=6.5 m 1367      20.922      79.078              4             6    66.667               282                2            0.185
+all scored addresses National, largest-coverage counties             38.071     C distance + boundary type    w=1e+06 1367      38.771      61.229              4             6    66.667               526                2            0.239
+all scored addresses National, largest-coverage counties             38.071 A, same held-out workload as C            1367      38.771      61.229              6             6   100.000               524                0            0.000
+all scored addresses National, largest-coverage counties             38.071     B non-street boundary only            1367      20.556      79.444              3             6    50.000               278                3            0.276
+all scored addresses National, largest-coverage counties             38.071              none (assign all)            1367       0.000     100.000              0             6     0.000                 0                6            0.439
+all scored addresses          National, smaller counties             38.071                A distance only  tau=6.5 m  919      17.954      82.046              3             9    33.333               162                6            0.796
+all scored addresses          National, smaller counties             38.071     C distance + boundary type       w=10  919      19.260      80.740              4             9    44.444               173                5            0.674
+all scored addresses          National, smaller counties             38.071 A, same held-out workload as C             919      19.260      80.740              3             9    33.333               174                6            0.809
+all scored addresses          National, smaller counties             38.071     B non-street boundary only             919      32.209      67.791              3             9    33.333               293                6            0.963
+all scored addresses          National, smaller counties             38.071              none (assign all)             919       0.000     100.000              0             9     0.000                 0                9            0.979
+all scored addresses                          NYC, PLUTO             25.000                A distance only  tau=6.4 m 4963      25.468      74.532              0             5     0.000              1264                5            0.135
+all scored addresses                          NYC, PLUTO             25.000     C distance + boundary type       w=10 4963      26.295      73.705              0             5     0.000              1305                5            0.137
+all scored addresses                          NYC, PLUTO             25.000 A, same held-out workload as C            4963      26.295      73.705              0             5     0.000              1305                5            0.137
+all scored addresses                          NYC, PLUTO             25.000     B non-street boundary only            4963       3.002      96.998              0             5     0.000               149                5            0.104
+all scored addresses                          NYC, PLUTO             25.000              none (assign all)            4963       0.000     100.000              0             5     0.000                 0                5            0.101
+all scored addresses                 NYC, Address Points             25.000                A distance only  tau=6.4 m 2894      25.225      74.775              9            21    42.857               721               12            0.555
+all scored addresses                 NYC, Address Points             25.000     C distance + boundary type       w=10 2894      26.088      73.912             10            21    47.619               745               11            0.514
+all scored addresses                 NYC, Address Points             25.000 A, same held-out workload as C            2894      26.088      73.912              9            21    42.857               746               12            0.561
+all scored addresses                 NYC, Address Points             25.000     B non-street boundary only            2894       2.903      97.097              1            21     4.762                83               20            0.712
+all scored addresses                 NYC, Address Points             25.000              none (assign all)            2894       0.000     100.000              0            21     0.000                 0               21            0.726
+all scored addresses              Utah, Salt Lake County             25.000                A distance only  tau=6.4 m 1376      29.869      70.131              1             9    11.111               410                8            0.829
+all scored addresses              Utah, Salt Lake County             25.000     C distance + boundary type       w=10 1376      18.096      81.904              4             9    44.444               245                5            0.444
+all scored addresses              Utah, Salt Lake County             25.000 A, same held-out workload as C            1376      18.096      81.904              1             9    11.111               248                8            0.710
+all scored addresses              Utah, Salt Lake County             25.000     B non-street boundary only            1376      10.610      89.390              3             9    33.333               143                6            0.488
+all scored addresses              Utah, Salt Lake County             25.000              none (assign all)            1376       0.000     100.000              0             9     0.000                 0                9            0.654
+all scored addresses            Utah, six rural counties             25.000                A distance only  tau=6.4 m 1139      43.898      56.102             10            13    76.923               490                3            0.469
+all scored addresses            Utah, six rural counties             25.000     C distance + boundary type       w=10 1139      44.074      55.926              9            13    69.231               493                4            0.628
+all scored addresses            Utah, six rural counties             25.000 A, same held-out workload as C            1139      44.074      55.926             10            13    76.923               492                3            0.471
+all scored addresses            Utah, six rural counties             25.000     B non-street boundary only            1139      20.808      79.192              1            13     7.692               236               12            1.330
+all scored addresses            Utah, six rural counties             25.000              none (assign all)            1139       0.000     100.000              0            13     0.000                 0               13            1.141
+all scored addresses National, largest-coverage counties             25.000                A distance only  tau=6.4 m 1367      15.143      84.857              3             6    50.000               204                3            0.259
+all scored addresses National, largest-coverage counties             25.000     C distance + boundary type       w=10 1367      17.484      82.516              3             6    50.000               236                3            0.266
+all scored addresses National, largest-coverage counties             25.000 A, same held-out workload as C            1367      17.484      82.516              3             6    50.000               236                3            0.266
+all scored addresses National, largest-coverage counties             25.000     B non-street boundary only            1367      20.556      79.444              3             6    50.000               278                3            0.276
+all scored addresses National, largest-coverage counties             25.000              none (assign all)            1367       0.000     100.000              0             6     0.000                 0                6            0.439
+all scored addresses          National, smaller counties             25.000                A distance only  tau=6.4 m  919      10.555      89.445              2             9    22.222                95                7            0.852
+all scored addresses          National, smaller counties             25.000     C distance + boundary type       w=10  919      11.643      88.357              2             9    22.222               105                7            0.862
+all scored addresses          National, smaller counties             25.000 A, same held-out workload as C             919      11.643      88.357              2             9    22.222               105                7            0.862
+all scored addresses          National, smaller counties             25.000     B non-street boundary only             919      32.209      67.791              3             9    33.333               293                6            0.963
+all scored addresses          National, smaller counties             25.000              none (assign all)             919       0.000     100.000              0             9     0.000                 0                9            0.979
+all scored addresses                          NYC, PLUTO             10.000                A distance only  tau=6.4 m 4963      20.371      79.629              0             5     0.000              1011                5            0.127
+all scored addresses                          NYC, PLUTO             10.000     C distance + boundary type       w=10 4963      18.134      81.866              0             5     0.000               900                5            0.123
+all scored addresses                          NYC, PLUTO             10.000 A, same held-out workload as C            4963      18.134      81.866              0             5     0.000               900                5            0.123
+all scored addresses                          NYC, PLUTO             10.000     B non-street boundary only            4963       3.002      96.998              0             5     0.000               149                5            0.104
+all scored addresses                          NYC, PLUTO             10.000              none (assign all)            4963       0.000     100.000              0             5     0.000                 0                5            0.101
+all scored addresses                 NYC, Address Points             10.000                A distance only  tau=6.3 m 2894      17.899      82.101              6            21    28.571               512               15            0.631
+all scored addresses                 NYC, Address Points             10.000     C distance + boundary type    w=1e+06 2894       2.903      97.097              1            21     4.762                83               20            0.712
+all scored addresses                 NYC, Address Points             10.000 A, same held-out workload as C            2894       2.903      97.097              4            21    19.048                80               17            0.605
+all scored addresses                 NYC, Address Points             10.000     B non-street boundary only            2894       2.903      97.097              1            21     4.762                83               20            0.712
+all scored addresses                 NYC, Address Points             10.000              none (assign all)            2894       0.000     100.000              0            21     0.000                 0               21            0.726
+all scored addresses              Utah, Salt Lake County             10.000                A distance only  tau=6.3 m 1376       0.291      99.709              0             9     0.000                 4                9            0.656
+all scored addresses              Utah, Salt Lake County             10.000     C distance + boundary type        w=3 1376       0.727      99.273              1             9    11.111                 9                8            0.586
+all scored addresses              Utah, Salt Lake County             10.000 A, same held-out workload as C            1376       0.727      99.273              0             9     0.000                10                9            0.659
+all scored addresses              Utah, Salt Lake County             10.000     B non-street boundary only            1376      10.610      89.390              3             9    33.333               143                6            0.488
+all scored addresses              Utah, Salt Lake County             10.000              none (assign all)            1376       0.000     100.000              0             9     0.000                 0                9            0.654
+all scored addresses            Utah, six rural counties             10.000                A distance only  tau=6.3 m 1139       0.176      99.824              0            13     0.000                 2               13            1.143
+all scored addresses            Utah, six rural counties             10.000     C distance + boundary type    w=1e+06 1139      20.896      79.104              1            13     7.692               237               12            1.332
+all scored addresses            Utah, six rural counties             10.000 A, same held-out workload as C            1139      20.896      79.104              7            13    53.846               231                6            0.666
+all scored addresses            Utah, six rural counties             10.000     B non-street boundary only            1139      20.808      79.192              1            13     7.692               236               12            1.330
+all scored addresses            Utah, six rural counties             10.000              none (assign all)            1139       0.000     100.000              0            13     0.000                 0               13            1.141
+all scored addresses National, largest-coverage counties             10.000                A distance only  tau=6.3 m 1367       3.877      96.123              3             6    50.000                50                3            0.228
+all scored addresses National, largest-coverage counties             10.000     C distance + boundary type    w=1e+06 1367      21.434      78.566              3             6    50.000               290                3            0.279
+all scored addresses National, largest-coverage counties             10.000 A, same held-out workload as C            1367      21.434      78.566              4             6    66.667               289                2            0.186
+all scored addresses National, largest-coverage counties             10.000     B non-street boundary only            1367      20.556      79.444              3             6    50.000               278                3            0.276
+all scored addresses National, largest-coverage counties             10.000              none (assign all)            1367       0.000     100.000              0             6     0.000                 0                6            0.439
+all scored addresses          National, smaller counties             10.000                A distance only  tau=6.3 m  919       3.156      96.844              0             9     0.000                29                9            1.011
+all scored addresses          National, smaller counties             10.000     C distance + boundary type       w=10  919       3.917      96.083              1             9    11.111                35                8            0.906
+all scored addresses          National, smaller counties             10.000 A, same held-out workload as C             919       3.917      96.083              0             9     0.000                36                9            1.019
+all scored addresses          National, smaller counties             10.000     B non-street boundary only             919      32.209      67.791              3             9    33.333               293                6            0.963
+all scored addresses          National, smaller counties             10.000              none (assign all)             919       0.000     100.000              0             9     0.000                 0                9            0.979
+
+[P8b] Held-out results pooled over the six held-out regions
+               scope  workload_target_%                           rule     n  errors_total  errors_caught  correct_withheld  errors_answered  reviewed_%  recall_%  risk_answered_%
+all scored addresses             10.000                A distance only 12658            63              9              1608               54      12.775    14.286            0.489
+all scored addresses             10.000 A, same held-out workload as C 12658            63             15              1546               48      12.332    23.810            0.433
+all scored addresses             10.000     B non-street boundary only 12658            63             11              1182               52       9.425    17.460            0.454
+all scored addresses             10.000     C distance + boundary type 12658            63              7              1554               56      12.332    11.111            0.505
+all scored addresses             10.000              none (assign all) 12658            63              0                 0               63       0.000     0.000            0.498
+all scored addresses             25.000                A distance only 12658            63             25              3184               38      25.352    39.683            0.402
+all scored addresses             25.000 A, same held-out workload as C 12658            63             25              3132               38      24.941    39.683            0.400
+all scored addresses             25.000     B non-street boundary only 12658            63             11              1182               52       9.425    17.460            0.454
+all scored addresses             25.000     C distance + boundary type 12658            63             28              3129               35      24.941    44.444            0.368
+all scored addresses             25.000              none (assign all) 12658            63              0                 0               63       0.000     0.000            0.498
+all scored addresses             38.071                A distance only 12658            63             32              5090               31      40.465    50.794            0.411
+all scored addresses             38.071 A, same held-out workload as C 12658            63             38              5480               25      43.593    60.317            0.350
+all scored addresses             38.071     B non-street boundary only 12658            63             11              1182               52       9.425    17.460            0.454
+all scored addresses             38.071     C distance + boundary type 12658            63             36              5482               27      43.593    57.143            0.378
+all scored addresses             38.071              none (assign all) 12658            63              0                 0               63       0.000     0.000            0.498
+    near-line cohort             10.000                A distance only  5971            44              5               729               39      12.293    11.364            0.745
+    near-line cohort             10.000 A, same held-out workload as C  5971            44              6               589               38       9.965    13.636            0.707
+    near-line cohort             10.000     B non-street boundary only  5971            44              5               245               39       4.187    11.364            0.682
+    near-line cohort             10.000     C distance + boundary type  5971            44              7               588               37       9.965    15.909            0.688
+    near-line cohort             10.000              none (assign all)  5971            44              0                 0               44       0.000     0.000            0.737
+    near-line cohort             25.000                A distance only  5971            44              8              1480               36      24.920    18.182            0.803
+    near-line cohort             25.000 A, same held-out workload as C  5971            44              9              1503               35      25.322    20.455            0.785
+    near-line cohort             25.000     B non-street boundary only  5971            44              5               245               39       4.187    11.364            0.682
+    near-line cohort             25.000     C distance + boundary type  5971            44             10              1502               34      25.322    22.727            0.763
+    near-line cohort             25.000              none (assign all)  5971            44              0                 0               44       0.000     0.000            0.737
+    near-line cohort             64.897                A distance only  5971            44             26              3840               18      64.746    59.091            0.855
+    near-line cohort             64.897 A, same held-out workload as C  5971            44             24              3769               20      63.524    54.545            0.918
+    near-line cohort             64.897     B non-street boundary only  5971            44              5               245               39       4.187    11.364            0.682
+    near-line cohort             64.897     C distance + boundary type  5971            44             25              3768               19      63.524    56.818            0.872
+    near-line cohort             64.897              none (assign all)  5971            44              0                 0               44       0.000     0.000            0.737
+
+[P8c] Held-out errors caught: C vs A at C's held-out review share, per region
+               scope  workload_target_%                            held_out  A, same held-out workload as C  C distance + boundary type  C_minus_A
+all scored addresses               10.0                 NYC, Address Points                             4.0                         1.0       -3.0
+all scored addresses               10.0                          NYC, PLUTO                             0.0                         0.0        0.0
+all scored addresses               10.0 National, largest-coverage counties                             4.0                         3.0       -1.0
+all scored addresses               10.0          National, smaller counties                             0.0                         1.0        1.0
+all scored addresses               10.0              Utah, Salt Lake County                             0.0                         1.0        1.0
+all scored addresses               10.0            Utah, six rural counties                             7.0                         1.0       -6.0
+all scored addresses               25.0                 NYC, Address Points                             9.0                        10.0        1.0
+all scored addresses               25.0                          NYC, PLUTO                             0.0                         0.0        0.0
+all scored addresses               25.0 National, largest-coverage counties                             3.0                         3.0        0.0
+all scored addresses               25.0          National, smaller counties                             2.0                         2.0        0.0
+all scored addresses               25.0              Utah, Salt Lake County                             1.0                         4.0        3.0
+all scored addresses               25.0            Utah, six rural counties                            10.0                         9.0       -1.0
+all scored addresses               38.0                 NYC, Address Points                            14.0                        13.0       -1.0
+all scored addresses               38.0                          NYC, PLUTO                             0.0                         0.0        0.0
+all scored addresses               38.0 National, largest-coverage counties                             6.0                         4.0       -2.0
+all scored addresses               38.0          National, smaller counties                             3.0                         4.0        1.0
+all scored addresses               38.0              Utah, Salt Lake County                             5.0                         4.0       -1.0
+all scored addresses               38.0            Utah, six rural counties                            10.0                        11.0        1.0
+    near-line cohort               10.0                 NYC, Address Points                             3.0                         3.0        0.0
+    near-line cohort               10.0                          NYC, PLUTO                             0.0                         0.0        0.0
+    near-line cohort               10.0 National, largest-coverage counties                             2.0                         2.0        0.0
+    near-line cohort               10.0          National, smaller counties                             0.0                         1.0        1.0
+    near-line cohort               10.0              Utah, Salt Lake County                             0.0                         0.0        0.0
+    near-line cohort               10.0            Utah, six rural counties                             1.0                         1.0        0.0
+    near-line cohort               25.0                 NYC, Address Points                             6.0                         6.0        0.0
+    near-line cohort               25.0                          NYC, PLUTO                             0.0                         0.0        0.0
+    near-line cohort               25.0 National, largest-coverage counties                             2.0                         2.0        0.0
+    near-line cohort               25.0          National, smaller counties                             0.0                         1.0        1.0
+    near-line cohort               25.0              Utah, Salt Lake County                             0.0                         0.0        0.0
+    near-line cohort               25.0            Utah, six rural counties                             1.0                         1.0        0.0
+    near-line cohort               65.0                 NYC, Address Points                             8.0                         8.0        0.0
+    near-line cohort               65.0                          NYC, PLUTO                             0.0                         0.0        0.0
+    near-line cohort               65.0 National, largest-coverage counties                             3.0                         3.0        0.0
+    near-line cohort               65.0          National, smaller counties                             3.0                         4.0        1.0
+    near-line cohort               65.0              Utah, Salt Lake County                             1.0                         1.0        0.0
+    near-line cohort               65.0            Utah, six rural counties                             9.0                         9.0        0.0

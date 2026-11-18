@@ -1,0 +1,27 @@
+scope,workload,rule,n,reviewed_%,coverage_%,errors_caught,errors_total,recall_%,correct_withheld,errors_answered,risk_answered_%
+near-line cohort,= d_obs<7 m,A distance only,5971,64.897,35.103,26,44,59.091,3849,18,0.859
+near-line cohort,= d_obs<7 m,"C distance + boundary type (w=3, in-sample)",5971,64.897,35.103,28,44,63.636,3847,16,0.763
+near-line cohort,= rule B,A distance only,5971,4.187,95.813,5,44,11.364,245,39,0.682
+near-line cohort,= rule B,"C distance + boundary type (w=3, in-sample)",5971,4.187,95.813,7,44,15.909,243,37,0.647
+near-line cohort,10%,A distance only,5971,9.998,90.002,5,44,11.364,592,39,0.726
+near-line cohort,10%,"C distance + boundary type (w=10, in-sample)",5971,9.998,90.002,8,44,18.182,589,36,0.67
+near-line cohort,25%,A distance only,5971,25.004,74.996,8,44,18.182,1485,36,0.804
+near-line cohort,25%,"C distance + boundary type (w=3, in-sample)",5971,25.004,74.996,9,44,20.455,1484,35,0.782
+near-line cohort,50%,A distance only,5971,50.008,49.992,23,44,52.273,2963,21,0.704
+near-line cohort,50%,"C distance + boundary type (w=3, in-sample)",5971,50.008,49.992,25,44,56.818,2961,19,0.637
+near-line cohort,rule B,B non-street boundary only,5971,4.187,95.813,5,44,11.364,245,39,0.682
+near-line cohort,d_obs<7 m,A d_obs < 7 m (paper),5971,64.897,35.103,26,44,59.091,3849,18,0.859
+near-line cohort,0,none (assign all),5971,0.0,100.0,0,44,0.0,0,44,0.737
+all scored addresses,= d_obs<7 m,A distance only,12658,38.071,61.929,31,63,49.206,4788,32,0.408
+all scored addresses,= d_obs<7 m,"C distance + boundary type (w=1e+06, in-sample)",12658,38.071,61.929,36,63,57.143,4783,27,0.344
+all scored addresses,= rule B,A distance only,12658,9.425,90.575,9,63,14.286,1184,54,0.471
+all scored addresses,= rule B,"C distance + boundary type (w=10, in-sample)",12658,9.425,90.575,14,63,22.222,1179,49,0.427
+all scored addresses,10%,A distance only,12658,10.002,89.998,9,63,14.286,1257,54,0.474
+all scored addresses,10%,"C distance + boundary type (w=10, in-sample)",12658,10.002,89.998,14,63,22.222,1252,49,0.43
+all scored addresses,25%,A distance only,12658,24.996,75.004,23,63,36.508,3141,40,0.421
+all scored addresses,25%,"C distance + boundary type (w=10, in-sample)",12658,24.996,75.004,29,63,46.032,3135,34,0.358
+all scored addresses,50%,A distance only,12658,50.0,50.0,51,63,80.952,6278,12,0.19
+all scored addresses,50%,"C distance + boundary type (w=2, in-sample)",12658,50.0,50.0,54,63,85.714,6275,9,0.142
+all scored addresses,rule B,B non-street boundary only,12658,9.425,90.575,11,63,17.46,1182,52,0.454
+all scored addresses,d_obs<7 m,A d_obs < 7 m (paper),12658,38.071,61.929,31,63,49.206,4788,32,0.408
+all scored addresses,0,none (assign all),12658,0.0,100.0,0,63,0.0,0,63,0.498

@@ -1,0 +1,181 @@
+scope,held_out,workload_target_%,rule,param,n,reviewed_%,coverage_%,errors_caught,errors_total,recall_%,correct_withheld,errors_answered,risk_answered_%
+near-line cohort,"NYC, PLUTO",64.897,A distance only,tau=8.9 m,2478,66.263,33.737,0,1,0.0,1642,1,0.12
+near-line cohort,"NYC, PLUTO",64.897,C distance + boundary type,w=3,2478,66.182,33.818,0,1,0.0,1640,1,0.119
+near-line cohort,"NYC, PLUTO",64.897,"A, same held-out workload as C",,2478,66.182,33.818,0,1,0.0,1640,1,0.119
+near-line cohort,"NYC, PLUTO",64.897,B non-street boundary only,,2478,1.937,98.063,0,1,0.0,48,1,0.041
+near-line cohort,"NYC, PLUTO",64.897,none (assign all),,2478,0.0,100.0,0,1,0.0,0,1,0.04
+near-line cohort,"NYC, Address Points",64.897,A distance only,tau=6.5 m,1443,63.964,36.036,10,14,71.429,913,4,0.769
+near-line cohort,"NYC, Address Points",64.897,C distance + boundary type,w=10,1443,58.351,41.649,8,14,57.143,834,6,0.998
+near-line cohort,"NYC, Address Points",64.897,"A, same held-out workload as C",,1443,58.351,41.649,8,14,57.143,834,6,0.998
+near-line cohort,"NYC, Address Points",64.897,B non-street boundary only,,1443,2.079,97.921,0,14,0.0,30,14,0.991
+near-line cohort,"NYC, Address Points",64.897,none (assign all),,1443,0.0,100.0,0,14,0.0,0,14,0.97
+near-line cohort,"Utah, Salt Lake County",64.897,A distance only,tau=6.5 m,694,55.476,44.524,1,5,20.0,384,4,1.294
+near-line cohort,"Utah, Salt Lake County",64.897,C distance + boundary type,w=3,694,56.196,43.804,1,5,20.0,389,4,1.316
+near-line cohort,"Utah, Salt Lake County",64.897,"A, same held-out workload as C",,694,56.196,43.804,1,5,20.0,389,4,1.316
+near-line cohort,"Utah, Salt Lake County",64.897,B non-street boundary only,,694,8.069,91.931,1,5,20.0,55,4,0.627
+near-line cohort,"Utah, Salt Lake County",64.897,none (assign all),,694,0.0,100.0,0,5,0.0,0,5,0.72
+near-line cohort,"Utah, six rural counties",64.897,A distance only,tau=11.0 m,591,82.403,17.597,9,12,75.0,478,3,2.885
+near-line cohort,"Utah, six rural counties",64.897,C distance + boundary type,w=1,591,82.403,17.597,9,12,75.0,478,3,2.885
+near-line cohort,"Utah, six rural counties",64.897,"A, same held-out workload as C",,591,82.403,17.597,9,12,75.0,478,3,2.885
+near-line cohort,"Utah, six rural counties",64.897,B non-street boundary only,,591,3.723,96.277,1,12,8.333,21,11,1.933
+near-line cohort,"Utah, six rural counties",64.897,none (assign all),,591,0.0,100.0,0,12,0.0,0,12,2.03
+near-line cohort,"National, largest-coverage counties",64.897,A distance only,tau=6.5 m,529,50.095,49.905,3,5,60.0,262,2,0.758
+near-line cohort,"National, largest-coverage counties",64.897,C distance + boundary type,w=3,529,51.418,48.582,3,5,60.0,269,2,0.778
+near-line cohort,"National, largest-coverage counties",64.897,"A, same held-out workload as C",,529,51.418,48.582,3,5,60.0,269,2,0.778
+near-line cohort,"National, largest-coverage counties",64.897,B non-street boundary only,,529,14.367,85.633,2,5,40.0,74,3,0.662
+near-line cohort,"National, largest-coverage counties",64.897,none (assign all),,529,0.0,100.0,0,5,0.0,0,5,0.945
+near-line cohort,"National, smaller counties",64.897,A distance only,tau=7.9 m,236,69.492,30.508,3,7,42.857,161,4,5.556
+near-line cohort,"National, smaller counties",64.897,C distance + boundary type,w=3,236,68.644,31.356,4,7,57.143,158,3,4.054
+near-line cohort,"National, smaller counties",64.897,"A, same held-out workload as C",,236,68.644,31.356,3,7,42.857,159,4,5.405
+near-line cohort,"National, smaller counties",64.897,B non-street boundary only,,236,7.627,92.373,1,7,14.286,17,6,2.752
+near-line cohort,"National, smaller counties",64.897,none (assign all),,236,0.0,100.0,0,7,0.0,0,7,2.966
+near-line cohort,"NYC, PLUTO",25.0,A distance only,tau=6.4 m,2478,33.858,66.142,0,1,0.0,839,1,0.061
+near-line cohort,"NYC, PLUTO",25.0,C distance + boundary type,w=3,2478,33.939,66.061,0,1,0.0,841,1,0.061
+near-line cohort,"NYC, PLUTO",25.0,"A, same held-out workload as C",,2478,33.939,66.061,0,1,0.0,841,1,0.061
+near-line cohort,"NYC, PLUTO",25.0,B non-street boundary only,,2478,1.937,98.063,0,1,0.0,48,1,0.041
+near-line cohort,"NYC, PLUTO",25.0,none (assign all),,2478,0.0,100.0,0,1,0.0,0,1,0.04
+near-line cohort,"NYC, Address Points",25.0,A distance only,tau=6.4 m,1443,32.086,67.914,6,14,42.857,457,8,0.816
+near-line cohort,"NYC, Address Points",25.0,C distance + boundary type,w=3,1443,32.155,67.845,6,14,42.857,458,8,0.817
+near-line cohort,"NYC, Address Points",25.0,"A, same held-out workload as C",,1443,32.155,67.845,6,14,42.857,458,8,0.817
+near-line cohort,"NYC, Address Points",25.0,B non-street boundary only,,1443,2.079,97.921,0,14,0.0,30,14,0.991
+near-line cohort,"NYC, Address Points",25.0,none (assign all),,1443,0.0,100.0,0,14,0.0,0,14,0.97
+near-line cohort,"Utah, Salt Lake County",25.0,A distance only,tau=6.4 m,694,3.602,96.398,0,5,0.0,25,5,0.747
+near-line cohort,"Utah, Salt Lake County",25.0,C distance + boundary type,w=3,694,3.602,96.398,0,5,0.0,25,5,0.747
+near-line cohort,"Utah, Salt Lake County",25.0,"A, same held-out workload as C",,694,3.602,96.398,0,5,0.0,25,5,0.747
+near-line cohort,"Utah, Salt Lake County",25.0,B non-street boundary only,,694,8.069,91.931,1,5,20.0,55,4,0.627
+near-line cohort,"Utah, Salt Lake County",25.0,none (assign all),,694,0.0,100.0,0,5,0.0,0,5,0.72
+near-line cohort,"Utah, six rural counties",25.0,A distance only,tau=6.4 m,591,1.015,98.985,0,12,0.0,6,12,2.051
+near-line cohort,"Utah, six rural counties",25.0,C distance + boundary type,w=10,591,2.707,97.293,1,12,8.333,15,11,1.913
+near-line cohort,"Utah, six rural counties",25.0,"A, same held-out workload as C",,591,2.707,97.293,1,12,8.333,15,11,1.913
+near-line cohort,"Utah, six rural counties",25.0,B non-street boundary only,,591,3.723,96.277,1,12,8.333,21,11,1.933
+near-line cohort,"Utah, six rural counties",25.0,none (assign all),,591,0.0,100.0,0,12,0.0,0,12,2.03
+near-line cohort,"National, largest-coverage counties",25.0,A distance only,tau=6.4 m,529,17.391,82.609,2,5,40.0,90,3,0.686
+near-line cohort,"National, largest-coverage counties",25.0,C distance + boundary type,w=3,529,18.526,81.474,2,5,40.0,96,3,0.696
+near-line cohort,"National, largest-coverage counties",25.0,"A, same held-out workload as C",,529,18.526,81.474,2,5,40.0,96,3,0.696
+near-line cohort,"National, largest-coverage counties",25.0,B non-street boundary only,,529,14.367,85.633,2,5,40.0,74,3,0.662
+near-line cohort,"National, largest-coverage counties",25.0,none (assign all),,529,0.0,100.0,0,5,0.0,0,5,0.945
+near-line cohort,"National, smaller counties",25.0,A distance only,tau=6.4 m,236,26.695,73.305,0,7,0.0,63,7,4.046
+near-line cohort,"National, smaller counties",25.0,C distance + boundary type,w=3,236,28.814,71.186,1,7,14.286,67,6,3.571
+near-line cohort,"National, smaller counties",25.0,"A, same held-out workload as C",,236,28.814,71.186,0,7,0.0,68,7,4.167
+near-line cohort,"National, smaller counties",25.0,B non-street boundary only,,236,7.627,92.373,1,7,14.286,17,6,2.752
+near-line cohort,"National, smaller counties",25.0,none (assign all),,236,0.0,100.0,0,7,0.0,0,7,2.966
+near-line cohort,"NYC, PLUTO",10.0,A distance only,tau=6.3 m,2478,17.312,82.688,0,1,0.0,429,1,0.049
+near-line cohort,"NYC, PLUTO",10.0,C distance + boundary type,w=10,2478,11.299,88.701,0,1,0.0,280,1,0.045
+near-line cohort,"NYC, PLUTO",10.0,"A, same held-out workload as C",,2478,11.299,88.701,0,1,0.0,280,1,0.045
+near-line cohort,"NYC, PLUTO",10.0,B non-street boundary only,,2478,1.937,98.063,0,1,0.0,48,1,0.041
+near-line cohort,"NYC, PLUTO",10.0,none (assign all),,2478,0.0,100.0,0,1,0.0,0,1,0.04
+near-line cohort,"NYC, Address Points",10.0,A distance only,tau=6.3 m,1443,17.672,82.328,3,14,21.429,252,11,0.926
+near-line cohort,"NYC, Address Points",10.0,C distance + boundary type,w=10,1443,14.068,85.932,3,14,21.429,200,11,0.887
+near-line cohort,"NYC, Address Points",10.0,"A, same held-out workload as C",,1443,14.068,85.932,3,14,21.429,200,11,0.887
+near-line cohort,"NYC, Address Points",10.0,B non-street boundary only,,1443,2.079,97.921,0,14,0.0,30,14,0.991
+near-line cohort,"NYC, Address Points",10.0,none (assign all),,1443,0.0,100.0,0,14,0.0,0,14,0.97
+near-line cohort,"Utah, Salt Lake County",10.0,A distance only,tau=6.3 m,694,0.432,99.568,0,5,0.0,3,5,0.724
+near-line cohort,"Utah, Salt Lake County",10.0,C distance + boundary type,w=3,694,1.153,98.847,0,5,0.0,8,5,0.729
+near-line cohort,"Utah, Salt Lake County",10.0,"A, same held-out workload as C",,694,1.153,98.847,0,5,0.0,8,5,0.729
+near-line cohort,"Utah, Salt Lake County",10.0,B non-street boundary only,,694,8.069,91.931,1,5,20.0,55,4,0.627
+near-line cohort,"Utah, Salt Lake County",10.0,none (assign all),,694,0.0,100.0,0,5,0.0,0,5,0.72
+near-line cohort,"Utah, six rural counties",10.0,A distance only,tau=6.3 m,591,0.169,99.831,0,12,0.0,1,12,2.034
+near-line cohort,"Utah, six rural counties",10.0,C distance + boundary type,w=10,591,2.707,97.293,1,12,8.333,15,11,1.913
+near-line cohort,"Utah, six rural counties",10.0,"A, same held-out workload as C",,591,2.707,97.293,1,12,8.333,15,11,1.913
+near-line cohort,"Utah, six rural counties",10.0,B non-street boundary only,,591,3.723,96.277,1,12,8.333,21,11,1.933
+near-line cohort,"Utah, six rural counties",10.0,none (assign all),,591,0.0,100.0,0,12,0.0,0,12,2.03
+near-line cohort,"National, largest-coverage counties",10.0,A distance only,tau=6.3 m,529,6.805,93.195,2,5,40.0,34,3,0.609
+near-line cohort,"National, largest-coverage counties",10.0,C distance + boundary type,w=10,529,13.611,86.389,2,5,40.0,70,3,0.656
+near-line cohort,"National, largest-coverage counties",10.0,"A, same held-out workload as C",,529,13.611,86.389,2,5,40.0,70,3,0.656
+near-line cohort,"National, largest-coverage counties",10.0,B non-street boundary only,,529,14.367,85.633,2,5,40.0,74,3,0.662
+near-line cohort,"National, largest-coverage counties",10.0,none (assign all),,529,0.0,100.0,0,5,0.0,0,5,0.945
+near-line cohort,"National, smaller counties",10.0,A distance only,tau=6.3 m,236,4.237,95.763,0,7,0.0,10,7,3.097
+near-line cohort,"National, smaller counties",10.0,C distance + boundary type,w=10,236,6.78,93.22,1,7,14.286,15,6,2.727
+near-line cohort,"National, smaller counties",10.0,"A, same held-out workload as C",,236,6.78,93.22,0,7,0.0,16,7,3.182
+near-line cohort,"National, smaller counties",10.0,B non-street boundary only,,236,7.627,92.373,1,7,14.286,17,6,2.752
+near-line cohort,"National, smaller counties",10.0,none (assign all),,236,0.0,100.0,0,7,0.0,0,7,2.966
+all scored addresses,"NYC, PLUTO",38.071,A distance only,tau=20.2 m,4963,48.68,51.32,0,5,0.0,2416,5,0.196
+all scored addresses,"NYC, PLUTO",38.071,C distance + boundary type,w=1,4963,48.68,51.32,0,5,0.0,2416,5,0.196
+all scored addresses,"NYC, PLUTO",38.071,"A, same held-out workload as C",,4963,48.68,51.32,0,5,0.0,2416,5,0.196
+all scored addresses,"NYC, PLUTO",38.071,B non-street boundary only,,4963,3.002,96.998,0,5,0.0,149,5,0.104
+all scored addresses,"NYC, PLUTO",38.071,none (assign all),,4963,0.0,100.0,0,5,0.0,0,5,0.101
+all scored addresses,"NYC, Address Points",38.071,A distance only,tau=12.9 m,2894,45.992,54.008,14,21,66.667,1317,7,0.448
+all scored addresses,"NYC, Address Points",38.071,C distance + boundary type,w=3,2894,45.266,54.734,13,21,61.905,1297,8,0.505
+all scored addresses,"NYC, Address Points",38.071,"A, same held-out workload as C",,2894,45.266,54.734,14,21,66.667,1296,7,0.442
+all scored addresses,"NYC, Address Points",38.071,B non-street boundary only,,2894,2.903,97.097,1,21,4.762,83,20,0.712
+all scored addresses,"NYC, Address Points",38.071,none (assign all),,2894,0.0,100.0,0,21,0.0,0,21,0.726
+all scored addresses,"Utah, Salt Lake County",38.071,A distance only,tau=6.5 m,1376,30.741,69.259,1,9,11.111,422,8,0.839
+all scored addresses,"Utah, Salt Lake County",38.071,C distance + boundary type,w=1e+06,1376,41.352,58.648,4,9,44.444,565,5,0.62
+all scored addresses,"Utah, Salt Lake County",38.071,"A, same held-out workload as C",,1376,41.352,58.648,5,9,55.556,564,4,0.496
+all scored addresses,"Utah, Salt Lake County",38.071,B non-street boundary only,,1376,10.61,89.39,3,9,33.333,143,6,0.488
+all scored addresses,"Utah, Salt Lake County",38.071,none (assign all),,1376,0.0,100.0,0,9,0.0,0,9,0.654
+all scored addresses,"Utah, six rural counties",38.071,A distance only,tau=9.1 m,1139,43.986,56.014,10,13,76.923,491,3,0.47
+all scored addresses,"Utah, six rural counties",38.071,C distance + boundary type,w=10,1139,45.303,54.697,11,13,84.615,505,2,0.321
+all scored addresses,"Utah, six rural counties",38.071,"A, same held-out workload as C",,1139,45.303,54.697,10,13,76.923,506,3,0.482
+all scored addresses,"Utah, six rural counties",38.071,B non-street boundary only,,1139,20.808,79.192,1,13,7.692,236,12,1.33
+all scored addresses,"Utah, six rural counties",38.071,none (assign all),,1139,0.0,100.0,0,13,0.0,0,13,1.141
+all scored addresses,"National, largest-coverage counties",38.071,A distance only,tau=6.5 m,1367,20.922,79.078,4,6,66.667,282,2,0.185
+all scored addresses,"National, largest-coverage counties",38.071,C distance + boundary type,w=1e+06,1367,38.771,61.229,4,6,66.667,526,2,0.239
+all scored addresses,"National, largest-coverage counties",38.071,"A, same held-out workload as C",,1367,38.771,61.229,6,6,100.0,524,0,0.0
+all scored addresses,"National, largest-coverage counties",38.071,B non-street boundary only,,1367,20.556,79.444,3,6,50.0,278,3,0.276
+all scored addresses,"National, largest-coverage counties",38.071,none (assign all),,1367,0.0,100.0,0,6,0.0,0,6,0.439
+all scored addresses,"National, smaller counties",38.071,A distance only,tau=6.5 m,919,17.954,82.046,3,9,33.333,162,6,0.796
+all scored addresses,"National, smaller counties",38.071,C distance + boundary type,w=10,919,19.26,80.74,4,9,44.444,173,5,0.674
+all scored addresses,"National, smaller counties",38.071,"A, same held-out workload as C",,919,19.26,80.74,3,9,33.333,174,6,0.809
+all scored addresses,"National, smaller counties",38.071,B non-street boundary only,,919,32.209,67.791,3,9,33.333,293,6,0.963
+all scored addresses,"National, smaller counties",38.071,none (assign all),,919,0.0,100.0,0,9,0.0,0,9,0.979
+all scored addresses,"NYC, PLUTO",25.0,A distance only,tau=6.4 m,4963,25.468,74.532,0,5,0.0,1264,5,0.135
+all scored addresses,"NYC, PLUTO",25.0,C distance + boundary type,w=10,4963,26.295,73.705,0,5,0.0,1305,5,0.137
+all scored addresses,"NYC, PLUTO",25.0,"A, same held-out workload as C",,4963,26.295,73.705,0,5,0.0,1305,5,0.137
+all scored addresses,"NYC, PLUTO",25.0,B non-street boundary only,,4963,3.002,96.998,0,5,0.0,149,5,0.104
+all scored addresses,"NYC, PLUTO",25.0,none (assign all),,4963,0.0,100.0,0,5,0.0,0,5,0.101
+all scored addresses,"NYC, Address Points",25.0,A distance only,tau=6.4 m,2894,25.225,74.775,9,21,42.857,721,12,0.555
+all scored addresses,"NYC, Address Points",25.0,C distance + boundary type,w=10,2894,26.088,73.912,10,21,47.619,745,11,0.514
+all scored addresses,"NYC, Address Points",25.0,"A, same held-out workload as C",,2894,26.088,73.912,9,21,42.857,746,12,0.561
+all scored addresses,"NYC, Address Points",25.0,B non-street boundary only,,2894,2.903,97.097,1,21,4.762,83,20,0.712
+all scored addresses,"NYC, Address Points",25.0,none (assign all),,2894,0.0,100.0,0,21,0.0,0,21,0.726
+all scored addresses,"Utah, Salt Lake County",25.0,A distance only,tau=6.4 m,1376,29.869,70.131,1,9,11.111,410,8,0.829
+all scored addresses,"Utah, Salt Lake County",25.0,C distance + boundary type,w=10,1376,18.096,81.904,4,9,44.444,245,5,0.444
+all scored addresses,"Utah, Salt Lake County",25.0,"A, same held-out workload as C",,1376,18.096,81.904,1,9,11.111,248,8,0.71
+all scored addresses,"Utah, Salt Lake County",25.0,B non-street boundary only,,1376,10.61,89.39,3,9,33.333,143,6,0.488
+all scored addresses,"Utah, Salt Lake County",25.0,none (assign all),,1376,0.0,100.0,0,9,0.0,0,9,0.654
+all scored addresses,"Utah, six rural counties",25.0,A distance only,tau=6.4 m,1139,43.898,56.102,10,13,76.923,490,3,0.469
+all scored addresses,"Utah, six rural counties",25.0,C distance + boundary type,w=10,1139,44.074,55.926,9,13,69.231,493,4,0.628
+all scored addresses,"Utah, six rural counties",25.0,"A, same held-out workload as C",,1139,44.074,55.926,10,13,76.923,492,3,0.471
+all scored addresses,"Utah, six rural counties",25.0,B non-street boundary only,,1139,20.808,79.192,1,13,7.692,236,12,1.33
+all scored addresses,"Utah, six rural counties",25.0,none (assign all),,1139,0.0,100.0,0,13,0.0,0,13,1.141
+all scored addresses,"National, largest-coverage counties",25.0,A distance only,tau=6.4 m,1367,15.143,84.857,3,6,50.0,204,3,0.259
+all scored addresses,"National, largest-coverage counties",25.0,C distance + boundary type,w=10,1367,17.484,82.516,3,6,50.0,236,3,0.266
+all scored addresses,"National, largest-coverage counties",25.0,"A, same held-out workload as C",,1367,17.484,82.516,3,6,50.0,236,3,0.266
+all scored addresses,"National, largest-coverage counties",25.0,B non-street boundary only,,1367,20.556,79.444,3,6,50.0,278,3,0.276
+all scored addresses,"National, largest-coverage counties",25.0,none (assign all),,1367,0.0,100.0,0,6,0.0,0,6,0.439
+all scored addresses,"National, smaller counties",25.0,A distance only,tau=6.4 m,919,10.555,89.445,2,9,22.222,95,7,0.852
+all scored addresses,"National, smaller counties",25.0,C distance + boundary type,w=10,919,11.643,88.357,2,9,22.222,105,7,0.862
+all scored addresses,"National, smaller counties",25.0,"A, same held-out workload as C",,919,11.643,88.357,2,9,22.222,105,7,0.862
+all scored addresses,"National, smaller counties",25.0,B non-street boundary only,,919,32.209,67.791,3,9,33.333,293,6,0.963
+all scored addresses,"National, smaller counties",25.0,none (assign all),,919,0.0,100.0,0,9,0.0,0,9,0.979
+all scored addresses,"NYC, PLUTO",10.0,A distance only,tau=6.4 m,4963,20.371,79.629,0,5,0.0,1011,5,0.127
+all scored addresses,"NYC, PLUTO",10.0,C distance + boundary type,w=10,4963,18.134,81.866,0,5,0.0,900,5,0.123
+all scored addresses,"NYC, PLUTO",10.0,"A, same held-out workload as C",,4963,18.134,81.866,0,5,0.0,900,5,0.123
+all scored addresses,"NYC, PLUTO",10.0,B non-street boundary only,,4963,3.002,96.998,0,5,0.0,149,5,0.104
+all scored addresses,"NYC, PLUTO",10.0,none (assign all),,4963,0.0,100.0,0,5,0.0,0,5,0.101
+all scored addresses,"NYC, Address Points",10.0,A distance only,tau=6.3 m,2894,17.899,82.101,6,21,28.571,512,15,0.631
+all scored addresses,"NYC, Address Points",10.0,C distance + boundary type,w=1e+06,2894,2.903,97.097,1,21,4.762,83,20,0.712
+all scored addresses,"NYC, Address Points",10.0,"A, same held-out workload as C",,2894,2.903,97.097,4,21,19.048,80,17,0.605
+all scored addresses,"NYC, Address Points",10.0,B non-street boundary only,,2894,2.903,97.097,1,21,4.762,83,20,0.712
+all scored addresses,"NYC, Address Points",10.0,none (assign all),,2894,0.0,100.0,0,21,0.0,0,21,0.726
+all scored addresses,"Utah, Salt Lake County",10.0,A distance only,tau=6.3 m,1376,0.291,99.709,0,9,0.0,4,9,0.656
+all scored addresses,"Utah, Salt Lake County",10.0,C distance + boundary type,w=3,1376,0.727,99.273,1,9,11.111,9,8,0.586
+all scored addresses,"Utah, Salt Lake County",10.0,"A, same held-out workload as C",,1376,0.727,99.273,0,9,0.0,10,9,0.659
+all scored addresses,"Utah, Salt Lake County",10.0,B non-street boundary only,,1376,10.61,89.39,3,9,33.333,143,6,0.488
+all scored addresses,"Utah, Salt Lake County",10.0,none (assign all),,1376,0.0,100.0,0,9,0.0,0,9,0.654
+all scored addresses,"Utah, six rural counties",10.0,A distance only,tau=6.3 m,1139,0.176,99.824,0,13,0.0,2,13,1.143
+all scored addresses,"Utah, six rural counties",10.0,C distance + boundary type,w=1e+06,1139,20.896,79.104,1,13,7.692,237,12,1.332
+all scored addresses,"Utah, six rural counties",10.0,"A, same held-out workload as C",,1139,20.896,79.104,7,13,53.846,231,6,0.666
+all scored addresses,"Utah, six rural counties",10.0,B non-street boundary only,,1139,20.808,79.192,1,13,7.692,236,12,1.33
+all scored addresses,"Utah, six rural counties",10.0,none (assign all),,1139,0.0,100.0,0,13,0.0,0,13,1.141
+all scored addresses,"National, largest-coverage counties",10.0,A distance only,tau=6.3 m,1367,3.877,96.123,3,6,50.0,50,3,0.228
+all scored addresses,"National, largest-coverage counties",10.0,C distance + boundary type,w=1e+06,1367,21.434,78.566,3,6,50.0,290,3,0.279
+all scored addresses,"National, largest-coverage counties",10.0,"A, same held-out workload as C",,1367,21.434,78.566,4,6,66.667,289,2,0.186
+all scored addresses,"National, largest-coverage counties",10.0,B non-street boundary only,,1367,20.556,79.444,3,6,50.0,278,3,0.276
+all scored addresses,"National, largest-coverage counties",10.0,none (assign all),,1367,0.0,100.0,0,6,0.0,0,6,0.439
+all scored addresses,"National, smaller counties",10.0,A distance only,tau=6.3 m,919,3.156,96.844,0,9,0.0,29,9,1.011
+all scored addresses,"National, smaller counties",10.0,C distance + boundary type,w=10,919,3.917,96.083,1,9,11.111,35,8,0.906
+all scored addresses,"National, smaller counties",10.0,"A, same held-out workload as C",,919,3.917,96.083,0,9,0.0,36,9,1.019
+all scored addresses,"National, smaller counties",10.0,B non-street boundary only,,919,32.209,67.791,3,9,33.333,293,6,0.963
+all scored addresses,"National, smaller counties",10.0,none (assign all),,919,0.0,100.0,0,9,0.0,0,9,0.979
