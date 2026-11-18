@@ -101,3 +101,23 @@ Guo et al. 2017; Heuvelink 1998; Jacquez 2012; Krieger et al. 2001; Krieger et a
 Zimmerman et al. 2007; plus Census Geocoder, TIGER/Line 2025 and USDOT NAD web pages.
 Removed: Perkal 1956 ("On epsilon length") — the exact bibliographic record could not be verified online; the epsilon-band
 point-in-polygon idea is cited to Blakemore 1984 instead.
+
+## Revision after pre-submission reviews (2026-11-18)
+| Claim | Value | Source | Status |
+|---|---|---|---|
+| Table 2 (matched risk) | coverage at risk ≤0.5% / ≤0.1%, Unif/Gauss × R 20/50 | v2/T3 pooled + v2_gaussian [GA1]; CIs v2_matched [M1] | ✓ |
+| Distance rule within 0.1 pt of both overlays | all 24 model×R×target cells | [M1] / T3 / GA1 (max gap 0.08) | ✓ |
+| MC vs distance rule | at most 0.1 higher, up to 0.9 lower; 0 at Gauss 50 m 0.1% | T3 (g20 0.1%: +0.07; u50 0.1%: −0.85) | ✓ |
+| Bootstrap CI extent | ≤1.5 points; MC Gauss 50 0.1% [0, 79.0] | [M1] (g50 0.1% distance 78.4 [76.9, 79.5]) | ✓ |
+| Runtime environment | Apple M4 Pro, Python 3.11, Shapely 2.2, single process | v2_realdata_extra [R5] | ✓ |
+| UCB fold exceedances | 25–26/120 (MC 16) vs empirical 58–60 (MC 50) | v2_heldout_geography [H2] total_folds_over_target | ✓ |
+| MC UCB Gauss 50 0.1% | coverage 0 (abstains on all) | [H1] | ✓ |
+| Random-direction CIs (Table 3) | 11.5 [10.9,12.1]; 15.0 [14.1,16.0]; 11.7 [10.6,12.8]; 10.8 [9.6,12.1]; 20.2 [19.0,21.5] | v2_realdata_extra [R4] | ✓ |
+| Joint boundary × side (pooled, within 50 m) | street+same side 27/6,949 = 0.39%; street+opposite 19/84 = 22.6%; non-street+same side 6/264 = 2.3% | [R1b] | ✓ |
+| NYC overlap | 13 addresses, none misassigned | [R3] | ✓ |
+| Distance rule on real geocodes (near-line pooled) | n = 5,971, 44 wrong; d_obs < 7 m withholds 64.9%, catches 26/44; answered risk 0.86% | [R2c] | ✓ |
+| Geometry relative excess | 6–21% | v2_geometry_stress [S1] 1.061–1.207 | ✓ |
+| Berg et al. 2026 | Trans. GIS 30(2) e70225; "overlay uncertainty"; aggregation / reallocation to populated blocks | CU Boulder record + department news (Apr 2026) | ✓ |
+| Kinnee et al. 2020 | IJERPH 17(16) 5845; NYC; street-segment errors mostly toward one direction; few differences in census-area assignment | PMC7459468 | ✓ |
+| Census geocoder documentation | "coordinates calculated along an address range" (offset not stated on current page) | census.gov Geocoding Services | ✓ |
+| Cartographic file documentation | designed for small-scale thematic mapping; not for geocoding / precise area relationships | census.gov Cartographic Boundary File Description | ✓ |

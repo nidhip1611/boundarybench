@@ -65,7 +65,7 @@ near["boundary"] = np.where(near["street_boundary"], "follows a street", "not a 
 
 
 def joint(d):
-    k, n = int(d["wrong"].sum()), len(d); lo, hi = wilson(k, n) if n else (np.nan, np.nan)
+    k, n = int(d["wrong"].sum()), len(d); lo, hi = wilson(k, n) if n else (np.nan, np.nan); lo = max(lo, 0.0)
     return pd.Series({"n": n, "wrong": k, "wrong_%": 100 * k / max(n, 1), "ci": f"[{100*lo:.2f}, {100*hi:.2f}]"})
 
 
