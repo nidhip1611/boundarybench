@@ -1,0 +1,7 @@
+group,n,along_p50,cross_p50,along_p90,cross_p90,near_intersection_pct,ambiguous_pct
+"NYC, PLUTO",2478,17.86,17.77,44.5,24.2,2.7,7.95
+"NYC, Address Points",1443,15.77,8.15,52.18,15.3,3.05,10.95
+"Utah, Salt Lake County",694,17.78,18.19,57.4,33.26,7.64,56.77
+"Utah, six rural counties",591,15.54,19.18,60.37,33.44,2.88,74.45
+"National, largest-coverage counties",529,25.27,19.87,81.15,41.39,7.75,25.33
+"National, smaller counties",236,40.85,21.21,193.19,73.08,6.78,51.69

@@ -1,0 +1,431 @@
+# EXP20 held-out thresholds by fold, zero coverage separated, cluster-aware UCB | run 2026-11-18 18:12 | commit 032908d
+
+[F2] Pooled over the 5 held-out folds, per setting (status: met / missed / no answers)
+   model  R           method  target_%              rule  answered  errors     n  zero_cov_folds  folds_over  coverage_%  pooled_risk_%                      status
+gaussian  5     Disk overlay       0.1    UCB (location)     62660      24 65000               0           0     96.4000         0.0383                         met
+gaussian  5     Disk overlay       0.1 UCB (observation)     63130      46 65000               0           1     97.1231         0.0729                         met
+gaussian  5     Disk overlay       0.1         empirical     63293      64 65000               0           3     97.3738         0.1011                      missed
+gaussian  5     Disk overlay       0.5    UCB (location)     64200     236 65000               0           0     98.7692         0.3676                         met
+gaussian  5     Disk overlay       0.5 UCB (observation)     64356     281 65000               0           1     99.0092         0.4366                         met
+gaussian  5     Disk overlay       0.5         empirical     64495     327 65000               0           2     99.2231         0.5070                      missed
+gaussian  5     Disk overlay       1.0    UCB (location)     64986     516 65000               0           0     99.9785         0.7940                         met
+gaussian  5     Disk overlay       1.0 UCB (observation)     64999     522 65000               0           0     99.9985         0.8031                         met
+gaussian  5     Disk overlay       1.0         empirical     64999     522 65000               0           0     99.9985         0.8031                         met
+gaussian  5    Distance rule       0.1    UCB (location)     62658      24 65000               0           0     96.3969         0.0383                         met
+gaussian  5    Distance rule       0.1 UCB (observation)     63127      46 65000               0           1     97.1185         0.0729                         met
+gaussian  5    Distance rule       0.1         empirical     63287      64 65000               0           3     97.3646         0.1011                      missed
+gaussian  5    Distance rule       0.5    UCB (location)     64201     234 65000               0           0     98.7708         0.3645                         met
+gaussian  5    Distance rule       0.5 UCB (observation)     64365     282 65000               0           1     99.0231         0.4381                         met
+gaussian  5    Distance rule       0.5         empirical     64505     330 65000               0           2     99.2385         0.5116                      missed
+gaussian  5    Distance rule       1.0    UCB (location)     64988     518 65000               0           0     99.9815         0.7971                         met
+gaussian  5    Distance rule       1.0 UCB (observation)     65000     529 65000               0           0    100.0000         0.8138                         met
+gaussian  5    Distance rule       1.0         empirical     65000     529 65000               0           0    100.0000         0.8138                         met
+gaussian  5 Gaussian overlay       0.1    UCB (location)     62661      24 65000               0           0     96.4015         0.0383                         met
+gaussian  5 Gaussian overlay       0.1 UCB (observation)     63131      46 65000               0           1     97.1246         0.0729                         met
+gaussian  5 Gaussian overlay       0.1         empirical     63294      64 65000               0           3     97.3754         0.1011                      missed
+gaussian  5 Gaussian overlay       0.5    UCB (location)     64200     236 65000               0           0     98.7692         0.3676                         met
+gaussian  5 Gaussian overlay       0.5 UCB (observation)     64364     282 65000               0           1     99.0215         0.4381                         met
+gaussian  5 Gaussian overlay       0.5         empirical     64498     327 65000               0           2     99.2277         0.5070                      missed
+gaussian  5 Gaussian overlay       1.0    UCB (location)     64986     516 65000               0           0     99.9785         0.7940                         met
+gaussian  5 Gaussian overlay       1.0 UCB (observation)     64999     521 65000               0           0     99.9985         0.8016                         met
+gaussian  5 Gaussian overlay       1.0         empirical     64999     521 65000               0           0     99.9985         0.8016                         met
+gaussian  5      Monte Carlo       0.1    UCB (location)     62650      22 65000               0           0     96.3846         0.0351                         met
+gaussian  5      Monte Carlo       0.1 UCB (observation)     63091      43 65000               0           1     97.0631         0.0682                         met
+gaussian  5      Monte Carlo       0.1         empirical     63251      60 65000               0           3     97.3092         0.0949                         met
+gaussian  5      Monte Carlo       0.5    UCB (location)     64125     228 65000               0           0     98.6538         0.3556                         met
+gaussian  5      Monte Carlo       0.5 UCB (observation)     64317     279 65000               0           1     98.9492         0.4338                         met
+gaussian  5      Monte Carlo       0.5         empirical     64435     318 65000               0           2     99.1308         0.4935                         met
+gaussian  5      Monte Carlo       1.0    UCB (location)     64971     515 65000               0           0     99.9554         0.7927                         met
+gaussian  5      Monte Carlo       1.0 UCB (observation)     64999     527 65000               0           0     99.9985         0.8108                         met
+gaussian  5      Monte Carlo       1.0         empirical     64999     527 65000               0           0     99.9985         0.8108                         met
+gaussian 10     Disk overlay       0.1    UCB (location)     59991      21 65000               0           0     92.2938         0.0350                         met
+gaussian 10     Disk overlay       0.1 UCB (observation)     60658      46 65000               0           1     93.3200         0.0758                         met
+gaussian 10     Disk overlay       0.1         empirical     60869      62 65000               0           2     93.6446         0.1019                      missed
+gaussian 10     Disk overlay       0.5    UCB (location)     62446     221 65000               0           1     96.0708         0.3539                         met
+gaussian 10     Disk overlay       0.5 UCB (observation)     62735     275 65000               0           2     96.5154         0.4384                         met
+gaussian 10     Disk overlay       0.5         empirical     62889     313 65000               0           3     96.7523         0.4977                         met
+gaussian 10     Disk overlay       1.0    UCB (location)     63683     513 65000               0           0     97.9738         0.8056                         met
+gaussian 10     Disk overlay       1.0 UCB (observation)     63905     586 65000               0           1     98.3154         0.9170                         met
+gaussian 10     Disk overlay       1.0         empirical     64069     642 65000               0           3     98.5677         1.0020                      missed
+gaussian 10    Distance rule       0.1    UCB (location)     59986      21 65000               0           0     92.2862         0.0350                         met
+gaussian 10    Distance rule       0.1 UCB (observation)     60654      46 65000               0           1     93.3138         0.0758                         met
+gaussian 10    Distance rule       0.1         empirical     60865      62 65000               0           2     93.6385         0.1019                      missed
+gaussian 10    Distance rule       0.5    UCB (location)     62433     219 65000               0           1     96.0508         0.3508                         met
+gaussian 10    Distance rule       0.5 UCB (observation)     62732     273 65000               0           2     96.5108         0.4352                         met
+gaussian 10    Distance rule       0.5         empirical     62895     316 65000               0           3     96.7615         0.5024                      missed
+gaussian 10    Distance rule       1.0    UCB (location)     63683     513 65000               0           0     97.9738         0.8056                         met
+gaussian 10    Distance rule       1.0 UCB (observation)     63901     585 65000               0           0     98.3092         0.9155                         met
+gaussian 10    Distance rule       1.0         empirical     64056     637 65000               0           3     98.5477         0.9944                         met
+gaussian 10 Gaussian overlay       0.1    UCB (location)     59986      21 65000               0           0     92.2862         0.0350                         met
+gaussian 10 Gaussian overlay       0.1 UCB (observation)     60650      46 65000               0           1     93.3077         0.0758                         met
+gaussian 10 Gaussian overlay       0.1         empirical     60867      62 65000               0           2     93.6415         0.1019                      missed
+gaussian 10 Gaussian overlay       0.5    UCB (location)     62436     220 65000               0           1     96.0554         0.3524                         met
+gaussian 10 Gaussian overlay       0.5 UCB (observation)     62735     273 65000               0           2     96.5154         0.4352                         met
+gaussian 10 Gaussian overlay       0.5         empirical     62893     314 65000               0           3     96.7585         0.4993                         met
+gaussian 10 Gaussian overlay       1.0    UCB (location)     63681     513 65000               0           0     97.9708         0.8056                         met
+gaussian 10 Gaussian overlay       1.0 UCB (observation)     63907     588 65000               0           1     98.3185         0.9201                         met
+gaussian 10 Gaussian overlay       1.0         empirical     64070     643 65000               0           3     98.5692         1.0036                      missed
+gaussian 10      Monte Carlo       0.1    UCB (location)     59965      20 65000               0           0     92.2538         0.0334                         met
+gaussian 10      Monte Carlo       0.1 UCB (observation)     60379      43 65000               0           1     92.8908         0.0712                         met
+gaussian 10      Monte Carlo       0.1         empirical     60770      55 65000               0           2     93.4923         0.0905                         met
+gaussian 10      Monte Carlo       0.5    UCB (location)     62306     219 65000               0           0     95.8554         0.3515                         met
+gaussian 10      Monte Carlo       0.5 UCB (observation)     62605     265 65000               0           1     96.3154         0.4233                         met
+gaussian 10      Monte Carlo       0.5         empirical     62772     305 65000               0           3     96.5723         0.4859                         met
+gaussian 10      Monte Carlo       1.0    UCB (location)     63563     501 65000               0           0     97.7892         0.7882                         met
+gaussian 10      Monte Carlo       1.0 UCB (observation)     63782     564 65000               0           0     98.1262         0.8843                         met
+gaussian 10      Monte Carlo       1.0         empirical     64010     630 65000               0           3     98.4769         0.9842                         met
+gaussian 20     Disk overlay       0.1    UCB (location)     56907      21 65000               0           0     87.5492         0.0369                         met
+gaussian 20     Disk overlay       0.1 UCB (observation)     57385      42 65000               0           1     88.2846         0.0732                         met
+gaussian 20     Disk overlay       0.1         empirical     57681      60 65000               0           3     88.7400         0.1040                      missed
+gaussian 20     Disk overlay       0.5    UCB (location)     59456     216 65000               0           0     91.4708         0.3633                         met
+gaussian 20     Disk overlay       0.5 UCB (observation)     59880     275 65000               0           2     92.1231         0.4593                         met
+gaussian 20     Disk overlay       0.5         empirical     60107     302 65000               0           2     92.4723         0.5024                      missed
+gaussian 20     Disk overlay       1.0    UCB (location)     61181     497 65000               0           0     94.1246         0.8123                         met
+gaussian 20     Disk overlay       1.0 UCB (observation)     61440     571 65000               0           2     94.5231         0.9294                         met
+gaussian 20     Disk overlay       1.0         empirical     61633     622 65000               0           2     94.8200         1.0092                      missed
+gaussian 20    Distance rule       0.1    UCB (location)     56903      21 65000               0           0     87.5431         0.0369                         met
+gaussian 20    Distance rule       0.1 UCB (observation)     57416      43 65000               0           1     88.3323         0.0749                         met
+gaussian 20    Distance rule       0.1         empirical     57704      61 65000               0           2     88.7754         0.1057                      missed
+gaussian 20    Distance rule       0.5    UCB (location)     59483     219 65000               0           1     91.5123         0.3682                         met
+gaussian 20    Distance rule       0.5 UCB (observation)     59888     270 65000               0           2     92.1354         0.4508                         met
+gaussian 20    Distance rule       0.5         empirical     60133     304 65000               0           2     92.5123         0.5055                      missed
+gaussian 20    Distance rule       1.0    UCB (location)     61167     497 65000               0           0     94.1031         0.8125                         met
+gaussian 20    Distance rule       1.0 UCB (observation)     61432     567 65000               0           2     94.5108         0.9230                         met
+gaussian 20    Distance rule       1.0         empirical     61632     621 65000               0           2     94.8185         1.0076                      missed
+gaussian 20 Gaussian overlay       0.1    UCB (location)     56911      21 65000               0           0     87.5554         0.0369                         met
+gaussian 20 Gaussian overlay       0.1 UCB (observation)     57378      43 65000               0           1     88.2738         0.0749                         met
+gaussian 20 Gaussian overlay       0.1         empirical     57681      60 65000               0           3     88.7400         0.1040                      missed
+gaussian 20 Gaussian overlay       0.5    UCB (location)     59467     218 65000               0           0     91.4877         0.3666                         met
+gaussian 20 Gaussian overlay       0.5 UCB (observation)     59873     271 65000               0           2     92.1123         0.4526                         met
+gaussian 20 Gaussian overlay       0.5         empirical     60117     303 65000               0           2     92.4877         0.5040                      missed
+gaussian 20 Gaussian overlay       1.0    UCB (location)     61182     496 65000               0           0     94.1262         0.8107                         met
+gaussian 20 Gaussian overlay       1.0 UCB (observation)     61418     564 65000               0           2     94.4892         0.9183                         met
+gaussian 20 Gaussian overlay       1.0         empirical     61630     622 65000               0           2     94.8154         1.0092                      missed
+gaussian 20      Monte Carlo       0.1    UCB (location)     22439      13 65000               3           0     34.5215         0.0579                         met
+gaussian 20      Monte Carlo       0.1 UCB (observation)     57366      42 65000               0           2     88.2554         0.0732                         met
+gaussian 20      Monte Carlo       0.1         empirical     57671      51 65000               0           3     88.7246         0.0884                         met
+gaussian 20      Monte Carlo       0.5    UCB (location)     59387     205 65000               0           0     91.3646         0.3452                         met
+gaussian 20      Monte Carlo       0.5 UCB (observation)     59680     254 65000               0           1     91.8154         0.4256                         met
+gaussian 20      Monte Carlo       0.5         empirical     60002     293 65000               0           2     92.3108         0.4883                         met
+gaussian 20      Monte Carlo       1.0    UCB (location)     60977     474 65000               0           0     93.8108         0.7773                         met
+gaussian 20      Monte Carlo       1.0 UCB (observation)     61284     548 65000               0           1     94.2831         0.8942                         met
+gaussian 20      Monte Carlo       1.0         empirical     61469     595 65000               0           2     94.5677         0.9680                         met
+gaussian 50     Disk overlay       0.1    UCB (location)         0       0 65000               5           0      0.0000            NaN no answers (risk undefined)
+gaussian 50     Disk overlay       0.1 UCB (observation)     50056      35 65000               0           0     77.0092         0.0699                         met
+gaussian 50     Disk overlay       0.1         empirical     50947      52 65000               0           2     78.3800         0.1021                      missed
+gaussian 50     Disk overlay       0.5    UCB (location)     53667     191 65000               0           0     82.5646         0.3559                         met
+gaussian 50     Disk overlay       0.5 UCB (observation)     54147     237 65000               0           2     83.3031         0.4377                         met
+gaussian 50     Disk overlay       0.5         empirical     54531     280 65000               0           2     83.8938         0.5135                      missed
+gaussian 50     Disk overlay       1.0    UCB (location)     55881     448 65000               0           0     85.9708         0.8017                         met
+gaussian 50     Disk overlay       1.0 UCB (observation)     56392     515 65000               0           0     86.7569         0.9133                         met
+gaussian 50     Disk overlay       1.0         empirical     56769     566 65000               0           3     87.3369         0.9970                         met
+gaussian 50    Distance rule       0.1    UCB (location)     48795      13 65000               0           0     75.0692         0.0266                         met
+gaussian 50    Distance rule       0.1 UCB (observation)     50048      35 65000               0           0     76.9969         0.0699                         met
+gaussian 50    Distance rule       0.1         empirical     50955      51 65000               0           2     78.3923         0.1001                      missed
+gaussian 50    Distance rule       0.5    UCB (location)     53622     188 65000               0           0     82.4954         0.3506                         met
+gaussian 50    Distance rule       0.5 UCB (observation)     54122     239 65000               0           2     83.2646         0.4416                         met
+gaussian 50    Distance rule       0.5         empirical     54516     277 65000               0           2     83.8708         0.5081                      missed
+gaussian 50    Distance rule       1.0    UCB (location)     55815     445 65000               0           0     85.8692         0.7973                         met
+gaussian 50    Distance rule       1.0 UCB (observation)     56390     517 65000               0           1     86.7538         0.9168                         met
+gaussian 50    Distance rule       1.0         empirical     56703     564 65000               0           3     87.2354         0.9947                         met
+gaussian 50 Gaussian overlay       0.1    UCB (location)     48954      14 65000               0           0     75.3138         0.0286                         met
+gaussian 50 Gaussian overlay       0.1 UCB (observation)     50039      36 65000               0           0     76.9831         0.0719                         met
+gaussian 50 Gaussian overlay       0.1         empirical     50957      52 65000               0           2     78.3954         0.1020                      missed
+gaussian 50 Gaussian overlay       0.5    UCB (location)     53660     189 65000               0           0     82.5538         0.3522                         met
+gaussian 50 Gaussian overlay       0.5 UCB (observation)     54168     239 65000               0           2     83.3354         0.4412                         met
+gaussian 50 Gaussian overlay       0.5         empirical     54525     282 65000               0           2     83.8846         0.5172                      missed
+gaussian 50 Gaussian overlay       1.0    UCB (location)     55861     442 65000               0           0     85.9400         0.7912                         met
+gaussian 50 Gaussian overlay       1.0 UCB (observation)     56432     520 65000               0           1     86.8185         0.9215                         met
+gaussian 50 Gaussian overlay       1.0         empirical     56748     565 65000               0           3     87.3046         0.9956                         met
+gaussian 50      Monte Carlo       0.1    UCB (location)         0       0 65000               5           0      0.0000            NaN no answers (risk undefined)
+gaussian 50      Monte Carlo       0.1 UCB (observation)         0       0 65000               5           0      0.0000            NaN no answers (risk undefined)
+gaussian 50      Monte Carlo       0.1         empirical     15324      20 65000               4           1     23.5754         0.1305                      missed
+gaussian 50      Monte Carlo       0.5    UCB (location)     53179     174 65000               0           0     81.8138         0.3272                         met
+gaussian 50      Monte Carlo       0.5 UCB (observation)     53766     220 65000               0           0     82.7169         0.4092                         met
+gaussian 50      Monte Carlo       0.5         empirical     54181     262 65000               0           2     83.3554         0.4836                         met
+gaussian 50      Monte Carlo       1.0    UCB (location)     55596     421 65000               0           0     85.5323         0.7572                         met
+gaussian 50      Monte Carlo       1.0 UCB (observation)     56150     494 65000               0           0     86.3846         0.8798                         met
+gaussian 50      Monte Carlo       1.0         empirical     56580     551 65000               0           2     87.0462         0.9738                         met
+ uniform  5     Disk overlay       0.1    UCB (location)     62647      22 65000               0           0     96.3800         0.0351                         met
+ uniform  5     Disk overlay       0.1 UCB (observation)     62848      45 65000               0           0     96.6892         0.0716                         met
+ uniform  5     Disk overlay       0.1         empirical     62952      63 65000               0           4     96.8492         0.1001                      missed
+ uniform  5     Disk overlay       0.5    UCB (location)     63803     230 65000               0           0     98.1585         0.3605                         met
+ uniform  5     Disk overlay       0.5 UCB (observation)     64033     281 65000               0           1     98.5123         0.4388                         met
+ uniform  5     Disk overlay       0.5         empirical     64161     316 65000               0           2     98.7092         0.4925                         met
+ uniform  5     Disk overlay       1.0    UCB (location)     64694     526 65000               0           0     99.5292         0.8131                         met
+ uniform  5     Disk overlay       1.0 UCB (observation)     64885     598 65000               0           2     99.8231         0.9216                         met
+ uniform  5     Disk overlay       1.0         empirical     64977     644 65000               0           3     99.9646         0.9911                         met
+ uniform  5    Distance rule       0.1    UCB (location)     62666      25 65000               0           0     96.4092         0.0399                         met
+ uniform  5    Distance rule       0.1 UCB (observation)     62845      45 65000               0           0     96.6846         0.0716                         met
+ uniform  5    Distance rule       0.1         empirical     62952      64 65000               0           4     96.8492         0.1017                      missed
+ uniform  5    Distance rule       0.5    UCB (location)     63801     231 65000               0           0     98.1554         0.3621                         met
+ uniform  5    Distance rule       0.5 UCB (observation)     64034     282 65000               0           1     98.5138         0.4404                         met
+ uniform  5    Distance rule       0.5         empirical     64159     315 65000               0           2     98.7062         0.4910                         met
+ uniform  5    Distance rule       1.0    UCB (location)     64688     526 65000               0           0     99.5200         0.8131                         met
+ uniform  5    Distance rule       1.0 UCB (observation)     64876     599 65000               0           2     99.8092         0.9233                         met
+ uniform  5    Distance rule       1.0         empirical     64979     649 65000               0           2     99.9677         0.9988                         met
+ uniform  5 Gaussian overlay       0.1    UCB (location)     62646      22 65000               0           0     96.3785         0.0351                         met
+ uniform  5 Gaussian overlay       0.1 UCB (observation)     62848      45 65000               0           0     96.6892         0.0716                         met
+ uniform  5 Gaussian overlay       0.1         empirical     62952      63 65000               0           4     96.8492         0.1001                      missed
+ uniform  5 Gaussian overlay       0.5    UCB (location)     63800     230 65000               0           0     98.1538         0.3605                         met
+ uniform  5 Gaussian overlay       0.5 UCB (observation)     64032     280 65000               0           1     98.5108         0.4373                         met
+ uniform  5 Gaussian overlay       0.5         empirical     64159     316 65000               0           2     98.7062         0.4925                         met
+ uniform  5 Gaussian overlay       1.0    UCB (location)     64694     527 65000               0           0     99.5292         0.8146                         met
+ uniform  5 Gaussian overlay       1.0 UCB (observation)     64883     599 65000               0           2     99.8200         0.9232                         met
+ uniform  5 Gaussian overlay       1.0         empirical     64980     646 65000               0           2     99.9692         0.9942                         met
+ uniform  5      Monte Carlo       0.1    UCB (location)     62617      22 65000               0           0     96.3338         0.0351                         met
+ uniform  5      Monte Carlo       0.1 UCB (observation)     62805      42 65000               0           0     96.6231         0.0669                         met
+ uniform  5      Monte Carlo       0.1         empirical     62967      64 65000               0           3     96.8723         0.1016                      missed
+ uniform  5      Monte Carlo       0.5    UCB (location)     63808     226 65000               0           0     98.1662         0.3542                         met
+ uniform  5      Monte Carlo       0.5 UCB (observation)     63968     272 65000               0           1     98.4123         0.4252                         met
+ uniform  5      Monte Carlo       0.5         empirical     64105     317 65000               0           3     98.6231         0.4945                         met
+ uniform  5      Monte Carlo       1.0    UCB (location)     64672     517 65000               0           0     99.4954         0.7994                         met
+ uniform  5      Monte Carlo       1.0 UCB (observation)     64820     580 65000               0           1     99.7231         0.8948                         met
+ uniform  5      Monte Carlo       1.0         empirical     64967     650 65000               0           3     99.9492         1.0005                      missed
+ uniform 10     Disk overlay       0.1    UCB (location)     60276      22 65000               0           0     92.7323         0.0365                         met
+ uniform 10     Disk overlay       0.1 UCB (observation)     60616      47 65000               0           2     93.2554         0.0775                         met
+ uniform 10     Disk overlay       0.1         empirical     60832      63 65000               0           2     93.5877         0.1036                      missed
+ uniform 10     Disk overlay       0.5    UCB (location)     61894     226 65000               0           1     95.2215         0.3651                         met
+ uniform 10     Disk overlay       0.5 UCB (observation)     62125     273 65000               0           1     95.5769         0.4394                         met
+ uniform 10     Disk overlay       0.5         empirical     62300     312 65000               0           3     95.8462         0.5008                      missed
+ uniform 10     Disk overlay       1.0    UCB (location)     62997     505 65000               0           0     96.9185         0.8016                         met
+ uniform 10     Disk overlay       1.0 UCB (observation)     63201     583 65000               0           1     97.2323         0.9225                         met
+ uniform 10     Disk overlay       1.0         empirical     63336     631 65000               0           3     97.4400         0.9963                         met
+ uniform 10    Distance rule       0.1    UCB (location)     60276      22 65000               0           0     92.7323         0.0365                         met
+ uniform 10    Distance rule       0.1 UCB (observation)     60605      47 65000               0           2     93.2385         0.0776                         met
+ uniform 10    Distance rule       0.1         empirical     60830      63 65000               0           2     93.5846         0.1036                      missed
+ uniform 10    Distance rule       0.5    UCB (location)     61892     227 65000               0           1     95.2185         0.3668                         met
+ uniform 10    Distance rule       0.5 UCB (observation)     62125     272 65000               0           1     95.5769         0.4378                         met
+ uniform 10    Distance rule       0.5         empirical     62301     313 65000               0           3     95.8477         0.5024                      missed
+ uniform 10    Distance rule       1.0    UCB (location)     63008     508 65000               0           0     96.9354         0.8062                         met
+ uniform 10    Distance rule       1.0 UCB (observation)     63203     582 65000               0           2     97.2354         0.9208                         met
+ uniform 10    Distance rule       1.0         empirical     63343     634 65000               0           3     97.4508         1.0009                      missed
+ uniform 10 Gaussian overlay       0.1    UCB (location)     60276      23 65000               0           0     92.7323         0.0382                         met
+ uniform 10 Gaussian overlay       0.1 UCB (observation)     60615      46 65000               0           2     93.2538         0.0759                         met
+ uniform 10 Gaussian overlay       0.1         empirical     60832      63 65000               0           2     93.5877         0.1036                      missed
+ uniform 10 Gaussian overlay       0.5    UCB (location)     61893     226 65000               0           1     95.2200         0.3651                         met
+ uniform 10 Gaussian overlay       0.5 UCB (observation)     62126     272 65000               0           1     95.5785         0.4378                         met
+ uniform 10 Gaussian overlay       0.5         empirical     62302     313 65000               0           3     95.8492         0.5024                      missed
+ uniform 10 Gaussian overlay       1.0    UCB (location)     63007     509 65000               0           0     96.9338         0.8078                         met
+ uniform 10 Gaussian overlay       1.0 UCB (observation)     63200     582 65000               0           2     97.2308         0.9209                         met
+ uniform 10 Gaussian overlay       1.0         empirical     63344     635 65000               0           3     97.4523         1.0025                      missed
+ uniform 10      Monte Carlo       0.1    UCB (location)     60234      19 65000               0           0     92.6677         0.0315                         met
+ uniform 10      Monte Carlo       0.1 UCB (observation)     60460      38 65000               0           2     93.0154         0.0629                         met
+ uniform 10      Monte Carlo       0.1         empirical     60706      57 65000               0           2     93.3938         0.0939                         met
+ uniform 10      Monte Carlo       0.5    UCB (location)     61847     218 65000               0           0     95.1492         0.3525                         met
+ uniform 10      Monte Carlo       0.5 UCB (observation)     62056     264 65000               0           2     95.4708         0.4254                         met
+ uniform 10      Monte Carlo       0.5         empirical     62205     297 65000               0           3     95.7000         0.4775                         met
+ uniform 10      Monte Carlo       1.0    UCB (location)     62928     502 65000               0           0     96.8123         0.7977                         met
+ uniform 10      Monte Carlo       1.0 UCB (observation)     63112     558 65000               0           0     97.0954         0.8841                         met
+ uniform 10      Monte Carlo       1.0         empirical     63258     621 65000               0           2     97.3200         0.9817                         met
+ uniform 20     Disk overlay       0.1    UCB (location)     57669      18 65000               0           0     88.7215         0.0312                         met
+ uniform 20     Disk overlay       0.1 UCB (observation)     57961      41 65000               0           0     89.1708         0.0707                         met
+ uniform 20     Disk overlay       0.1         empirical     58183      61 65000               0           3     89.5123         0.1048                      missed
+ uniform 20     Disk overlay       0.5    UCB (location)     59241     213 65000               0           0     91.1400         0.3595                         met
+ uniform 20     Disk overlay       0.5 UCB (observation)     59458     261 65000               0           1     91.4738         0.4390                         met
+ uniform 20     Disk overlay       0.5         empirical     59607     302 65000               0           3     91.7031         0.5067                      missed
+ uniform 20     Disk overlay       1.0    UCB (location)     60304     487 65000               0           0     92.7754         0.8076                         met
+ uniform 20     Disk overlay       1.0 UCB (observation)     60516     554 65000               0           2     93.1015         0.9155                         met
+ uniform 20     Disk overlay       1.0         empirical     60703     611 65000               0           2     93.3892         1.0065                      missed
+ uniform 20    Distance rule       0.1    UCB (location)     57653      17 65000               0           0     88.6969         0.0295                         met
+ uniform 20    Distance rule       0.1 UCB (observation)     57941      40 65000               0           0     89.1400         0.0690                         met
+ uniform 20    Distance rule       0.1         empirical     58176      60 65000               0           3     89.5015         0.1031                      missed
+ uniform 20    Distance rule       0.5    UCB (location)     59204     213 65000               0           0     91.0831         0.3598                         met
+ uniform 20    Distance rule       0.5 UCB (observation)     59441     261 65000               0           1     91.4477         0.4391                         met
+ uniform 20    Distance rule       0.5         empirical     59603     302 65000               0           3     91.6969         0.5067                      missed
+ uniform 20    Distance rule       1.0    UCB (location)     60280     485 65000               0           0     92.7385         0.8046                         met
+ uniform 20    Distance rule       1.0 UCB (observation)     60500     553 65000               0           2     93.0769         0.9140                         met
+ uniform 20    Distance rule       1.0         empirical     60697     613 65000               0           2     93.3800         1.0099                      missed
+ uniform 20 Gaussian overlay       0.1    UCB (location)     57659      18 65000               0           0     88.7062         0.0312                         met
+ uniform 20 Gaussian overlay       0.1 UCB (observation)     57959      41 65000               0           0     89.1677         0.0707                         met
+ uniform 20 Gaussian overlay       0.1         empirical     58181      61 65000               0           3     89.5092         0.1048                      missed
+ uniform 20 Gaussian overlay       0.5    UCB (location)     59226     213 65000               0           0     91.1169         0.3596                         met
+ uniform 20 Gaussian overlay       0.5 UCB (observation)     59457     260 65000               0           1     91.4723         0.4373                         met
+ uniform 20 Gaussian overlay       0.5         empirical     59606     301 65000               0           3     91.7015         0.5050                      missed
+ uniform 20 Gaussian overlay       1.0    UCB (location)     60290     489 65000               0           0     92.7538         0.8111                         met
+ uniform 20 Gaussian overlay       1.0 UCB (observation)     60503     552 65000               0           2     93.0815         0.9124                         met
+ uniform 20 Gaussian overlay       1.0         empirical     60699     611 65000               0           2     93.3831         1.0066                      missed
+ uniform 20      Monte Carlo       0.1    UCB (location)     57510      19 65000               0           0     88.4769         0.0330                         met
+ uniform 20      Monte Carlo       0.1 UCB (observation)     57839      36 65000               0           0     88.9831         0.0622                         met
+ uniform 20      Monte Carlo       0.1         empirical     58012      51 65000               0           2     89.2492         0.0879                         met
+ uniform 20      Monte Carlo       0.5    UCB (location)     59078     198 65000               0           0     90.8892         0.3352                         met
+ uniform 20      Monte Carlo       0.5 UCB (observation)     59334     244 65000               0           0     91.2831         0.4112                         met
+ uniform 20      Monte Carlo       0.5         empirical     59607     292 65000               0           2     91.7031         0.4899                         met
+ uniform 20      Monte Carlo       1.0    UCB (location)     60226     463 65000               0           0     92.6554         0.7688                         met
+ uniform 20      Monte Carlo       1.0 UCB (observation)     60497     536 65000               0           1     93.0723         0.8860                         met
+ uniform 20      Monte Carlo       1.0         empirical     60647     579 65000               0           2     93.3031         0.9547                         met
+ uniform 50     Disk overlay       0.1    UCB (location)     51080      16 65000               0           0     78.5846         0.0313                         met
+ uniform 50     Disk overlay       0.1 UCB (observation)     51516      37 65000               0           1     79.2554         0.0718                         met
+ uniform 50     Disk overlay       0.1         empirical     51780      52 65000               0           2     79.6615         0.1004                      missed
+ uniform 50     Disk overlay       0.5    UCB (location)     52971     183 65000               0           0     81.4938         0.3455                         met
+ uniform 50     Disk overlay       0.5 UCB (observation)     53250     235 65000               0           1     81.9231         0.4413                         met
+ uniform 50     Disk overlay       0.5         empirical     53495     270 65000               0           3     82.3000         0.5047                      missed
+ uniform 50     Disk overlay       1.0    UCB (location)     54455     430 65000               0           0     83.7769         0.7896                         met
+ uniform 50     Disk overlay       1.0 UCB (observation)     54856     497 65000               0           0     84.3938         0.9060                         met
+ uniform 50     Disk overlay       1.0         empirical     55096     550 65000               0           3     84.7631         0.9983                         met
+ uniform 50    Distance rule       0.1    UCB (location)     51043      16 65000               0           0     78.5277         0.0313                         met
+ uniform 50    Distance rule       0.1 UCB (observation)     51464      36 65000               0           0     79.1754         0.0700                         met
+ uniform 50    Distance rule       0.1         empirical     51723      50 65000               0           1     79.5738         0.0967                         met
+ uniform 50    Distance rule       0.5    UCB (location)     52938     188 65000               0           0     81.4431         0.3551                         met
+ uniform 50    Distance rule       0.5 UCB (observation)     53199     235 65000               0           1     81.8446         0.4417                         met
+ uniform 50    Distance rule       0.5         empirical     53444     268 65000               0           3     82.2215         0.5015                      missed
+ uniform 50    Distance rule       1.0    UCB (location)     54375     427 65000               0           0     83.6538         0.7853                         met
+ uniform 50    Distance rule       1.0 UCB (observation)     54764     495 65000               0           0     84.2523         0.9039                         met
+ uniform 50    Distance rule       1.0         empirical     55044     551 65000               0           4     84.6831         1.0010                      missed
+ uniform 50 Gaussian overlay       0.1    UCB (location)     51071      16 65000               0           0     78.5708         0.0313                         met
+ uniform 50 Gaussian overlay       0.1 UCB (observation)     51508      38 65000               0           1     79.2431         0.0738                         met
+ uniform 50 Gaussian overlay       0.1         empirical     51775      51 65000               0           2     79.6538         0.0985                         met
+ uniform 50 Gaussian overlay       0.5    UCB (location)     52962     185 65000               0           0     81.4800         0.3493                         met
+ uniform 50 Gaussian overlay       0.5 UCB (observation)     53243     234 65000               0           0     81.9123         0.4395                         met
+ uniform 50 Gaussian overlay       0.5         empirical     53484     267 65000               0           3     82.2831         0.4992                         met
+ uniform 50 Gaussian overlay       1.0    UCB (location)     54440     432 65000               0           0     83.7538         0.7935                         met
+ uniform 50 Gaussian overlay       1.0 UCB (observation)     54845     497 65000               0           0     84.3769         0.9062                         met
+ uniform 50 Gaussian overlay       1.0         empirical     55111     554 65000               0           4     84.7862         1.0052                      missed
+ uniform 50      Monte Carlo       0.1    UCB (location)     50690      12 65000               0           0     77.9846         0.0237                         met
+ uniform 50      Monte Carlo       0.1 UCB (observation)     51186      32 65000               0           0     78.7477         0.0625                         met
+ uniform 50      Monte Carlo       0.1         empirical     51326      42 65000               0           1     78.9631         0.0818                         met
+ uniform 50      Monte Carlo       0.5    UCB (location)     52735     172 65000               0           0     81.1308         0.3262                         met
+ uniform 50      Monte Carlo       0.5 UCB (observation)     53101     221 65000               0           0     81.6938         0.4162                         met
+ uniform 50      Monte Carlo       0.5         empirical     53101     221 65000               0           0     81.6938         0.4162                         met
+ uniform 50      Monte Carlo       1.0    UCB (location)     54089     373 65000               0           0     83.2138         0.6896                         met
+ uniform 50      Monte Carlo       1.0 UCB (observation)     54561     473 65000               0           1     83.9400         0.8669                         met
+ uniform 50      Monte Carlo       1.0         empirical     54874     535 65000               0           2     84.4215         0.9750                         met
+
+[F3] Summary over 8 error settings x 3 targets. 'met_of_answered' excludes settings with no answers;
+     folds_over_target counts fold-setting cases (of fold_cases) whose held-out risk exceeds the target
+          method              rule  settings  no_answers met_of_answered  fold_cases  zero_coverage_fold_cases  folds_over_target  mean_coverage_%
+    Disk overlay    UCB (location)        24           1           23/23         120                         5                  2            88.27
+    Disk overlay UCB (observation)        24           0           24/24         120                         0                 25            91.95
+    Disk overlay         empirical        24           0            7/24         120                         0                 60            92.29
+   Distance rule    UCB (location)        24           0           24/24         120                         0                  3            91.38
+   Distance rule UCB (observation)        24           0           24/24         120                         0                 25            91.93
+   Distance rule         empirical        24           0            6/24         120                         0                 58            92.28
+Gaussian overlay    UCB (location)        24           0           24/24         120                         0                  2            91.41
+Gaussian overlay UCB (observation)        24           0           24/24         120                         0                 26            91.94
+Gaussian overlay         empirical        24           0            7/24         120                         0                 60            92.29
+     Monte Carlo    UCB (location)        24           1           23/23         120                         8                  0            85.87
+     Monte Carlo UCB (observation)        24           1           23/23         120                         5                 16            88.54
+     Monte Carlo         empirical        24           0           21/24         120                         4                 50            89.82
+
+[F1 excerpt] Fold-level results at R = 50 m, target 0.1% (full table: F1_folds.csv)
+   model  R           method  target_%              rule  fold  n_test  answered  errors  coverage_%  risk_%  over
+gaussian 50    Distance rule       0.1         empirical     0   19625     15426      18      78.604   0.117     1
+gaussian 50    Distance rule       0.1         empirical     1   13415     10544      10      78.599   0.095     0
+gaussian 50    Distance rule       0.1         empirical     2   10795      8458       8      78.351   0.095     0
+gaussian 50    Distance rule       0.1         empirical     3   12275      9591      11      78.134   0.115     1
+gaussian 50    Distance rule       0.1         empirical     4    8890      6936       4      78.020   0.058     0
+gaussian 50    Distance rule       0.1 UCB (observation)     0   19625     15150      13      77.198   0.086     0
+gaussian 50    Distance rule       0.1 UCB (observation)     1   13415     10388       9      77.436   0.087     0
+gaussian 50    Distance rule       0.1 UCB (observation)     2   10795      8298       5      76.869   0.060     0
+gaussian 50    Distance rule       0.1 UCB (observation)     3   12275      9403       6      76.603   0.064     0
+gaussian 50    Distance rule       0.1 UCB (observation)     4    8890      6809       2      76.592   0.029     0
+gaussian 50    Distance rule       0.1    UCB (location)     0   19625     14694       4      74.874   0.027     0
+gaussian 50    Distance rule       0.1    UCB (location)     1   13415     10121       3      75.445   0.030     0
+gaussian 50    Distance rule       0.1    UCB (location)     2   10795      8133       3      75.340   0.037     0
+gaussian 50    Distance rule       0.1    UCB (location)     3   12275      9171       2      74.713   0.022     0
+gaussian 50    Distance rule       0.1    UCB (location)     4    8890      6676       1      75.096   0.015     0
+gaussian 50      Monte Carlo       0.1         empirical     0   19625     15324      20      78.084   0.130     1
+gaussian 50      Monte Carlo       0.1         empirical     1   13415         0       0       0.000     NaN     0
+gaussian 50      Monte Carlo       0.1         empirical     2   10795         0       0       0.000     NaN     0
+gaussian 50      Monte Carlo       0.1         empirical     3   12275         0       0       0.000     NaN     0
+gaussian 50      Monte Carlo       0.1         empirical     4    8890         0       0       0.000     NaN     0
+gaussian 50      Monte Carlo       0.1 UCB (observation)     0   19625         0       0       0.000     NaN     0
+gaussian 50      Monte Carlo       0.1 UCB (observation)     1   13415         0       0       0.000     NaN     0
+gaussian 50      Monte Carlo       0.1 UCB (observation)     2   10795         0       0       0.000     NaN     0
+gaussian 50      Monte Carlo       0.1 UCB (observation)     3   12275         0       0       0.000     NaN     0
+gaussian 50      Monte Carlo       0.1 UCB (observation)     4    8890         0       0       0.000     NaN     0
+gaussian 50      Monte Carlo       0.1    UCB (location)     0   19625         0       0       0.000     NaN     0
+gaussian 50      Monte Carlo       0.1    UCB (location)     1   13415         0       0       0.000     NaN     0
+gaussian 50      Monte Carlo       0.1    UCB (location)     2   10795         0       0       0.000     NaN     0
+gaussian 50      Monte Carlo       0.1    UCB (location)     3   12275         0       0       0.000     NaN     0
+gaussian 50      Monte Carlo       0.1    UCB (location)     4    8890         0       0       0.000     NaN     0
+gaussian 50     Disk overlay       0.1         empirical     0   19625     15432      18      78.634   0.117     1
+gaussian 50     Disk overlay       0.1         empirical     1   13415     10534      10      78.524   0.095     0
+gaussian 50     Disk overlay       0.1         empirical     2   10795      8461       8      78.379   0.095     0
+gaussian 50     Disk overlay       0.1         empirical     3   12275      9596      12      78.175   0.125     1
+gaussian 50     Disk overlay       0.1         empirical     4    8890      6924       4      77.885   0.058     0
+gaussian 50     Disk overlay       0.1 UCB (observation)     0   19625     15156      13      77.228   0.086     0
+gaussian 50     Disk overlay       0.1 UCB (observation)     1   13415     10389       9      77.443   0.087     0
+gaussian 50     Disk overlay       0.1 UCB (observation)     2   10795      8298       5      76.869   0.060     0
+gaussian 50     Disk overlay       0.1 UCB (observation)     3   12275      9403       6      76.603   0.064     0
+gaussian 50     Disk overlay       0.1 UCB (observation)     4    8890      6810       2      76.603   0.029     0
+gaussian 50     Disk overlay       0.1    UCB (location)     0   19625         0       0       0.000     NaN     0
+gaussian 50     Disk overlay       0.1    UCB (location)     1   13415         0       0       0.000     NaN     0
+gaussian 50     Disk overlay       0.1    UCB (location)     2   10795         0       0       0.000     NaN     0
+gaussian 50     Disk overlay       0.1    UCB (location)     3   12275         0       0       0.000     NaN     0
+gaussian 50     Disk overlay       0.1    UCB (location)     4    8890         0       0       0.000     NaN     0
+gaussian 50 Gaussian overlay       0.1         empirical     0   19625     15455      20      78.752   0.129     1
+gaussian 50 Gaussian overlay       0.1         empirical     1   13415     10534      10      78.524   0.095     0
+gaussian 50 Gaussian overlay       0.1         empirical     2   10795      8464       8      78.407   0.094     0
+gaussian 50 Gaussian overlay       0.1         empirical     3   12275      9580      10      78.045   0.104     1
+gaussian 50 Gaussian overlay       0.1         empirical     4    8890      6924       4      77.885   0.058     0
+gaussian 50 Gaussian overlay       0.1 UCB (observation)     0   19625     15142      13      77.157   0.086     0
+gaussian 50 Gaussian overlay       0.1 UCB (observation)     1   13415     10376       9      77.346   0.087     0
+gaussian 50 Gaussian overlay       0.1 UCB (observation)     2   10795      8302       5      76.906   0.060     0
+gaussian 50 Gaussian overlay       0.1 UCB (observation)     3   12275      9404       6      76.611   0.064     0
+gaussian 50 Gaussian overlay       0.1 UCB (observation)     4    8890      6815       3      76.659   0.044     0
+gaussian 50 Gaussian overlay       0.1    UCB (location)     0   19625     14806       6      75.445   0.040     0
+gaussian 50 Gaussian overlay       0.1    UCB (location)     1   13415     10131       2      75.520   0.020     0
+gaussian 50 Gaussian overlay       0.1    UCB (location)     2   10795      8146       3      75.461   0.037     0
+gaussian 50 Gaussian overlay       0.1    UCB (location)     3   12275      9189       2      74.860   0.022     0
+gaussian 50 Gaussian overlay       0.1    UCB (location)     4    8890      6682       1      75.163   0.015     0
+ uniform 50    Distance rule       0.1         empirical     0   19625     15676      19      79.878   0.121     1
+ uniform 50    Distance rule       0.1         empirical     1   13415     10715       9      79.873   0.084     0
+ uniform 50    Distance rule       0.1         empirical     2   10795      8568       6      79.370   0.070     0
+ uniform 50    Distance rule       0.1         empirical     3   12275      9722       9      79.202   0.093     0
+ uniform 50    Distance rule       0.1         empirical     4    8890      7042       7      79.213   0.099     0
+ uniform 50    Distance rule       0.1 UCB (observation)     0   19625     15592      15      79.450   0.096     0
+ uniform 50    Distance rule       0.1 UCB (observation)     1   13415     10667       6      79.516   0.056     0
+ uniform 50    Distance rule       0.1 UCB (observation)     2   10795      8537       4      79.083   0.047     0
+ uniform 50    Distance rule       0.1 UCB (observation)     3   12275      9664       7      78.729   0.072     0
+ uniform 50    Distance rule       0.1 UCB (observation)     4    8890      7004       4      78.785   0.057     0
+ uniform 50    Distance rule       0.1    UCB (location)     0   19625     15429       4      78.619   0.026     0
+ uniform 50    Distance rule       0.1    UCB (location)     1   13415     10578       3      78.852   0.028     0
+ uniform 50    Distance rule       0.1    UCB (location)     2   10795      8471       2      78.472   0.024     0
+ uniform 50    Distance rule       0.1    UCB (location)     3   12275      9597       5      78.183   0.052     0
+ uniform 50    Distance rule       0.1    UCB (location)     4    8890      6968       2      78.380   0.029     0
+ uniform 50      Monte Carlo       0.1         empirical     0   19625     15640      21      79.694   0.134     1
+ uniform 50      Monte Carlo       0.1         empirical     1   13415     10613       8      79.113   0.075     0
+ uniform 50      Monte Carlo       0.1         empirical     2   10795      8488       4      78.629   0.047     0
+ uniform 50      Monte Carlo       0.1         empirical     3   12275      9607       6      78.265   0.062     0
+ uniform 50      Monte Carlo       0.1         empirical     4    8890      6978       3      78.493   0.043     0
+ uniform 50      Monte Carlo       0.1 UCB (observation)     0   19625     15500      11      78.981   0.071     0
+ uniform 50      Monte Carlo       0.1 UCB (observation)     1   13415     10613       8      79.113   0.075     0
+ uniform 50      Monte Carlo       0.1 UCB (observation)     2   10795      8488       4      78.629   0.047     0
+ uniform 50      Monte Carlo       0.1 UCB (observation)     3   12275      9607       6      78.265   0.062     0
+ uniform 50      Monte Carlo       0.1 UCB (observation)     4    8890      6978       3      78.493   0.043     0
+ uniform 50      Monte Carlo       0.1    UCB (location)     0   19625     15349       4      78.212   0.026     0
+ uniform 50      Monte Carlo       0.1    UCB (location)     1   13415     10519       3      78.412   0.028     0
+ uniform 50      Monte Carlo       0.1    UCB (location)     2   10795      8415       2      77.953   0.024     0
+ uniform 50      Monte Carlo       0.1    UCB (location)     3   12275      9499       2      77.385   0.021     0
+ uniform 50      Monte Carlo       0.1    UCB (location)     4    8890      6908       1      77.705   0.014     0
+ uniform 50     Disk overlay       0.1         empirical     0   19625     15704      20      80.020   0.127     1
+ uniform 50     Disk overlay       0.1         empirical     1   13415     10729      10      79.978   0.093     0
+ uniform 50     Disk overlay       0.1         empirical     2   10795      8579       5      79.472   0.058     0
+ uniform 50     Disk overlay       0.1         empirical     3   12275      9724       9      79.218   0.093     0
+ uniform 50     Disk overlay       0.1         empirical     4    8890      7044       8      79.235   0.114     1
+ uniform 50     Disk overlay       0.1 UCB (observation)     0   19625     15612      16      79.552   0.102     1
+ uniform 50     Disk overlay       0.1 UCB (observation)     1   13415     10669       6      79.530   0.056     0
+ uniform 50     Disk overlay       0.1 UCB (observation)     2   10795      8551       4      79.213   0.047     0
+ uniform 50     Disk overlay       0.1 UCB (observation)     3   12275      9673       7      78.802   0.072     0
+ uniform 50     Disk overlay       0.1 UCB (observation)     4    8890      7011       4      78.864   0.057     0
+ uniform 50     Disk overlay       0.1    UCB (location)     0   19625     15440       4      78.675   0.026     0
+ uniform 50     Disk overlay       0.1    UCB (location)     1   13415     10586       3      78.912   0.028     0
+ uniform 50     Disk overlay       0.1    UCB (location)     2   10795      8484       2      78.592   0.024     0
+ uniform 50     Disk overlay       0.1    UCB (location)     3   12275      9600       5      78.208   0.052     0
+ uniform 50     Disk overlay       0.1    UCB (location)     4    8890      6970       2      78.403   0.029     0
+ uniform 50 Gaussian overlay       0.1         empirical     0   19625     15706      20      80.031   0.127     1
+ uniform 50 Gaussian overlay       0.1         empirical     1   13415     10722      10      79.926   0.093     0
+ uniform 50 Gaussian overlay       0.1         empirical     2   10795      8578       4      79.463   0.047     0
+ uniform 50 Gaussian overlay       0.1         empirical     3   12275      9721       9      79.194   0.093     0
+ uniform 50 Gaussian overlay       0.1         empirical     4    8890      7048       8      79.280   0.114     1
+ uniform 50 Gaussian overlay       0.1 UCB (observation)     0   19625     15615      16      79.567   0.102     1
+ uniform 50 Gaussian overlay       0.1 UCB (observation)     1   13415     10666       7      79.508   0.066     0
+ uniform 50 Gaussian overlay       0.1 UCB (observation)     2   10795      8555       4      79.250   0.047     0
+ uniform 50 Gaussian overlay       0.1 UCB (observation)     3   12275      9667       7      78.754   0.072     0
+ uniform 50 Gaussian overlay       0.1 UCB (observation)     4    8890      7005       4      78.796   0.057     0
+ uniform 50 Gaussian overlay       0.1    UCB (location)     0   19625     15440       4      78.675   0.026     0
+ uniform 50 Gaussian overlay       0.1    UCB (location)     1   13415     10574       3      78.822   0.028     0
+ uniform 50 Gaussian overlay       0.1    UCB (location)     2   10795      8486       2      78.610   0.024     0
+ uniform 50 Gaussian overlay       0.1    UCB (location)     3   12275      9601       5      78.216   0.052     0
+ uniform 50 Gaussian overlay       0.1    UCB (location)     4    8890      6970       2      78.403   0.029     0

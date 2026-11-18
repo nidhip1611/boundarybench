@@ -1,0 +1,11 @@
+scope,flag,n,flagged_%,errors_caught,risk_answered_%
+near-line cohort,d_obs < 7 m,5971,64.897,26/44,0.859
+near-line cohort,non-street line within 50 m (geocode),5971,2.529,4/44,0.687
+near-line cohort,either,5971,67.292,28/44,0.819
+near-line cohort,d_obs < 6.3 m (matched coverage),5971,2.529,5/44,0.67
+near-line cohort,none,5971,0.0,0/44,0.737
+all scored addresses,d_obs < 7 m,12658,38.071,31/63,0.408
+all scored addresses,non-street line within 50 m (geocode),12658,1.454,8/63,0.441
+all scored addresses,either,12658,39.445,36/63,0.352
+all scored addresses,d_obs < 6.3 m (matched coverage),12658,1.454,7/63,0.449
+all scored addresses,none,12658,0.0,0/63,0.498

@@ -1,0 +1,13 @@
+group,boundary,n,wrong,wrong_%,ci
+"NYC, Address Points",non-street,30,0,0.0,"[0.00, 11.35]"
+"NYC, Address Points",street,1413,14,0.991,"[0.59, 1.66]"
+"NYC, PLUTO",non-street,52,0,0.0,"[0.00, 6.88]"
+"NYC, PLUTO",street,2426,1,0.041,"[0.01, 0.23]"
+"National, largest-coverage counties",non-street,80,2,2.5,"[0.69, 8.66]"
+"National, largest-coverage counties",street,449,3,0.668,"[0.23, 1.95]"
+"National, smaller counties",non-street,17,1,5.882,"[1.05, 26.98]"
+"National, smaller counties",street,219,6,2.74,"[1.26, 5.85]"
+"Utah, Salt Lake County",non-street,64,1,1.562,"[0.28, 8.33]"
+"Utah, Salt Lake County",street,630,4,0.635,"[0.25, 1.62]"
+"Utah, six rural counties",non-street,23,1,4.348,"[0.77, 20.99]"
+"Utah, six rural counties",street,568,11,1.937,"[1.08, 3.43]"

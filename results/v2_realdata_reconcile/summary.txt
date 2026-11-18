@@ -1,0 +1,136 @@
+# EXP19 reconciled real-data cohort, street-side breakdown, along/cross components, assignment-time flags | run 2026-11-18 18:12 | commit 032908d
+
+[P0] Pipeline: addresses submitted, Census match status, scored. Only 'Match' is scored; 'Tie' and 'No_Match'
+     are excluded; matched_not_scored = displacement > 500 m (treated as a wrong address match) or reference point
+     outside every tract. Utah scored count is before removing reference points placed by geocoding.
+                source  submitted  Match  Tie  No_Match  scored  matched_not_scored
+            NYC, PLUTO       5000   4966    5        29    4963                   3
+   NYC, Address Points       3000   2960   25        15    2894                  66
+   Utah (both regions)       3000   2663    7       330    2615                  48
+National (18 counties)       2679   2358   22       299    2286                  72
+
+[P1] Near-line cohort (= Table 2 rows; the 18-county row is the sum of the two national groups)
+                                          n  wrong  wrong_%
+group                                                      
+NYC, PLUTO                           2478.0    1.0    0.040
+NYC, Address Points                  1443.0   14.0    0.970
+Utah, Salt Lake County                694.0    5.0    0.720
+Utah, six rural counties              591.0   12.0    2.030
+National, largest-coverage counties   529.0    5.0    0.945
+National, smaller counties            236.0    7.0    2.966
+TOTAL                                5971.0   44.0    0.737
+
+[P2] Near-line cohort by region x boundary type (at the reference point) x street side of the geocode
+                              group   boundary              side    n  wrong  wrong_%             ci
+                NYC, Address Points non-street no street <= 60 m    1      0    0.000  [0.00, 79.35]
+                NYC, Address Points non-street     opposite side    1      0    0.000  [0.00, 79.35]
+                NYC, Address Points non-street         same side   28      0    0.000  [0.00, 12.06]
+                NYC, Address Points     street     opposite side    7      3   42.857 [15.82, 74.95]
+                NYC, Address Points     street         same side 1406     11    0.782   [0.44, 1.40]
+                         NYC, PLUTO non-street         same side   52      0    0.000   [0.00, 6.88]
+                         NYC, PLUTO     street     opposite side    4      0    0.000  [0.00, 48.99]
+                         NYC, PLUTO     street         same side 2422      1    0.041   [0.01, 0.23]
+National, largest-coverage counties non-street no street <= 60 m    3      0    0.000  [0.00, 56.15]
+National, largest-coverage counties non-street     opposite side    9      0    0.000  [0.00, 29.92]
+National, largest-coverage counties non-street         same side   68      2    2.941  [0.81, 10.10]
+National, largest-coverage counties     street     opposite side   16      3   18.750  [6.59, 43.01]
+National, largest-coverage counties     street         same side  433      0    0.000   [0.00, 0.88]
+         National, smaller counties non-street no street <= 60 m    3      0    0.000  [0.00, 56.15]
+         National, smaller counties non-street     opposite side    1      0    0.000  [0.00, 79.35]
+         National, smaller counties non-street         same side   13      1    7.692  [1.37, 33.31]
+         National, smaller counties     street     opposite side   20      3   15.000  [5.24, 36.04]
+         National, smaller counties     street         same side  199      3    1.508   [0.51, 4.34]
+             Utah, Salt Lake County non-street no street <= 60 m    4      0    0.000  [0.00, 48.99]
+             Utah, Salt Lake County non-street     opposite side    4      0    0.000  [0.00, 48.99]
+             Utah, Salt Lake County non-street         same side   56      1    1.786   [0.32, 9.45]
+             Utah, Salt Lake County     street     opposite side   15      1    6.667  [1.19, 29.82]
+             Utah, Salt Lake County     street         same side  615      3    0.488   [0.17, 1.42]
+           Utah, six rural counties non-street no street <= 60 m    3      1   33.333  [6.15, 79.23]
+           Utah, six rural counties non-street         same side   20      0    0.000  [0.00, 16.11]
+           Utah, six rural counties     street     opposite side   13      8   61.538 [35.52, 82.29]
+           Utah, six rural counties     street         same side  555      3    0.541   [0.18, 1.58]
+
+[P2b] Same, pooled (rows sum to the cohort total in P1)
+  boundary              side    n  wrong  wrong_%             ci
+non-street no street <= 60 m   14      1    7.143  [1.27, 31.47]
+non-street     opposite side   15      0    0.000  [0.00, 20.39]
+non-street         same side  237      4    1.688   [0.66, 4.26]
+    street     opposite side   75     18   24.000 [15.75, 34.78]
+    street         same side 5630     21    0.373   [0.24, 0.57]
+
+[P3] Near-line cohort: street vs non-street boundary per region
+                              group   boundary    n  wrong  wrong_%            ci
+                NYC, Address Points non-street   30      0    0.000 [0.00, 11.35]
+                NYC, Address Points     street 1413     14    0.991  [0.59, 1.66]
+                         NYC, PLUTO non-street   52      0    0.000  [0.00, 6.88]
+                         NYC, PLUTO     street 2426      1    0.041  [0.01, 0.23]
+National, largest-coverage counties non-street   80      2    2.500  [0.69, 8.66]
+National, largest-coverage counties     street  449      3    0.668  [0.23, 1.95]
+         National, smaller counties non-street   17      1    5.882 [1.05, 26.98]
+         National, smaller counties     street  219      6    2.740  [1.26, 5.85]
+             Utah, Salt Lake County non-street   64      1    1.562  [0.28, 8.33]
+             Utah, Salt Lake County     street  630      4    0.635  [0.25, 1.62]
+           Utah, six rural counties non-street   23      1    4.348 [0.77, 20.99]
+           Utah, six rural counties     street  568     11    1.937  [1.08, 3.43]
+[P3b] pooled near-line cohort: non-street 5/266 = 1.88% vs street 39/5705 = 0.68%; odds ratio 2.78, Fisher two-sided p = 0.0445
+[P3c] without NYC: non-street 5/184 vs street 24/1866; OR 2.14, p = 0.1761
+TIGER road files found: 30
+
+[P4] Displacement components relative to the TIGER segment nearest the reference point (m), near-line cohort
+                                        n  along_p50  cross_p50  along_p90  cross_p90  near_intersection_pct  ambiguous_pct
+group                                                                                                                      
+NYC, PLUTO                           2478      17.86      17.77      44.50      24.20                   2.70           7.95
+NYC, Address Points                  1443      15.77       8.15      52.18      15.30                   3.05          10.95
+Utah, Salt Lake County                694      17.78      18.19      57.40      33.26                   7.64          56.77
+Utah, six rural counties              591      15.54      19.18      60.37      33.44                   2.88          74.45
+National, largest-coverage counties   529      25.27      19.87      81.15      41.39                   7.75          25.33
+National, smaller counties            236      40.85      21.21     193.19      73.08                   6.78          51.69
+
+[P4b] Components for correct vs wrong-tract geocodes (pooled)
+          n  along_p50  cross_p50
+wrong                            
+False  5927      18.07      16.70
+True     44      83.43      31.28
+
+[P4c] Near-line cohort EXCLUDING geocodes within 15 m of a segment end or with an ambiguous nearest segment (second-nearest within 2 m): wrong-tract rate
+                              group    n  wrong  wrong_%           ci
+                NYC, Address Points 1256      7    0.557 [0.27, 1.15]
+                         NYC, PLUTO 2231      1    0.045 [0.01, 0.25]
+National, largest-coverage counties  369      2    0.542 [0.15, 1.95]
+         National, smaller counties  107      2    1.869 [0.51, 6.56]
+             Utah, Salt Lake County  278      1    0.360 [0.06, 2.01]
+           Utah, six rural counties  144      3    2.083 [0.71, 5.95]
+
+[P4d] Same exclusion, pooled boundary x side
+  boundary              side    n  wrong  wrong_%            ci
+non-street no street <= 60 m    7      0    0.000 [0.00, 35.43]
+non-street     opposite side   12      0    0.000 [0.00, 24.25]
+non-street         same side  167      2    1.198  [0.33, 4.26]
+    street     opposite side   35      3    8.571 [2.96, 22.38]
+    street         same side 4164     11    0.264  [0.15, 0.47]
+
+[P5] Flags computed from the geocode only (information available at assignment time)
+               scope                                  flag     n  flagged_% errors_caught  risk_answered_%
+    near-line cohort                           d_obs < 7 m  5971     64.897         26/44            0.859
+    near-line cohort non-street line within 50 m (geocode)  5971      2.529          4/44            0.687
+    near-line cohort                                either  5971     67.292         28/44            0.819
+    near-line cohort      d_obs < 6.3 m (matched coverage)  5971      2.529          5/44            0.670
+    near-line cohort                                  none  5971      0.000          0/44            0.737
+all scored addresses                           d_obs < 7 m 12658     38.071         31/63            0.408
+all scored addresses non-street line within 50 m (geocode) 12658      1.454          8/63            0.441
+all scored addresses                                either 12658     39.445         36/63            0.352
+all scored addresses      d_obs < 6.3 m (matched coverage) 12658      1.454          7/63            0.449
+all scored addresses                                  none 12658      0.000          0/63            0.498
+[P5b] boundary type from the geocode agrees with boundary type from the reference point for 99.4% of near-line addresses
+
+[P6] Near-line cohort by reference placement type (groups with n >= 20)
+                              group           placement    n  wrong  wrong_%            ci
+                NYC, Address Points   NYC address point 1443     14    0.970  [0.58, 1.62]
+                         NYC, PLUTO     PLUTO lot point 2478      1    0.040  [0.01, 0.23]
+National, largest-coverage counties      Parcel - Other  117      0    0.000  [0.00, 3.18]
+National, largest-coverage counties Structure - Rooftop  388      5    1.289  [0.55, 2.98]
+         National, smaller counties Structure - Rooftop  229      7    3.057  [1.49, 6.17]
+             Utah, Salt Lake County             Unknown  683      5    0.732  [0.31, 1.70]
+           Utah, six rural counties             Rooftop   21      1    4.762 [0.85, 22.67]
+           Utah, six rural counties             Unknown  323     10    3.096  [1.69, 5.60]
+           Utah, six rural counties             missing  246      1    0.407  [0.07, 2.27]

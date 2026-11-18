@@ -1,0 +1,7 @@
+group,n,wrong,wrong_%,ci
+"NYC, Address Points",1256,7,0.557,"[0.27, 1.15]"
+"NYC, PLUTO",2231,1,0.045,"[0.01, 0.25]"
+"National, largest-coverage counties",369,2,0.542,"[0.15, 1.95]"
+"National, smaller counties",107,2,1.869,"[0.51, 6.56]"
+"Utah, Salt Lake County",278,1,0.36,"[0.06, 2.01]"
+"Utah, six rural counties",144,3,2.083,"[0.71, 5.95]"
