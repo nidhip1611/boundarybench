@@ -1,0 +1,54 @@
+# EXP06 geometry stress set | run 2026-11-18 14:59 | commit 0a0d93b
+
+[S0] Stress-set points per layer and geometry class (class at R = 50 m)
+class_R50  bent / corner  junction (3+ regions)  multi-edge / sliver  open edge (water/gap)  straight
+layer                                                                                                
+county               400                    115                  138                    400       400
+tract                400                    400                  216                     38       400
+zcta                 400                    400                  400                    400       400
+
+[S1] Wrong-region rate by local geometry vs straight-line prediction (95% CI: bootstrap over points)
+   model  R            geom_class  n_points  n_obs  observed_%       obs_ci  straight_line_%  obs/pred     ratio_ci
+gaussian 20         bent / corner       154   3080      20.812 [17.9, 23.7]           17.629     1.181 [1.10, 1.28]
+gaussian 20 junction (3+ regions)       182   3640      29.615 [27.0, 32.1]           25.956     1.141 [1.08, 1.20]
+gaussian 20   multi-edge / sliver        75   1500      21.200 [17.5, 26.7]           19.002     1.116 [0.98, 1.25]
+gaussian 20 open edge (water/gap)       430   8600      16.849 [15.3, 18.3]           16.876     0.998 [0.96, 1.04]
+gaussian 20              straight      1733  34660      16.134 [15.4, 16.9]           16.165     0.998 [0.98, 1.02]
+gaussian 50         bent / corner      1200  24000      22.446 [21.5, 23.5]           19.911     1.127 [1.10, 1.15]
+gaussian 50 junction (3+ regions)       915  18300      29.617 [28.3, 31.0]           25.687     1.153 [1.12, 1.18]
+gaussian 50   multi-edge / sliver       754  15080      19.297 [18.1, 20.7]           18.179     1.061 [1.02, 1.11]
+gaussian 50 open edge (water/gap)       838  16760      20.447 [19.3, 21.7]           19.995     1.023 [1.00, 1.05]
+gaussian 50              straight      1200  24000      18.917 [18.1, 19.8]           19.154     0.988 [0.96, 1.01]
+ uniform 20         bent / corner       154   3080      27.403 [24.1, 31.2]           23.181     1.182 [1.10, 1.27]
+ uniform 20 junction (3+ regions)       182   3640      37.033 [34.5, 39.8]           31.565     1.173 [1.13, 1.23]
+ uniform 20   multi-edge / sliver        75   1500      29.667 [25.4, 35.4]           24.588     1.207 [1.09, 1.33]
+ uniform 20 open edge (water/gap)       430   8600      21.372 [19.6, 23.2]           22.032     0.970 [0.93, 1.01]
+ uniform 20              straight      1733  34660      20.378 [19.5, 21.2]           21.119     0.965 [0.94, 0.98]
+ uniform 50         bent / corner      1200  24000      30.738 [29.6, 32.0]           25.717     1.195 [1.17, 1.22]
+ uniform 50 junction (3+ regions)       915  18300      37.098 [35.8, 38.6]           31.218     1.188 [1.16, 1.22]
+ uniform 50   multi-edge / sliver       754  15080      25.776 [24.3, 27.1]           23.709     1.087 [1.05, 1.12]
+ uniform 50 open edge (water/gap)       838  16760      24.958 [23.8, 26.0]           25.651     0.973 [0.95, 0.99]
+ uniform 50              straight      1200  24000      24.512 [23.5, 25.5]           24.841     0.987 [0.97, 1.01]
+
+[S2] Ranking quality (AURC, lower = better) by geometry class: does probability beat distance where geometry is complex?
+   model  R            geom_class  AURC_distance_%  AURC_disk_overlay_%  AURC_gauss_overlay_%
+gaussian 20         bent / corner            8.734               13.212                11.198
+gaussian 20 junction (3+ regions)           15.889               16.142                15.792
+gaussian 20   multi-edge / sliver           10.789               14.646                12.103
+gaussian 20 open edge (water/gap)            1.419                0.000                 0.000
+gaussian 20              straight            5.062                4.929                 4.960
+gaussian 50         bent / corner           10.131               14.495                12.415
+gaussian 50 junction (3+ regions)           15.747               16.250                15.737
+gaussian 50   multi-edge / sliver            7.809               10.191                 8.477
+gaussian 50 open edge (water/gap)            2.091                0.001                 0.000
+gaussian 50              straight            7.258                7.164                 7.156
+ uniform 20         bent / corner           11.334               14.856                13.413
+ uniform 20 junction (3+ regions)           21.015               20.720                20.749
+ uniform 20   multi-edge / sliver           15.659               18.554                16.690
+ uniform 20 open edge (water/gap)            2.284                0.000                 0.000
+ uniform 20              straight            7.258                7.128                 7.168
+ uniform 50         bent / corner           15.293               18.730                17.373
+ uniform 50 junction (3+ regions)           21.163               20.976                20.905
+ uniform 50   multi-edge / sliver           12.552               14.565                13.132
+ uniform 50 open edge (water/gap)            3.115                0.000                 0.000
+ uniform 50              straight            9.960                9.789                 9.847

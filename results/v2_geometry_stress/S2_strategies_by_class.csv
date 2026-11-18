@@ -1,0 +1,21 @@
+model,R,geom_class,AURC_distance_%,AURC_disk_overlay_%,AURC_gauss_overlay_%
+gaussian,20,bent / corner,8.734,13.212,11.198
+gaussian,20,junction (3+ regions),15.889,16.142,15.792
+gaussian,20,multi-edge / sliver,10.789,14.646,12.103
+gaussian,20,open edge (water/gap),1.419,0.0,0.0
+gaussian,20,straight,5.062,4.929,4.96
+gaussian,50,bent / corner,10.131,14.495,12.415
+gaussian,50,junction (3+ regions),15.747,16.25,15.737
+gaussian,50,multi-edge / sliver,7.809,10.191,8.477
+gaussian,50,open edge (water/gap),2.091,0.001,0.0
+gaussian,50,straight,7.258,7.164,7.156
+uniform,20,bent / corner,11.334,14.856,13.413
+uniform,20,junction (3+ regions),21.015,20.72,20.749
+uniform,20,multi-edge / sliver,15.659,18.554,16.69
+uniform,20,open edge (water/gap),2.284,0.0,0.0
+uniform,20,straight,7.258,7.128,7.168
+uniform,50,bent / corner,15.293,18.73,17.373
+uniform,50,junction (3+ regions),21.163,20.976,20.905
+uniform,50,multi-edge / sliver,12.552,14.565,13.132
+uniform,50,open edge (water/gap),3.115,0.0,0.0
+uniform,50,straight,9.96,9.789,9.847

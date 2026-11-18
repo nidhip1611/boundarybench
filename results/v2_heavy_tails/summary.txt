@@ -1,0 +1,70 @@
+# EXP07 heavy-tailed error robustness (simulation) | run 2026-11-18 15:17 | commit 0a0d93b
+
+[H0] Error models (R = 95% radius; heavier tails = larger p99 / p99.9 relative to R)
+       model  R_95_m  check_share_beyond_R_%  median_m  p99_m  p99.9_m
+          t3    20.0                    4.99      6.06  35.97    78.07
+          t3    50.0                    4.95     15.16  89.77   196.52
+contaminated    20.0                    5.03      4.30  36.56    51.37
+contaminated    50.0                    4.93     10.74  91.61   130.74
+   lognormal   357.7                    5.02     61.10 748.45  1720.89
+
+[H1] Wrong-region rate by d/R: observed vs straight-line prediction using each model's own radial distribution
+         dR        model     R     n  observed_pct  predicted_pct
+[0.0, 0.25)           t3  20.0  3255        30.753         32.020
+[0.25, 0.5)           t3  20.0  3245        10.601         10.770
+[0.5, 0.75)           t3  20.0  1040         3.846          3.673
+[0.75, 1.0)           t3  20.0  1080         2.130          1.599
+ [1.0, 1.5)           t3  20.0  2025         0.395          0.674
+ [1.5, 2.0)           t3  20.0  2135         0.187          0.262
+ [2.0, 3.0)           t3  20.0  4885         0.082          0.094
+ [3.0, inf)           t3  20.0 47335         0.000          0.006
+[0.0, 0.25)           t3  50.0  6980        35.344         34.098
+[0.25, 0.5)           t3  50.0  2645        10.888         10.793
+[0.5, 0.75)           t3  50.0  2615         3.824          3.767
+[0.75, 1.0)           t3  50.0  2775         1.802          1.585
+ [1.0, 1.5)           t3  50.0  5715         0.770          0.658
+ [1.5, 2.0)           t3  50.0  5270         0.190          0.251
+ [2.0, 3.0)           t3  50.0  2935         0.068          0.088
+ [3.0, inf)           t3  50.0 36065         0.006          0.005
+[0.0, 0.25) contaminated  20.0  3255        26.390         27.323
+[0.25, 0.5) contaminated  20.0  3245         5.701          5.628
+[0.5, 0.75) contaminated  20.0  1040         1.538          2.373
+[0.75, 1.0) contaminated  20.0  1080         1.481          1.524
+ [1.0, 1.5) contaminated  20.0  2025         0.938          0.730
+ [1.5, 2.0) contaminated  20.0  2135         0.234          0.204
+ [2.0, 3.0) contaminated  20.0  4885         0.020          0.022
+ [3.0, inf) contaminated  20.0 47335         0.000          0.000
+[0.0, 0.25) contaminated  50.0  6980        28.395         29.312
+[0.25, 0.5) contaminated  50.0  2645         5.142          5.302
+[0.5, 0.75) contaminated  50.0  2615         1.950          2.287
+[0.75, 1.0) contaminated  50.0  2775         1.441          1.442
+ [1.0, 1.5) contaminated  50.0  5715         0.787          0.725
+ [1.5, 2.0) contaminated  50.0  5270         0.247          0.219
+ [2.0, 3.0) contaminated  50.0  2935         0.000          0.033
+ [3.0, inf) contaminated  50.0 36065         0.000          0.000
+[0.0, 0.25)    lognormal 357.7 23885        28.407         27.627
+[0.25, 0.5)    lognormal 357.7  6560         8.720          7.782
+[0.5, 0.75)    lognormal 357.7  3675         3.347          3.094
+[0.75, 1.0)    lognormal 357.7  3340         1.796          1.627
+ [1.0, 1.5)    lognormal 357.7  6950         0.777          0.771
+ [1.5, 2.0)    lognormal 357.7  4455         0.247          0.397
+ [2.0, 3.0)    lognormal 357.7  3545         0.197          0.179
+ [3.0, inf)    lognormal 357.7 12590         0.000          0.011
+
+[H2] Strategies under heavy tails (methods assume a uniform disk of radius R: misspecified by design)
+       model     R        method  err_full_cov_%  AURC_%  cov@risk<=1%  cov@risk<=0.5%  cov@risk<=0.1%  op_coverage_%  op_risk_%
+          t3  20.0     Crisp PIP           2.191   2.191         0.000           0.000           0.000            NaN        NaN
+          t3  20.0 Distance rule           2.191   0.096        96.538          93.551          87.086         87.017      0.099
+          t3  20.0  Disk overlay           2.151   0.133        96.498          93.497          87.086         89.625      0.189
+          t3  50.0     Crisp PIP           4.558   4.558         0.000           0.000           0.000            NaN        NaN
+          t3  50.0 Distance rule           4.558   0.364        88.389          83.663          67.880         76.828      0.198
+          t3  50.0  Disk overlay           4.498   0.498        88.383          83.754           0.000         82.598      0.425
+contaminated  20.0     Crisp PIP           1.694   1.694         0.000           0.000           0.000            NaN        NaN
+contaminated  20.0 Distance rule           1.694   0.063        98.352          95.974          87.354         86.945      0.078
+contaminated  20.0  Disk overlay           1.674   0.129        98.312          95.934          87.355         89.240      0.169
+contaminated  50.0     Crisp PIP           3.488   3.488         0.000           0.000           0.000            NaN        NaN
+contaminated  50.0 Distance rule           3.488   0.234        92.331          87.609          72.103         76.905      0.166
+contaminated  50.0  Disk overlay           3.486   0.292        92.162          87.551           0.002         82.494      0.306
+   lognormal 357.7     Crisp PIP          11.711  11.711         0.000           0.000           0.000            NaN        NaN
+   lognormal 357.7 Distance rule          11.711   2.976        44.638          33.148          17.963         42.869      0.922
+   lognormal 357.7  Disk overlay          12.986   3.510        44.209           0.002           0.002         50.942      1.616

@@ -1,0 +1,138 @@
+# EXP08 statistics: data flow, bootstrap CIs, calibration | run 2026-11-18 15:17 | commit 0a0d93b
+
+[D1] Benchmark points by layer and difficulty tier
+difficulty  boundary  easy  edge  hard  medium  total
+layer                                                
+county           400  1400   200  1000    1000   4000
+tract            500  1750   250  1250    1250   5000
+zcta             400  1400   200  1000    1000   4000
+total           1300  4550   650  3250    3250  13000
+
+[D2] Observations per setting (total 520,000 = 13,000 points × K × 8 settings); near = reported point closer than R to its boundary
+   model  R  observations  points  near_boundary_obs  obs_per_point
+gaussian  5         65000   13000               3209            5.0
+gaussian 10         65000   13000               5754            5.0
+gaussian 20         65000   13000               8380            5.0
+gaussian 50         65000   13000              15115            5.0
+ uniform  5         65000   13000               3224            5.0
+ uniform 10         65000   13000               5558            5.0
+ uniform 20         65000   13000               8251            5.0
+ uniform 50         65000   13000              15081            5.0
+
+[B1] Headline metrics with 95% CIs (bootstrap over benchmark points, B = 300)
+   model  R             metric   value  ci_low  ci_high
+gaussian  5        crisp_err_%  0.8138  0.7200   0.9116
+gaussian  5  crisp_err_0-10m_%  8.1385  7.3084   9.0863
+gaussian  5 crisp_err_10-25m_%  0.0000  0.0000   0.0000
+gaussian  5 crisp_err_25-50m_%  0.0000  0.0000   0.0000
+gaussian  5         dist_cov_% 95.0631 94.7315  95.3938
+gaussian  5        dist_risk_%  0.0081  0.0016   0.0162
+gaussian  5         disk_cov_% 96.6569 96.4231  96.9148
+gaussian  5        disk_risk_%  0.0478  0.0302   0.0669
+gaussian  5        AURC_dist_%  0.0109  0.0087   0.0133
+gaussian  5          AURC_mc_%  0.0219  0.0131   0.0320
+gaussian  5        AURC_disk_%  0.0186  0.0117   0.0273
+gaussian  5       AURC_gauss_%  0.0109  0.0087   0.0133
+gaussian 10        crisp_err_%  1.5631  1.4523   1.7008
+gaussian 10  crisp_err_0-10m_% 15.5692 14.6298  16.6615
+gaussian 10 crisp_err_10-25m_%  0.1280  0.0310   0.2878
+gaussian 10 crisp_err_25-50m_%  0.0000  0.0000   0.0000
+gaussian 10         dist_cov_% 91.1477 90.6626  91.5125
+gaussian 10        dist_risk_%  0.0152  0.0067   0.0270
+gaussian 10         disk_cov_% 93.5338 93.1327  93.8262
+gaussian 10        disk_risk_%  0.0822  0.0592   0.1071
+gaussian 10        AURC_dist_%  0.0406  0.0359   0.0468
+gaussian 10          AURC_mc_%  0.0589  0.0474   0.0748
+gaussian 10        AURC_disk_%  0.0542  0.0437   0.0691
+gaussian 10       AURC_gauss_%  0.0405  0.0359   0.0466
+gaussian 20        crisp_err_%  2.9877  2.7715   3.1778
+gaussian 20  crisp_err_0-10m_% 28.3231 27.1853  29.5687
+gaussian 20 crisp_err_10-25m_%  3.2000  2.4686   3.9406
+gaussian 20 crisp_err_25-50m_%  0.0186  0.0000   0.0735
+gaussian 20         dist_cov_% 87.1077 86.6128  87.6628
+gaussian 20        dist_risk_%  0.0212  0.0088   0.0364
+gaussian 20         disk_cov_% 90.0462 89.6415  90.4901
+gaussian 20        disk_risk_%  0.1914  0.1587   0.2327
+gaussian 20        AURC_dist_%  0.1273  0.1123   0.1409
+gaussian 20          AURC_mc_%  0.1637  0.1411   0.1854
+gaussian 20        AURC_disk_%  0.1455  0.1259   0.1648
+gaussian 20       AURC_gauss_%  0.1272  0.1123   0.1405
+gaussian 50        crisp_err_%  5.2831  5.0305   5.5102
+gaussian 50  crisp_err_0-10m_% 39.8615 38.4854  40.9820
+gaussian 50 crisp_err_10-25m_% 19.9680 18.4397  21.2559
+gaussian 50 crisp_err_25-50m_%  3.8219  3.3634   4.3264
+gaussian 50         dist_cov_% 76.7462 76.1765  77.3633
+gaussian 50        dist_risk_%  0.0621  0.0401   0.0805
+gaussian 50         disk_cov_% 82.8508 82.2963  83.4338
+gaussian 50        disk_risk_%  0.3900  0.3351   0.4446
+gaussian 50        AURC_dist_%  0.4032  0.3680   0.4348
+gaussian 50          AURC_mc_%  0.4887  0.4409   0.5284
+gaussian 50        AURC_disk_%  0.4468  0.4011   0.4810
+gaussian 50       AURC_gauss_%  0.4006  0.3658   0.4323
+ uniform  5        crisp_err_%  1.0215  0.9106   1.1400
+ uniform  5  crisp_err_0-10m_% 10.2154  9.3362  11.2843
+ uniform  5 crisp_err_10-25m_%  0.0000  0.0000   0.0000
+ uniform  5 crisp_err_25-50m_%  0.0000  0.0000   0.0000
+ uniform  5         dist_cov_% 95.0400 94.7292  95.3596
+ uniform  5        dist_risk_%  0.0000  0.0000   0.0000
+ uniform  5         disk_cov_% 96.5708 96.3153  96.7993
+ uniform  5        disk_risk_%  0.0558  0.0366   0.0749
+ uniform  5        AURC_dist_%  0.0152  0.0124   0.0182
+ uniform  5          AURC_mc_%  0.0169  0.0130   0.0221
+ uniform  5        AURC_disk_%  0.0152  0.0123   0.0181
+ uniform  5       AURC_gauss_%  0.0152  0.0123   0.0181
+ uniform 10        crisp_err_%  2.0538  1.9130   2.2239
+ uniform 10  crisp_err_0-10m_% 20.5385 19.4390  21.7163
+ uniform 10 crisp_err_10-25m_%  0.0000  0.0000   0.0000
+ uniform 10 crisp_err_25-50m_%  0.0000  0.0000   0.0000
+ uniform 10         dist_cov_% 91.4492 90.9884  91.7950
+ uniform 10        dist_risk_%  0.0000  0.0000   0.0000
+ uniform 10         disk_cov_% 93.7523 93.4031  94.0358
+ uniform 10        disk_risk_%  0.1214  0.0934   0.1513
+ uniform 10        AURC_dist_%  0.0569  0.0502   0.0652
+ uniform 10          AURC_mc_%  0.0580  0.0513   0.0667
+ uniform 10        AURC_disk_%  0.0569  0.0503   0.0652
+ uniform 10       AURC_gauss_%  0.0569  0.0503   0.0652
+ uniform 20        crisp_err_%  3.6646  3.4368   3.9170
+ uniform 20  crisp_err_0-10m_% 34.2769 33.1728  35.4616
+ uniform 20 crisp_err_10-25m_%  4.9280  4.1957   5.8176
+ uniform 20 crisp_err_25-50m_%  0.0000  0.0000   0.0000
+ uniform 20         dist_cov_% 87.3062 86.8151  87.8273
+ uniform 20        dist_risk_%  0.0000  0.0000   0.0000
+ uniform 20         disk_cov_% 90.6031 90.2023  91.0073
+ uniform 20        disk_risk_%  0.2615  0.2224   0.3086
+ uniform 20        AURC_dist_%  0.1672  0.1501   0.1858
+ uniform 20          AURC_mc_%  0.1797  0.1597   0.2006
+ uniform 20        AURC_disk_%  0.1666  0.1497   0.1848
+ uniform 20       AURC_gauss_%  0.1667  0.1497   0.1849
+ uniform 50        crisp_err_%  6.3077  6.0462   6.5855
+ uniform 50  crisp_err_0-10m_% 43.4769 42.2994  44.6478
+ uniform 50 crisp_err_10-25m_% 27.4560 26.1917  29.1035
+ uniform 50 crisp_err_25-50m_%  7.7180  6.9593   8.5118
+ uniform 50         dist_cov_% 76.7985 76.1895  77.4064
+ uniform 50        dist_risk_%  0.0000  0.0000   0.0000
+ uniform 50         disk_cov_% 83.2708 82.7453  83.7840
+ uniform 50        disk_risk_%  0.6947  0.6133   0.7694
+ uniform 50        AURC_dist_%  0.5437  0.5020   0.5841
+ uniform 50          AURC_mc_%  0.5674  0.5219   0.6125
+ uniform 50        AURC_disk_%  0.5404  0.5004   0.5813
+ uniform 50       AURC_gauss_%  0.5410  0.5004   0.5811
+
+[K1] Calibration on near-boundary observations (equal-mass bins, 95% bootstrap CI)
+   model  R           method  correctly_specified  n_near  ECE_eqmass_%  ci_low  ci_high  Brier_true
+gaussian  5     Disk overlay                False    3209         5.241   3.892    6.494       0.121
+gaussian  5 Gaussian overlay                 True    3209         1.664   1.356    3.173       0.118
+gaussian 10     Disk overlay                False    5754         5.429   4.393    6.459       0.129
+gaussian 10 Gaussian overlay                 True    5754         1.621   1.243    2.745       0.126
+gaussian 20     Disk overlay                False    8380         2.813   2.430    3.976       0.158
+gaussian 20 Gaussian overlay                 True    8380         4.562   3.738    5.433       0.159
+gaussian 50     Disk overlay                False   15115         2.082   1.656    2.813       0.153
+gaussian 50 Gaussian overlay                 True   15115         3.775   3.098    4.393       0.154
+ uniform  5     Disk overlay                 True    3224         3.159   2.340    4.621       0.143
+ uniform  5 Gaussian overlay                False    3224         4.771   3.604    6.440       0.146
+ uniform 10     Disk overlay                 True    5558         2.003   1.508    3.189       0.161
+ uniform 10 Gaussian overlay                False    5558         6.704   5.568    7.966       0.166
+ uniform 20     Disk overlay                 True    8251         5.572   4.583    6.599       0.188
+ uniform 20 Gaussian overlay                False    8251        10.498   9.523   11.553       0.199
+ uniform 50     Disk overlay                 True   15081         4.822   4.139    5.599       0.183
+ uniform 50 Gaussian overlay                False   15081         9.777   8.977   10.461       0.192
