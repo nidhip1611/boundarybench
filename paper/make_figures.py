@@ -52,6 +52,7 @@ for i, r in enumerate(rows):
     ax.text(i + w / 2, r[2] + 0.4, f"{r[2]:.1f}", ha="center", fontsize=6)
 ax.set_xticks(x); ax.set_xticklabels([r[0] for r in rows], fontsize=6.5)
 ax.set_ylabel("wrong tract (%)")
+ax.set_ylim(0, 25)
 ax.legend(frameon=False, fontsize=6.5, loc="upper left")
 fig.tight_layout(); fig.savefig(f"{OUT}/fig2_direction.pdf"); plt.close(fig)
 print("wrote", os.listdir(OUT))
