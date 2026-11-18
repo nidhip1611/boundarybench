@@ -17,7 +17,7 @@
 
 \begin{document}
 
-\title{When Does a Geocoded Address Land in the Wrong Census Tract? Boundary-Distance Theory, Abstention Rules, and Nationwide Evidence}
+\title{When Does a Geocoded Address Land in the Wrong Census Tract? Boundary-Distance Theory, Abstention Rules, and Multi-Region Evidence}
 \titlerunning{When Does a Geocoded Address Land in the Wrong Census Tract?}
 % CAMERA-READY: replace with real author block
 \author{Anonymous Author(s)}
@@ -27,7 +27,7 @@
 \maketitle
 
 \begin{abstract}
-Government statistics, eligibility rules and public-health surveillance routinely assign geocoded addresses to administrative areas such as census tracts, ZIP code areas and counties. Geocoded coordinates are displaced from the true location, and a point near a boundary can be silently assigned to the wrong area. We study when this happens and how to detect it. We build a national benchmark of 13{,}000 locations across U.S.\ counties, ZIP Code Tabulation Areas and tracts, stratified by distance to the nearest boundary, and evaluate 520{,}000 simulated noisy observations under uniform, Gaussian and heavy-tailed error. Misassignment closely follows a closed-form straight-boundary prediction in the ratio of boundary distance to error radius (observed/predicted 0.99), with 6--20\% excess at corners, junctions and slivers. A simple distance-based abstention rule ranks risky queries as well as probabilistic overlay and Monte Carlo methods, is more robust to heavy tails, and its certified thresholds transfer to held-out states. We then measure real errors of the U.S.\ Census Bureau geocoder against authoritative address points in New York City, urban and rural Utah, and 18 counties covering all nine Census divisions. Real displacements are large (median 19--86\,m by region) yet rarely change the tract, because geocodes sit about 6.4\,m from the street centerline on the correct side and tract boundaries mostly follow streets; near tract lines, 0.04--2.0\% of real geocodes are misassigned, whereas the same displacements in random directions misassign 10.8--20.2\%. Protection is weaker in smaller counties and where boundaries do not follow streets. Finally, simplified (cartographic) boundary files alone misassign 1.6--15\% of exact benchmark locations. We release code and data to support reliable geographic assignment.
+Agencies routinely assign geocoded addresses to census tracts, ZIP Code Tabulation Areas and counties with a point-in-polygon test that silently returns one label even near a boundary. On a benchmark of 13{,}000 U.S.\ locations stratified by boundary distance, 520{,}000 simulated observations under uniform and Gaussian error follow a closed-form straight-boundary prediction in the ratio of the true location's boundary distance to the error radius (observed/predicted 0.99), with relative excesses of 6--21\% at corners, junctions and slivers. At matched risk targets, a distance-to-boundary abstention rule reaches the coverage of probabilistic overlays and Monte Carlo (never more than 0.1 percentage points below either), is more robust to heavy-tailed error, and conservatively calibrated thresholds met the pooled risk target in held-out states. We then compare U.S.\ Census Bureau geocodes with independent reference address points in New York City, Utah and 18 sampled counties spanning all nine Census divisions. Displacements are large (median 19--86\,m), yet near tract lines only 0.04--2.0\% of geocodes fall in another tract, against 10.8--20.2\% when the same displacement lengths are given random directions: geocodes sit about 6.4\,m from the street centerline on the reference address's side, and most tract lines follow streets. Errors are more frequent in smaller counties and near boundaries that do not follow streets. Finally, generalized cartographic boundary files used for assignment produced 1.6--15\% disagreement on our boundary-stratified benchmark.
 \keywords{Geocoding \and Positional uncertainty \and Point-in-polygon \and Census tracts \and Selective prediction}
 \end{abstract}
 
@@ -35,20 +35,20 @@ Government statistics, eligibility rules and public-health surveillance routinel
 \section{Introduction}
 Many digital public services start with the same step: an address is geocoded to a coordinate, and the coordinate is assigned to an administrative area by a point-in-polygon (PIP) test. The resulting area label decides which tract a disease case is counted in, whether a household lies in an area that qualifies for a program (for example, HUD Qualified Census Tracts for the Low-Income Housing Tax Credit), and which neighbourhood statistics a record contributes to. Public-health researchers recognised early that a geocode on the ``wrong side of the tract'' biases area-based measures~\cite{krieger2001,krieger2002,rushton2006}.
 
-The difficulty is that the PIP step is \emph{silent}. Geocoded coordinates are displaced from the true location by tens of metres~\cite{cayo2003,zandbergen2008,zandbergen2009}, but standard GIS software returns exactly one area label with no indication that the point lies close to a boundary. Prior work has characterised geocoding error~\cite{goldberg2007,zimmerman2007,strickland2007} and proposed probabilistic PIP models~\cite{cheung2004}, but practitioners still lack answers to three operational questions: (i) \emph{when} is an assignment at risk, (ii) which \emph{cheap rule} reliably flags those cases, and (iii) does the risk predicted by simple error models match what happens with \emph{real} geocoders?
+The difficulty is that the PIP step is \emph{silent}. Geocoded coordinates are displaced from the true location by tens of metres~\cite{cayo2003,zandbergen2008,zandbergen2009}, but standard GIS software returns exactly one area label with no indication that the point lies close to a boundary. Prior work has characterised geocoding error~\cite{goldberg2007,zimmerman2007,strickland2007,kinnee2020}, documented wrong or implausible area assignments~\cite{krieger2001,berg2026} and proposed probabilistic PIP models~\cite{cheung2004}, but practitioners still lack answers to three operational questions: (i) \emph{when} is an assignment at risk, (ii) which \emph{cheap rule} reliably flags those cases, and (iii) does the risk predicted by simple error models match what happens with \emph{real} geocoders?
 
 We answer these questions with a benchmark and a systematic evaluation. Our contributions are:
 \begin{enumerate}
-\item \textbf{A benchmark and protocol} for boundary assignment under positional error: 13{,}000 U.S.\ locations at three administrative levels, stratified by boundary distance, with 520{,}000 noisy observations and region-level ground truth (Sect.~\ref{sec:bench}).
-\item \textbf{A risk model} that explains misassignment by the ratio of boundary distance to error radius, validated against closed-form predictions, with measured departures at complex geometry (Sect.~\ref{sec:model},~\ref{sec:sim}).
-\item \textbf{An evaluation of assignment strategies} in a selective-prediction framework (risk vs.\ coverage), including risk control on held-out geography (Sect.~\ref{sec:sim}).
-\item \textbf{Nationwide real-world evidence} that the \emph{direction} of geocoding error, not only its size, determines misassignment, and two practical pitfalls: non-street boundaries and simplified boundary files (Sect.~\ref{sec:real}).
+\item \textbf{A benchmark and protocol} for boundary assignment under positional error: 13{,}000 U.S.\ locations at three administrative levels, stratified by boundary distance, with 520{,}000 noisy observations and region-level reference labels (Sect.~\ref{sec:bench}).
+\item \textbf{A risk model} that explains misassignment by the ratio of the true location's boundary distance to the error radius, validated against closed-form predictions, with measured departures at complex geometry (Sect.~\ref{sec:model},~\ref{sec:sim}).
+\item \textbf{An evaluation of assignment strategies} at matched risk targets in a selective-prediction framework, including threshold transfer to held-out states (Sect.~\ref{sec:sim}).
+\item \textbf{Multi-region real-world evidence} isolating the role of error \emph{direction} (same displacement length, random direction) in New York City, Utah and 18 sampled counties, plus two pitfalls: non-street boundaries and generalized boundary files (Sect.~\ref{sec:real}).
 \end{enumerate}
 We do not claim a new PIP algorithm; the strategies we evaluate are established. Our contribution is the evidence of when each is adequate and why.
 
 %=====================================================================
 \section{Related Work}
-\textbf{Geocoding error.} Address geocoding places points by street-segment interpolation, parcel or address-point matching; positional errors range from metres to hundreds of metres and are larger in rural areas~\cite{cayo2003,zandbergen2008,zandbergen2009,goldberg2007}. Error distributions have been modelled empirically: automated geocoding errors in rural Iowa formed a cross-shaped (street-aligned) distribution that a single bivariate normal or $t$ distribution could not fit~\cite{zimmerman2007}, whereas error angles in Atlanta appeared uniform~\cite{strickland2007}. Consequences for health studies have been reviewed~\cite{rushton2006,jacquez2012}. Whether error direction matters for \emph{area assignment} has not been measured directly; we do so in Sect.~\ref{sec:real}. Krieger et al.~\cite{krieger2001} measured tract misassignment by commercial geocoders; we extend this line with a controlled theory, strategy comparison and multi-region measurement of a free public geocoder.
+\textbf{Geocoding error and area assignment.} Geocoding errors range from metres to hundreds of metres and are larger in rural areas~\cite{cayo2003,zandbergen2008,zandbergen2009,goldberg2007}. Automated geocoding errors in rural Iowa formed a cross-shaped (street-aligned) distribution that a single bivariate normal or $t$ distribution could not fit~\cite{zimmerman2007}, error angles in Atlanta appeared uniform~\cite{strickland2007}, and in New York City street-segment geocodes were displaced mostly toward one direction relative to address points~\cite{kinnee2020}. Consequences for health studies are reviewed in~\cite{rushton2006,jacquez2012}. For area assignment, Krieger et al.~\cite{krieger2001} measured tract misassignment by commercial geocoders, Kinnee et al.~\cite{kinnee2020} found few differences between geocoding methods in assignment to census areas, and Berg et al.~\cite{berg2026} describe geocoded records joined to implausible census blocks (``overlay uncertainty'') and remedies such as aggregation or reallocation to populated blocks. We add a counterfactual that keeps each address's measured displacement length and randomises only its direction, which isolates the contribution of direction to tract misassignment, and we replicate it across regions.
 
 \textbf{Spatial uncertainty and point-in-polygon.} Uncertainty in GIS has a long tradition~\cite{heuvelink1998,zhang2002,shi2010}. The epsilon band and its use to classify points as definitely or possibly inside a polygon~\cite{blakemore1984} are the origin of the distance rule we evaluate. Probability-based PIP models integrate a positional error distribution over the polygon~\cite{cheung2004}, and probabilistic spatial queries over imprecise data were studied in databases~\cite{cheng2003}. These works define the methods; we evaluate their risk--coverage behaviour at national scale and test their assumptions against real geocoding error.
 
@@ -56,47 +56,50 @@ We do not claim a new PIP algorithm; the strategies we evaluate are established.
 
 %=====================================================================
 \section{Problem and Risk Model}\label{sec:model}
-\textbf{Task.} A true location $x$ lies in region $r(x)$ of a partition (tracts, ZCTAs or counties). A system observes only $\tilde x = x + e$, where $e$ is positional error with a known scale $R$ (the maximum error radius for bounded error, or the 95\% radius otherwise). It must output a region or abstain. Because ZCTAs and coastal counties do not cover all land and water, the output distinguishes three cases: ANSWER, ABSTAIN-competing (another region is plausible) and ABSTAIN-unassigned (the error disk reaches area outside every region).
+\textbf{Task.} Let $\mathcal{R}$ be a set of non-overlapping administrative polygons (tracts, ZCTAs or counties) that need not cover all land and water (ZCTAs leave gaps; coastal polygons end at the shoreline). A true location $x$ has reference label $r(x)\in\mathcal{R}$, or is unassigned if it lies outside every polygon. A system observes only $\tilde x = x + e$, where $e$ is positional error with a known scale $R$ (the maximum error radius for bounded error, or the 95\% radius otherwise). It must output a region or abstain, and distinguishes three cases: ANSWER, ABSTAIN-competing (another region is plausible) and ABSTAIN-unassigned (the error disk reaches area outside every polygon).
 
-\textbf{Risk factors.} We model the probability of a wrong assignment as a function of five factors: (1) the distance $d$ from $\tilde x$ to its region's boundary, (2) the size and (3) the distribution of the error, (4) its \emph{direction} relative to the boundary, and (5) local boundary geometry and coverage gaps. Each experiment isolates one factor.
+\textbf{Two distances.} We use $d_{\mathrm{true}}=\operatorname{dist}(x,\partial r(x))$, the true location's distance to the boundary of its own region, to stratify the benchmark and to validate the error model, and $d_{\mathrm{obs}}=\operatorname{dist}(\tilde x,\partial r(\tilde x))$, the observed point's distance to the boundary of the region that contains it, which is the only distance available in practice and drives the abstention rule.
 
-\textbf{Straight-boundary theory.} If the boundary is locally straight and the error is isotropic, only the across-boundary component matters. For error uniform in a disk of radius $R$ and $u=d/R<1$, the probability of crossing is the area of the circular segment beyond the line:
+\textbf{Risk factors.} We model the probability of a wrong assignment as a function of five factors: (1) boundary distance, (2) the size and (3) the distribution of the error, (4) its \emph{direction} relative to the boundary, and (5) local boundary geometry and coverage gaps. Each experiment isolates one factor.
+
+\textbf{Straight-boundary forward model.} If the boundary is locally straight and the error is isotropic, only the across-boundary component matters. For a true location at distance $d_{\mathrm{true}}$ and error uniform in a disk of radius $R$, with $u=d_{\mathrm{true}}/R<1$, the probability that $\tilde x$ crosses the boundary is the area share of the circular segment beyond the line:
 \begin{equation}
 P_{\mathrm{uni}}(u) = \tfrac{1}{\pi}\left(\arccos u - u\sqrt{1-u^2}\right),\qquad P_{\mathrm{uni}}=0 \text{ for } u\ge 1. \label{eq:uni}
 \end{equation}
-For Gaussian error with $\sigma=R/2.4477$ (so that $R$ is the 95\% radius), $P_{\mathrm{gau}}=\Phi(-d/\sigma)$. For any isotropic error with observed displacement lengths $\rho_1,\dots,\rho_n$,
+For Gaussian error with $\sigma=R/2.4477$ (so that $R$ is the 95\% radius), $P_{\mathrm{gau}}=\Phi(-d_{\mathrm{true}}/\sigma)$. For any isotropic error with observed displacement lengths $\rho_1,\dots,\rho_n$,
 \begin{equation}
-P(d)=\frac{1}{n}\sum_{i:\,\rho_i>d}\frac{\arccos(d/\rho_i)}{\pi}. \label{eq:emp}
-\end{equation} Fig.~\ref{fig:theory} shows both curves. The prediction depends on $d$ and $R$ only through $d/R$, which gives a scale-free test.
+P(d_{\mathrm{true}})=\frac{1}{n}\sum_{i:\,\rho_i>d_{\mathrm{true}}}\frac{\arccos(d_{\mathrm{true}}/\rho_i)}{\pi}. \label{eq:emp}
+\end{equation}
+These are forward probabilities given the true location; Fig.~\ref{fig:theory} shows both curves. They depend on $d_{\mathrm{true}}$ and $R$ only through $d_{\mathrm{true}}/R$, which gives a scale-free test. The probability that an \emph{observed} point is wrongly assigned additionally depends on how true locations are distributed near boundaries, so we evaluate the operational rules separately, by risk and coverage.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.75\textwidth]{figures/fig1_theory.pdf}
-\caption{Straight-boundary prediction of misassignment versus $d/R$ (lines) and observed benchmark rates (markers); observed/predicted 0.988 uniform, 0.994 Gaussian (Sect.~\ref{sec:sim}).}
+\caption{Straight-boundary forward prediction of misassignment versus $d_{\mathrm{true}}/R$ (lines) and observed benchmark rates (markers); observed/predicted 0.988 uniform, 0.994 Gaussian (Sect.~\ref{sec:sim}).}
 \label{fig:theory}
 \end{figure}
 
 \textbf{Strategies.} We compare five assignment strategies, all given only $\tilde x$ and $R$:
 \emph{Crisp PIP} returns the containing region.
-\emph{Distance rule} answers the containing region if $d\ge\tau$ (default $\tau=R$) and abstains otherwise; its score is $d/R$. Under bounded error with $d\ge R$, the whole error disk lies in one region, so the answer is certain.
+\emph{Distance rule} answers the containing region if $d_{\mathrm{obs}}\ge\tau$ (default $\tau=R$) and abstains otherwise; its score is $d_{\mathrm{obs}}/R$. Under bounded error with $d_{\mathrm{obs}}\ge R$, the whole disk of radius $R$ around $\tilde x$, and therefore $x$, lies in one region, so the answer is certain.
 \emph{Monte Carlo} (MC) samples $N$ error draws (default $N=100$) and returns region frequencies.
-\emph{Disk overlay} returns the area fractions of each region within the disk of radius $R$; it is exact for uniform error only.
+\emph{Disk overlay} returns the area fractions of each region within the disk of radius $R$ around $\tilde x$; it is exact for uniform error only.
 \emph{Gaussian overlay} integrates the Gaussian density by radial Gauss--Legendre quadrature, $P_k=\int_0^{5\sigma} A_k(r)\,(r/\sigma^2)\,\phi(r)\,dr$ with 24 nodes, where $A_k(r)$ is the share of the circle of radius $r$ in region $k$.
-Probabilistic strategies answer if the top region probability is at least $\theta$ (default 0.9). Mass outside all regions is kept as \emph{unassigned}, not renormalised.
+Probabilistic strategies answer if the top region probability is at least $\theta$ (default 0.9). Mass outside all polygons is kept as \emph{unassigned}, not renormalised.
 
 %=====================================================================
 \section{Benchmark and Evaluation Protocol}\label{sec:bench}
-\textbf{Locations.} The benchmark contains 13{,}000 true locations in the 50 states and D.C.\ (county 4{,}000; ZCTA 4{,}000; tract 5{,}000) on TIGER/Line 2025 boundaries, sampled in an equal-area projection (EPSG:2163) within distance strata (Table~\ref{tab:bench}). A further geometry stress set of 4{,}907 locations targets corners, junctions of three or more regions, and slivers, which the main strata under-sample.
+\textbf{Locations.} The benchmark contains 13{,}000 true locations in the 50 states and D.C.\ (county 4{,}000; ZCTA 4{,}000; tract 5{,}000) on TIGER/Line 2025 boundaries~\cite{tiger2025}, sampled in an equal-area projection (EPSG:2163) within $d_{\mathrm{true}}$ strata (Table~\ref{tab:bench}). A further geometry stress set of 4{,}907 locations targets corners, junctions of three or more regions, and slivers, which the main strata under-sample.
 
 \begin{table}[t]
 \centering
-\caption{Benchmark composition by distance to the nearest boundary of the true region.}
+\caption{Benchmark composition by the true location's distance to its region boundary ($d_{\mathrm{true}}$).}
 \label{tab:bench}
 \small
 \setlength{\tabcolsep}{6.5pt}
 \begin{tabular}{lrrl}
 \toprule
-Stratum & Distance & Points & Purpose \\
+Stratum & $d_{\mathrm{true}}$ & Points & Purpose \\
 \midrule
 boundary & 0--10\,m & 1{,}300 & highest risk \\
 hard & 10--100\,m & 3{,}250 & typical geocoding error range \\
@@ -107,47 +110,49 @@ easy & $\ge$500\,m & 4{,}550 & interior control \\
 \end{tabular}
 \end{table}
 
-\textbf{Observations.} Each location receives $K=5$ noisy observations for each of eight settings: two error models (uniform disk; Gaussian) $\times$ four radii $R\in\{5,10,20,50\}$\,m, for 520{,}000 observations. Heavy-tailed models (Student-$t_3$, a contaminated Gaussian, and a log-normal with median 61\,m and 90th percentile 242\,m) test misspecification. Methods are scored against the region of the \emph{true} location.
+\textbf{Observations.} Each location receives $K=5$ noisy observations for each of eight settings: two error models (uniform disk; Gaussian) $\times$ four radii $R\in\{5,10,20,50\}$\,m, for 520{,}000 observations. Separate heavy-tailed runs (Student-$t_3$, a contaminated Gaussian, and a log-normal with median 61\,m and 90th percentile 242\,m) test misspecification. Methods are scored against the reference label of the \emph{true} location.
 
-\textbf{Metrics.} For selective assignment we report \emph{coverage} (share answered), \emph{risk} (error rate among answered), the area under the risk--coverage curve (AURC), and coverage at fixed risk targets (1\%, 0.5\%, 0.1\%). Probabilities are evaluated by expected calibration error (ECE, equal-mass bins) and Brier score. Pooled rates reflect the stratified design, so we report rates per distance band. Confidence intervals use a bootstrap clustered by location (the statistical unit is the benchmark location, not the observation) and Wilson intervals for proportions.
+\textbf{Metrics.} For selective assignment we report \emph{coverage} (share answered), \emph{risk} (error rate among answered), the area under the risk--coverage curve (AURC), and coverage at fixed risk targets (1\%, 0.5\%, 0.1\%). Probabilities are evaluated by expected calibration error (ECE, equal-mass bins) and Brier score. Pooled rates reflect the stratified design, so we report rates per distance band. Confidence intervals for benchmark metrics use a bootstrap over locations (the $K$ observations of a location are resampled together); proportions over independent addresses use Wilson intervals.
 
-\textbf{Held-out geography.} To test whether decision thresholds transfer, states are split into five folds; thresholds are chosen on four and applied to the fifth, either as the empirical threshold or as a \emph{certified} threshold whose Wilson upper bound on risk meets the target.
+\textbf{Held-out geography.} States are split into five folds. Thresholds are chosen on four folds and applied to the fifth, either as the \emph{empirical} threshold (largest coverage whose calibration risk meets the target) or as an \emph{upper-confidence-bound} (UCB) threshold (largest coverage whose 95\% Wilson upper bound on calibration risk meets the target). The UCB rule is a conservative heuristic, not a guarantee: the bound is computed over answered observations, which are correlated within a location, and the scan over candidate thresholds is not corrected for multiplicity.
 
 %=====================================================================
 \section{Results on the Benchmark}\label{sec:sim}
-\textbf{Risk is governed by $d/R$.} Crisp PIP is wrong often near boundaries: under uniform error with $R=20$\,m, 34.3\% [33.2, 35.5] of observations within 10\,m of a boundary fall in the wrong region, 4.9\% [4.2, 5.8] at 10--25\,m, and none beyond 25\,m; at $R=50$\,m the rates are 43.5\%, 27.5\% and 7.7\% for 0--10, 10--25 and 25--50\,m. County, ZCTA and tract rates differ by at most about 5 points, with no level consistently worst. Across all radii, the observed misassignment collapses onto Eq.~(\ref{eq:uni}) and its Gaussian analogue: the ratio of observed to predicted errors is 0.988 for uniform ($n$=33{,}390 near-boundary observations) and 0.994 for Gaussian error ($n$=43{,}760). The empirical form holds for each heavy-tailed model when evaluated with that model's displacement lengths.
+\textbf{Risk is governed by $d_{\mathrm{true}}/R$.} Crisp PIP is often wrong near boundaries: under uniform error with $R=20$\,m, 34.3\% [33.2, 35.5] of observations whose true location lies within 10\,m of a boundary fall in the wrong region, 4.9\% [4.2, 5.8] at 10--25\,m, and none beyond 25\,m; at $R=50$\,m the rates are 43.5\%, 27.5\% and 7.7\% for 0--10, 10--25 and 25--50\,m. County, ZCTA and tract rates differ by at most about 5 points, with no level consistently worst. Across all radii, the observed misassignment collapses onto Eq.~(\ref{eq:uni}) and its Gaussian analogue: over observations with $d_{\mathrm{true}}<R$ (uniform) or $d_{\mathrm{true}}<1.5R$ (Gaussian), the ratio of observed to predicted errors is 0.988 ($n$=33{,}390) and 0.994 ($n$=43{,}760). The empirical form, Eq.~(\ref{eq:emp}), holds for each heavy-tailed model when evaluated with that model's displacement lengths.
 
-\textbf{Geometry adds a measurable excess.} On the stress set, straight local boundaries match the theory (ratio 0.97--1.00), while junctions (ratio 1.14--1.19), corners (1.13--1.20) and slivers (1.06--1.21) exceed it, with confidence intervals excluding 1 in 11 of 12 cases.
+\textbf{Geometry adds a measurable excess.} On the stress set, straight local boundaries match the theory (observed/predicted 0.97--1.00), while junctions (1.14--1.19), corners (1.13--1.20) and slivers (1.06--1.21) exceed it, i.e.\ a relative increase of 6--21\%, with confidence intervals excluding 1 in 11 of 12 cases.
 
-\textbf{A distance rule is as good as probabilistic methods for ranking.} Table~\ref{tab:strategies} summarises the strategies. Under uniform error, the distance rule ($\tau=R$) has zero observed risk at 95.0/91.4/87.3/76.8\% coverage for $R$=5/10/20/50\,m, which follows from the bounded-error guarantee. The disk overlay ($\theta=0.9$) answers more queries (96.6/93.8/90.6/83.3\%) at a small risk (0.06--0.70\%): a trade-off, not a dominance. AURC of the distance rule and the overlays is indistinguishable under uniform error; under Gaussian error the distance rule equals the correctly specified Gaussian overlay (AURC 0.127\% at $R=20$) and beats the disk overlay (0.146\%) and MC-100 (0.164\%). At corners and slivers the distance rule ranks better than the overlays; the overlays are clearly better only at water edges and coverage gaps, where they can report unassigned mass. Unassigned mass is small for tracts (0.1--0.2\%) but reaches 0.5--1.0\% for coastal counties and 0.8--1.3\% for ZCTAs.
+\textbf{At matched risk, the distance rule matches the overlays.} Table~\ref{tab:strategies} compares the strategies at the same risk targets. In all 24 combinations of error model, radius and target, the distance rule's coverage is within 0.1 percentage points of both overlays; MC with 100 samples is at most 0.1 points higher, up to 0.9 points lower, and cannot reach 0.1\% risk for Gaussian error at $R=50$\,m. Crisp PIP cannot abstain (error 3.7\% overall for uniform error at $R=20$\,m). At its default threshold $\tau=R$, the distance rule has zero observed risk under uniform error at 95.0/91.4/87.3/76.8\% coverage for $R$=5/10/20/50\,m, as the bounded-error guarantee implies; the disk overlay at $\theta=0.9$ answers more queries (96.6/93.8/90.6/83.3\%) at a small risk (0.06--0.70\%), a different operating point rather than a better ranking. AURC agrees (Gaussian, $R$=20\,m: distance rule and Gaussian overlay 0.127\%, disk overlay 0.146\%, MC 0.164\%). On the stress set the distance rule ranks better than the overlays at corners and slivers; the overlays are clearly better only at water edges and coverage gaps, where they can report unassigned mass. Unassigned mass is small for tracts (0.1--0.2\%) but reaches 0.5--1.0\% for coastal counties and 0.8--1.3\% for ZCTAs.
 
 \begin{table}[t]
 \centering
-\caption{Assignment strategies on the benchmark (uniform error unless noted). Coverage = share of queries answered; AURC in \%; runtime per 1{,}000 queries at $R$=20\,m.}
+\caption{Coverage (\%) at matched risk targets ($\le$0.5\% and $\le$0.1\%), benchmark pooled over levels; 0 = target not reached. Bootstrap 95\% CIs are in the repository. Runtime: ms per 1{,}000 queries at $R$=20\,m on one machine (EXP01 and EXP03 runs).}
 \label{tab:strategies}
-\small\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lL{7.0cm}r}
+\small\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{lrrrrrrrrr}
 \toprule
-Strategy & Key behaviour & ms/1k \\
+& \multicolumn{2}{c}{Unif.\ 20\,m} & \multicolumn{2}{c}{Gauss.\ 20\,m} & \multicolumn{2}{c}{Unif.\ 50\,m} & \multicolumn{2}{c}{Gauss.\ 50\,m} & \\
+Strategy & 0.5\% & 0.1\% & 0.5\% & 0.1\% & 0.5\% & 0.1\% & 0.5\% & 0.1\% & ms/1k \\
 \midrule
-Crisp PIP & no abstention; 34\% wrong within 10\,m ($R$=20) & 5 \\
-Distance rule & 0\% risk at 87.3\% coverage ($R$=20); best under heavy tails & 5 \\
-Disk overlay & 90.6\% coverage at 0.26\% risk ($R$=20); exact for uniform only & 13 \\
-Gaussian overlay & AURC 0.127 = distance rule (Gaussian, $R$=20); ECE 1.6--4.6\% & 500 \\
-Monte Carlo ($N$=100) & AURC 0.164 (Gaussian, $R$=20); 5\% of decisions differ from overlay & 67 \\
+Distance rule & 91.7 & 89.5 & 92.4 & 88.7 & 82.2 & 79.6 & 83.7 & 78.4 & 5 \\
+Disk overlay & 91.7 & 89.5 & 92.4 & 88.7 & 82.3 & 79.6 & 83.8 & 78.3 & 13 \\
+Gaussian overlay & 91.7 & 89.5 & 92.4 & 88.7 & 82.3 & 79.6 & 83.8 & 78.3 & 500 \\
+MC ($N$=100) & 91.6 & 89.3 & 92.3 & 88.8 & 81.7 & 78.7 & 83.2 & 0 & 67 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Probabilities need care.} The Gaussian overlay matches 5{,}000-sample MC to a mean absolute difference of 0.0032, yet its ECE is 1.6--1.7\% at $R$=5--10\,m and 3.8--4.6\% at $R$=20--50\,m; the disk overlay under uniform error has ECE 2.0--5.6\%. A correctly specified error model therefore does not guarantee calibrated probabilities, likely because benchmark locations are concentrated near boundaries (a non-flat prior). MC error decreases as $1/\sqrt{N}$ (RMSE 0.079, 0.039, 0.012, 0.006 for $N$=25, 100, 1{,}000, 5{,}000): about 5\% of threshold decisions differ from the exact overlay at $N$=100 and 0.7\% at $N$=5{,}000, so MC needs thousands of samples to match a deterministic overlay.
+\textbf{Probabilities need care.} The Gaussian overlay matches 5{,}000-sample MC to a mean absolute difference of 0.0032, yet its ECE is 1.6--1.7\% at $R$=5--10\,m and 3.8--4.6\% at $R$=20--50\,m; the disk overlay under uniform error has ECE 2.0--5.6\%. An overlay centred on $\tilde x$ computes $\int \mathbf{1}[x\in r]\,f(\tilde x-x)\,dx$, the posterior $p(r(x)=r\mid\tilde x)$ only under a flat prior on $x$. Our benchmark deliberately concentrates true locations near boundaries, so a correctly specified error density $f$ does not yield calibrated region probabilities. MC error decreases as $1/\sqrt{N}$ (RMSE 0.079, 0.039, 0.012, 0.006 for $N$=25, 100, 1{,}000, 5{,}000): about 5\% of threshold decisions differ from the exact overlay at $N$=100 and 0.7\% at $N$=5{,}000, so MC needs thousands of samples to match a deterministic overlay.
 
 \textbf{Heavy tails.} When $R$ is only a percentile of a heavy-tailed error, no rule has a hard guarantee. The distance rule degrades gracefully (Student-$t_3$, $R$=50\,m: 67.9\% coverage at risk $\le$0.1\%), whereas the disk overlay cannot reach that risk at any coverage.
 
-\textbf{Thresholds transfer across states.} With certified thresholds, pooled held-out risk stays within the target in 24/24 settings (8 error settings $\times$ 3 targets) for every strategy; empirical thresholds succeed in only 6--7 of 24 (MC: 21/24). Single folds occasionally exceed the target slightly (worst 0.168\% against 0.1\%). The distance rule and overlays retain about 91.9\% coverage; MC retains 88.5\% and cannot be certified for Gaussian error at $R$=50\,m and 0.1\%.
+\textbf{Thresholds in held-out states.} With UCB thresholds, pooled held-out risk met the target in 24/24 settings (8 error settings $\times$ 3 targets) for every strategy; for MC at Gaussian $R$=50\,m and 0.1\% this holds only because the rule abstains on every query. Empirical thresholds met it in 6--7 of 24 settings (MC: 21/24). At the level of individual folds, UCB thresholds exceeded the target in 25--26 of 120 fold--setting cases (MC: 16), against 58--60 (MC: 50) for empirical thresholds; the worst fold reached 0.168\% against a 0.1\% target. The distance rule and the overlays retained about 91.9\% mean coverage under UCB thresholds, MC 88.5\%.
 
 %=====================================================================
-\section{Real Geocoding Error: NYC, Utah and Nationwide}\label{sec:real}
-\textbf{Data.} We geocode addresses with the U.S.\ Census Bureau batch geocoder~\cite{censusgeocoder} (benchmark \texttt{Public\_AR\_Current}) and assign tracts with the same TIGER/Line 2025 polygons~\cite{tiger2025}. Ground truth comes from authoritative address points: (a) New York City, two independent sources (PLUTO tax-lot points, $n$=4{,}963; NYC Address Points, $n$=2{,}894); (b) Utah, Salt Lake County versus six rural counties (state address points, 2{,}615 scored addresses); (c) the USDOT National Address Database (release 24)~\cite{nad}, using in each of the nine Census divisions the county with the most address points and one randomly chosen smaller county (2{,}000--30{,}000 address points), 18 counties and 2{,}286 scored addresses. Addresses with unit numbers or non-numeric house numbers, and truth points that are themselves geocoded, are excluded. In each region we sample addresses within 50\,m of a tract line and random addresses. As a counterfactual we keep each address's displacement length but rotate it to a random direction (\emph{random direction}).
+\section{Real Geocoding Error: NYC, Utah and 18 Sampled Counties}\label{sec:real}
+\textbf{Data.} We geocode addresses with the U.S.\ Census Bureau batch geocoder~\cite{censusgeocoder} (benchmark \texttt{Public\_AR\_Current}) and assign tracts with the same TIGER/Line 2025 polygons~\cite{tiger2025}. Independent reference coordinates come from address-point data: (a) New York City, two sources (PLUTO tax-lot points, $n$=4{,}963 scored addresses; NYC Address Points, $n$=2{,}894); (b) Utah state address points, Salt Lake County versus six rural counties (2{,}615 scored addresses); (c) the USDOT National Address Database (release 24)~\cite{nad}, using in each of the nine Census divisions the county with the most address points and one randomly chosen smaller county (2{,}000--30{,}000 address points): 18 sampled counties and 2{,}286 scored addresses. The tract containing a reference point is its \emph{reference label}. Addresses with unit numbers or non-numeric house numbers are excluded, as are reference points whose placement is itself a geocode (and, in the national data, of unknown placement). In each region we sample addresses whose reference point lies within 50\,m of a tract line, and random addresses. The samples are designed to compare mechanisms, not to estimate national prevalence.
+
+\textbf{Random-direction counterfactual.} For each address we keep the measured displacement length $\rho$ between reference point and geocode and draw $M=200$ directions uniformly on $[0,2\pi)$ around the reference point; the address's random-direction rate is the share of rotated points outside its reference tract. We report the mean over addresses (95\% bootstrap CIs over addresses are in the repository). Because only the direction changes, the comparison isolates the contribution of direction.
 
 \begin{figure}[t]
 \centering
@@ -156,31 +161,31 @@ Monte Carlo ($N$=100) & AURC 0.164 (Gaussian, $R$=20); 5\% of decisions differ f
 \label{fig:direction}
 \end{figure}
 
-\textbf{Real errors are large but rarely change the tract.} Median displacement is 19--26\,m in NYC, 27--31\,m in Utah and 30--86\,m across the national counties. Isotropic theory would predict many tract errors near boundaries (e.g., 14--16\% in Utah). Observed rates are far lower (Fig.~\ref{fig:direction}, Table~\ref{tab:real}): 0.04\% and 0.97\% in NYC (PLUTO and Address Points truth), 0.72\% in Salt Lake County, 2.03\% in rural Utah and 1.57\% [0.90, 2.72] nationally for near-line addresses, against 10.8--20.2\% under random directions, i.e.\ 5--16 times fewer errors outside the PLUTO sample (which has a single error). The pattern holds in each of the 18 national counties: on each county's full sample (near-line and random addresses), real rates are 0--3.1\% and random-direction rates 4.1--12.0\%.
+\textbf{Real errors are large but rarely change the tract.} Median displacement is 19--26\,m in NYC, 27--31\,m in Utah and 30--86\,m across the sampled counties. Isotropic theory would predict many tract errors near boundaries (e.g., 14--16\% in Utah). Observed rates are far lower (Fig.~\ref{fig:direction}, Table~\ref{tab:real}): 0.04\% and 0.97\% in NYC (PLUTO and Address Points references), 0.72\% in Salt Lake County, 2.03\% in rural Utah and 1.57\% [0.90, 2.72] across the 18 sampled counties for near-line addresses, against 10.8--20.2\% under random directions, i.e.\ 5--16 times fewer errors outside the PLUTO sample (which has a single error). The pattern holds in each of the 18 counties: on each county's full sample (near-line and random addresses), real rates are 0--3.1\% and random-direction rates 4.1--12.0\%.
 
 \begin{table}[t]
 \centering
-\caption{Wrong-tract rate (\%) of Census geocodes for addresses within 50\,m of a tract line, with 95\% Wilson intervals, and the same displacement lengths in random directions. PLUTO and Address Points are two independent NYC ground truths.}
+\caption{Wrong-tract rate (\%) of Census geocodes for addresses whose reference point lies within 50\,m of a tract line, with 95\% Wilson intervals, and the same displacement lengths in random directions ($M=200$ per address). PLUTO and Address Points are two independent NYC reference sources.}
 \label{tab:real}
 \small\setlength{\tabcolsep}{5pt}
 \begin{tabular}{lrrrr}
 \toprule
 Region & $n$ & Real & 95\% CI & Random dir. \\
 \midrule
-NYC, PLUTO truth & 2{,}478 & 0.04 & [0.01, 0.23] & 11.5 \\
-NYC, Address Points truth & 1{,}443 & 0.97 & [0.58, 1.62] & 15.0 \\
+NYC, PLUTO reference & 2{,}478 & 0.04 & [0.01, 0.23] & 11.5 \\
+NYC, Address Points reference & 1{,}443 & 0.97 & [0.58, 1.62] & 15.0 \\
 Utah, Salt Lake County & 694 & 0.72 & [0.31, 1.68] & 11.7 \\
 Utah, six rural counties & 591 & 2.03 & [1.17, 3.52] & 10.8 \\
-National, 18 counties & 765 & 1.57 & [0.90, 2.72] & 20.2 \\
+18 sampled counties & 765 & 1.57 & [0.90, 2.72] & 20.2 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Mechanism: a street-side offset.} Census geocodes are interpolated along TIGER street centerlines and offset from them. In every region, the median distance from the geocode to the nearest TIGER street centerline is 6.3--6.4\,m, with 96--100\% of geocodes between 5 and 8\,m, and 84--99.7\% lie on the same side of the street as the true address. Tract boundaries mostly follow street centerlines (87\% of near-line boundaries nationally; 60--100\% by county). A geocode that stays on the correct side of the street therefore stays in the correct tract even when it is tens of metres away along the street. This is a measured regularity of the geocoder output, not a documented design guarantee. In NYC, of the remaining misassigned cases, 12 of 26 were displaced along the same street, 10 matched a different street and 4 were placed on the opposite side.
+\textbf{Mechanism: a street-side offset.} Census documentation states that coordinates are calculated along an address range of the MAF/TIGER database~\cite{censusgeodoc}. We measure where they land: in every region the median distance from the geocode to the nearest TIGER street centerline is 6.3--6.4\,m, with 96--100\% of geocodes between 5 and 8\,m, and 84--99.7\% lie on the same side of that street as the reference point (side is taken relative to the TIGER segment nearest the geocode; intersections receive no special treatment). A tract boundary is counted as street-following if a TIGER centerline lies within 1.5\,m of the boundary point nearest the reference location; in NYC, tolerances of 1--5\,m gave identical results. Such boundaries are the majority (87\% of near-line boundaries across the sampled counties; 60--100\% by county). A geocode that stays on the reference side of the street therefore stays in the reference tract even when it is tens of metres away along the street. The 6.4\,m offset is a measured regularity of the geocoder output, not a documented design guarantee. Of the 26 misassigned NYC cases, 12 were displaced along the same street, 10 matched a different street and 4 were placed on the opposite side.
 
-\textbf{Where protection weakens.} The protection depends on two conditions. First, in smaller counties the error is larger and side-of-street swaps occur: pooled national rates are 0.44\% [0.20, 0.95] in the largest-coverage counties and 0.98\% [0.52, 1.85] in the smaller ones, and only 44\% of rural Utah errors stayed on the correct side (78\% urban). Second, some tract boundaries follow rivers, rail lines or municipal limits. Near such non-street boundaries the error rate was higher in every region examined (national: 3.7\% vs.\ 0.66\% in larger and 5.9\% vs.\ 2.7\% in smaller counties; Utah: 3.0\% vs.\ 0.72\% urban, 4.3\% vs.\ 1.9\% rural). Groups are small; pooling Utah (geocoded truth points removed) and national data in an exploratory analysis gives 3.7\% (7/187) versus 1.29\% (25/1{,}945), odds ratio 3.0, Fisher $p$=0.02.
+\textbf{Where protection weakens.} Two conditions weaken it. First, among the 18 sampled counties, wrong-tract rates were 0.44\% [0.20, 0.95] in the largest-coverage counties and 0.98\% [0.52, 1.85] in the smaller ones; in Utah, where the comparison is explicitly urban versus rural, only 44\% of rural misassignments stayed on the reference side of the street (78\% urban). Second, some tract boundaries follow rivers, rail lines or municipal limits. Near such non-street boundaries the error rate was higher in every region examined (sampled counties: 3.7\% vs.\ 0.66\% in the largest-coverage and 5.9\% vs.\ 2.7\% in the smaller counties; Utah: 3.0\% vs.\ 0.72\% urban, 4.3\% vs.\ 1.9\% rural). Groups are small; pooling Utah (geocoded reference points removed) and the sampled counties in an exploratory analysis gives 3.7\% (7/187) versus 1.29\% (25/1{,}945), odds ratio 3.0, Fisher $p$=0.02.
 
-\textbf{Pitfall: simplified boundary files.} Census also distributes generalised cartographic boundary files for mapping. Applied to \emph{exact} benchmark locations (which over-sample boundaries), the 1:500k tract file assigns 1.64\% [1.32, 2.03] of locations to the wrong tract (14.2\% within 10\,m of a boundary) and leaves 2.3\% outside every polygon along shorelines; county files misassign 2.1\% (1:500k), 8.0\% (1:5m) and 15.0\% (1:20m). In NYC, true PLUTO locations with the cartographic tract file are wrong 0.69\% of the time, nearly seven times the 0.10\% of the corresponding Census geocodes with TIGER/Line. The boundary file can matter more than the geocoder.
+\textbf{Pitfall: generalized boundary files.} Census also distributes cartographic boundary files, which are designed for small-scale thematic mapping and documented as unsuitable for geocoding addresses or determining precise geographic area relationships~\cite{censuscb}. Using them outside that purpose introduces substantial disagreement. Applied to \emph{exact} benchmark locations (which over-sample boundaries), the 1:500k tract file assigns 1.64\% [1.32, 2.03] of locations to a different tract than TIGER/Line (14.2\% within 10\,m of a boundary) and leaves 2.3\% outside every polygon along shorelines; county files disagree for 2.1\% (1:500k), 8.0\% (1:5m) and 15.0\% (1:20m). In NYC, PLUTO reference points assigned with the cartographic tract file disagree with their TIGER/Line label 0.69\% of the time, nearly seven times the 0.10\% of the corresponding Census geocodes with TIGER/Line.
 
 %=====================================================================
 \section{Implications, Limitations and Conclusion}
@@ -188,35 +193,38 @@ National, 18 counties & 765 & 1.57 & [0.90, 2.72] & 20.2 \\
 
 \begin{table}[t]
 \centering
-\caption{Practitioner decision table.}
+\caption{Practitioner decision table. Real-data rates refer to addresses within 50\,m of a tract line.}
 \label{tab:guide}
 \small\setlength{\tabcolsep}{3pt}
 \begin{tabular}{L{3.9cm}L{7.7cm}}
 \toprule
 Situation & Recommendation \\
 \midrule
-Any area assignment & Use full-resolution TIGER/Line boundaries, never cartographic files. \\
-Need a cheap risk flag & Flag records with $d<R$; review or report them separately. \\
+Any area assignment & Use full-resolution TIGER/Line boundaries; cartographic files are documented for small-scale mapping only. \\
+Simulated or known error scale $R$ & Flag records with $d_{\mathrm{obs}}<R$; review or report them separately. \\
 Need graded probabilities & Use a deterministic overlay matched to the error model; check calibration; avoid MC with few samples. \\
-Choosing a threshold & Certify it on held-out geography (Wilson bound), not on the same data. \\
-Census geocodes near street-following boundaries & Do not set $R$ from the along-street displacement (19--86\,m): it would flag most urban addresses. Residual risk within 50\,m of a line was 0.04--2.0\% (2.7\% in smaller counties). \\
-Rural counties, non-street boundaries (rivers, rail, municipal limits) & Real-data risk 2--6\% near the line: flag with $d<R$ and review. \\
-Coasts, ZCTAs (simulated) & Expect unassigned mass (0.5--1.3\%); report it, do not renormalise. \\
+Choosing a threshold & Calibrate conservatively (upper confidence bound) and verify on held-out geography. \\
+Census geocodes near street-following boundaries & Do not set $R$ from the along-street displacement (19--86\,m): it would flag most urban addresses. Observed rates 0.04--2.0\% (Table~\ref{tab:real}). \\
+Non-street boundaries; smaller or rural counties & Observed 3.0--5.9\% near non-street lines (7/187 pooled), 2.7\% (6/219) on street lines in smaller sampled counties, 2.0\% (12/591) in rural Utah: flag and review. \\
+Coasts, ZCTAs (simulation) & Expect unassigned mass (0.5--1.3\%); report it, do not renormalise. \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{Limitations.} The real-world evaluation covers one geocoder; commercial and parcel-based geocoders place points differently, and the protective street offset should not be assumed for them. Address-point ground truth has its own placement error; we removed truth points that were themselves geocoded, and results were unchanged (rural Utah 2.47\%$\to$2.03\%). National counties were chosen by address-database coverage, not by an official urban--rural classification, and the database does not cover every state. Real-world samples are a few thousand addresses, so per-county rates are imprecise, and the non-street boundary effect is exploratory. The simulated benchmark assumes isotropic error with a known scale.
+\textbf{Limitations.} The real-world evaluation covers one geocoder; commercial and parcel-based geocoders place points differently, and the protective street offset should not be assumed for them. Reference coordinates have their own placement error; removing reference points that were themselves geocoded changed rural Utah from 2.47\% to 2.03\%, and the pattern persisted. Counties were chosen by address-database coverage, not by an official urban--rural classification, and the database does not cover every state, so the rates are not national prevalence estimates. Real-world samples are a few thousand addresses, so per-county rates are imprecise, and the non-street boundary effect is exploratory. Street-side classification ignores intersections. The UCB threshold rule is a heuristic without a formal guarantee. The simulated benchmark assumes isotropic error with a known scale; for real geocodes, whose errors are directional, the distance rule is supported by simulation only, and the appropriate $R$ must reflect the across-street error component.
 
-\textbf{Conclusion.} Boundary misassignment of geocoded addresses is predictable: under isotropic error it follows a closed-form function of distance over error radius, with a modest excess at complex geometry. A distance rule flags risky cases as well as probabilistic methods at a fraction of the cost, and certified thresholds transfer to unseen states. Real Census geocoding errors are large but directionally structured, which keeps most addresses in the correct tract nationwide; the protection weakens in rural areas, near non-street boundaries and, most simply avoidable, when simplified boundary files are used. Reporting uncertain assignments, rather than silently choosing one, is a low-cost step toward more reliable government statistics and services.
+\textbf{Conclusion.} Boundary misassignment of geocoded addresses is predictable: under isotropic error it follows a closed-form function of the true location's boundary distance over the error radius, with a modest excess at complex geometry. At matched risk targets, a distance rule flags risky cases as well as probabilistic overlays at a fraction of the cost, and conservatively calibrated thresholds carried over to held-out states. Real Census geocoding errors are large but directionally structured, which kept most addresses in the reference tract in every sampled region; the protection weakens in smaller and rural counties, near non-street boundaries and, most simply avoidable, when generalized boundary files are used for assignment. Reporting uncertain assignments, rather than silently choosing one, is a low-cost step toward more reliable government statistics and services.
 
 \textbf{Data and code availability.} Benchmark, code and all result tables are available in an anonymized repository: \url{https://anonymous.4open.science/r/boundarybench-4678/}. % CAMERA-READY: GitHub URL + Zenodo DOI
 
 %=====================================================================
 \begin{thebibliography}{99}
 \bibitem{censusgeocoder} U.S. Census Bureau: Census Geocoder, \url{https://geocoding.geo.census.gov/}. Accessed Nov 2026
+\bibitem{censusgeodoc} U.S. Census Bureau: Census Geocoding Services, \url{https://www.census.gov/data/developers/data-sets/Geocoding-services.html}. Accessed Nov 2026
+\bibitem{censuscb} U.S. Census Bureau: Cartographic Boundary File Description, \url{https://www.census.gov/programs-surveys/geography/technical-documentation/naming-convention/cartographic-boundary-file.html}. Accessed Nov 2026
 \bibitem{tiger2025} U.S. Census Bureau: TIGER/Line Shapefiles 2025, \url{https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html}. Accessed Nov 2026
 \bibitem{nad} U.S. Department of Transportation: National Address Database, \url{https://www.transportation.gov/gis/national-address-database}. Accessed Nov 2026
+\bibitem{berg2026} Berg, A., Gutmann, M., Leyk, S., Kwon, H.: Why it's so hard to match residence addresses to census blocks---and how to fix it. Trans. GIS \textbf{30}(2), e70225 (2026)
 \bibitem{blakemore1984} Blakemore, M.: Generalisation and error in spatial data bases. Cartographica \textbf{21}(2--3), 131--139 (1984)
 \bibitem{cayo2003} Cayo, M.R., Talbot, T.O.: Positional error in automated geocoding of residential addresses. Int. J. Health Geogr. \textbf{2}, 10 (2003)
 \bibitem{cheng2003} Cheng, R., Kalashnikov, D.V., Prabhakar, S.: Evaluating probabilistic queries over imprecise data. In: Proc. ACM SIGMOD, pp. 551--562 (2003)
@@ -227,6 +235,7 @@ Coasts, ZCTAs (simulated) & Expect unassigned mass (0.5--1.3\%); report it, do n
 \bibitem{guo2017} Guo, C., Pleiss, G., Sun, Y., Weinberger, K.Q.: On calibration of modern neural networks. In: Proc. ICML, pp. 1321--1330 (2017)
 \bibitem{heuvelink1998} Heuvelink, G.B.M.: Error Propagation in Environmental Modelling with GIS. Taylor \& Francis, London (1998)
 \bibitem{jacquez2012} Jacquez, G.M.: A research agenda: does geocoding positional error matter in health GIS studies? Spat. Spatiotemporal Epidemiol. \textbf{3}(1), 7--16 (2012)
+\bibitem{kinnee2020} Kinnee, E.J., Tripathy, S., Schinasi, L., Shmool, J.L.C., Sheffield, P.E., Holguin, F., Clougherty, J.E.: Geocoding error, spatial uncertainty, and implications for exposure assessment and environmental epidemiology. Int. J. Environ. Res. Public Health \textbf{17}(16), 5845 (2020)
 \bibitem{krieger2001} Krieger, N., Waterman, P., Lemieux, K., Zierler, S., Hogan, J.W.: On the wrong side of the tracts? Evaluating the accuracy of geocoding in public health research. Am. J. Public Health \textbf{91}(7), 1114--1116 (2001)
 \bibitem{krieger2002} Krieger, N., Chen, J.T., Waterman, P.D., Soobader, M.J., Subramanian, S.V., Carson, R.: Geocoding and monitoring of US socioeconomic inequalities in mortality and cancer incidence: does the choice of area-based measure and geographic level matter? Am. J. Epidemiol. \textbf{156}(5), 471--482 (2002)
 \bibitem{rushton2006} Rushton, G., Armstrong, M.P., Gittler, J., Greene, B.R., Pavlik, C.E., West, M.M., Zimmerman, D.L.: Geocoding in cancer research: a review. Am. J. Prev. Med. \textbf{30}(2S), S16--S24 (2006)
