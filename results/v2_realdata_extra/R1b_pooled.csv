@@ -1,0 +1,6 @@
+boundary,side,n,wrong,wrong_%,ci
+follows a street,opposite side,84,19,22.619,"[14.99, 32.65]"
+follows a street,same side,6949,27,0.389,"[0.27, 0.56]"
+not a street,no street within 60 m,14,1,7.143,"[1.27, 31.47]"
+not a street,opposite side,16,1,6.25,"[1.11, 28.33]"
+not a street,same side,264,6,2.273,"[1.05, 4.87]"

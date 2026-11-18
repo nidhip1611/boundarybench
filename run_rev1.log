@@ -1,0 +1,272 @@
+
+================================================================================
+RUNNING exp17_matched_operating_points.py
+================================================================================
+# EXP17 matched operating points (coverage at fixed risk targets, bootstrap CIs) | run 2026-11-18 17:32 | commit 8e3e891
+EXP17 gaussian R=5 done
+EXP17 gaussian R=10 done
+EXP17 gaussian R=20 done
+EXP17 gaussian R=50 done
+EXP17 uniform R=5 done
+EXP17 uniform R=10 done
+EXP17 uniform R=20 done
+EXP17 uniform R=50 done
+
+[M1] Coverage (%) at fixed risk targets and AURC (%), 95% CI from a bootstrap over benchmark points (B = 200).
+     Coverage 0 means the target is not reached at any coverage.
+metric                                   cov@risk<=1%     cov@risk<=0.5%     cov@risk<=0.1%                AURC_%
+model    R  method                                                                                               
+gaussian 5  Disk overlay         100.0 [100.0, 100.0]  99.2 [98.9, 99.5]  97.4 [97.0, 97.7]  0.019 [0.011, 0.027]
+            Distance rule        100.0 [100.0, 100.0]  99.2 [98.9, 99.5]  97.3 [97.0, 97.7]  0.011 [0.009, 0.013]
+            Gaussian overlay     100.0 [100.0, 100.0]  99.2 [98.9, 99.5]  97.4 [97.0, 97.7]  0.011 [0.009, 0.013]
+            Monte Carlo (N=100)  100.0 [100.0, 100.0]  99.1 [98.9, 99.4]  97.3 [97.0, 97.7]  0.022 [0.013, 0.030]
+         10 Disk overlay            98.6 [98.2, 98.9]  96.7 [96.4, 97.2]  93.6 [93.2, 94.2]  0.054 [0.043, 0.067]
+            Distance rule           98.6 [98.2, 98.9]  96.7 [96.4, 97.2]  93.6 [93.2, 94.2]  0.041 [0.035, 0.046]
+            Gaussian overlay        98.6 [98.2, 98.9]  96.7 [96.4, 97.1]  93.6 [93.2, 94.2]  0.040 [0.035, 0.046]
+            Monte Carlo (N=100)     98.5 [98.0, 98.9]  96.6 [96.2, 97.0]  93.5 [92.8, 94.0]  0.059 [0.048, 0.073]
+         20 Disk overlay            94.8 [94.4, 95.3]  92.4 [91.9, 93.1]  88.7 [88.0, 89.4]  0.146 [0.129, 0.163]
+            Distance rule           94.8 [94.4, 95.3]  92.4 [92.0, 93.1]  88.7 [88.1, 89.4]  0.127 [0.114, 0.140]
+            Gaussian overlay        94.8 [94.3, 95.3]  92.4 [91.9, 93.1]  88.7 [88.0, 89.4]  0.127 [0.114, 0.140]
+            Monte Carlo (N=100)     94.7 [94.1, 95.1]  92.3 [91.6, 92.9]  88.8 [88.2, 89.4]  0.164 [0.141, 0.183]
+         50 Disk overlay            87.3 [86.6, 88.1]  83.8 [83.2, 84.8]  78.3 [76.9, 79.4]  0.447 [0.403, 0.481]
+            Distance rule           87.3 [86.5, 88.0]  83.7 [83.1, 84.8]  78.4 [76.9, 79.5]  0.403 [0.369, 0.430]
+            Gaussian overlay        87.3 [86.7, 88.1]  83.8 [83.2, 84.8]  78.3 [76.9, 79.4]  0.401 [0.366, 0.427]
+            Monte Carlo (N=100)     86.8 [86.3, 87.7]  83.2 [82.6, 84.4]    0.0 [0.0, 79.0]  0.489 [0.439, 0.531]
+uniform  5  Disk overlay          100.0 [99.8, 100.0]  98.7 [98.5, 99.0]  96.9 [96.5, 97.2]  0.015 [0.012, 0.018]
+            Distance rule         100.0 [99.8, 100.0]  98.7 [98.5, 99.0]  96.9 [96.5, 97.2]  0.015 [0.012, 0.018]
+            Gaussian overlay      100.0 [99.8, 100.0]  98.7 [98.5, 99.0]  96.9 [96.5, 97.2]  0.015 [0.012, 0.018]
+            Monte Carlo (N=100)    99.9 [99.7, 100.0]  98.6 [98.3, 98.9]  96.9 [96.4, 97.2]  0.017 [0.013, 0.022]
+         10 Disk overlay            97.5 [97.1, 97.8]  95.8 [95.4, 96.3]  93.6 [93.1, 94.1]  0.057 [0.050, 0.064]
+            Distance rule           97.5 [97.1, 97.8]  95.9 [95.4, 96.3]  93.6 [93.1, 94.1]  0.057 [0.050, 0.064]
+            Gaussian overlay        97.5 [97.1, 97.8]  95.9 [95.4, 96.3]  93.6 [93.2, 94.1]  0.057 [0.050, 0.064]
+            Monte Carlo (N=100)     97.3 [96.9, 97.7]  95.6 [95.3, 96.1]  93.3 [93.0, 93.9]  0.058 [0.051, 0.066]
+         20 Disk overlay            93.4 [92.8, 93.8]  91.7 [91.2, 92.2]  89.5 [89.0, 90.0]  0.167 [0.151, 0.184]
+            Distance rule           93.4 [92.8, 93.8]  91.7 [91.2, 92.2]  89.5 [89.0, 90.0]  0.167 [0.151, 0.185]
+            Gaussian overlay        93.4 [92.8, 93.8]  91.7 [91.2, 92.2]  89.5 [89.0, 90.0]  0.167 [0.151, 0.184]
+            Monte Carlo (N=100)     93.4 [92.7, 93.9]  91.6 [91.1, 92.1]  89.3 [88.6, 89.7]  0.180 [0.162, 0.202]
+         50 Disk overlay            84.8 [84.1, 85.5]  82.3 [81.7, 83.0]  79.6 [79.0, 80.4]  0.540 [0.501, 0.575]
+            Distance rule           84.7 [84.0, 85.4]  82.2 [81.6, 83.0]  79.6 [78.9, 80.3]  0.544 [0.504, 0.579]
+            Gaussian overlay        84.8 [84.1, 85.5]  82.3 [81.6, 83.0]  79.6 [79.0, 80.4]  0.541 [0.502, 0.575]
+            Monte Carlo (N=100)     84.2 [83.5, 85.1]  81.7 [81.2, 82.8]  78.7 [78.3, 79.9]  0.567 [0.524, 0.604]
+
+summary written to /Users/nidhipandya/Downloads/BoundaryBench/repo/results/v2_matched/summary.txt
+exp17_matched_operating_points.py finished in 22s
+
+================================================================================
+RUNNING exp18_realdata_mechanism.py
+================================================================================
+# EXP18 real-data mechanism, distance rule on real geocodes, NYC overlap, CIs, environment | run 2026-11-18 17:33 | commit 8e3e891
+Addresses per group: {'NYC, PLUTO': 4963, 'NYC, Address Points': 2894, 'Utah, Salt Lake County': 1376, 'Utah, six rural counties': 1139, 'National, largest-coverage counties': 1367, 'National, smaller counties': 919}
+/Users/nidhipandya/Downloads/BoundaryBench/repo/experiments/exp18_realdata_mechanism.py:72: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  r1 = near.groupby(["group", "boundary", "side"]).apply(joint).reset_index()
+
+[R1] Addresses within 50 m of a tract line: wrong-tract counts by boundary type x street side of the Census
+     point (side = relative to the TIGER segment nearest the Census point; boundary 'follows a street' if a TIGER
+     road centerline lies within 1.5 m of the nearest boundary point)
+                              group         boundary                  side    n  wrong  wrong_%             ci
+                         NYC, PLUTO follows a street         opposite side    6      0    0.000  [0.00, 39.03]
+                         NYC, PLUTO follows a street             same side 3190      1    0.031   [0.01, 0.18]
+                         NYC, PLUTO     not a street             same side   66      0    0.000   [0.00, 5.50]
+                NYC, Address Points follows a street         opposite side   11      4   36.364 [15.17, 64.62]
+                NYC, Address Points follows a street             same side 1881     16    0.851   [0.52, 1.38]
+                NYC, Address Points     not a street no street within 60 m    1      0    0.000  [0.00, 79.35]
+                NYC, Address Points     not a street         opposite side    1      0    0.000  [0.00, 79.35]
+                NYC, Address Points     not a street             same side   39      1    2.564  [0.45, 13.18]
+             Utah, Salt Lake County follows a street         opposite side   18      1    5.556  [0.99, 25.76]
+             Utah, Salt Lake County follows a street             same side  680      4    0.588   [0.23, 1.50]
+             Utah, Salt Lake County     not a street no street within 60 m    4      0    0.000  [0.00, 48.99]
+             Utah, Salt Lake County     not a street         opposite side    4      0    0.000  [0.00, 48.99]
+             Utah, Salt Lake County     not a street             same side   58      2    3.448  [0.95, 11.73]
+           Utah, six rural counties follows a street         opposite side   13      8   61.538 [35.52, 82.29]
+           Utah, six rural counties follows a street             same side  563      3    0.533   [0.18, 1.55]
+           Utah, six rural counties     not a street no street within 60 m    3      1   33.333  [6.15, 79.23]
+           Utah, six rural counties     not a street             same side   20      0    0.000 [-0.00, 16.11]
+National, largest-coverage counties follows a street         opposite side   16      3   18.750  [6.59, 43.01]
+National, largest-coverage counties follows a street             same side  436      0    0.000   [0.00, 0.87]
+National, largest-coverage counties     not a street no street within 60 m    3      0    0.000  [0.00, 56.15]
+National, largest-coverage counties     not a street         opposite side   10      1   10.000  [1.79, 40.42]
+National, largest-coverage counties     not a street             same side   68      2    2.941  [0.81, 10.10]
+         National, smaller counties follows a street         opposite side   20      3   15.000  [5.24, 36.04]
+         National, smaller counties follows a street             same side  199      3    1.508   [0.51, 4.34]
+         National, smaller counties     not a street no street within 60 m    3      0    0.000  [0.00, 56.15]
+         National, smaller counties     not a street         opposite side    1      0    0.000  [0.00, 79.35]
+         National, smaller counties     not a street             same side   13      1    7.692  [1.37, 33.31]
+/Users/nidhipandya/Downloads/BoundaryBench/repo/experiments/exp18_realdata_mechanism.py:79: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  pool = near.groupby(["boundary", "side"]).apply(joint).reset_index().round(3)
+
+[R1b] Same, all regions pooled
+        boundary                  side    n  wrong  wrong_%             ci
+follows a street         opposite side   84     19   22.619 [14.99, 32.65]
+follows a street             same side 6949     27    0.389   [0.27, 0.56]
+    not a street no street within 60 m   14      1    7.143  [1.27, 31.47]
+    not a street         opposite side   16      1    6.250  [1.11, 28.33]
+    not a street             same side  264      6    2.273   [1.05, 4.87]
+
+[R2] Distance rule on real Census geocodes: answer only if d_obs >= tau (d_obs = distance of the Census point
+     to the boundary of the tract that contains it). wrong_flagged = wrong-tract cases with d_obs < tau
+                              group  stratum  tau_m    n  coverage_%  risk_% wrong_flagged
+                         NYC, PLUTO near_50m      0 2478     100.000   0.040           0/1
+                         NYC, PLUTO near_50m      5 2478      99.960   0.040           0/1
+                         NYC, PLUTO near_50m      6 2478      99.839   0.040           0/1
+                         NYC, PLUTO near_50m      7 2478      34.019   0.119           0/1
+                         NYC, PLUTO near_50m      8 2478      33.898   0.119           0/1
+                         NYC, PLUTO near_50m     10 2478      32.930   0.123           0/1
+                         NYC, PLUTO near_50m     15 2478      29.338   0.138           0/1
+                         NYC, PLUTO near_50m     20 2478      26.877   0.150           0/1
+                         NYC, PLUTO near_50m     30 2478      21.186   0.000           1/1
+                         NYC, PLUTO near_50m     50 2478      12.591   0.000           1/1
+                         NYC, PLUTO   random      0 2485     100.000   0.161           0/4
+                         NYC, PLUTO   random      5 2485     100.000   0.161           0/4
+                         NYC, PLUTO   random      6 2485      99.920   0.161           0/4
+                         NYC, PLUTO   random      7 2485      78.753   0.204           0/4
+                         NYC, PLUTO   random      8 2485      78.551   0.205           0/4
+                         NYC, PLUTO   random     10 2485      78.310   0.206           0/4
+                         NYC, PLUTO   random     15 2485      76.861   0.209           0/4
+                         NYC, PLUTO   random     20 2485      75.976   0.212           0/4
+                         NYC, PLUTO   random     30 2485      73.199   0.110           2/4
+                         NYC, PLUTO   random     50 2485      66.720   0.121           2/4
+                NYC, Address Points near_50m      0 1443     100.000   0.970          0/14
+                NYC, Address Points near_50m      5 1443      99.861   0.972          0/14
+                NYC, Address Points near_50m      6 1443      99.653   0.904          1/14
+                NYC, Address Points near_50m      7 1443      35.759   0.775         10/14
+                NYC, Address Points near_50m      8 1443      35.274   0.786         10/14
+                NYC, Address Points near_50m     10 1443      34.165   0.811         10/14
+                NYC, Address Points near_50m     15 1443      31.324   0.885         10/14
+                NYC, Address Points near_50m     20 1443      28.482   0.487         12/14
+                NYC, Address Points near_50m     30 1443      22.176   0.000         14/14
+                NYC, Address Points near_50m     50 1443      12.682   0.000         14/14
+                NYC, Address Points   random      0 1451     100.000   0.482           0/7
+                NYC, Address Points   random      5 1451      99.793   0.483           0/7
+                NYC, Address Points   random      6 1451      99.655   0.415           1/7
+                NYC, Address Points   random      7 1451      77.119   0.357           3/7
+                NYC, Address Points   random      8 1451      76.981   0.358           3/7
+                NYC, Address Points   random     10 1451      76.499   0.360           3/7
+                NYC, Address Points   random     15 1451      75.121   0.275           4/7
+                NYC, Address Points   random     20 1451      74.018   0.279           4/7
+                NYC, Address Points   random     30 1451      72.019   0.287           4/7
+                NYC, Address Points   random     50 1451      63.473   0.109           6/7
+             Utah, Salt Lake County near_50m      0  694     100.000   0.720           0/5
+             Utah, Salt Lake County near_50m      5  694     100.000   0.720           0/5
+             Utah, Salt Lake County near_50m      6  694     100.000   0.720           0/5
+             Utah, Salt Lake County near_50m      7  694      44.380   1.299           1/5
+             Utah, Salt Lake County near_50m      8  694      44.380   1.299           1/5
+             Utah, Salt Lake County near_50m     10  694      43.228   1.333           1/5
+             Utah, Salt Lake County near_50m     15  694      41.066   1.404           1/5
+             Utah, Salt Lake County near_50m     20  694      38.473   1.498           1/5
+             Utah, Salt Lake County near_50m     30  694      33.285   1.299           2/5
+             Utah, Salt Lake County near_50m     50  694      17.003   1.695           3/5
+             Utah, Salt Lake County   random      0  682     100.000   0.587           0/4
+             Utah, Salt Lake County   random      5  682     100.000   0.587           0/4
+             Utah, Salt Lake County   random      6  682     100.000   0.587           0/4
+             Utah, Salt Lake County   random      7  682      94.282   0.622           0/4
+             Utah, Salt Lake County   random      8  682      94.135   0.467           1/4
+             Utah, Salt Lake County   random     10  682      94.135   0.467           1/4
+             Utah, Salt Lake County   random     15  682      93.842   0.469           1/4
+             Utah, Salt Lake County   random     20  682      93.548   0.470           1/4
+             Utah, Salt Lake County   random     30  682      91.935   0.159           3/4
+             Utah, Salt Lake County   random     50  682      87.390   0.168           3/4
+           Utah, six rural counties near_50m      0  591     100.000   2.030          0/12
+           Utah, six rural counties near_50m      5  591     100.000   2.030          0/12
+           Utah, six rural counties near_50m      6  591      99.831   2.034          0/12
+           Utah, six rural counties near_50m      7  591      17.936   2.830          9/12
+           Utah, six rural counties near_50m      8  591      17.936   2.830          9/12
+           Utah, six rural counties near_50m     10  591      17.766   2.857          9/12
+           Utah, six rural counties near_50m     15  591      16.582   3.061          9/12
+           Utah, six rural counties near_50m     20  591      14.552   2.326         10/12
+           Utah, six rural counties near_50m     30  591      11.675   2.899         10/12
+           Utah, six rural counties near_50m     50  591       4.399   3.846         11/12
+           Utah, six rural counties   random      0  548     100.000   0.182           0/1
+           Utah, six rural counties   random      5  548     100.000   0.182           0/1
+           Utah, six rural counties   random      6  548     100.000   0.182           0/1
+           Utah, six rural counties   random      7  548      97.080   0.000           1/1
+           Utah, six rural counties   random      8  548      97.080   0.000           1/1
+           Utah, six rural counties   random     10  548      97.080   0.000           1/1
+           Utah, six rural counties   random     15  548      97.080   0.000           1/1
+           Utah, six rural counties   random     20  548      97.080   0.000           1/1
+           Utah, six rural counties   random     30  548      97.080   0.000           1/1
+           Utah, six rural counties   random     50  548      96.715   0.000           1/1
+National, largest-coverage counties near_50m      0  529     100.000   0.945           0/5
+National, largest-coverage counties near_50m      5  529      99.244   0.762           1/5
+National, largest-coverage counties near_50m      6  529      98.677   0.575           2/5
+National, largest-coverage counties near_50m      7  529      47.259   0.800           3/5
+National, largest-coverage counties near_50m      8  529      46.881   0.806           3/5
+National, largest-coverage counties near_50m     10  529      44.991   0.840           3/5
+National, largest-coverage counties near_50m     15  529      42.155   0.000           5/5
+National, largest-coverage counties near_50m     20  529      40.076   0.000           5/5
+National, largest-coverage counties near_50m     30  529      34.972   0.000           5/5
+National, largest-coverage counties near_50m     50  529      24.953   0.000           5/5
+National, largest-coverage counties   random      0  838     100.000   0.119           0/1
+National, largest-coverage counties   random      5  838      99.881   0.000           1/1
+National, largest-coverage counties   random      6  838      99.881   0.000           1/1
+National, largest-coverage counties   random      7  838      97.494   0.000           1/1
+National, largest-coverage counties   random      8  838      97.375   0.000           1/1
+National, largest-coverage counties   random     10  838      97.375   0.000           1/1
+National, largest-coverage counties   random     15  838      97.017   0.000           1/1
+National, largest-coverage counties   random     20  838      96.539   0.000           1/1
+National, largest-coverage counties   random     30  838      95.823   0.000           1/1
+National, largest-coverage counties   random     50  838      94.511   0.000           1/1
+         National, smaller counties near_50m      0  236     100.000   2.966           0/7
+         National, smaller counties near_50m      5  236      99.576   2.979           0/7
+         National, smaller counties near_50m      6  236      99.576   2.979           0/7
+         National, smaller counties near_50m      7  236      30.932   5.479           3/7
+         National, smaller counties near_50m      8  236      30.085   5.634           3/7
+         National, smaller counties near_50m     10  236      28.390   5.970           3/7
+         National, smaller counties near_50m     15  236      28.390   5.970           3/7
+         National, smaller counties near_50m     20  236      26.695   3.175           5/7
+         National, smaller counties near_50m     30  236      22.881   3.704           5/7
+         National, smaller counties near_50m     50  236      18.644   2.273           6/7
+         National, smaller counties   random      0  683     100.000   0.293           0/2
+         National, smaller counties   random      5  683     100.000   0.293           0/2
+         National, smaller counties   random      6  683     100.000   0.293           0/2
+         National, smaller counties   random      7  683      98.829   0.296           0/2
+         National, smaller counties   random      8  683      98.829   0.296           0/2
+         National, smaller counties   random     10  683      98.829   0.296           0/2
+         National, smaller counties   random     15  683      98.829   0.296           0/2
+         National, smaller counties   random     20  683      98.682   0.297           0/2
+         National, smaller counties   random     30  683      98.243   0.298           0/2
+         National, smaller counties   random     50  683      97.950   0.299           0/2
+
+[R2b] Risk-coverage of the d_obs ranking on real Census geocodes (per region and stratum)
+                              group  stratum    n  err_full_cov_%  AURC_%  cov@risk<=1%  cov@risk<=0.5%  cov@risk<=0.1%
+                         NYC, PLUTO near_50m 2478           0.040   0.054       100.000         100.000         100.000
+                         NYC, PLUTO   random 2485           0.161   0.074       100.000         100.000          59.477
+                NYC, Address Points near_50m 1443           0.970   0.632       100.000          28.621          27.235
+                NYC, Address Points   random 1451           0.482   0.128       100.000         100.000          52.240
+             Utah, Salt Lake County near_50m  694           0.720   1.553       100.000           0.144           0.144
+             Utah, Salt Lake County   random  682           0.587   0.063       100.000          94.135          80.938
+           Utah, six rural counties near_50m  591           2.030   2.820         0.000           0.000           0.000
+           Utah, six rural counties   random  548           0.182   0.002       100.000         100.000          98.723
+National, largest-coverage counties near_50m  529           0.945   0.430       100.000          44.612          42.155
+National, largest-coverage counties   random  838           0.119   0.000       100.000         100.000          99.881
+         National, smaller counties near_50m  236           2.966   3.404        10.593          10.593          10.593
+         National, smaller counties   random  683           0.293   0.011       100.000         100.000          95.022
+
+[R2c] Same, all near-line samples pooled
+ tau_m    n  coverage_%  risk_% wrong_flagged
+     0 5971     100.000   0.737          0/44
+     5 5971      99.866   0.721          1/44
+     6 5971      99.699   0.689          3/44
+     7 5971      35.103   0.859         26/44
+     8 5971      34.869   0.865         26/44
+    10 5971      33.813   0.892         26/44
+    15 5971      31.017   0.864         28/44
+    20 5971      28.555   0.645         33/44
+    30 5971      23.179   0.506         37/44
+    50 5971      13.649   0.491         40/44
+[R3] NYC overlap: 13 PLUTO addresses share a Census geocode (<= 0.5 m) with an Address Points address (of 4963 PLUTO, 2894 Address Points).
+     wrong tract on overlap: PLUTO 0/13, Address Points 0/13; median distance between the two reference points 8.4 m; median displacement PLUTO 21.3 m, Address Points 21.5 m
+
+[R4] Random-direction wrong-tract rate, near-line addresses (each address: mean over M = 200 random rotations;
+     95% CI: bootstrap over addresses, B = 1000)
+                     row    n  random_dir_%             ci
+              NYC, PLUTO 2478        11.484 [10.90, 12.07]
+     NYC, Address Points 1443        15.012 [14.11, 15.97]
+  Utah, Salt Lake County  694        11.717 [10.58, 12.84]
+Utah, six rural counties  591        10.801  [9.59, 12.09]
+   National, 18 counties  765        20.202 [18.96, 21.49]
+[R5] Environment: platform=macOS-26.6.2-arm64-arm-64bit; machine=arm64; python=3.11.18; cpu=Apple M4 Pro; cores=12; memory_bytes=25769803776; numpy=2.4.6; pandas=2.3.3; shapely=2.2.0
+
+summary written to /Users/nidhipandya/Downloads/BoundaryBench/repo/results/v2_realdata_extra/summary.txt
+exp18_realdata_mechanism.py finished in 1s
+
+All done. Summaries: results/*/summary.txt

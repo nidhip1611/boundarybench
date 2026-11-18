@@ -1,0 +1,121 @@
+group,stratum,tau_m,n,coverage_%,risk_%,wrong_flagged
+"NYC, PLUTO",near_50m,0,2478,100.0,0.04,0/1
+"NYC, PLUTO",near_50m,5,2478,99.96,0.04,0/1
+"NYC, PLUTO",near_50m,6,2478,99.839,0.04,0/1
+"NYC, PLUTO",near_50m,7,2478,34.019,0.119,0/1
+"NYC, PLUTO",near_50m,8,2478,33.898,0.119,0/1
+"NYC, PLUTO",near_50m,10,2478,32.93,0.123,0/1
+"NYC, PLUTO",near_50m,15,2478,29.338,0.138,0/1
+"NYC, PLUTO",near_50m,20,2478,26.877,0.15,0/1
+"NYC, PLUTO",near_50m,30,2478,21.186,0.0,1/1
+"NYC, PLUTO",near_50m,50,2478,12.591,0.0,1/1
+"NYC, PLUTO",random,0,2485,100.0,0.161,0/4
+"NYC, PLUTO",random,5,2485,100.0,0.161,0/4
+"NYC, PLUTO",random,6,2485,99.92,0.161,0/4
+"NYC, PLUTO",random,7,2485,78.753,0.204,0/4
+"NYC, PLUTO",random,8,2485,78.551,0.205,0/4
+"NYC, PLUTO",random,10,2485,78.31,0.206,0/4
+"NYC, PLUTO",random,15,2485,76.861,0.209,0/4
+"NYC, PLUTO",random,20,2485,75.976,0.212,0/4
+"NYC, PLUTO",random,30,2485,73.199,0.11,2/4
+"NYC, PLUTO",random,50,2485,66.72,0.121,2/4
+"NYC, Address Points",near_50m,0,1443,100.0,0.97,0/14
+"NYC, Address Points",near_50m,5,1443,99.861,0.972,0/14
+"NYC, Address Points",near_50m,6,1443,99.653,0.904,1/14
+"NYC, Address Points",near_50m,7,1443,35.759,0.775,10/14
+"NYC, Address Points",near_50m,8,1443,35.274,0.786,10/14
+"NYC, Address Points",near_50m,10,1443,34.165,0.811,10/14
+"NYC, Address Points",near_50m,15,1443,31.324,0.885,10/14
+"NYC, Address Points",near_50m,20,1443,28.482,0.487,12/14
+"NYC, Address Points",near_50m,30,1443,22.176,0.0,14/14
+"NYC, Address Points",near_50m,50,1443,12.682,0.0,14/14
+"NYC, Address Points",random,0,1451,100.0,0.482,0/7
+"NYC, Address Points",random,5,1451,99.793,0.483,0/7
+"NYC, Address Points",random,6,1451,99.655,0.415,1/7
+"NYC, Address Points",random,7,1451,77.119,0.357,3/7
+"NYC, Address Points",random,8,1451,76.981,0.358,3/7
+"NYC, Address Points",random,10,1451,76.499,0.36,3/7
+"NYC, Address Points",random,15,1451,75.121,0.275,4/7
+"NYC, Address Points",random,20,1451,74.018,0.279,4/7
+"NYC, Address Points",random,30,1451,72.019,0.287,4/7
+"NYC, Address Points",random,50,1451,63.473,0.109,6/7
+"Utah, Salt Lake County",near_50m,0,694,100.0,0.72,0/5
+"Utah, Salt Lake County",near_50m,5,694,100.0,0.72,0/5
+"Utah, Salt Lake County",near_50m,6,694,100.0,0.72,0/5
+"Utah, Salt Lake County",near_50m,7,694,44.38,1.299,1/5
+"Utah, Salt Lake County",near_50m,8,694,44.38,1.299,1/5
+"Utah, Salt Lake County",near_50m,10,694,43.228,1.333,1/5
+"Utah, Salt Lake County",near_50m,15,694,41.066,1.404,1/5
+"Utah, Salt Lake County",near_50m,20,694,38.473,1.498,1/5
+"Utah, Salt Lake County",near_50m,30,694,33.285,1.299,2/5
+"Utah, Salt Lake County",near_50m,50,694,17.003,1.695,3/5
+"Utah, Salt Lake County",random,0,682,100.0,0.587,0/4
+"Utah, Salt Lake County",random,5,682,100.0,0.587,0/4
+"Utah, Salt Lake County",random,6,682,100.0,0.587,0/4
+"Utah, Salt Lake County",random,7,682,94.282,0.622,0/4
+"Utah, Salt Lake County",random,8,682,94.135,0.467,1/4
+"Utah, Salt Lake County",random,10,682,94.135,0.467,1/4
+"Utah, Salt Lake County",random,15,682,93.842,0.469,1/4
+"Utah, Salt Lake County",random,20,682,93.548,0.47,1/4
+"Utah, Salt Lake County",random,30,682,91.935,0.159,3/4
+"Utah, Salt Lake County",random,50,682,87.39,0.168,3/4
+"Utah, six rural counties",near_50m,0,591,100.0,2.03,0/12
+"Utah, six rural counties",near_50m,5,591,100.0,2.03,0/12
+"Utah, six rural counties",near_50m,6,591,99.831,2.034,0/12
+"Utah, six rural counties",near_50m,7,591,17.936,2.83,9/12
+"Utah, six rural counties",near_50m,8,591,17.936,2.83,9/12
+"Utah, six rural counties",near_50m,10,591,17.766,2.857,9/12
+"Utah, six rural counties",near_50m,15,591,16.582,3.061,9/12
+"Utah, six rural counties",near_50m,20,591,14.552,2.326,10/12
+"Utah, six rural counties",near_50m,30,591,11.675,2.899,10/12
+"Utah, six rural counties",near_50m,50,591,4.399,3.846,11/12
+"Utah, six rural counties",random,0,548,100.0,0.182,0/1
+"Utah, six rural counties",random,5,548,100.0,0.182,0/1
+"Utah, six rural counties",random,6,548,100.0,0.182,0/1
+"Utah, six rural counties",random,7,548,97.08,0.0,1/1
+"Utah, six rural counties",random,8,548,97.08,0.0,1/1
+"Utah, six rural counties",random,10,548,97.08,0.0,1/1
+"Utah, six rural counties",random,15,548,97.08,0.0,1/1
+"Utah, six rural counties",random,20,548,97.08,0.0,1/1
+"Utah, six rural counties",random,30,548,97.08,0.0,1/1
+"Utah, six rural counties",random,50,548,96.715,0.0,1/1
+"National, largest-coverage counties",near_50m,0,529,100.0,0.945,0/5
+"National, largest-coverage counties",near_50m,5,529,99.244,0.762,1/5
+"National, largest-coverage counties",near_50m,6,529,98.677,0.575,2/5
+"National, largest-coverage counties",near_50m,7,529,47.259,0.8,3/5
+"National, largest-coverage counties",near_50m,8,529,46.881,0.806,3/5
+"National, largest-coverage counties",near_50m,10,529,44.991,0.84,3/5
+"National, largest-coverage counties",near_50m,15,529,42.155,0.0,5/5
+"National, largest-coverage counties",near_50m,20,529,40.076,0.0,5/5
+"National, largest-coverage counties",near_50m,30,529,34.972,0.0,5/5
+"National, largest-coverage counties",near_50m,50,529,24.953,0.0,5/5
+"National, largest-coverage counties",random,0,838,100.0,0.119,0/1
+"National, largest-coverage counties",random,5,838,99.881,0.0,1/1
+"National, largest-coverage counties",random,6,838,99.881,0.0,1/1
+"National, largest-coverage counties",random,7,838,97.494,0.0,1/1
+"National, largest-coverage counties",random,8,838,97.375,0.0,1/1
+"National, largest-coverage counties",random,10,838,97.375,0.0,1/1
+"National, largest-coverage counties",random,15,838,97.017,0.0,1/1
+"National, largest-coverage counties",random,20,838,96.539,0.0,1/1
+"National, largest-coverage counties",random,30,838,95.823,0.0,1/1
+"National, largest-coverage counties",random,50,838,94.511,0.0,1/1
+"National, smaller counties",near_50m,0,236,100.0,2.966,0/7
+"National, smaller counties",near_50m,5,236,99.576,2.979,0/7
+"National, smaller counties",near_50m,6,236,99.576,2.979,0/7
+"National, smaller counties",near_50m,7,236,30.932,5.479,3/7
+"National, smaller counties",near_50m,8,236,30.085,5.634,3/7
+"National, smaller counties",near_50m,10,236,28.39,5.97,3/7
+"National, smaller counties",near_50m,15,236,28.39,5.97,3/7
+"National, smaller counties",near_50m,20,236,26.695,3.175,5/7
+"National, smaller counties",near_50m,30,236,22.881,3.704,5/7
+"National, smaller counties",near_50m,50,236,18.644,2.273,6/7
+"National, smaller counties",random,0,683,100.0,0.293,0/2
+"National, smaller counties",random,5,683,100.0,0.293,0/2
+"National, smaller counties",random,6,683,100.0,0.293,0/2
+"National, smaller counties",random,7,683,98.829,0.296,0/2
+"National, smaller counties",random,8,683,98.829,0.296,0/2
+"National, smaller counties",random,10,683,98.829,0.296,0/2
+"National, smaller counties",random,15,683,98.829,0.296,0/2
+"National, smaller counties",random,20,683,98.682,0.297,0/2
+"National, smaller counties",random,30,683,98.243,0.298,0/2
+"National, smaller counties",random,50,683,97.95,0.299,0/2

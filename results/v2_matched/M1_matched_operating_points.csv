@@ -1,0 +1,129 @@
+model,R,method,metric,value,ci_low,ci_high
+gaussian,5,Distance rule,cov@risk<=1%,100.0,100.0,100.0
+gaussian,5,Distance rule,cov@risk<=0.5%,99.218,98.949,99.459
+gaussian,5,Distance rule,cov@risk<=0.1%,97.349,97.0,97.719
+gaussian,5,Distance rule,AURC_%,0.011,0.009,0.013
+gaussian,5,Monte Carlo (N=100),cov@risk<=1%,100.0,100.0,100.0
+gaussian,5,Monte Carlo (N=100),cov@risk<=0.5%,99.078,98.852,99.417
+gaussian,5,Monte Carlo (N=100),cov@risk<=0.1%,97.349,96.957,97.669
+gaussian,5,Monte Carlo (N=100),AURC_%,0.022,0.013,0.03
+gaussian,5,Disk overlay,cov@risk<=1%,100.0,100.0,100.0
+gaussian,5,Disk overlay,cov@risk<=0.5%,99.206,98.937,99.456
+gaussian,5,Disk overlay,cov@risk<=0.1%,97.352,97.006,97.728
+gaussian,5,Disk overlay,AURC_%,0.019,0.011,0.027
+gaussian,5,Gaussian overlay,cov@risk<=1%,100.0,100.0,100.0
+gaussian,5,Gaussian overlay,cov@risk<=0.5%,99.209,98.943,99.459
+gaussian,5,Gaussian overlay,cov@risk<=0.1%,97.351,97.005,97.728
+gaussian,5,Gaussian overlay,AURC_%,0.011,0.009,0.013
+gaussian,10,Distance rule,cov@risk<=1%,98.554,98.212,98.9
+gaussian,10,Distance rule,cov@risk<=0.5%,96.745,96.386,97.154
+gaussian,10,Distance rule,cov@risk<=0.1%,93.62,93.205,94.168
+gaussian,10,Distance rule,AURC_%,0.041,0.035,0.046
+gaussian,10,Monte Carlo (N=100),cov@risk<=1%,98.52,98.003,98.87
+gaussian,10,Monte Carlo (N=100),cov@risk<=0.5%,96.566,96.186,97.04
+gaussian,10,Monte Carlo (N=100),cov@risk<=0.1%,93.492,92.83,94.019
+gaussian,10,Monte Carlo (N=100),AURC_%,0.059,0.048,0.073
+gaussian,10,Disk overlay,cov@risk<=1%,98.569,98.241,98.93
+gaussian,10,Disk overlay,cov@risk<=0.5%,96.746,96.409,97.164
+gaussian,10,Disk overlay,cov@risk<=0.1%,93.634,93.221,94.185
+gaussian,10,Disk overlay,AURC_%,0.054,0.043,0.067
+gaussian,10,Gaussian overlay,cov@risk<=1%,98.558,98.244,98.929
+gaussian,10,Gaussian overlay,cov@risk<=0.5%,96.745,96.403,97.147
+gaussian,10,Gaussian overlay,cov@risk<=0.1%,93.631,93.214,94.174
+gaussian,10,Gaussian overlay,AURC_%,0.04,0.035,0.046
+gaussian,20,Distance rule,cov@risk<=1%,94.815,94.358,95.287
+gaussian,20,Distance rule,cov@risk<=0.5%,92.448,91.954,93.086
+gaussian,20,Distance rule,cov@risk<=0.1%,88.706,88.147,89.446
+gaussian,20,Distance rule,AURC_%,0.127,0.114,0.14
+gaussian,20,Monte Carlo (N=100),cov@risk<=1%,94.658,94.072,95.119
+gaussian,20,Monte Carlo (N=100),cov@risk<=0.5%,92.323,91.596,92.893
+gaussian,20,Monte Carlo (N=100),cov@risk<=0.1%,88.772,88.167,89.412
+gaussian,20,Monte Carlo (N=100),AURC_%,0.164,0.141,0.183
+gaussian,20,Disk overlay,cov@risk<=1%,94.809,94.352,95.3
+gaussian,20,Disk overlay,cov@risk<=0.5%,92.406,91.924,93.104
+gaussian,20,Disk overlay,cov@risk<=0.1%,88.688,88.029,89.383
+gaussian,20,Disk overlay,AURC_%,0.146,0.129,0.163
+gaussian,20,Gaussian overlay,cov@risk<=1%,94.812,94.35,95.317
+gaussian,20,Gaussian overlay,cov@risk<=0.5%,92.405,91.932,93.107
+gaussian,20,Gaussian overlay,cov@risk<=0.1%,88.688,88.032,89.412
+gaussian,20,Gaussian overlay,AURC_%,0.127,0.114,0.14
+gaussian,50,Distance rule,cov@risk<=1%,87.257,86.55,88.03
+gaussian,50,Distance rule,cov@risk<=0.5%,83.748,83.106,84.813
+gaussian,50,Distance rule,cov@risk<=0.1%,78.374,76.932,79.508
+gaussian,50,Distance rule,AURC_%,0.403,0.369,0.43
+gaussian,50,Monte Carlo (N=100),cov@risk<=1%,86.838,86.292,87.733
+gaussian,50,Monte Carlo (N=100),cov@risk<=0.5%,83.169,82.586,84.43
+gaussian,50,Monte Carlo (N=100),cov@risk<=0.1%,0.0,0.0,78.97
+gaussian,50,Monte Carlo (N=100),AURC_%,0.489,0.439,0.531
+gaussian,50,Disk overlay,cov@risk<=1%,87.337,86.62,88.076
+gaussian,50,Disk overlay,cov@risk<=0.5%,83.774,83.16,84.822
+gaussian,50,Disk overlay,cov@risk<=0.1%,78.32,76.87,79.397
+gaussian,50,Disk overlay,AURC_%,0.447,0.403,0.481
+gaussian,50,Gaussian overlay,cov@risk<=1%,87.32,86.659,88.128
+gaussian,50,Gaussian overlay,cov@risk<=0.5%,83.802,83.152,84.768
+gaussian,50,Gaussian overlay,cov@risk<=0.1%,78.326,76.878,79.381
+gaussian,50,Gaussian overlay,AURC_%,0.401,0.366,0.427
+uniform,5,Distance rule,cov@risk<=1%,99.974,99.75,100.0
+uniform,5,Distance rule,cov@risk<=0.5%,98.691,98.47,98.979
+uniform,5,Distance rule,cov@risk<=0.1%,96.852,96.53,97.216
+uniform,5,Distance rule,AURC_%,0.015,0.012,0.018
+uniform,5,Monte Carlo (N=100),cov@risk<=1%,99.938,99.655,100.0
+uniform,5,Monte Carlo (N=100),cov@risk<=0.5%,98.608,98.321,98.945
+uniform,5,Monte Carlo (N=100),cov@risk<=0.1%,96.871,96.446,97.232
+uniform,5,Monte Carlo (N=100),AURC_%,0.017,0.013,0.022
+uniform,5,Disk overlay,cov@risk<=1%,99.98,99.757,100.0
+uniform,5,Disk overlay,cov@risk<=0.5%,98.698,98.466,98.982
+uniform,5,Disk overlay,cov@risk<=0.1%,96.857,96.526,97.222
+uniform,5,Disk overlay,AURC_%,0.015,0.012,0.018
+uniform,5,Gaussian overlay,cov@risk<=1%,99.978,99.756,100.0
+uniform,5,Gaussian overlay,cov@risk<=0.5%,98.695,98.46,98.981
+uniform,5,Gaussian overlay,cov@risk<=0.1%,96.857,96.524,97.22
+uniform,5,Gaussian overlay,AURC_%,0.015,0.012,0.018
+uniform,10,Distance rule,cov@risk<=1%,97.469,97.126,97.791
+uniform,10,Distance rule,cov@risk<=0.5%,95.862,95.419,96.278
+uniform,10,Distance rule,cov@risk<=0.1%,93.571,93.112,94.067
+uniform,10,Distance rule,AURC_%,0.057,0.05,0.064
+uniform,10,Monte Carlo (N=100),cov@risk<=1%,97.308,96.941,97.738
+uniform,10,Monte Carlo (N=100),cov@risk<=0.5%,95.603,95.261,96.149
+uniform,10,Monte Carlo (N=100),cov@risk<=0.1%,93.306,92.95,93.853
+uniform,10,Monte Carlo (N=100),AURC_%,0.058,0.051,0.066
+uniform,10,Disk overlay,cov@risk<=1%,97.457,97.129,97.783
+uniform,10,Disk overlay,cov@risk<=0.5%,95.845,95.408,96.316
+uniform,10,Disk overlay,cov@risk<=0.1%,93.586,93.12,94.074
+uniform,10,Disk overlay,AURC_%,0.057,0.05,0.064
+uniform,10,Gaussian overlay,cov@risk<=1%,97.466,97.124,97.783
+uniform,10,Gaussian overlay,cov@risk<=0.5%,95.855,95.424,96.284
+uniform,10,Gaussian overlay,cov@risk<=0.1%,93.585,93.161,94.073
+uniform,10,Gaussian overlay,AURC_%,0.057,0.05,0.064
+uniform,20,Distance rule,cov@risk<=1%,93.358,92.815,93.812
+uniform,20,Distance rule,cov@risk<=0.5%,91.683,91.223,92.156
+uniform,20,Distance rule,cov@risk<=0.1%,89.488,88.982,89.973
+uniform,20,Distance rule,AURC_%,0.167,0.151,0.185
+uniform,20,Monte Carlo (N=100),cov@risk<=1%,93.366,92.712,93.883
+uniform,20,Monte Carlo (N=100),cov@risk<=0.5%,91.577,91.099,92.128
+uniform,20,Monte Carlo (N=100),cov@risk<=0.1%,89.286,88.598,89.738
+uniform,20,Monte Carlo (N=100),AURC_%,0.18,0.162,0.202
+uniform,20,Disk overlay,cov@risk<=1%,93.389,92.834,93.85
+uniform,20,Disk overlay,cov@risk<=0.5%,91.692,91.219,92.168
+uniform,20,Disk overlay,cov@risk<=0.1%,89.517,88.987,90.0
+uniform,20,Disk overlay,AURC_%,0.167,0.151,0.184
+uniform,20,Gaussian overlay,cov@risk<=1%,93.358,92.826,93.82
+uniform,20,Gaussian overlay,cov@risk<=0.5%,91.692,91.233,92.161
+uniform,20,Gaussian overlay,cov@risk<=0.1%,89.514,88.954,89.994
+uniform,20,Gaussian overlay,AURC_%,0.167,0.151,0.184
+uniform,50,Distance rule,cov@risk<=1%,84.686,84.035,85.413
+uniform,50,Distance rule,cov@risk<=0.5%,82.226,81.569,82.97
+uniform,50,Distance rule,cov@risk<=0.1%,79.595,78.916,80.306
+uniform,50,Distance rule,AURC_%,0.544,0.504,0.579
+uniform,50,Monte Carlo (N=100),cov@risk<=1%,84.191,83.478,85.13
+uniform,50,Monte Carlo (N=100),cov@risk<=0.5%,81.694,81.209,82.757
+uniform,50,Monte Carlo (N=100),cov@risk<=0.1%,78.748,78.279,79.915
+uniform,50,Monte Carlo (N=100),AURC_%,0.567,0.524,0.604
+uniform,50,Disk overlay,cov@risk<=1%,84.751,84.122,85.491
+uniform,50,Disk overlay,cov@risk<=0.5%,82.275,81.65,83.018
+uniform,50,Disk overlay,cov@risk<=0.1%,79.631,78.973,80.384
+uniform,50,Disk overlay,AURC_%,0.54,0.501,0.575
+uniform,50,Gaussian overlay,cov@risk<=1%,84.762,84.119,85.502
+uniform,50,Gaussian overlay,cov@risk<=0.5%,82.274,81.643,83.018
+uniform,50,Gaussian overlay,cov@risk<=0.1%,79.64,78.984,80.407
+uniform,50,Gaussian overlay,AURC_%,0.541,0.502,0.575

@@ -1,0 +1,13 @@
+group,stratum,n,err_full_cov_%,AURC_%,cov@risk<=1%,cov@risk<=0.5%,cov@risk<=0.1%
+"NYC, PLUTO",near_50m,2478,0.04,0.054,100.0,100.0,100.0
+"NYC, PLUTO",random,2485,0.161,0.074,100.0,100.0,59.477
+"NYC, Address Points",near_50m,1443,0.97,0.632,100.0,28.621,27.235
+"NYC, Address Points",random,1451,0.482,0.128,100.0,100.0,52.24
+"Utah, Salt Lake County",near_50m,694,0.72,1.553,100.0,0.144,0.144
+"Utah, Salt Lake County",random,682,0.587,0.063,100.0,94.135,80.938
+"Utah, six rural counties",near_50m,591,2.03,2.82,0.0,0.0,0.0
+"Utah, six rural counties",random,548,0.182,0.002,100.0,100.0,98.723
+"National, largest-coverage counties",near_50m,529,0.945,0.43,100.0,44.612,42.155
+"National, largest-coverage counties",random,838,0.119,0.0,100.0,100.0,99.881
+"National, smaller counties",near_50m,236,2.966,3.404,10.593,10.593,10.593
+"National, smaller counties",random,683,0.293,0.011,100.0,100.0,95.022
