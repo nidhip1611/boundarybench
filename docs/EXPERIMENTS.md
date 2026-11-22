@@ -122,7 +122,7 @@ EXP01 reproduced (all T3 values identical after removing clip_by_rect). Fixed Ga
 Added EXP09 (street mechanism + independent NYC Address Points truth + map panels) and EXP10 (formal output
 categories). NYC wording stays conservative until EXP09: "Census geocodes concentrate ~6.3 m from tract lines,
 consistent with street-side placement". LLM evaluation dropped from the paper (future work). Paper adds a
-practitioner decision table and a Zenodo DOI for code + data.
+practitioner decision table and an archived DOI for code + data (camera-ready).
 
 ### 2026-11-12 — EXP09–EXP10 results (results commit 82d1156)
 Census points sit 6.3–6.5 m from the nearest TIGER street centerline (99.4–99.8%), on the same side as the true address
