@@ -129,3 +129,27 @@ Krieger 2002, Jacquez 2012, Goldberg 2007, Cheng 2003 (claims that used them wer
 ## Using the spare page (2026-11-18)
 The 10-page cut built to 9 pages, so Fig. 2, Eq. (2) as a display, the AURC sentence and the four dropped references
 (Krieger 2002, Jacquez 2012, Goldberg 2007, Cheng 2003) were restored. Numbers unchanged.
+
+## Revision round 3 (third reviewer + GPT re-review), sources for every new number
+
+| Paper text | Value | Source | Check |
+|---|---|---|---|
+| Pipeline | 13,679 submitted; 12,947 Match; 59 Tie; 673 No_Match; 189 matched not scored; 100 Utah geocoded refs; 12,658 scored | v2_realdata_reconcile [P0], [P0b] | ✓ |
+| Near-line cohort | 5,971 / 44 wrong; = Table 2 | [P1] | ✓ |
+| Old street-side cohort | 7,327 / 54 = 5,971 + 1,356 random-stratum addresses with d_true < 50 m | [P1b–d] | ✓ explains 27/6,949 etc. |
+| Street side (cohort) | same 21/5,630; opposite 18/75; non-street 5/266 | [P2b] | ✓ |
+| Excl. segment ends/ambiguous | 11/4,164; 3/35 | [P4d] | ✓ |
+| Street-following share | 5,705/5,971 = 95.5%; national 668/765 = 87% | [P0b] | ✓ |
+| Along/across medians | wrong 83/31 m; correct 18/17 m | [P4b] | ✓ |
+| Length-preserving test | 4,378 (73%); along 6.66 [6.17,7.20]; across 19.03 [18.28,19.76]; random 13.74 [13.25,14.22]; actual 0.37 [0.21,0.57]; ordering in all 6 | [P7] | ✓ |
+| Non-street vs street | 1.6–5.9 vs 0.64–2.7 outside NYC; NYC 0/82; OR 2.78 p 0.0445; w/o NYC p 0.176 | [P3], [P3b], [P3c] | ✓ |
+| National split | 5/529 0.95%; 7/236 2.97% | [P1] | ✓ |
+| Rural Utah opposite side | 8 of 12; SLC 1 of 5 | [P2] | ✓ |
+| Geocode-based boundary type | agreement 5,933/5,971 = 99.4%; flag 4.187% catches 5; distance same workload 5 | [P5b], [P5] | ✓ |
+| C vs A in-sample | +1 to +3 at 4–65%; all bootstrap CIs include 0 | [P5], [P5c] | ✓ |
+| C vs A held-out | near-line 7/10/25 vs 6/9/24 at 9.97/25.3/63.5%; all scored 7/28/36 vs 15/25/38 | [P8b], [P8c] | ✓ |
+| Held-out folds | UCB(obs) met 24/24 (MC 23/23 + 1 no answers); empirical 6–7/24 (MC 21/24); folds over 25–26 (MC 16), empirical 58–60 (MC 50); UCB(loc) folds over 3/2/2/0, max 0.5126% at 0.5% target; coverage 91.38/91.41/88.27/85.87 vs 91.93–91.95/88.54; disk overlay UCB(loc) no answers at Gauss 50 m 0.1% | v2_heldout_folds [F2], [F3], F1_folds.csv | ✓ |
+| Worst UCB(obs) relative excess | 0.168% vs 0.1% | F1_folds.csv | ✓ |
+| 24 combinations | 8 settings × targets 1/0.5/0.1%; bootstrap recomputes coverage-at-target per replicate | exp17 code | ✓ |
+| Vintage | Public_AR_Current / Current_Current | src/nycdata.py, exp04 | ✓ |
+| Removed | Fig. 2 (duplicated Table 2); AURC and Brier mentions; NYC 26-case breakdown and full-sample county range (other cohorts); NYC cartographic 0.69% sentence | — | — |
