@@ -151,5 +151,5 @@ The 10-page cut built to 9 pages, so Fig. 2, Eq. (2) as a display, the AURC sent
 | Held-out folds | UCB(obs) met 24/24 (MC 23/23 + 1 no answers); empirical 6–7/24 (MC 21/24); folds over 25–26 (MC 16), empirical 58–60 (MC 50); UCB(loc) folds over 3/2/2/0, max 0.5126% at 0.5% target; coverage 91.38/91.41/88.27/85.87 vs 91.93–91.95/88.54; disk overlay UCB(loc) no answers at Gauss 50 m 0.1% | v2_heldout_folds [F2], [F3], F1_folds.csv | ✓ |
 | Worst UCB(obs) relative excess | 0.168% vs 0.1% | F1_folds.csv | ✓ |
 | 24 combinations | 8 settings × targets 1/0.5/0.1%; bootstrap recomputes coverage-at-target per replicate | exp17 code | ✓ |
-| Vintage | Public_AR_Current / Current_Current | src/nycdata.py, exp04 | ✓ |
+| Vintage, run dates | Public_AR_Current / Current_Current; files dated Nov 9 (NYC PLUTO) and Nov 12, 2026 (others) | src/nycdata.py, exp04 | ✓ |
 | Removed | Fig. 2 (duplicated Table 2); AURC and Brier mentions; NYC 26-case breakdown and full-sample county range (other cohorts); NYC cartographic 0.69% sentence | — | — |
