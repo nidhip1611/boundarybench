@@ -81,7 +81,7 @@ for j, (col, name, colr) in enumerate(series):
     ax.bar(x + (j - 1.5) * w, v[:, 0], w, color=colr, label=name, yerr=v[:, 1:].T, error_kw={"lw": 0.6, "capsize": 1.2})
     if col == "actual_wrong_%":
         for xi, vi in zip(x, v[:, 0]):
-            ax.text(xi + (j - 1.5) * w, vi + v[list(x).index(xi), 2] + 0.8, f"{vi:.2f}", ha="center", va="bottom", fontsize=5.6, rotation=90, color=INK)
+            ax.text(xi + (j - 1.5) * w, vi + v[list(x).index(xi), 2] + 0.6, f"{vi:.2f}%", ha="center", va="bottom", fontsize=6.3, color=INK, bbox=dict(fc="white", ec="none", pad=0.4, alpha=0.85), zorder=6)
 ax.set_xticks(x); ax.set_xticklabels([lab[g] for g in P7["group"]], fontsize=7.5)
 ax.set_ylabel("tract disagreement (%)", fontsize=8); ax.tick_params(axis="y", labelsize=7.5)
 ax.legend(frameon=False, fontsize=7.5, ncol=2, loc="upper left", handlelength=1.2, columnspacing=1.0)
@@ -108,7 +108,7 @@ def mark(x, y, kind, lab, dx=0.3, dy=0.45):
         ax.plot(x, y, "s", ms=5, mfc="white", mec=INK, zorder=4)
     else:
         ax.plot(x, y, "o", ms=5, color=ORANGE, zorder=4)
-    ax.text(x + dx, y + dy, lab, fontsize=6.3, color=INK)
+    ax.text(x + dx, y + dy, lab, fontsize=6.3, color=INK, bbox=dict(fc="white", ec="none", pad=0.4, alpha=0.85), zorder=6)
 mark(3.0, 3.2, "ref", "R1"); mark(3.8, 1.3, "geo", "G1", dy=0.35)
 mark(7.0, -3.2, "ref", "R2"); mark(7.2, 1.3, "geo", "G2", dy=0.35)
 ax.annotate("", xy=(7.15, 1.05), xytext=(7.0, -2.9), arrowprops=dict(arrowstyle="->", lw=0.6, color=INK))
