@@ -1,0 +1,7 @@
+group,median_scale_err_pct,max_scale_err_pct,max_angular_distortion_deg
+"NYC, PLUTO",1.084,1.104,1.697
+"NYC, Address Points",1.084,1.104,1.697
+"Utah, Salt Lake County",0.178,0.188,0.432
+"Utah, six rural counties",0.091,0.156,0.543
+"National, largest-coverage counties",0.276,1.419,1.932
+"National, smaller counties",0.406,1.647,2.051

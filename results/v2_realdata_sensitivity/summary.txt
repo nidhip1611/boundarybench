@@ -1,0 +1,92 @@
+# EXP21 real-data sensitivity: exclusions, Census-returned tract, county clustering, bands, error causes | run 2026-11-23 12:46 | commit d64dc69
+
+[S1] Address flow by sample and stratum (stratum of unscored addresses inferred from the sampling block)
+                              group   stratum  submitted  Tie  No_Match  Match_excluded  ref_geocoded  scored  scored_%_of_submitted
+                         NYC, PLUTO near-line       2500    1        20               1             0    2478                   99.1
+                         NYC, PLUTO    random       2500    4         9               2             0    2485                   99.4
+                NYC, Address Points near-line       1500   18         6              33             0    1443                   96.2
+                NYC, Address Points    random       1500    7         9              33             0    1451                   96.7
+             Utah, Salt Lake County near-line        749    1        53               1             0     694                   92.7
+             Utah, Salt Lake County    random        750    0        67               1             0     682                   90.9
+           Utah, six rural counties near-line        750    2        80              21            56     591                   78.8
+           Utah, six rural counties    random        750    4       129              25            44     548                   73.1
+National, largest-coverage counties near-line        564    5        26               4             0     529                   93.8
+National, largest-coverage counties    random        898    7        43              10             0     838                   93.3
+         National, smaller counties near-line        306    3        52              15             0     236                   77.1
+         National, smaller counties    random        894    5       167              39             0     683                   76.4
+                              TOTAL near-line       6369   30       237              75            56    5971                   93.8
+                              TOTAL    random       7292   27       424             110            44    6687                   91.7
+
+[S2] Near-line rates if every excluded near-line Match (displacement > 500 m or reference outside tracts)
+     were a wrong tract (worst case), vs random-direction rate
+                                row    n  wrong  real_%           ci  excluded_near_matches  worst_case_%      worst_ci  random_dir_%
+                         NYC, PLUTO 2478      1   0.040 [0.01, 0.23]                      1         0.081  [0.02, 0.29]        11.484
+                NYC, Address Points 1443     14   0.970 [0.58, 1.62]                     33         3.184  [2.40, 4.21]        15.012
+             Utah, Salt Lake County  694      5   0.720 [0.31, 1.68]                      1         0.863  [0.40, 1.87]        11.717
+           Utah, six rural counties  591     12   2.030 [1.17, 3.52]                     21         5.392  [3.86, 7.48]        10.801
+National, largest-coverage counties  529      5   0.945 [0.40, 2.19]                      4         1.689  [0.89, 3.18]        17.669
+         National, smaller counties  236      7   2.966 [1.44, 5.99]                     15         8.765 [5.86, 12.91]        25.879
+                18 sampled counties  765     12   1.569 [0.90, 2.72]                     19         3.954  [2.80, 5.56]        20.202
+                              TOTAL 5971     44   0.737 [0.55, 0.99]                     75         1.968  [1.65, 2.35]        13.413
+[S3a] check: PIP-based wrong flag reproduces the saved flag for 100.00% of scored addresses; Census tract code present for 100.0%
+
+[S3] Tract returned by the Census geocoder vs point-in-polygon tract of its coordinate, and wrong-tract counts
+     for each (reference = tract of the reference point)
+     scope                               group     n  census_tract_eq_PIP_%  disagree_n  PIP_wrong  census_tract_wrong  census_wrong_%    census_ci
+ near-line                          NYC, PLUTO  2478                100.000           0          1                   1           0.040 [0.01, 0.23]
+ near-line                 NYC, Address Points  1443                100.000           0         14                  14           0.970 [0.58, 1.62]
+ near-line              Utah, Salt Lake County   694                 99.856           1          5                   6           0.865 [0.40, 1.87]
+ near-line            Utah, six rural counties   591                100.000           0         12                  12           2.030 [1.17, 3.52]
+ near-line National, largest-coverage counties   529                100.000           0          5                   5           0.945 [0.40, 2.19]
+ near-line          National, smaller counties   236                100.000           0          7                   7           2.966 [1.44, 5.99]
+ near-line                                 ALL  5971                 99.983           1         44                  45           0.754 [0.56, 1.01]
+all scored                          NYC, PLUTO  4963                100.000           0          5                   5           0.101 [0.04, 0.24]
+all scored                 NYC, Address Points  2894                100.000           0         21                  21           0.726 [0.48, 1.11]
+all scored              Utah, Salt Lake County  1376                 99.927           1          9                  10           0.727 [0.40, 1.33]
+all scored            Utah, six rural counties  1139                100.000           0         13                  13           1.141 [0.67, 1.94]
+all scored National, largest-coverage counties  1367                100.000           0          6                   6           0.439 [0.20, 0.95]
+all scored          National, smaller counties   919                100.000           0          9                   9           0.979 [0.52, 1.85]
+all scored                                 ALL 12658                 99.992           1         63                  64           0.506 [0.40, 0.65]
+
+[S3b] near-line: PIP wrong (rows) x Census-returned tract wrong (cols)
+Census tract wrong  False  True 
+PIP wrong                       
+False                5926      1
+True                    0     44
+
+[S4] 18 sampled counties: county-cluster bootstrap (5,000 reps) vs Wilson
+                           row   n  counties  real_%    wilson_ci county_cluster_ci  random_dir_% random_cluster_ci
+18 sampled counties, near-line 765        18   1.569 [0.90, 2.72]      [0.67, 2.67]        20.202    [18.03, 23.14]
+[S4b] per-county near-line real rate: min 0.00%, max 8.33%; real < random-direction in 18/18 counties
+
+[S5] Real vs random-direction rate by true boundary distance (near-line stratum < 50 m by design)
+d_true_band_m   stratum    n  wrong  real_%            ci  random_dir_%
+         0-10    random   20      1   5.000 [0.89, 23.61]        21.625
+         0-10 near-line   52      1   1.923 [0.34, 10.12]        27.962
+        10-25    random  727      4   0.550  [0.21, 1.41]        17.144
+        10-25 near-line 2759     24   0.870  [0.59, 1.29]        16.670
+        25-50    random  609      5   0.821  [0.35, 1.91]         7.497
+        25-50 near-line 3160     19   0.601  [0.39, 0.94]        10.329
+       50-100    random 1552      8   0.515  [0.26, 1.01]         2.024
+        >=100    random 3779      1   0.026  [0.00, 0.15]         0.166
+[S5b] all scored with d_true < 25 m: n=3558, real 0.84% [0.59, 1.20], random-direction 16.96%
+[S5b] all scored with d_true < 50 m: n=7327, real 0.74% [0.57, 0.96], random-direction 13.31%
+[S5b] all scored with d_true < 100 m: n=8879, real 0.70% [0.55, 0.89], random-direction 11.34%
+
+[S6] Near-line wrong-tract cases by street side: Census match type and input vs matched address
+     (street_text_differs is a raw text comparison and also flags abbreviations; see S6b for each case)
+             side  n  non_exact  house_number_differs  street_text_differs
+no street <= 60 m  1          1                     0                    1
+    opposite side 18         13                     0                   16
+        same side 25         16                     0                   11
+[S6c] near-line Non_Exact share: 50.43% overall; wrong-tract rate 1.00% (n=3011) vs 0.47% for Exact
+
+[S7] EPSG:2163 linear-scale error (max of meridional/parallel, %) and angular distortion at reference points
+                                     median_scale_err_pct  max_scale_err_pct  max_angular_distortion_deg
+group                                                                                                   
+NYC, PLUTO                                          1.084              1.104                       1.697
+NYC, Address Points                                 1.084              1.104                       1.697
+Utah, Salt Lake County                              0.178              0.188                       0.432
+Utah, six rural counties                            0.091              0.156                       0.543
+National, largest-coverage counties                 0.276              1.419                       1.932
+National, smaller counties                          0.406              1.647                       2.051

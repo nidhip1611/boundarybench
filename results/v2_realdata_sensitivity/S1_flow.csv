@@ -1,0 +1,15 @@
+group,stratum,submitted,Tie,No_Match,Match_excluded,ref_geocoded,scored,scored_%_of_submitted
+"NYC, PLUTO",near-line,2500,1,20,1,0,2478,99.1
+"NYC, PLUTO",random,2500,4,9,2,0,2485,99.4
+"NYC, Address Points",near-line,1500,18,6,33,0,1443,96.2
+"NYC, Address Points",random,1500,7,9,33,0,1451,96.7
+"Utah, Salt Lake County",near-line,749,1,53,1,0,694,92.7
+"Utah, Salt Lake County",random,750,0,67,1,0,682,90.9
+"Utah, six rural counties",near-line,750,2,80,21,56,591,78.8
+"Utah, six rural counties",random,750,4,129,25,44,548,73.1
+"National, largest-coverage counties",near-line,564,5,26,4,0,529,93.8
+"National, largest-coverage counties",random,898,7,43,10,0,838,93.3
+"National, smaller counties",near-line,306,3,52,15,0,236,77.1
+"National, smaller counties",random,894,5,167,39,0,683,76.4
+TOTAL,near-line,6369,30,237,75,56,5971,93.8
+TOTAL,random,7292,27,424,110,44,6687,91.7

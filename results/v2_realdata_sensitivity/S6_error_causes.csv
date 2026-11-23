@@ -1,0 +1,4 @@
+side,n,non_exact,house_number_differs,street_text_differs
+no street <= 60 m,1,1,0,1
+opposite side,18,13,0,16
+same side,25,16,0,11

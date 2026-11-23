@@ -1,0 +1,2 @@
+row,n,counties,real_%,wilson_ci,county_cluster_ci,random_dir_%,random_cluster_ci
+"18 sampled counties, near-line",765,18,1.569,"[0.90, 2.72]","[0.67, 2.67]",20.202,"[18.03, 23.14]"
