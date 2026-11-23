@@ -1,0 +1,15 @@
+scope,group,n,observed_%,obs_ci,random_position_on_matched_face_%,same_but_opposite_side_%
+near-line,"NYC, PLUTO",2452,0.041,"[0.01, 0.23]",0.209,64.923
+near-line,"NYC, Address Points",1436,0.975,"[0.58, 1.63]",1.123,62.806
+near-line,"Utah, Salt Lake County",672,0.744,"[0.32, 1.73]",0.771,54.973
+near-line,"Utah, six rural counties",578,2.076,"[1.19, 3.59]",2.104,81.0
+near-line,"National, largest-coverage counties",521,0.96,"[0.41, 2.23]",1.182,50.514
+near-line,"National, smaller counties",228,3.07,"[1.49, 6.20]",3.211,69.193
+near-line,ALL,5887,0.747,"[0.56, 1.00]",0.884,63.74
+all scored,"NYC, PLUTO",4915,0.102,"[0.04, 0.24]",0.247,42.975
+all scored,"NYC, Address Points",2877,0.73,"[0.48, 1.11]",0.844,42.559
+all scored,"Utah, Salt Lake County",1336,0.674,"[0.35, 1.28]",0.689,30.648
+all scored,"Utah, six rural counties",1117,1.164,"[0.68, 1.98]",1.18,43.259
+all scored,"National, largest-coverage counties",1351,0.444,"[0.20, 0.97]",0.48,20.981
+all scored,"National, smaller counties",903,0.997,"[0.53, 1.88]",1.045,18.583
+all scored,ALL,12499,0.504,"[0.39, 0.64]",0.598,37.447

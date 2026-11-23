@@ -1,0 +1,63 @@
+# EXP22 matched-edge mechanism test (Census TLID + side) | run 2026-11-23 12:50 | commit 03b803d
+[M0] edge files: 32 counties, 1,320,966 edges
+
+[M1] All scored addresses with a matched edge: offset from the matched edge, side checks, and whether the
+     reference point lies on the same block face (projects inside the edge, <= 60 m away)
+                              group     n  offset_p50_m  offset_5_8m_%  geocode_on_reported_side_%  ref_on_reported_side_%  ref_within_matched_face_%
+                         NYC, PLUTO  4915          6.36         100.00                       100.0                   99.90                      98.29
+                NYC, Address Points  2877          6.36         100.00                       100.0                   99.72                      96.91
+             Utah, Salt Lake County  1336          6.38         100.00                       100.0                   97.83                      87.50
+           Utah, six rural counties  1117          6.37         100.00                       100.0                   96.87                      87.65
+National, largest-coverage counties  1351          6.37          99.78                       100.0                   98.22                      86.53
+         National, smaller counties   903          6.37         100.00                       100.0                   96.68                      77.19
+                                ALL 12499          6.37          99.98                       100.0                   98.95                      93.07
+
+[M2] Near-line cohort by the reference point's position relative to the edge the geocoder matched
+                              case    n  wrong  wrong_%             ci
+reference > 60 m from matched edge  112     25   22.321 [15.60, 30.88]
+ reference beyond matched edge end  168     13    7.738  [4.58, 12.79]
+           reference on other side   13      4   30.769 [12.68, 57.63]
+              same face, same side 5594      2    0.036   [0.01, 0.13]
+
+[M2b] per group
+                              group                               case    n  wrong
+                NYC, Address Points reference > 60 m from matched edge   10      7
+                NYC, Address Points  reference beyond matched edge end   26      6
+                NYC, Address Points               same face, same side 1400      1
+                         NYC, PLUTO reference > 60 m from matched edge    9      1
+                         NYC, PLUTO  reference beyond matched edge end   31      0
+                         NYC, PLUTO            reference on other side    2      0
+                         NYC, PLUTO               same face, same side 2410      0
+National, largest-coverage counties reference > 60 m from matched edge   24      1
+National, largest-coverage counties  reference beyond matched edge end   27      1
+National, largest-coverage counties            reference on other side    3      2
+National, largest-coverage counties               same face, same side  467      1
+         National, smaller counties reference > 60 m from matched edge   20      5
+         National, smaller counties  reference beyond matched edge end   15      2
+         National, smaller counties               same face, same side  193      0
+             Utah, Salt Lake County reference > 60 m from matched edge   28      2
+             Utah, Salt Lake County  reference beyond matched edge end   49      3
+             Utah, Salt Lake County            reference on other side    3      0
+             Utah, Salt Lake County               same face, same side  592      0
+           Utah, six rural counties reference > 60 m from matched edge   21      9
+           Utah, six rural counties  reference beyond matched edge end   20      1
+           Utah, six rural counties            reference on other side    5      2
+           Utah, six rural counties               same face, same side  532      0
+
+[M3] Re-placing each geocode at M = 50 random positions along its matched edge (own offset): reported side vs
+     opposite side; share outside the reference tract
+     scope                               group     n  observed_%       obs_ci  random_position_on_matched_face_%  same_but_opposite_side_%
+ near-line                          NYC, PLUTO  2452       0.041 [0.01, 0.23]                              0.209                    64.923
+ near-line                 NYC, Address Points  1436       0.975 [0.58, 1.63]                              1.123                    62.806
+ near-line              Utah, Salt Lake County   672       0.744 [0.32, 1.73]                              0.771                    54.973
+ near-line            Utah, six rural counties   578       2.076 [1.19, 3.59]                              2.104                    81.000
+ near-line National, largest-coverage counties   521       0.960 [0.41, 2.23]                              1.182                    50.514
+ near-line          National, smaller counties   228       3.070 [1.49, 6.20]                              3.211                    69.193
+ near-line                                 ALL  5887       0.747 [0.56, 1.00]                              0.884                    63.740
+all scored                          NYC, PLUTO  4915       0.102 [0.04, 0.24]                              0.247                    42.975
+all scored                 NYC, Address Points  2877       0.730 [0.48, 1.11]                              0.844                    42.559
+all scored              Utah, Salt Lake County  1336       0.674 [0.35, 1.28]                              0.689                    30.648
+all scored            Utah, six rural counties  1117       1.164 [0.68, 1.98]                              1.180                    43.259
+all scored National, largest-coverage counties  1351       0.444 [0.20, 0.97]                              0.480                    20.981
+all scored          National, smaller counties   903       0.997 [0.53, 1.88]                              1.045                    18.583
+all scored                                 ALL 12499       0.504 [0.39, 0.64]                              0.598                    37.447

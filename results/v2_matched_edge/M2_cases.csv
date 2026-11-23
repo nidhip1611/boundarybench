@@ -1,0 +1,5 @@
+case,n,wrong,wrong_%,ci
+reference > 60 m from matched edge,112,25,22.321,"[15.60, 30.88]"
+reference beyond matched edge end,168,13,7.738,"[4.58, 12.79]"
+reference on other side,13,4,30.769,"[12.68, 57.63]"
+"same face, same side",5594,2,0.036,"[0.01, 0.13]"

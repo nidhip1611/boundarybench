@@ -1,0 +1,8 @@
+group,n,offset_p50_m,offset_5_8m_%,geocode_on_reported_side_%,ref_on_reported_side_%,ref_within_matched_face_%
+"NYC, PLUTO",4915,6.36,100.0,100.0,99.9,98.29
+"NYC, Address Points",2877,6.36,100.0,100.0,99.72,96.91
+"Utah, Salt Lake County",1336,6.38,100.0,100.0,97.83,87.5
+"Utah, six rural counties",1117,6.37,100.0,100.0,96.87,87.65
+"National, largest-coverage counties",1351,6.37,99.78,100.0,98.22,86.53
+"National, smaller counties",903,6.37,100.0,100.0,96.68,77.19
+ALL,12499,6.37,99.98,100.0,98.95,93.07
