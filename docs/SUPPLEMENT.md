@@ -153,3 +153,53 @@ Source: results/v2_blocks_policy/Q1_qct_flips.csv and Q1b_cases.csv. For each ad
 
 ## Data note
 The archived geocoder inputs/outputs (data/geocoder_outputs/) contain street addresses taken from public open-data address files (NYC PLUTO, NYC Address Points, Utah SGID Address Points, USDOT NAD). They contain no names or other personal information; use follows the open-data terms of each source.
+
+## S8. The 44 near-line disagreements, case by case
+Source: results/v2_blocks_policy/S8_disagreement_cases.csv (from F1b_error_cases.csv and v2_matched_edge/M_points.csv).
+
+| group | case | match_type | diff | ref_to_edge_m | input | out_address |
+|---|---|---|---|---|---|---|
+| NYC, Address Points | adjacent block face, same street | Non_Exact | city name only | 24.5 | 2459 OCEAN AVE, New York, NY, 11229 | 2459 OCEAN AVE, BROOKLYN, NY, 11229 |
+| NYC, Address Points | adjacent block face, same street | Non_Exact | city name only | 28.5 | 210-02 113 AVE, New York, NY, 11429 | 210-02 113TH AVE, QUEENS VILLAGE, NY, 11429 |
+| NYC, Address Points | adjacent block face, same street | Non_Exact | city name only | 54.9 | 60-28 FRESH POND RD, New York, NY, 11378 | 60-28 FRESH POND RD, MASPETH, NY, 11378 |
+| NYC, Address Points | adjacent block face, same street | Non_Exact | city name only | 28.9 | 113-42 196 ST, New York, NY, 11412 | 113-42 196TH ST, SAINT ALBANS, NY, 11412 |
+| NYC, Address Points | adjacent block face, same street | Non_Exact | city name only | 24.5 | 3851 FLATLANDS AVE, New York, NY, 11234 | 3851 FLATLANDS AVE, BROOKLYN, NY, 11234 |
+| NYC, Address Points | adjacent block face, same street | Non_Exact | city name only | 54.5 | 1329 FLATBUSH AVE, New York, NY, 11226 | 1329 FLATBUSH AVE, BROOKLYN, NY, 11226 |
+| National, largest-coverage counties | adjacent block face, same street | Non_Exact | city name only | 50.8 | 8340 Highway 7, Not stated, MN, 55375 | 8340 STATE HWY 7, SAINT BONIFACIUS, MN, 55375 |
+| National, smaller counties | adjacent block face, same street | Exact | no difference | 22.5 | 35 PUBLIC Square, LANCASTER, KY, 40444 | 35 PUBLIC SQ, LANCASTER, KY, 40444 |
+| National, smaller counties | adjacent block face, same street | Exact | no difference | 37.7 | 1826 178TH Street Southwest, LYNNWOOD, WA, 98037 | 1826 178TH ST SW, LYNNWOOD, WA, 98037 |
+| Utah, Salt Lake County | adjacent block face, same street | Exact | no difference | 31.9 | 4742 W DUCKHORN DR, SOUTH JORDAN, UT, 84009 | 4742 W DUCKHORN DR, SOUTH JORDAN, UT, 84009 |
+| Utah, Salt Lake County | adjacent block face, same street | Non_Exact | city name only | 27.6 | 2127 E 11270 S, SANDY CITY, UT, 84092 | 2127 E 11270 S, SANDY, UT, 84092 |
+| Utah, Salt Lake County | adjacent block face, same street | Exact | no difference | 56.2 | 2930 S 2000 E, SALT LAKE CITY, UT, 84109 | 2930 S 2000 E, SALT LAKE CITY, UT, 84109 |
+| NYC, Address Points | matched a different address | Non_Exact | house number differs | 202.1 | 107-18 ASCAN AVE, New York, NY, 11375 | 107 ASCAN AVE, FOREST HILLS, NY, 11375 |
+| National, largest-coverage counties | matched a different address | Non_Exact | directional differs | 39.1 | 2193 South MAIN Street, BROKEN ARROW, OK, 74012 | 2193 MAIN ST, BROKEN ARROW, OK, 74012 |
+| Utah, six rural counties | matched a different address | Non_Exact | directional differs | 37.0 | 1600 W HWY 40, VERNAL, UT, 84078 | 1600 E US HWY 40, VERNAL, UT, 84078 |
+| Utah, six rural counties | matched a different address | Non_Exact | directional differs | 51.2 | 58 S HWY 118, , UT, 84754 | 58 STATE RTE 118, MONROE, UT, 84754 |
+| Utah, six rural counties | matched a different address | Non_Exact | directional differs | 326.0 | 104 N MAIN ST, RICHFIELD CITY, UT, 84701 | 104 S MAIN ST, RICHFIELD, UT, 84701 |
+| Utah, six rural counties | matched a different address | Non_Exact | directional differs | 392.2 | 154 N MAIN ST, RICHFIELD CITY, UT, 84701 | 154 S MAIN ST, RICHFIELD, UT, 84701 |
+| Utah, six rural counties | matched a different address | Non_Exact | directional differs | 375.4 | 142 N MAIN ST, RICHFIELD CITY, UT, 84701 | 142 S MAIN ST, RICHFIELD, UT, 84701 |
+| Utah, six rural counties | matched a different address | Non_Exact | directional differs | 369.1 | 136 N MAIN ST, RICHFIELD CITY, UT, 84701 | 136 S MAIN ST, RICHFIELD, UT, 84701 |
+| Utah, six rural counties | matched a different address | Non_Exact | directional differs | 402.1 | 160 N MAIN ST, RICHFIELD CITY, UT, 84701 | 160 S MAIN ST, RICHFIELD, UT, 84701 |
+| Utah, six rural counties | matched a different address | Non_Exact | directional differs | 79.7 | 1335 S HWY 6, , UT, 84501 | 1335 US HWY 6, PRICE, UT, 84501 |
+| Utah, six rural counties | matched a different address | Non_Exact | directional differs | 330.3 | 108 N MAIN ST, RICHFIELD CITY, UT, 84701 | 108 S MAIN ST, RICHFIELD, UT, 84701 |
+| Utah, six rural counties | matched a different address | Non_Exact | directional differs | 386.6 | 319 N 200 E, EPHRAIM, UT, 84627 | 319 E 200 N, EPHRAIM, UT, 84627 |
+| NYC, Address Points | on matched face | Non_Exact | city name only | 33.6 | 170-04 NORTHERN BLVD, New York, NY, 11358 | 170-04 NORTHERN BLVD, FLUSHING, NY, 11358 |
+| National, largest-coverage counties | on matched face | Non_Exact | city name only | 17.1 | 44 RICH Street, Not stated, MA, 02148 | 44 RICH ST, MALDEN, MA, 02148 |
+| National, largest-coverage counties | other side, same block | Exact | no difference | 22.2 | 72 West 11th Street, Huntington Station, NY, 11746 | 72 W 11TH ST, HUNTINGTON STATION, NY, 11746 |
+| Utah, six rural counties | other side, same block | Exact | no difference | 28.1 | 487 W 500 S, VERNAL, UT, 84078 | 487 W 500 S, VERNAL, UT, 84078 |
+| NYC, Address Points | reference >60 m from matched street, same address text | Non_Exact | city name only | 64.6 | 7 HUGH J GRANT CIR, New York, NY, 10462 | 7 HUGH J GRANT CIR, BRONX, NY, 10462 |
+| NYC, Address Points | reference >60 m from matched street, same address text | Non_Exact | city name only | 138.3 | 63-01 99 ST, New York, NY, 11374 | 63-01 99TH ST, REGO PARK, NY, 11374 |
+| NYC, Address Points | reference >60 m from matched street, same address text | Non_Exact | city name only | 305.3 | 2 SUMPTER ST, New York, NY, 11233 | 2 SUMPTER ST, BROOKLYN, NY, 11233 |
+| NYC, Address Points | reference >60 m from matched street, same address text | Non_Exact | city name only | 95.7 | 1555 OVINGTON AVE, New York, NY, 11219 | 1555 OVINGTON AVE, BROOKLYN, NY, 11219 |
+| NYC, Address Points | reference >60 m from matched street, same address text | Non_Exact | city name only | 104.1 | 1494 E  35 ST, New York, NY, 11234 | 1494 E 35TH ST, BROOKLYN, NY, 11234 |
+| NYC, Address Points | reference >60 m from matched street, same address text | Non_Exact | city name only | 104.8 | 1559 OVINGTON AVE, New York, NY, 11219 | 1559 OVINGTON AVE, BROOKLYN, NY, 11219 |
+| NYC, PLUTO | reference >60 m from matched street, same address text | Exact | no difference | 118.3 | 1492 EAST 35 STREET, Brooklyn, NY, 11234 | 1492 E 35TH ST, BROOKLYN, NY, 11234 |
+| National, largest-coverage counties | reference >60 m from matched street, same address text | Exact | no difference | 125.1 | 4 Hunters Lane, Huntington Station, NY, 11746 | 4 HUNTERS LN, HUNTINGTON STATION, NY, 11746 |
+| National, smaller counties | reference >60 m from matched street, same address text | Exact | no difference | 339.5 | 1123 Old RAILROAD GRADE Road, LANCASTER, KY, 40444 | 1123 OLD RAILROAD GRADE RD, LANCASTER, KY, 40444 |
+| National, smaller counties | reference >60 m from matched street, same address text | Exact | no difference | 95.5 | 1427 KEMPER Lane, LANCASTER, KY, 40444 | 1427 KEMPER LN, LANCASTER, KY, 40444 |
+| National, smaller counties | reference >60 m from matched street, same address text | Exact | no difference | 90.1 | 3602 200TH Place Southeast, BOTHELL, WA, 98012 | 3602 200TH PL SE, BOTHELL, WA, 98012 |
+| National, smaller counties | reference >60 m from matched street, same address text | Exact | no difference | 317.8 | 1712 Peytonsburg Road, Vernon Hill, VA, 24597 | 1712 PEYTONSBURG RD, VERNON HILL, VA, 24597 |
+| National, smaller counties | reference >60 m from matched street, same address text | Exact | no difference | 293.0 | 1076 Huell Matthews Highway, South Boston, VA, 24592 | 1076 HUELL MATTHEWS HWY, SOUTH BOSTON, VA, 24592 |
+| Utah, Salt Lake County | reference >60 m from matched street, same address text | Non_Exact | ZIP differs | 458.6 | 3995 S REDWOOD RD, WEST VALLEY CITY, UT, 84123 | 3995 S REDWOOD RD, WEST VALLEY CITY, UT, 84119 |
+| Utah, Salt Lake County | reference >60 m from matched street, same address text | Non_Exact | city name only | 75.3 | 6790 S 400 W, MURRAY, UT, 84047 | 6790 S 400 W, MIDVALE, UT, 84047 |
+| Utah, six rural counties | reference >60 m from matched street, same address text | Exact | no difference | 91.1 | 849 W MAIN ST, VERNAL, UT, 84078 | 849 W MAIN ST, VERNAL, UT, 84078 |
