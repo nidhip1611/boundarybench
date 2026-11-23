@@ -79,6 +79,9 @@ x = np.arange(len(P7)); w = 0.2
 for j, (col, name, colr) in enumerate(series):
     v = np.array([parse(s) for s in P7[col]])
     ax.bar(x + (j - 1.5) * w, v[:, 0], w, color=colr, label=name, yerr=v[:, 1:].T, error_kw={"lw": 0.6, "capsize": 1.2})
+    if col == "actual_wrong_%":
+        for xi, vi in zip(x, v[:, 0]):
+            ax.text(xi + (j - 1.5) * w, vi + v[list(x).index(xi), 2] + 0.8, f"{vi:.2f}", ha="center", va="bottom", fontsize=5.6, rotation=90, color=INK)
 ax.set_xticks(x); ax.set_xticklabels([lab[g] for g in P7["group"]], fontsize=7.5)
 ax.set_ylabel("tract disagreement (%)", fontsize=8); ax.tick_params(axis="y", labelsize=7.5)
 ax.legend(frameon=False, fontsize=7.5, ncol=2, loc="upper left", handlelength=1.2, columnspacing=1.0)
@@ -95,7 +98,7 @@ for xv in (0, 11):
     ax.plot([xv, xv], [-5.2, 5.6], color=GREY, lw=5, zorder=1)                                 # cross streets
 ax.plot([-1, 21], [0, 0], color="#c53030", lw=1.2, ls="--", zorder=4)                            # tract line on street
 ax.plot([11, 11], [0, 5.6], color="#c53030", lw=1.2, ls="--", zorder=2)
-ax.plot([0.3, 10.7], [0.0, 0.0], color=BLUE, lw=2.6, zorder=3)                                  # matched edge (centerline)
+ax.plot([0.3, 10.7], [0.0, 0.0], color=BLUE, lw=3.4, zorder=3)                                  # matched edge (centerline)
 ax.plot([0.3, 10.7], [1.3, 1.3], color=BLUE, lw=0.8, ls=":", zorder=3)                         # offset on reported side
 ax.text(0.5, 2.2, "block face: matched edge, reported side", ha="left", fontsize=6.3, color=BLUE)
 ax.text(-0.6, 4.7, "Tract A", fontsize=7, color="#2c5282"); ax.text(1.0, -4.8, "Tract B", fontsize=7, color="#9c4221")
