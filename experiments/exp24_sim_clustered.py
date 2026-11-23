@@ -117,13 +117,15 @@ rep.table("[H1c] Distance rule at the 0.1% target, per fold (errors/answered)",
           index=False)
 
 # ----------------------------------------------------------------------------- P1 projection distortion
-tr = Transformer.from_crs(C.CRS_M, 4326, always_xy=True)
-lon, lat = tr.transform(pts["x"].to_numpy(), pts["y"].to_numpy())
+if {"lon", "lat"}.issubset(pts.columns):
+    lon, lat = pts["lon"].to_numpy(), pts["lat"].to_numpy()
+else:
+    lon, lat = Transformer.from_crs(C.CRS_M, 4326, always_xy=True).transform(pts["x"].to_numpy(), pts["y"].to_numpy())
 f = Proj(f"EPSG:{C.CRS_M}").get_factors(lon, lat)
 pts["scale_err_%"] = 100 * np.maximum(np.abs(np.asarray(f.meridional_scale) - 1), np.abs(np.asarray(f.parallel_scale) - 1))
 pts["ang_deg"] = np.asarray(f.angular_distortion)
 pts["grp"] = np.where(pts["statefp"].astype(str) == "02", "Alaska", np.where(pts["statefp"].astype(str) == "15", "Hawaii", "other states + DC"))
-P1 = pts.groupby("grp").agg(n=("x", "size"), median_scale_err=("scale_err_%", "median"), max_scale_err=("scale_err_%", "max"),
+P1 = pts.groupby("grp").agg(n=("statefp", "size"), median_scale_err=("scale_err_%", "median"), max_scale_err=("scale_err_%", "max"),
                             max_angular_deg=("ang_deg", "max")).round(3)
 P1.loc["ALL"] = [len(pts), pts["scale_err_%"].median(), pts["scale_err_%"].max(), pts["ang_deg"].max()]
 P1.to_csv(f"{RES}/P1_projection.csv")
