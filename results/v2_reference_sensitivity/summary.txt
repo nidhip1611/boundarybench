@@ -1,0 +1,70 @@
+# EXP25 reference-point sensitivity, block-face definition, Table 3 extras | run 2026-11-23 16:21 | commit e576250
+[M0] edge files: 32 counties, 1,320,966 edges
+
+[R0] scored addresses without a matched TIGER 2025 edge (TLID not found)
+near                                 False  True 
+group                                            
+NYC, Address Points                     10      7
+NYC, PLUTO                              22     26
+National, largest-coverage counties      8      8
+National, smaller counties               8      8
+Utah, Salt Lake County                  18     22
+Utah, six rural counties                 9     13
+
+[R1] Near-line disagreement by reference placement type
+                              group                       reference    n  wrong  rate_%            ci  random_dir_%
+                NYC, Address Points structure/rooftop/address point 1443     14   0.970  [0.58, 1.62]        15.012
+                         NYC, PLUTO                 other placement 2478      1   0.040  [0.01, 0.23]        11.484
+National, largest-coverage counties                 other placement  141      0   0.000  [0.00, 2.65]        14.645
+National, largest-coverage counties structure/rooftop/address point  388      5   1.289  [0.55, 2.98]        18.768
+         National, smaller counties                 other placement    7      0   0.000 [0.00, 35.43]        41.071
+         National, smaller counties structure/rooftop/address point  229      7   3.057  [1.49, 6.17]        25.415
+             Utah, Salt Lake County                 other placement  694      5   0.720  [0.31, 1.68]        11.717
+           Utah, six rural counties                 other placement  570     11   1.930  [1.08, 3.42]        10.661
+           Utah, six rural counties structure/rooftop/address point   21      1   4.762 [0.85, 22.67]        14.619
+                                ALL structure/rooftop/address point 2081     27   1.297  [0.89, 1.88]        16.853
+
+[R3] Near-line block-face split under alternative definitions (distance threshold, edge-end tolerance)
+ dist_thr_m  end_tol_m  on_face_n  on_face_wrong  off_face_n  off_face_wrong
+         30          1       4893              1         994              43
+         30          5       4819              1        1068              43
+         30         10       4684              1        1203              43
+         45          1       5516              2         371              42
+         45          5       5425              2         462              42
+         45         10       5273              2         614              42
+         60          1       5594              2         293              42
+         60          5       5501              2         386              42
+         60         10       5348              2         539              42
+         90          1       5607              2         280              42
+         90          5       5514              2         373              42
+         90         10       5360              2         527              42
+        120          1       5611              3         276              41
+        120          5       5518              3         369              41
+        120         10       5364              3         523              41
+
+[R2] Reference points jittered by r metres (20 replicates; near-line, addresses with a matched edge)
+ jitter_m  disagreement_%     range  on_face_n  on_face_wrong  off_face_n  off_face_wrong  face_class_changed_%
+        5            0.78 0.75-0.80    5575.50           2.75      311.50           42.90                  0.86
+       10            0.88 0.82-0.99    5523.05           3.00      363.95           48.85                  2.12
+       20            5.72 5.20-6.51    4897.05          13.45      989.95          323.15                 13.20
+
+[R4] Table 3 extras: both strata; worst case counting Tie, No_Match and >500 m matches as wrong; random-direction
+     CI = address bootstrap of per-address means over 200 directions
+                                row   stratum    n  wrong  rate_%           ci  all_exclusions  all_excl_as_wrong_%  random_dir_%  random_dir_ci
+                         NYC, PLUTO near-line 2478      1   0.040 [0.01, 0.23]              22                0.920        11.484 [10.86, 12.08]
+                         NYC, PLUTO    random 2485      4   0.161 [0.06, 0.41]              15                0.760         4.065   [3.66, 4.49]
+                NYC, Address Points near-line 1443     14   0.970 [0.58, 1.62]              57                4.733        15.012 [14.09, 15.95]
+                NYC, Address Points    random 1451      7   0.482 [0.23, 0.99]              49                3.733         5.637   [4.96, 6.31]
+             Utah, Salt Lake County near-line  694      5   0.720 [0.31, 1.68]              55                8.011        11.717 [10.57, 12.96]
+             Utah, Salt Lake County    random  682      4   0.587 [0.23, 1.50]              68                9.600         1.603   [1.07, 2.21]
+           Utah, six rural counties near-line  591     12   2.030 [1.17, 3.52]             103               16.571        10.801  [9.57, 12.09]
+           Utah, six rural counties    random  548      1   0.182 [0.03, 1.03]             158               22.521         0.528   [0.22, 0.92]
+National, largest-coverage counties near-line  529      5   0.945 [0.40, 2.19]              35                7.092        17.669 [16.15, 19.19]
+National, largest-coverage counties    random  838      1   0.119 [0.02, 0.67]              60                6.793         1.264   [0.87, 1.68]
+         National, smaller counties near-line  236      7   2.966 [1.44, 5.99]              70               25.163        25.879 [23.40, 28.34]
+         National, smaller counties    random  683      2   0.293 [0.08, 1.06]             211               23.826         0.743   [0.36, 1.17]
+                18 sampled counties near-line  765     12   1.569 [0.90, 2.72]             105               13.448        20.202 [18.87, 21.50]
+                18 sampled counties    random 1521      3   0.197 [0.07, 0.58]             271               15.290         1.030   [0.74, 1.32]
+                                All near-line 5971     44   0.737 [0.55, 0.99]             342                6.114        13.413 [12.96, 13.83]
+                                All    random 6687     19   0.284 [0.18, 0.44]             561                8.002         3.175   [2.94, 3.40]
+[R5] d_obs < 7 m withholds 64.90% and catches 26/44 = 59.1% of errors; withholding the same share at random catches 64.9% in expectation (28.6 errors)

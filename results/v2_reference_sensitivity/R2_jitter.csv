@@ -1,0 +1,4 @@
+jitter_m,disagreement_%,range,on_face_n,on_face_wrong,off_face_n,off_face_wrong,face_class_changed_%
+5,0.78,0.75-0.80,5575.5,2.75,311.5,42.9,0.86
+10,0.88,0.82-0.99,5523.05,3.0,363.95,48.85,2.12
+20,5.72,5.20-6.51,4897.05,13.45,989.95,323.15,13.2
