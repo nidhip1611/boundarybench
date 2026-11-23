@@ -18,12 +18,13 @@ STEPS = {"1": "exp01_v2_main.py", "2": "exp02_geometry.py", "3": "exp03_gaussian
          "15": "exp15_utah_transfer.py", "16": "exp16_national_transfer.py",
          "17": "exp17_matched_operating_points.py", "18": "exp18_realdata_mechanism.py",
          "19": "exp19_realdata_reconcile.py", "20": "exp20_heldout_folds.py",
-         "21": "exp21_realdata_sensitivity.py"}
+         "21": "exp21_realdata_sensitivity.py",
+         "22": "exp22_matched_edge.py"}
 
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
 todo = args or list(STEPS)
 if "--skip-nyc" in sys.argv:
-    todo = [k for k in todo if k not in ("4", "4b", "9", "11", "13", "15", "16", "18", "19", "21")]
+    todo = [k for k in todo if k not in ("4", "4b", "9", "11", "13", "15", "16", "18", "19", "21", "22")]
 for k in todo:
     t = time.time()
     print(f"\n{'=' * 80}\nRUNNING {STEPS[k]}\n{'=' * 80}", flush=True)

@@ -56,3 +56,31 @@ ax.set_ylim(0, 25)
 ax.legend(frameon=False, fontsize=6.5, loc="upper left")
 fig.tight_layout(); fig.savefig(f"{OUT}/fig2_direction.pdf"); plt.close(fig)
 print("wrote", os.listdir(OUT))
+
+# ---------------------------------------------------------------- Fig. 3 (used as Fig. 1 from round 4): direction test
+# results/v2_realdata_reconcile/P7_along_vs_across.csv (clear segment matches); read directly so values cannot drift
+import re
+import pandas as pd
+P7 = pd.read_csv(os.path.join(os.path.dirname(__file__), "..", "results", "v2_realdata_reconcile", "P7_along_vs_across.csv"))
+P7 = P7[P7["group"] != "ALL"]
+lab = {"NYC, PLUTO": "NYC\nPLUTO", "NYC, Address Points": "NYC addr.\npoints", "Utah, Salt Lake County": "Salt Lake\nCounty",
+       "Utah, six rural counties": "rural\nUtah", "National, largest-coverage counties": "largest\ncounties",
+       "National, smaller counties": "smaller\ncounties"}
+
+
+def parse(s):
+    v, lo, hi = map(float, re.findall(r"[-\d.]+", s)); return v, v - lo, hi - v
+
+
+series = [("actual_wrong_%", "observed", INK), ("along_street_%", "along street", BLUE),
+          ("random_direction_%", "random direction", GREY), ("across_street_%", "across street", ORANGE)]
+fig, ax = plt.subplots(figsize=(4.8, 1.95))
+x = np.arange(len(P7)); w = 0.2
+for j, (col, name, colr) in enumerate(series):
+    v = np.array([parse(s) for s in P7[col]])
+    ax.bar(x + (j - 1.5) * w, v[:, 0], w, color=colr, label=name, yerr=v[:, 1:].T, error_kw={"lw": 0.6, "capsize": 1.2})
+ax.set_xticks(x); ax.set_xticklabels([lab[g] for g in P7["group"]], fontsize=7.5)
+ax.set_ylabel("wrong tract (%)", fontsize=8); ax.tick_params(axis="y", labelsize=7.5)
+ax.legend(frameon=False, fontsize=7.5, ncol=2, loc="upper left", handlelength=1.2, columnspacing=1.0)
+ax.set_ylim(0, 38)
+fig.tight_layout(); fig.savefig(f"{OUT}/fig3_direction_test.pdf"); fig.savefig("/tmp/fig3.png", dpi=200); plt.close(fig)
