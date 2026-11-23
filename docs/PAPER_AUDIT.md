@@ -170,3 +170,16 @@ The 10-page cut built to 9 pages, so Fig. 2, Eq. (2) as a display, the AURC sent
 | Face counterfactual | near-line observed 0.747; random position on face 0.884; opposite side 63.74 | [M3] |
 | Fold table | distance rule, UCB(location), 0.1%: per-fold errors/answered | v2_heldout_folds F1_folds.csv |
 | NYC ratio | 0.97 / 0.04 ≈ 24 | [P1] |
+
+## Revision round 5 (research-driven additions, Nov 23)
+
+| Paper text | Value | Source |
+|---|---|---|
+| Block group / block near-line | 0.837% / 1.658% [1.36, 2.01]; random 14.78 / 22.10 | v2_blocks_policy [B1] |
+| Blocks on/off matched face | 6/5,594; 92/293 | [B2] |
+| QCT | 1,123/5,971 near-line addresses in 2026 QCTs (18.8%); flips 8/44 near-line, 2/18 random stratum | [Q1], [Q2] |
+| Non_Exact anatomy | city name only 2,637 (17 wrong); directional differs 268 (11 wrong, 4.10%); house number differs 6 (1) | [F1] |
+| Flag | house no./directional differs: 4.59% reviewed, 12/44 caught; distance same share 5 | [F1c] |
+| Region concentration | rural Utah 10 of 12 caught | [F1d] |
+| Non_Exact stratified | MH OR 3.28, CMH p = 0.0031 | [F2b] |
+| Prior work | Whitsel 2006 concordance 85–98%; Brokamp 2018 95.5%; Wilson et al. 2024 3.3% wrong tract (CA LIHTC) | research report (verified citations) |
