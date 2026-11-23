@@ -1,0 +1,4 @@
+flag,reviewed_%,caught,of,risk_answered_%,distance_same_workload_caught,distance_risk_answered_%
+Non_Exact,50.427,30,44,0.473,23,0.709
+house no./directional/street differs,6.297,12,44,0.572,5,0.697
+house no./directional differs,4.589,12,44,0.562,5,0.685

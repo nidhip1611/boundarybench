@@ -1,0 +1,63 @@
+group,uid,near,ref_block,geo_tract,qct_ref,qct_geo,flip
+"NYC, PLUTO",44,True,360470646002000,36047074600,False,False,False
+"NYC, PLUTO",2911,False,360610247001004,36061024100,False,True,True
+"NYC, PLUTO",2961,False,360810255001014,36081025100,False,False,False
+"NYC, PLUTO",3517,False,360810592001011,36081058000,False,False,False
+"NYC, PLUTO",4898,False,360811129002007,36081113300,False,False,False
+"NYC, Address Points",172,True,360050216023002,36005022200,True,True,False
+"NYC, Address Points",470,True,360810719002004,36081072100,True,False,True
+"NYC, Address Points",523,True,360810749001000,36081072300,False,False,False
+"NYC, Address Points",596,True,360470381003002,36047037900,True,False,True
+"NYC, Address Points",638,True,360470262001000,36047019000,False,False,False
+"NYC, Address Points",660,True,360470578001001,36047056000,True,False,True
+"NYC, Address Points",667,True,360810516002000,36081053601,False,False,False
+"NYC, Address Points",748,True,360810601002000,36081059900,False,False,False
+"NYC, Address Points",848,True,360810526001000,36081052400,False,False,False
+"NYC, Address Points",876,True,360470646002000,36047074600,False,False,False
+"NYC, Address Points",897,True,360470262001000,36047019000,False,False,False
+"NYC, Address Points",1221,True,360811193001001,36081118500,False,True,True
+"NYC, Address Points",1306,True,360470738003000,36047073600,False,False,False
+"NYC, Address Points",1335,True,360470790023002,36047079001,False,False,False
+"NYC, Address Points",1858,False,360470159006000,36047016300,False,False,False
+"NYC, Address Points",2104,False,360610049001004,36061004300,False,False,False
+"NYC, Address Points",2132,False,360050127012001,36005012901,True,True,False
+"NYC, Address Points",2208,False,360850122003009,36085013400,False,False,False
+"NYC, Address Points",2231,False,360470119011009,36047013700,False,False,False
+"NYC, Address Points",2638,False,360470360012000,36047036200,True,True,False
+"Utah, six rural counties",4,True,490479684031008,49047968301,False,False,False
+"Utah, six rural counties",36,True,490419755001008,49041975400,False,False,False
+"Utah, six rural counties",41,True,490419754001010,49041975300,False,False,False
+"Utah, six rural counties",48,True,490419754001010,49041975300,False,False,False
+"Utah, six rural counties",49,True,490479684032008,49047968301,False,False,False
+"Utah, six rural counties",303,True,490419754001010,49041975300,False,False,False
+"Utah, six rural counties",381,True,490419754001010,49041975300,False,False,False
+"Utah, six rural counties",504,True,490419754001010,49041975300,False,False,False
+"Utah, six rural counties",542,True,490070001002052,49007000300,False,True,True
+"Utah, six rural counties",603,True,490419754001010,49041975300,False,False,False
+"Utah, six rural counties",693,True,490399724011011,49039972402,False,False,False
+"Utah, six rural counties",732,True,490479684032035,49047968404,False,False,False
+"Utah, six rural counties",1037,False,490070006002072,49007000200,False,False,False
+"Utah, Salt Lake County",1623,True,490351130221023,49035115210,False,False,False
+"Utah, Salt Lake County",1754,True,490351135094004,49035113313,True,False,True
+"Utah, Salt Lake County",2074,True,490351122023017,49035112404,False,True,True
+"Utah, Salt Lake County",2194,True,490351128141007,49035112813,False,False,False
+"Utah, Salt Lake County",2195,True,490351048001007,49035110300,False,False,False
+"Utah, Salt Lake County",2254,False,490351120023008,49035112301,False,False,False
+"Utah, Salt Lake County",2321,False,490351109001015,49035110800,False,False,False
+"Utah, Salt Lake County",2551,False,490351113041013,49035112614,False,False,False
+"Utah, Salt Lake County",2915,False,490351044001003,49035104300,False,False,False
+"National, smaller counties",418,True,210799702021061,21079970400,False,False,False
+"National, smaller counties",430,True,210799701022029,21079970201,False,False,False
+"National, smaller counties",431,True,210799703002010,21079970201,False,False,False
+"National, largest-coverage counties",567,True,361031120012001,36103112002,False,False,False
+"National, largest-coverage counties",574,True,361031111031007,36103111102,False,False,False
+"National, smaller counties",828,False,361231503012007,36069051302,False,False,False
+"National, largest-coverage counties",1227,True,250173415003005,25017342202,False,True,True
+"National, largest-coverage counties",1336,False,250173573002013,25017354300,False,False,False
+"National, smaller counties",1410,False,230110108042000,23011010900,False,True,True
+"National, smaller counties",1661,True,530610519281004,53061051927,False,False,False
+"National, smaller counties",1670,True,530610519353011,53061052107,False,False,False
+"National, smaller counties",1987,True,510839302021032,51143010700,False,False,False
+"National, smaller counties",1993,True,510839303012003,51083930302,False,False,False
+"National, largest-coverage counties",2172,True,270530277034025,27053027702,False,False,False
+"National, largest-coverage counties",2401,True,401430075251004,40143007503,False,False,False

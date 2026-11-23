@@ -1,0 +1,10 @@
+non_exact,diff,n,wrong,wrong_%,ci
+False,city name only,190,0,0.0,"[0.00, 1.98]"
+False,no difference,2749,14,0.509,"[0.30, 0.85]"
+False,street name/type differs,21,0,0.0,"[0.00, 15.46]"
+True,ZIP differs,7,1,14.286,"[2.57, 51.31]"
+True,city name only,2637,17,0.645,"[0.40, 1.03]"
+True,directional differs,268,11,4.104,"[2.31, 7.20]"
+True,house number differs,6,1,16.667,"[3.01, 56.35]"
+True,no difference,12,0,0.0,"[0.00, 24.25]"
+True,street name/type differs,81,0,0.0,"[0.00, 4.53]"

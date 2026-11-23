@@ -1,0 +1,19 @@
+group,flag,n,reviewed_%,caught,errors
+"NYC, PLUTO",Non_Exact,2478,38.38,0,1
+"NYC, PLUTO",house no./directional/street differs,2478,1.33,0,1
+"NYC, PLUTO",house no./directional differs,2478,0.24,0,1
+"NYC, Address Points",Non_Exact,1443,92.45,14,14
+"NYC, Address Points",house no./directional/street differs,1443,2.15,1,14
+"NYC, Address Points",house no./directional differs,1443,0.35,1,14
+"Utah, Salt Lake County",Non_Exact,694,48.99,3,5
+"Utah, Salt Lake County",house no./directional/street differs,694,25.5,0,5
+"Utah, Salt Lake County",house no./directional differs,694,23.78,0,5
+"Utah, six rural counties",Non_Exact,591,26.57,10,12
+"Utah, six rural counties",house no./directional/street differs,591,10.83,10,12
+"Utah, six rural counties",house no./directional differs,591,10.66,10,12
+"National, largest-coverage counties",Non_Exact,529,36.86,3,5
+"National, largest-coverage counties",house no./directional/street differs,529,6.62,1,5
+"National, largest-coverage counties",house no./directional differs,529,4.91,1,5
+"National, smaller counties",Non_Exact,236,14.41,0,7
+"National, smaller counties",house no./directional/street differs,236,15.25,0,7
+"National, smaller counties",house no./directional differs,236,3.81,0,7
