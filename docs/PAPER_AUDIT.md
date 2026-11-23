@@ -183,3 +183,18 @@ The 10-page cut built to 9 pages, so Fig. 2, Eq. (2) as a display, the AURC sent
 | Region concentration | rural Utah 10 of 12 caught | [F1d] |
 | Non_Exact stratified | MH OR 3.28, CMH p = 0.0031 | [F2b] |
 | Prior work | Whitsel 2006 concordance 85–98%; Brokamp 2018 95.5%; Wilson et al. 2024 3.3% wrong tract (CA LIHTC) | research report (verified citations) |
+
+## Revision round 6 (two major-revision reviews, Nov 23)
+
+| Paper text | Value | Source |
+|---|---|---|
+| Structure-placed refs | 27/2,081 = 1.30%; random 16.85 | v2_reference_sensitivity [R1] |
+| Face definition | on-face 1–3, off-face 41–43 over 30–120 m × 1–10 m | [R3] |
+| Reference jitter | class changed 0.86% (5 m), 2.12% (10 m); on-face disagreements 2.75 / 3.00 | [R2] |
+| Table 3 extras | all-exclusions worst case 0.92/4.73/8.01/16.57/13.45/6.11; random stratum 19/6,687 = 0.28%; random-dir CIs | [R4] |
+| No matched edge | 84 near-line | [R0] |
+| Distance flag vs chance | 64.90% withheld, 59.1% caught (26/44) | [R5] |
+| Split-sample Table 1 | rows from T1; max gap distance vs better overlay 0.10; eval risk ≤ 0.111% at 0.1% | v2_sim_clustered [T1], [T1b] |
+| One-obs UCB | met 24/24 distance & Gaussian overlay; 23 disk/MC (1 no answers); folds over 8/9/9/3; mean cov 91.44; distance 0.1% one fold 0.1086% | [H1], [H1c] |
+| Projection at benchmark | median 0.360%; max outside AK/HI 1.899%; AK max 6.837%; 86+52 = 138 AK/HI locations | [P1] |
+| Benchmark/vintage ids | Public_AR_Current id 4; Current_Current id 4 (listings retrieved Nov 23, 2026) | research report |
