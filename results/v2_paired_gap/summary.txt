@@ -1,0 +1,3 @@
+# EXP26 paired bootstrap of the observed vs random-direction gap (near-line) | run 2026-11-23 17:59 | commit 6a1e07d
+[G1] near-line n=5971, observed 0.737%, random-direction 13.413%, gap 12.68 points
+[G2] paired address bootstrap 95% CI [12.22, 13.14]; county-cluster bootstrap (31 counties) [10.47, 15.44]
