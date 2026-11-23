@@ -153,3 +153,20 @@ The 10-page cut built to 9 pages, so Fig. 2, Eq. (2) as a display, the AURC sent
 | 24 combinations | 8 settings × targets 1/0.5/0.1%; bootstrap recomputes coverage-at-target per replicate | exp17 code | ✓ |
 | Vintage, run dates | Public_AR_Current / Current_Current; files dated Nov 9 (NYC PLUTO) and Nov 12, 2026 (others) | src/nycdata.py, exp04 | ✓ |
 | Removed | Fig. 2 (duplicated Table 2); AURC and Brier mentions; NYC 26-case breakdown and full-sample county range (other cohorts); NYC cartographic 0.69% sentence | — | — |
+
+## Revision round 4 (two Weak-Accept reviews, Nov 23): new numbers and sources
+
+| Paper text | Value | Source |
+|---|---|---|
+| Near-line flow | 6,369 submitted; Tie 30; No_Match 237; Match >500 m 75; Utah geocoded refs 56; scored 5,971 (93.8%); rural Utah 78.8%, smaller counties 77.1% | v2_realdata_sensitivity [S1] |
+| Excluded counted as wrong | 0.08 / 3.18 / 0.86 / 5.39 / 3.95; all 1.97 [1.65, 2.35]; random 13.4 | [S2] |
+| 18-county CI | county-cluster [0.67, 2.67]; random [18.03, 23.14]; real < random in 18/18 counties | [S4], [S4b] |
+| Bands | near-line 0–10 m 1/52 vs 27.96; all strata <25 m 0.84 vs 16.96; <100 m 0.70 vs 11.34 | [S5], [S5b] |
+| Census-returned tract = PIP | 5,970/5,971 near-line; 12,657/12,658 all | [S3] |
+| Non_Exact | 50.43% of near-line; 30/3,011 (1.00%) vs 14/2,960 (0.47%); Fisher p = 0.022 (computed from S6c counts); distance at 50% workload catches 23 | [S6c]; v2_realdata_reconcile P5 |
+| EPSG:2163 distortion | max linear scale error 1.647%; max angular 2.051° | [S7] |
+| Matched edge | geocode on reported side 100%; offset median 6.37 m; 99.98% within 5–8 m | v2_matched_edge [M1] |
+| Block-face cases | same face 2/5,594; beyond end 13/168; other side 4/13; >60 m 25/112 (42/293) | [M2] |
+| Face counterfactual | near-line observed 0.747; random position on face 0.884; opposite side 63.74 | [M3] |
+| Fold table | distance rule, UCB(location), 0.1%: per-fold errors/answered | v2_heldout_folds F1_folds.csv |
+| NYC ratio | 0.97 / 0.04 ≈ 24 | [P1] |
