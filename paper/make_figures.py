@@ -79,10 +79,9 @@ x = np.arange(len(P7)); w = 0.2
 for j, (col, name, colr) in enumerate(series):
     v = np.array([parse(s) for s in P7[col]])
     ax.bar(x + (j - 1.5) * w, v[:, 0], w, color=colr, label=name, yerr=v[:, 1:].T, error_kw={"lw": 0.6, "capsize": 1.2})
-    if col == "actual_wrong_%":
-        for xi, vi in zip(x, v[:, 0]):
-            ax.text(xi + (j - 1.5) * w, vi + v[list(x).index(xi), 2] + 0.6, f"{vi:.2f}%", ha="center", va="bottom", fontsize=6.3, color=INK, bbox=dict(fc="white", ec="none", pad=0.4, alpha=0.85), zorder=6)
-ax.set_xticks(x); ax.set_xticklabels([lab[g] for g in P7["group"]], fontsize=7.5)
+
+obs = [parse(v)[0] for v in P7["actual_wrong_%"]]
+ax.set_xticks(x); ax.set_xticklabels([f"{lab[g]}\nobs. {o:.2f}%" for g, o in zip(P7["group"], obs)], fontsize=7.2)
 ax.set_ylabel("tract disagreement (%)", fontsize=8); ax.tick_params(axis="y", labelsize=7.5)
 ax.legend(frameon=False, fontsize=7.5, ncol=2, loc="upper left", handlelength=1.2, columnspacing=1.0)
 ax.set_ylim(0, 38)
