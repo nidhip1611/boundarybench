@@ -84,3 +84,35 @@ ax.set_ylabel("wrong tract (%)", fontsize=8); ax.tick_params(axis="y", labelsize
 ax.legend(frameon=False, fontsize=7.5, ncol=2, loc="upper left", handlelength=1.2, columnspacing=1.0)
 ax.set_ylim(0, 38)
 fig.tight_layout(); fig.savefig(f"{OUT}/fig3_direction_test.pdf"); fig.savefig("/tmp/fig3.png", dpi=200); plt.close(fig)
+
+# ---------------------------------------------------------------- Fig. 2 (round 6): block-face mechanism schematic
+fig, ax = plt.subplots(figsize=(4.8, 2.05))
+ax.set_xlim(-1, 21); ax.set_ylim(-5.2, 5.6); ax.axis("off")
+ax.axhspan(0, 5.6, xmin=0, xmax=1, color="#ebf4ff", zorder=0); ax.axhspan(-5.2, 0, color="#fff5eb", zorder=0)
+ax.axvspan(11, 21, ymin=5.2 / 10.8, ymax=1, color="#e6fffa", zorder=0)
+ax.plot([-1, 21], [0, 0], color=GREY, lw=5, solid_capstyle="butt", zorder=1)                 # main street
+for xv in (0, 11):
+    ax.plot([xv, xv], [-5.2, 5.6], color=GREY, lw=5, zorder=1)                                 # cross streets
+ax.plot([-1, 21], [0, 0], color="#c53030", lw=1.2, ls="--", zorder=2)                            # tract line on street
+ax.plot([11, 11], [0, 5.6], color="#c53030", lw=1.2, ls="--", zorder=2)
+ax.plot([0.3, 10.7], [1.0, 1.0], color=BLUE, lw=2.2, zorder=3)                                  # matched block face
+ax.text(0.5, 2.0, "matched edge, reported side = block face", ha="left", fontsize=6.5, color=BLUE)
+ax.text(-0.6, 4.7, "Tract A", fontsize=7, color="#2c5282"); ax.text(1.0, -4.8, "Tract B", fontsize=7, color="#9c4221")
+ax.text(19.2, 4.7, "Tract C", fontsize=7, color="#285e61", ha="right")
+def mark(x, y, kind, lab, dx=0.3, dy=0.45):
+    if kind == "ref":
+        ax.plot(x, y, "s", ms=5, mfc="white", mec=INK, zorder=4)
+    else:
+        ax.plot(x, y, "o", ms=5, color=ORANGE, zorder=4)
+    ax.text(x + dx, y + dy, lab, fontsize=6.3, color=INK)
+mark(3.0, 3.2, "ref", "R1"); mark(3.8, 1.0, "geo", "G1", dy=0.35)
+mark(7.0, -3.2, "ref", "R2"); mark(7.2, 1.0, "geo", "G2", dy=0.35)
+ax.annotate("", xy=(7.15, 0.75), xytext=(7.0, -2.9), arrowprops=dict(arrowstyle="->", lw=0.6, color=INK))
+mark(15.0, 3.0, "ref", "R3"); mark(9.6, 1.0, "geo", "G3", dx=-1.1, dy=0.35)
+ax.annotate("", xy=(9.8, 1.2), xytext=(14.7, 2.9), arrowprops=dict(arrowstyle="->", lw=0.6, color=INK))
+ax.text(12.0, -0.9, "R1, G1: reference on the matched face, same tract\nR2, G2: other side of the street, tract differs\nR3, G3: neighboring block face, tract differs",
+        fontsize=6.2, color=INK, va="top")
+ax.plot([], [], "s", ms=5, mfc="white", mec=INK, label="reference point"); ax.plot([], [], "o", ms=5, color=ORANGE, label="Census geocode")
+ax.plot([], [], color="#c53030", ls="--", lw=1.2, label="tract line")
+ax.legend(frameon=False, fontsize=6.3, loc="lower right", bbox_to_anchor=(1.0, -0.03), ncol=1, handlelength=1.4)
+fig.tight_layout(pad=0.2); fig.savefig(f"{OUT}/fig2_mechanism.pdf"); fig.savefig("/tmp/fig2.png", dpi=200); plt.close(fig)
