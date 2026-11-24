@@ -22,7 +22,8 @@ STEPS = {"1": "exp01_v2_main.py", "2": "exp02_geometry.py", "3": "exp03_gaussian
          "22": "exp22_matched_edge.py",
          "23": "exp23_blocks_policy_flags.py",
          "24": "exp24_sim_clustered.py", "25": "exp25_reference_sensitivity.py",
-         "26": "exp26_paired_gap.py"}
+         "26": "exp26_paired_gap.py", "27": "exp27_duplicates.py",
+         "28": "exp28_unique_address_bootstrap.py"}
 
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
 todo = args or list(STEPS)

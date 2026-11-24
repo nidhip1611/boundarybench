@@ -225,3 +225,7 @@ The 10-page cut built to 9 pages, so Fig. 2, Eq. (2) as a display, the AURC sent
 - 0.86% among answered at d_obs<7 m restored (value from earlier rounds; = 18 remaining of ~2,096 answered).
 - Table 2 footnotes reordered (a = matched-face definition, b = >60 m cause). Contribution 2 wording matches Sect. 4 (QCT status differs).
 - Removed: Wilson-interval detail for 0.1% simulation evaluations; "as they must".
+
+## Round 15 (Nov 24 2026)
+- Unique-address bootstrap of the paired gap: EXP28 → results/v2_unique_boot/summary.txt, paper/unique_boot.tex (\gapuniq).
+- Abstract 0.74% labelled point-in-polygon; Gaussian formula tied to its lead-in; Table 3 placed [b] so it no longer splits the NYC sentence.
