@@ -217,3 +217,11 @@ The 10-page cut built to 9 pages, so Fig. 2, Eq. (2) as a display, the AURC sent
 - Duplicates: 'Utah | Utah' = 2 matched addresses each reached from two different inputs (EXP27). Bootstraps (EXP26) resample records (rows).
 - Held-out: met/over counts from results/v2_sim_clustered/summary.txt [H1]; 6–7/24 and 25–26/120 from results/v2_heldout_folds/F3_summary.csv.
 - Removed: random-stratum QCT clause; geocoder-update clause; |d_obs|<7 m rate change (0.74→0.86%).
+
+## Round 14 (Nov 24 2026)
+- Primary outcome stated: PIP tract of the returned coordinate (all tables, flags, QCT). Returned-code sensitivity: 45/5,971 = 0.75%;
+  Salt Lake County 6/694 = 0.865% (results/v2_realdata_sensitivity/summary.txt [S3]).
+- Worst-case arithmetic in text: (44+342)/6,313 = 6.11% (S1_flow.csv).
+- 0.86% among answered at d_obs<7 m restored (value from earlier rounds; = 18 remaining of ~2,096 answered).
+- Table 2 footnotes reordered (a = matched-face definition, b = >60 m cause). Contribution 2 wording matches Sect. 4 (QCT status differs).
+- Removed: Wilson-interval detail for 0.1% simulation evaluations; "as they must".
