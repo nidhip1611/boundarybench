@@ -1,0 +1,3 @@
+# EXP28 unique-address bootstrap of the observed vs random-direction gap (near-line) | run 2026-11-24 12:36 | commit 0540443
+[U1] near-line rows 5971, unique matched addresses 5963, repeated addresses 8
+[U2] gap 12.68 points; unique-address bootstrap 95% CI [12.23, 13.13] (5,000 reps)
