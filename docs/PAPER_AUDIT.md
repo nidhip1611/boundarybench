@@ -207,3 +207,13 @@ The 10-page cut built to 9 pages, so Fig. 2, Eq. (2) as a display, the AURC sent
   random observation per calibration location (seed 2425); evaluated on all observations of the held-out fold. 24/24 met, 8/120 folds over,
   mean coverage 91.44% (results/v2_sim_clustered/summary.txt [H1]).
 - Removed: county cartographic-file range (2.1–15.0%); duplicated limitation sentence on exclusions (stated in data section).
+
+## Round 13 (Nov 24 2026)
+- 6,313 denominator for the all-exclusions worst case: results/v2_realdata_sensitivity/S1_flow.csv TOTAL near-line: 6,369 submitted − 56 ref_geocoded = 6,313;
+  (44 + 30 + 237 + 75) / 6,313 = 386 / 6,313 = 6.11%. Scored share 5,971 / 6,313 = 94.6%.
+- Census-returned vs PIP tract exception: results/v2_realdata_sensitivity/summary.txt [S3], [S3b]: one near-line Salt Lake County address,
+  PIP tract agrees with the reference, returned tract does not → 45/5,971 = 0.75% with returned codes.
+- Abstract "0.37% observed" for clear matches: results/v2_realdata_reconcile/P7_along_vs_across.csv ALL row.
+- Duplicates: 'Utah | Utah' = 2 matched addresses each reached from two different inputs (EXP27). Bootstraps (EXP26) resample records (rows).
+- Held-out: met/over counts from results/v2_sim_clustered/summary.txt [H1]; 6–7/24 and 25–26/120 from results/v2_heldout_folds/F3_summary.csv.
+- Removed: random-stratum QCT clause; geocoder-update clause; |d_obs|<7 m rate change (0.74→0.86%).
