@@ -1,0 +1,11 @@
+NYC, PLUTO: rows 5000, duplicate inputs 0
+NYC, Address Points: rows 3000, duplicate inputs 0
+Utah: rows 3000, duplicate inputs 0
+National: rows 2679, duplicate inputs 0
+[near_50m] edge-found rows 5887; matched addresses in >1 row 8 (16 rows, 1 disagreements); by sample: {'NYC, Address Points | NYC, PLUTO': 6, 'Utah | Utah': 2}
+[random] edge-found rows 6612; matched addresses in >1 row 3 (6 rows, 0 disagreements); by sample: {'NYC, Address Points | NYC, PLUTO': 3}
+NYC, PLUTO: matched addresses in both strata 0
+NYC, Address Points: matched addresses in both strata 0
+Utah: matched addresses in both strata 0
+National: matched addresses in both strata 0
+pooled near-line 44/5971 = 0.74%; dropping duplicate rows 43/5955 = 0.72%

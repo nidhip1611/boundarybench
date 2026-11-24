@@ -198,3 +198,12 @@ The 10-page cut built to 9 pages, so Fig. 2, Eq. (2) as a display, the AURC sent
 | One-obs UCB | met 24/24 distance & Gaussian overlay; 23 disk/MC (1 no answers); folds over 8/9/9/3; mean cov 91.44; distance 0.1% one fold 0.1086% | [H1], [H1c] |
 | Projection at benchmark | median 0.360%; max outside AK/HI 1.899%; AK max 6.837%; 86+52 = 138 AK/HI locations | [P1] |
 | Benchmark/vintage ids | Public_AR_Current id 4; Current_Current id 4 (listings retrieved Nov 23, 2026) | research report |
+
+## Round 12 (reviewer round, Nov 24 2026)
+- Duplicates sentence (Sect. 4 data): results/v2_duplicates/summary.txt (EXP27). Inputs unique per sample; no address in both strata;
+  8 near-line matched addresses occur twice (6 PLUTO|Address Points, 2 Utah|Utah), 1 disagreement among the 16 rows; 43/5,955 = 0.72%.
+- Abstract "13.7% at random" for clear street matches: results/v2_realdata_reconcile/P7_along_vs_across.csv, ALL row: random 13.74% (same value as Sect. 4 body).
+- Held-out description: experiments/exp24_sim_clustered.py H1 — threshold = lowest cutoff whose Wilson UCB <= target, computed on one
+  random observation per calibration location (seed 2425); evaluated on all observations of the held-out fold. 24/24 met, 8/120 folds over,
+  mean coverage 91.44% (results/v2_sim_clustered/summary.txt [H1]).
+- Removed: county cartographic-file range (2.1–15.0%); duplicated limitation sentence on exclusions (stated in data section).
